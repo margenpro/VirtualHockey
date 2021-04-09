@@ -1,38 +1,15 @@
-import { StatusBar } from 'expo-status-bar';
 import React from 'react';
-import { StyleSheet, Text, View, Button, Image } from 'react-native';
+import { Login } from './components/Login/container'
+import { FirebaseAppProvider } from 'reactfire'
+import { firebaseConfig } from './firebase'
+// import { StyleSheet, Text, View, Button, Image, TextInput } from 'react-native';
+
 
 export default function App() {
   return (
-    <View style={styles.container}>
-      <Image
-        style={styles.logo}
-        source={{
-          uri: 'https://virtualhockey.com/wp-content/uploads/2021/01/vh_favicodark.png',
-        }}      />
-      <Text style={styles.title}>This is Virtual Hockey!</Text>
-      <Button
-        title="LOGIN"
-        color="blue"
-        accessibilityLabel="Learn more about this purple button"
-      />
-      <StatusBar style="auto" />
-    </View>
-  );
-}
+    <FirebaseAppProvider firebaseConfig={firebaseConfig}>
+    <Login />
+    </FirebaseAppProvider>
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#000',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  title: {
-    color: 'white',
-  },
-  logo: {
-    width: 66,
-    height: 58,
-  }
-});
+  )
+}
