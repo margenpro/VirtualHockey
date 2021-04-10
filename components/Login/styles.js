@@ -2,16 +2,6 @@ import { StyleSheet } from 'react-native';
 
 
 export default StyleSheet.create({
-<<<<<<< HEAD
-    container: {
-      flex: 1,
-      marginTop: 50,
-    },
-    title: {
-      color: 'darkred',
-    }
-  });
-=======
   container: {
     flex: 1,
     marginTop: 20,
@@ -67,4 +57,3 @@ export default StyleSheet.create({
     borderRadius: 100,
   }
 });
->>>>>>> 3a574f2d41b4b98fa1e9f923786a15aee750e110
