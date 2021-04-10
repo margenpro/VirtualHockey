@@ -5,4 +5,7 @@ export default StyleSheet.create({
       flex: 1,
       marginTop: 50,
     },
+    title: {
+      color: 'darkred',
+    }
   });

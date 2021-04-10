@@ -16,13 +16,14 @@ export function Login() {
 
     const passInputHandler = (newValue) => {
         setPassword(newValue)
+        console.log(password)
     }
 
     const submitHandler = () => {
         firebase.auth().signInWithEmailAndPassword(username, password)
             .then(() => console.log("logueo exitoso")
             )
-            .catch((error) => console.log(error.code, error.message))
+            .catch((error) => console.log("hubo un error", error.code, error.message))
     }
 
     return (

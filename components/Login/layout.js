@@ -4,12 +4,12 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 import { Input } from 'react-native-elements';
 import styles from './styles'
 
-export function Layout ({userInputHandler, passInputHandler, submitHandler}) {
+export function Layout({ userInputHandler, passInputHandler, submitHandler }) {
     return (
         <View style={styles.container}>
             <Text style={styles.title}>User</Text>
             <Input
-            onChangeText={userInputHandler}
+                onChangeText={userInputHandler}
                 placeholder='username'
                 leftIcon={
                     <Icon
@@ -21,7 +21,7 @@ export function Layout ({userInputHandler, passInputHandler, submitHandler}) {
             />
             <Text style={styles.title}>Password</Text>
             <Input
-            onChangeText={passInputHandler}
+                onChangeText={passInputHandler}
                 placeholder='password'
                 leftIcon={
                     <Icon
@@ -32,7 +32,7 @@ export function Layout ({userInputHandler, passInputHandler, submitHandler}) {
                 }
             />
             <Button
-            onPress = {submitHandler}
+                onPress={submitHandler}
                 title="Login"
                 color="blue"
                 accessibilityLabel="Learn more about this purple button"
