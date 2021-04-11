@@ -5,7 +5,8 @@ import { Input } from 'react-native-elements';
 import styles from './styles'
 import { LinearGradient } from 'expo-linear-gradient'
 
-export function Layout({ userInputHandler, passInputHandler, submitHandler, wrongUsername, wrongPassword }) {
+export function Layout({ userInputHandler, passInputHandler, submitHandler, 
+    wrongUsername, wrongPassword }) {
     return (
         <View style={styles.container}>
             <LinearGradient style={styles.container} colors={['rgba(2, 28, 59, 1)', 'rgba(19, 38, 135, 1)']}>

@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import 'firebase/auth'
 import { useFirebaseApp } from 'reactfire'
-import { Text } from 'react-native';
 import { Layout } from './layout'
 
 export function Login() {
