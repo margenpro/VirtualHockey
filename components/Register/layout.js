@@ -1,10 +1,15 @@
 import React from "react";
-import { View, Text, Button } from "react-native";
+import { View, Text, TouchableOpacity, Button } from "react-native";
 import Icon from "react-native-vector-icons/FontAwesome";
 import { Input } from "react-native-elements";
 import styles from "./styles";
 
-export function Layout({ userInputHandler, passInputHandler, submitHandler }) {
+export function Layout({
+  userInputHandler,
+  passInputHandler,
+  submitHandler,
+  screenHandler
+}) {
   return (
     <View style={styles.container}>
       <Text style={styles.title}>User</Text>
@@ -25,7 +30,9 @@ export function Layout({ userInputHandler, passInputHandler, submitHandler }) {
         color="blue"
         accessibilityLabel="Learn more about this purple button"
       />
-      <Text style={styles.title}>I am already a member!</Text>
+      <TouchableOpacity onPress={screenHandler}>
+        <Text style={styles.footer}>I'm already a member</Text>
+      </TouchableOpacity>{" "}
     </View>
   );
 }
