@@ -12,27 +12,37 @@ export function Login() {
 
     const [username, setUsername] = useState('')
     const [password, setPassword] = useState('')
+    const [wrongUsername, setWrongUsername] = useState(false)
+    const [wrongPassword, setWrongPassword] = useState(false)
 
     const userInputHandler = (newValue) => {
         setUsername(newValue)
+        setWrongUsername(false)
     }
 
     const passInputHandler = (newValue) => {
         setPassword(newValue)
-        console.log(password)
+        setWrongUsername(false)
     }
 
     const submitHandler = () => {
         firebase.auth().signInWithEmailAndPassword(username, password)
             .then(() => console.log("logueo exitoso")
             )
-            .catch((error) => console.log("hubo un error", error.code, error.message))
+            .catch((error) => {
+                console.log("hubo un error", error.code, error.message)
+                if (error.code === "auth/user-not-found") setWrongUsername(true)
+                else if (error.code === "auth/wrong-password") setWrongPassword(true)
+            }
+            )
     }
 
     return (
         <>
+        {console.log(wrongUsername)}
             <Layout userInputHandler={userInputHandler} passInputHandler={passInputHandler}
-                submitHandler={submitHandler} />
+                submitHandler={submitHandler} wrongUsername={wrongUsername}
+                wrongPassword={wrongPassword} />
             <Text>DEBE HABER ALGO:{SOME_KEY}</Text>
         </>
     )
