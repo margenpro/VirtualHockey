@@ -3,8 +3,6 @@ import 'firebase/auth'
 import { useFirebaseApp } from 'reactfire'
 import { Text } from 'react-native';
 import { Layout } from './layout'
-import { SOME_KEY } from 'react-native-dotenv'
-
 
 export function Login() {
 
@@ -38,12 +36,8 @@ export function Login() {
     }
 
     return (
-        <>
-        {console.log(wrongUsername)}
             <Layout userInputHandler={userInputHandler} passInputHandler={passInputHandler}
                 submitHandler={submitHandler} wrongUsername={wrongUsername}
                 wrongPassword={wrongPassword} />
-            <Text>DEBE HABER ALGO:{SOME_KEY}</Text>
-        </>
     )
 }
