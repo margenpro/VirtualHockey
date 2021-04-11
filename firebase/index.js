@@ -1,7 +1,8 @@
 import firebase from 'firebase/app'
 import '@firebase/firestore'
+import { REACT_APP_FIREBASE_APIKEY } from 'react-native-dotenv'
 
-const APIKEY = "AIzaSyD_OxDz-eyyABa5Nr_Mc1kSuut75DcQIXQ"
+const APIKEY = REACT_APP_FIREBASE_APIKEY
 const AUTH_DOMAIN = process.env.REACT_APP_FIREBASE_AUTHDOMAIN
 const PROJECT_ID = process.env.REACT_APP_FIREBASE_PROJECTID
 const STORAGE_BUCKET = process.env.REACT_APP_FIREBASE_STORAGEBUCKET

@@ -1,7 +1,10 @@
 import React, { useState } from 'react';
 import 'firebase/auth'
 import { useFirebaseApp } from 'reactfire'
+import { Text } from 'react-native';
 import { Layout } from './layout'
+import { SOME_KEY } from 'react-native-dotenv'
+
 
 export function Login() {
 
@@ -27,7 +30,10 @@ export function Login() {
     }
 
     return (
-        <Layout userInputHandler={userInputHandler} passInputHandler={passInputHandler}
-            submitHandler={submitHandler} />
-    );
+        <>
+            <Layout userInputHandler={userInputHandler} passInputHandler={passInputHandler}
+                submitHandler={submitHandler} />
+            <Text>DEBE HABER ALGO:{SOME_KEY}</Text>
+        </>
+    )
 }
