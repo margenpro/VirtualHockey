@@ -8,6 +8,7 @@
     "eject": "expo eject"
   },
   "dependencies": {
+    "@firebase/storage": "^0.4.7",
     "@react-firebase/auth": "^0.2.10",
     "@react-native-community/masked-view": "0.1.10",
     "expo": "~40.0.0",
@@ -31,13 +32,5 @@
   "devDependencies": {
     "@babel/core": "^7.9.0"
   },
-  "private": true,
-  "plugins": [
-    [
-      "module:react-native-dotenv",
-      {
-        "moduleName": "react-native-dotenv"
-      }
-    ]
-  ]
+  "private": true
 }

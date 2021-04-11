@@ -11,7 +11,8 @@ export function Layout({
   submitHandler,
   wrongUsername,
   wrongPassword,
-  screenHandler
+  screenHandler,
+  logoUrl,
 }) {
   return (
     <View style={styles.container}>
@@ -22,7 +23,7 @@ export function Layout({
         <Image
           style={styles.logo}
           source={{
-            uri: "https://reactnative.dev/img/tiny_logo.png"
+            uri: logoUrl
           }}
         />
         <Text style={styles.title}>USERNAME</Text>

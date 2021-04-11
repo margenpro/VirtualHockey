@@ -1,12 +1,13 @@
 import firebase from 'firebase/app'
 import '@firebase/firestore'
+import '@firebase/storage'
 
 const APIKEY = "AIzaSyD_OxDz-eyyABa5Nr_Mc1kSuut75DcQIXQ"
-const AUTH_DOMAIN = process.env.REACT_APP_FIREBASE_AUTHDOMAIN
-const PROJECT_ID = process.env.REACT_APP_FIREBASE_PROJECTID
-const STORAGE_BUCKET = process.env.REACT_APP_FIREBASE_STORAGEBUCKET
-const MESSAGING_SENDER_ID = process.env.REACT_APP_FIREBASE_MESSAGINGSENDERID
-const APP_ID = process.env.REACT_APP_FIREBASE_APPID
+const AUTH_DOMAIN = "virtualhockey.firebaseapp.com"
+const PROJECT_ID = "virtualhockey"
+const STORAGE_BUCKET = "virtualhockey.appspot.com"
+const MESSAGING_SENDER_ID = "405449447383"
+const APP_ID = "1:405449447383:web:a36b72395dfdaffd8d9d92"
 
 export const firebaseConfig = {
     apiKey: APIKEY,
@@ -19,6 +20,12 @@ export const firebaseConfig = {
 
 const app = firebase.initializeApp(firebaseConfig)
 
+const storage = firebase.storage()
+
+export function getStorage() {
+    return storage
+}
+
 export function getFirebase() {
     return app
 }
@@ -26,3 +33,4 @@ export function getFirebase() {
 export function getFirestore() {
     return firebase.firestore(app)
 }
+
