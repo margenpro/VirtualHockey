@@ -12,9 +12,9 @@ const screens = {
   }
 };
 
-const HomeStack = createStackNavigator(screens, {
+const LoginStack = createStackNavigator(screens, {
   defaultNavigationOptions: {
-    header: null
+    headerShown: null
   }
 });
-export default createAppContainer(HomeStack);
+export default createAppContainer(LoginStack);

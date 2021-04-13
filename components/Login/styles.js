@@ -1,59 +1,57 @@
-import { StyleSheet } from 'react-native';
-
+import { StyleSheet } from "react-native";
 
 export default StyleSheet.create({
   container: {
-    flex: 1,
-    marginTop: 20,
+    flex: 1
   },
   linearGradient: {
-    alignItems: 'center',
-    justifyContent: 'center',
+    alignItems: "center",
+    justifyContent: "center",
     borderRadius: 5,
     height: 200,
-    width: 350,
+    width: 350
   },
   title: {
-    position: 'relative',
-    fontStyle: 'normal',
-    color: '#6EC1E4',
-    fontWeight: 'bold'
+    position: "relative",
+    fontStyle: "normal",
+    color: "#6EC1E4",
+    fontWeight: "bold"
   },
   input: {
-    fontStyle: 'normal',
-    color: 'white',
+    fontStyle: "normal",
+    color: "white"
   },
   footer: {
-    position: 'relative',
-    fontStyle: 'normal',
-    color: '#6EC1E4',
-    display: 'flex',
-    alignItems: 'center',
+    position: "relative",
+    fontStyle: "normal",
+    color: "#6EC1E4",
+    display: "flex",
+    alignItems: "center",
     marginTop: 20,
-    alignSelf: 'center'
+    alignSelf: "center"
   },
   button: {
-    position: 'relative',
+    position: "relative",
     backgroundColor: "#6EC1E4",
     borderRadius: 3,
-    alignItems: 'center',
-    justifyContent: 'center',
+    alignItems: "center",
+    justifyContent: "center",
     height: 40,
     width: 200,
-    alignSelf: 'center'
+    alignSelf: "center"
   },
   buttonText: {
-    fontStyle: 'normal',
-    color: 'white',
-    fontWeight: 'bold'
+    fontStyle: "normal",
+    color: "white",
+    fontWeight: "bold"
   },
   logo: {
-    position: 'relative',
+    position: "relative",
     width: 200,
     height: 200,
-    alignItems: 'center',
-    alignSelf: 'center',
+    alignItems: "center",
+    alignSelf: "center",
     margin: 20,
-    borderRadius: 100,
+    borderRadius: 100
   }
 });

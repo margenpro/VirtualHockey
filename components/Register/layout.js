@@ -32,7 +32,7 @@ export function Layout({
       />
       <TouchableOpacity onPress={screenHandler}>
         <Text style={styles.footer}>I'm already a member</Text>
-      </TouchableOpacity>{" "}
+      </TouchableOpacity>
     </View>
   );
 }
