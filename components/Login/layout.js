@@ -11,8 +11,9 @@ export function Layout({
   submitHandler,
   wrongUsername,
   wrongPassword,
-  screenHandler,
-  logoUrl,
+  screenHandlerLanding,
+  screenHandlerRegister,
+  logoUrl
 }) {
   return (
     <View style={styles.container}>
@@ -42,13 +43,14 @@ export function Layout({
           leftIcon={<Icon name="key" size={24} color="white" />}
         />
         <TouchableOpacity
-          onPress={submitHandler}
+          // onPress={submitHandler}
+          onPress={screenHandlerLanding}
           accessibilityLabel="Learn more about this purple button"
           style={styles.button}
         >
           <Text style={styles.buttonText}>LOG IN</Text>
         </TouchableOpacity>
-        <TouchableOpacity onPress={screenHandler}>
+        <TouchableOpacity onPress={screenHandlerRegister}>
           <Text style={styles.footer}>New User? Sign Up!</Text>
         </TouchableOpacity>
       </LinearGradient>
