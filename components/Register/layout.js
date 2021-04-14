@@ -7,6 +7,7 @@ import { LinearGradient } from "expo-linear-gradient";
 
 export function Layout({
   userInputHandler,
+  emailInputHandler,
   passInputHandler,
   submitHandler,
   screenHandler,
@@ -36,7 +37,7 @@ export function Layout({
             placeholder={"JohnDoe"}
           />
           <Text style={styles.title}>EMAIL</Text>
-          <Input style={styles.input} placeholder={"john.doe@example.com"} />
+          <Input style={styles.input} onChangeText={emailInputHandler}  placeholder={"john.doe@example.com"} />
           <Text style={styles.title}>PASSWORD</Text>
           <Input
             onChangeText={passInputHandler}

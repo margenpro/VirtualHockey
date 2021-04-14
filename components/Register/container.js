@@ -9,6 +9,8 @@ export function Register({ navigation }) {
   const firebase = useFirebaseApp();
   const storageRef = storage.ref();  
 
+  const db = firebase.firestore()
+
   const [email, setEmail] = useState("");
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -50,12 +52,11 @@ export function Register({ navigation }) {
   const submitHandler = () => {
     firebase
       .auth()
-      .createUserWithEmailAndPassword(username, password)
+      .createUserWithEmailAndPassword(email, password)
       .then(userCredential => {
-        // Signed in
-        console.log("user created", userCredential.user);
-        // ...
-      })
+        return db.collection("users").doc(userCredential.user.uid).set({
+          username
+        })})
       .catch(error => {
         console.log("hubo un error", error.code, error.message);
         if (error.code === "auth/email-already-exists") setUsernameExists(true);
