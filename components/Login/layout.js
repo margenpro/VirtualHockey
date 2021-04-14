@@ -35,7 +35,7 @@ export function Layout({
           <Text style={styles.title}>EMAIL</Text>
           <Input
             onChangeText={emailInputHandler}
-           // errorMessage={wrongUsername ? "Invalid Username" : ""}
+            errorMessage={wrongUsername ? "Invalid Email" : ""}
             placeholder="john.doe@example.com"
             style={styles.input}
             autoCompleteType="email"

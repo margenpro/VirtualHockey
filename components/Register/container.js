@@ -54,9 +54,11 @@ export function Register({ navigation }) {
       .auth()
       .createUserWithEmailAndPassword(email, password)
       .then(userCredential => {
-        return db.collection("users").doc(userCredential.user.uid).set({
-          username
-        })})
+        db.collection("users").doc(userCredential.user.uid).set({
+          username //Validar que el usuario no exista
+        })
+        screenHandler()
+      })
       .catch(error => {
         console.log("hubo un error", error.code, error.message);
         if (error.code === "auth/email-already-exists") setUsernameExists(true);

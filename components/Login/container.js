@@ -35,7 +35,7 @@ export function Login({ navigation }) {
     navigation.navigate("Landing");
   };
 
-  const userInputHandler = newValue => {
+  const emailInputHandler = newValue => {
     setEmail(newValue);
     setWrongEmail(false);
   };
@@ -67,7 +67,7 @@ export function Login({ navigation }) {
   return (
     <>
       <Layout
-        userInputHandler={userInputHandler}
+        emailInputHandler={emailInputHandler}
         passInputHandler={passInputHandler}
         submitHandler={submitHandler}
         wrongEmail={wrongEmail}
