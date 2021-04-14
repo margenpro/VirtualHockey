@@ -46,10 +46,12 @@ export function Login({ navigation }) {
   };
 
   const submitHandler = () => {
-    firebase
-      .auth()
+    firebase.auth()
       .signInWithEmailAndPassword(username, password)
-      .then(() => console.log("logueo exitoso"))
+      .then(() => {
+        console.log("logueo exitoso")
+        screenHandlerLanding()
+      })
       .catch(error => {
         console.log("hubo un error", error.code, error.message);
         if (error.code === "auth/user-not-found") setWrongUsername(true);

@@ -50,8 +50,8 @@ export function Layout({
             style={styles.input}
           />
           <TouchableOpacity
-            // onPress={submitHandler}
-            onPress={screenHandlerLanding}
+            onPress={submitHandler}
+            // onPress={screenHandlerLanding}
             accessibilityLabel="Learn more about this purple button"
             style={styles.button}
           >
