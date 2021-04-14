@@ -9,9 +9,9 @@ export function Login({ navigation }) {
   const firebase = useFirebaseApp();
   const storageRef = storage.ref();
 
-  const [username, setUsername] = useState("");
+  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [wrongUsername, setWrongUsername] = useState(false);
+  const [wrongEmail, setWrongEmail] = useState(false);
   const [wrongPassword, setWrongPassword] = useState(false);
   const [logoUrl, setLogoUrl] = useState();
   const [showPassword, setShowPassword] = useState(false);
@@ -36,25 +36,25 @@ export function Login({ navigation }) {
   };
 
   const userInputHandler = newValue => {
-    setUsername(newValue);
-    setWrongUsername(false);
+    setEmail(newValue);
+    setWrongEmail(false);
   };
 
   const passInputHandler = newValue => {
     setPassword(newValue);
-    setWrongUsername(false);
+    setWrongEmail(false);
   };
 
   const submitHandler = () => {
     firebase.auth()
-      .signInWithEmailAndPassword(username, password)
+      .signInWithEmailAndPassword(email, password)
       .then(() => {
         console.log("logueo exitoso")
         screenHandlerLanding()
       })
       .catch(error => {
         console.log("hubo un error", error.code, error.message);
-        if (error.code === "auth/user-not-found") setWrongUsername(true);
+        if (error.code === "auth/user-not-found") setWrongEmail(true);
         else if (error.code === "auth/wrong-password") setWrongPassword(true);
       });
   };
@@ -69,7 +69,7 @@ export function Login({ navigation }) {
         userInputHandler={userInputHandler}
         passInputHandler={passInputHandler}
         submitHandler={submitHandler}
-        wrongUsername={wrongUsername}
+        wrongEmail={wrongEmail}
         screenHandlerLanding={screenHandlerLanding}
         screenHandlerRegister={screenHandlerRegister}
         wrongPassword={wrongPassword}

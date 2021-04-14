@@ -6,7 +6,7 @@ import styles from "./styles";
 import { LinearGradient } from "expo-linear-gradient";
 
 export function Layout({
-  userInputHandler,
+  emailInputHandler,
   passInputHandler,
   submitHandler,
   wrongUsername,
@@ -34,8 +34,8 @@ export function Layout({
         <View style={styles.container2}>
           <Text style={styles.title}>EMAIL</Text>
           <Input
-            onChangeText={userInputHandler}
-            errorMessage={wrongUsername ? "Invalid Username" : ""}
+            onChangeText={emailInputHandler}
+           // errorMessage={wrongUsername ? "Invalid Username" : ""}
             placeholder="john.doe@example.com"
             style={styles.input}
             autoCompleteType="email"

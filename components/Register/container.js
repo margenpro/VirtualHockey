@@ -9,6 +9,7 @@ export function Register({ navigation }) {
   const firebase = useFirebaseApp();
   const storageRef = storage.ref();  
 
+  const [email, setEmail] = useState("");
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [usernameExists, setUsernameExists] = useState(false);
@@ -39,6 +40,11 @@ export function Register({ navigation }) {
   const passInputHandler = newValue => {
     setPassword(newValue);
     setInvalidPassword(false);
+  };
+
+  const emailInputHandler = newValue => {
+    setEmail(newValue);
+    //setInvalidPassword(false);
   };
 
   const submitHandler = () => {
@@ -72,6 +78,7 @@ export function Register({ navigation }) {
       screenHandler={screenHandler}
       logoUrl={logoUrl}
       showPassword={showPassword}
+      emailInputHandler={emailInputHandler}
       showPasswordHandler={showPasswordHandler}
     />
   );
