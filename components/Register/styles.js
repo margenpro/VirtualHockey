@@ -7,6 +7,11 @@ export default StyleSheet.create({
   container2: {
     margin: 20
   },
+  pagetitle: {
+    fontSize: 38,
+    textAlign: "center",
+    color: "white"
+  },
   linearGradient: {
     alignItems: "center",
     justifyContent: "center",
@@ -18,13 +23,16 @@ export default StyleSheet.create({
     position: "relative",
     fontStyle: "normal",
     color: "#6EC1E4",
-    fontWeight: "bold"
+    fontWeight: "bold",
+    marginLeft: 10
   },
   input: {
     fontStyle: "normal",
     color: "white",
     height: 40,
-    width: 250,
+    borderBottomColor: "#6EC1E4",
+    borderBottomWidth: 2,
+    paddingHorizontal: 4
   },
   footer: {
     position: "relative",
@@ -34,7 +42,8 @@ export default StyleSheet.create({
     alignItems: "center",
     marginTop: 20,
     alignSelf: "center",
-    fontSize: 16
+    fontSize: 16,
+    top: 6
   },
   button: {
     position: "relative",
@@ -44,6 +53,7 @@ export default StyleSheet.create({
     justifyContent: "center",
     height: 40,
     width: 250,
+    top: 8,
     alignSelf: "center"
   },
   buttonText: {
@@ -54,12 +64,12 @@ export default StyleSheet.create({
   },
   logo: {
     position: "relative",
-    width: 200,
-    height: 200,
+    width: 160,
+    height: 160,
     alignItems: "center",
     alignSelf: "center",
     margin: 20,
     borderRadius: 100,
-    resizeMode: "contain",
+    resizeMode: "contain"
   }
 });

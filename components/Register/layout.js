@@ -12,7 +12,7 @@ export function Layout({
   screenHandler,
   logoUrl,
   showPassword,
-  showPasswordHandler,
+  showPasswordHandler
 }) {
   return (
     <View style={styles.container}>
@@ -26,22 +26,23 @@ export function Layout({
             uri: logoUrl
           }}
         />
+        <Text style={styles.pagetitle}>Register</Text>
+
         <View style={styles.container2}>
           <Text style={styles.title}>USERNAME</Text>
           <Input
             onChangeText={userInputHandler}
             style={styles.input}
+            placeholder={"JohnDoe"}
           />
           <Text style={styles.title}>EMAIL</Text>
-          <Input
-            style={styles.input}
-          />
+          <Input style={styles.input} placeholder={"john.doe@example.com"} />
           <Text style={styles.title}>PASSWORD</Text>
           <Input
             onChangeText={passInputHandler}
             secureTextEntry={!showPassword}
+            placeholder={"********"}
             style={styles.input}
-            rightIcon={<Icon name={showPassword ? "eye-slash" : "eye"} size={22} color="white" onPress={() => showPasswordHandler(!showPassword)} />}
           />
           <TouchableOpacity
             onPress={submitHandler}
@@ -54,7 +55,6 @@ export function Layout({
             <Text style={styles.footer}>I'm already a member</Text>
           </TouchableOpacity>
         </View>
-
       </LinearGradient>
     </View>
   );
