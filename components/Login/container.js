@@ -14,6 +14,7 @@ export function Login({ navigation }) {
   const [wrongUsername, setWrongUsername] = useState(false);
   const [wrongPassword, setWrongPassword] = useState(false);
   const [logoUrl, setLogoUrl] = useState();
+  const [showPassword, setShowPassword] = useState(false);
 
   useEffect(() => {
     storageRef
@@ -56,6 +57,10 @@ export function Login({ navigation }) {
       });
   };
 
+  const showPasswordHandler = newValue => {
+    setShowPassword(newValue);
+  };
+
   return (
     <>
       <Layout
@@ -67,8 +72,9 @@ export function Login({ navigation }) {
         screenHandlerRegister={screenHandlerRegister}
         wrongPassword={wrongPassword}
         logoUrl={logoUrl}
+        showPassword={showPassword}
+        showPasswordHandler={showPasswordHandler}
       />
-      {console.log(logoUrl)}
     </>
   );
 }

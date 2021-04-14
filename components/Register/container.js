@@ -1,15 +1,30 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "firebase/auth";
+import { getStorage } from "../../firebase";
 import { useFirebaseApp } from "reactfire";
 import { Layout } from "./layout";
 
 export function Register({ navigation }) {
+  const storage = getStorage();
   const firebase = useFirebaseApp();
+  const storageRef = storage.ref();  
 
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [usernameExists, setUsernameExists] = useState(false);
   const [invalidPassword, setInvalidPassword] = useState(false);
+  const [logoUrl, setLogoUrl] = useState();
+  const [showPassword, setShowPassword] = useState(false);
+
+  useEffect(() => {
+    storageRef
+      .child("images/vh_favico[3].png")
+      .getDownloadURL()
+      .then(resolve => {
+        setLogoUrl(resolve);
+      })
+      .catch(e => console.log(e.code, e.message));
+  }, []);
 
   // SF Direccionar a la screen Login
   const screenHandler = () => {
@@ -43,6 +58,10 @@ export function Register({ navigation }) {
       });
   };
 
+  const showPasswordHandler = newValue => {
+    setShowPassword(newValue);
+  };
+
   return (
     <Layout
       userInputHandler={userInputHandler}
@@ -51,6 +70,9 @@ export function Register({ navigation }) {
       usernameExists={usernameExists}
       invalidPassword={invalidPassword}
       screenHandler={screenHandler}
+      logoUrl={logoUrl}
+      showPassword={showPassword}
+      showPasswordHandler={showPasswordHandler}
     />
   );
 }

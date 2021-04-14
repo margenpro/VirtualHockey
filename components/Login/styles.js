@@ -4,6 +4,9 @@ export default StyleSheet.create({
   container: {
     flex: 1
   },
+  container2: {
+    margin: 20
+  },
   linearGradient: {
     alignItems: "center",
     justifyContent: "center",
@@ -19,7 +22,9 @@ export default StyleSheet.create({
   },
   input: {
     fontStyle: "normal",
-    color: "white"
+    color: "white",
+    height: 40,
+    width: 250,
   },
   footer: {
     position: "relative",
@@ -28,22 +33,24 @@ export default StyleSheet.create({
     display: "flex",
     alignItems: "center",
     marginTop: 20,
-    alignSelf: "center"
+    alignSelf: "center",
+    fontSize: 16
   },
   button: {
     position: "relative",
-    backgroundColor: "#6EC1E4",
-    borderRadius: 3,
+    backgroundColor: "#00AEEF",
+    borderRadius: 4,
     alignItems: "center",
     justifyContent: "center",
     height: 40,
-    width: 200,
+    width: 250,
     alignSelf: "center"
   },
   buttonText: {
     fontStyle: "normal",
     color: "white",
-    fontWeight: "bold"
+    fontWeight: "normal",
+    fontSize: 20
   },
   logo: {
     position: "relative",
@@ -52,6 +59,7 @@ export default StyleSheet.create({
     alignItems: "center",
     alignSelf: "center",
     margin: 20,
-    borderRadius: 100
+    borderRadius: 100,
+    resizeMode: "contain",
   }
 });

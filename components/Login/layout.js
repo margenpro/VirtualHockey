@@ -5,6 +5,10 @@ import { Input } from "react-native-elements";
 import styles from "./styles";
 import { LinearGradient } from "expo-linear-gradient";
 
+
+
+
+
 export function Layout({
   userInputHandler,
   passInputHandler,
@@ -13,7 +17,9 @@ export function Layout({
   wrongPassword,
   screenHandlerLanding,
   screenHandlerRegister,
-  logoUrl
+  logoUrl,
+  showPassword,
+  showPasswordHandler,
 }) {
   return (
     <View style={styles.container}>
@@ -27,32 +33,40 @@ export function Layout({
             uri: logoUrl
           }}
         />
-        <Text style={styles.title}>USERNAME</Text>
-        <Input
-          onChangeText={userInputHandler}
-          placeholder="username"
-          style={styles.input}
-          leftIcon={<Icon name="user" size={24} color="white" />}
-        />
-        <Text style={styles.title}>PASSWORD</Text>
-        <Input
-          onChangeText={passInputHandler}
-          placeholder="password"
-          secureTextEntry
-          style={styles.input}
-          leftIcon={<Icon name="key" size={24} color="white" />}
-        />
-        <TouchableOpacity
-          // onPress={submitHandler}
-          onPress={screenHandlerLanding}
-          accessibilityLabel="Learn more about this purple button"
-          style={styles.button}
-        >
-          <Text style={styles.buttonText}>LOG IN</Text>
-        </TouchableOpacity>
-        <TouchableOpacity onPress={screenHandlerRegister}>
-          <Text style={styles.footer}>New User? Sign Up!</Text>
-        </TouchableOpacity>
+        <View style={styles.container2}>
+          <Text style={styles.title}>USERNAME</Text>
+          <Input
+            onChangeText={userInputHandler}
+            errorMessage={wrongUsername ? "Invalid Username":""}
+            placeholder="username"
+            style={styles.input}
+            autoCompleteType="email"
+            leftIcon={<Icon name="user" size={24} color="white" />}
+          />
+          <Text style={styles.title}>PASSWORD</Text>
+          <Input
+            onChangeText={passInputHandler}
+            errorMessage={wrongPassword ? "Invalid Password":""}
+            placeholder="password"
+            secureTextEntry={!showPassword}
+            autoCompleteType="password"
+            style={styles.input}
+            leftIcon={<Icon name="key" size={24} color="white" />}
+            rightIcon={<Icon name={showPassword ? "eye-slash" : "eye"} size={22} color="white" onPress={() => showPasswordHandler(!showPassword)} />}
+          />
+          <TouchableOpacity
+            // onPress={submitHandler}
+            onPress={screenHandlerLanding}
+            accessibilityLabel="Learn more about this purple button"
+            style={styles.button}
+          >
+            <Text style={styles.buttonText}>LOG IN</Text>
+          </TouchableOpacity>
+          <TouchableOpacity onPress={screenHandlerRegister}>
+            <Text style={styles.footer}>New User? Sign Up!</Text>
+          </TouchableOpacity>
+        </View>
+
       </LinearGradient>
     </View>
   );
