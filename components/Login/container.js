@@ -50,6 +50,7 @@ export function Login({ navigation }) {
       .signInWithEmailAndPassword(email, password)
       .then(() => {
         console.log("logueo exitoso")
+        navigation.navigate("Landing");
         screenHandlerLanding()
       })
       .catch(error => {
