@@ -1,5 +1,4 @@
-
-
+import React, { useState, useEffect } from "react";
 import { Layout } from "./layout";
 
 export function Landing({ navigation }) {
@@ -10,11 +9,9 @@ export function Landing({ navigation }) {
     }; */
   
     return (
-      <>
         <Layout
         //screenHandler={screenHandler}
         />
-      </>
     );
   }
   
