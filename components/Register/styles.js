@@ -24,7 +24,7 @@ export default StyleSheet.create({
     fontStyle: "normal",
     color: "#6EC1E4",
     fontWeight: "bold",
-    marginLeft: 10
+    marginLeft: 13
   },
   input: {
     fontStyle: "normal",
