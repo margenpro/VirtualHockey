@@ -44,6 +44,7 @@ export function Layout({
           <Input
             onChangeText={passInputHandler}
             errorMessage={wrongPassword ? "Invalid Password" : ""}
+            rightIcon={<Icon name={showPassword ? "eye-slash" : "eye"} size={22} color="white" onPress={() => showPasswordHandler(!showPassword)} />}
             placeholder="********"
             secureTextEntry={!showPassword}
             autoCompleteType="password"
