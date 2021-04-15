@@ -1,18 +1,10 @@
-
-
 import React from 'react';
 import { Text, View, Image, TouchableOpacity } from 'react-native';
 import { LinearGradient } from "expo-linear-gradient";
 import styles from "./styles";
 
-
-
 import imagenTitulo from '../../assets/imagenTitulo.png'
 import imagenVideo from '../../assets/imagenVideo.png'
-
-
-
-
 
 export function Layout({
     //screenHandler 
@@ -23,7 +15,6 @@ export function Layout({
                 style={styles.container}
                 colors={["rgba(2, 28, 59, 1)", "rgba(19, 38, 135, 1)"]}
             >
-    
     
                 <View style={styles.containerImagenTitulo}>
                     <Image 
