@@ -8,6 +8,7 @@ export default StyleSheet.create({
     margin: 20
   },
   pagetitle: {
+    fontFamily:"comfortaa",
     fontSize: 38,
     textAlign: "center",
     color: "white"
@@ -20,6 +21,7 @@ export default StyleSheet.create({
     width: 350
   },
   title: {
+    fontFamily:"comfortaa",
     position: "relative",
     fontStyle: "normal",
     color: "#6EC1E4",
@@ -27,6 +29,7 @@ export default StyleSheet.create({
     marginLeft: 13
   },
   input: {
+    fontFamily:"comfortaa",
     fontStyle: "normal",
     color: "white",
     height: 40,
@@ -35,6 +38,7 @@ export default StyleSheet.create({
     paddingHorizontal: 4
   },
   footer: {
+    fontFamily:"comfortaa",
     position: "relative",
     fontStyle: "normal",
     color: "#6EC1E4",
@@ -46,6 +50,7 @@ export default StyleSheet.create({
     top: 6
   },
   textTouch: {
+    fontFamily:"comfortaa",
     alignSelf: "center",
     maxWidth: 200,
     maxHeight: 1,
@@ -53,6 +58,7 @@ export default StyleSheet.create({
     alignItems: "center",
   },
   button: {
+    fontFamily:"comfortaa",
     position: "relative",
     backgroundColor: "#00AEEF",
     borderRadius: 4,
@@ -64,6 +70,7 @@ export default StyleSheet.create({
     alignSelf: "center"
   },
   buttonText: {
+    fontFamily:"comfortaa",
     fontStyle: "normal",
     color: "white",
     fontWeight: "normal",
