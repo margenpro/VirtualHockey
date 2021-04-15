@@ -15,7 +15,7 @@ export function Register({ navigation }) {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [emailExists, setEmailExists] = useState(false);
-  const [usernameExists, setUsernameExists] = useState(0);
+  // const [usernameExists, setUsernameExists] = useState(0);
   const [usernameExistsDisplay, setUsernameExistsDisplay] = useState(false);
   const [invalidPassword, setInvalidPassword] = useState(false);
   const [logoUrl, setLogoUrl] = useState();
@@ -51,16 +51,47 @@ export function Register({ navigation }) {
     setInvalidPassword(false);
   };
 
-  const checkIfUsernameExists = async username => {
-    // const db = getFirestore()
-    // db.collection("users").where("username", "==", username)
-    //   .get()
-    //   .then(querySnapshot => {
-    //     console.log(querySnapshot)
-    //   })
-    //   .catch((error) => console.log(error))
-    //   .finally(() => { return true })
-    return false
+  const showPasswordHandler = newValue => {
+    setShowPassword(newValue);
+  };
+
+  const submitHandler = async () => {
+    console.log("empezando el submit")
+    try {
+      const temp = await checkIfUsernameExists(username)
+      console.log(temp)
+      if (!temp) {
+        console.log("empezando a crear usuario")
+        createUser()
+        screenHandler()
+      } else {
+        console.log("no creo el usuario")
+        setUsernameExistsDisplay(true)
+        throw new Error("auth/username-exists")
+      }
+    }
+    catch (e) {
+      console.log(e.code, e.message)
+    }
+  };
+
+  const checkIfUsernameExists = async (username) => {
+    let retorno = false
+    console.log("chequeando si el usuario existe")
+    try {
+      const db = getFirestore()
+      let querySnapshot = await db.collection("users").where("username", "==", username)
+        .get()
+      if (querySnapshot.docs[0] != undefined) {
+        console.log("user already exists in database")
+        retorno = true
+      }
+    }
+    catch (error) {
+      console.log(error)
+      retorno = true
+    }
+    finally { return retorno }
   }
 
   const createUser = () => {
@@ -80,31 +111,11 @@ export function Register({ navigation }) {
       });
   }
 
-  const submitHandler = async () => {
-    setUsernameExists(await checkIfUsernameExists())
-  };
-
-  useEffect(() => {
-    if (usernameExists != 0) {
-      if (usernameExists === false) {
-        createUser()
-      } else if (usernameExists === true) {
-        console.log("el usuario ya existe")
-        setUsernameExistsDisplay(true)
-      }
-    }
-  }, [usernameExists])
-
-  const showPasswordHandler = newValue => {
-    setShowPassword(newValue);
-  };
-
   return (
     <Layout
       userInputHandler={userInputHandler}
       passInputHandler={passInputHandler}
       submitHandler={submitHandler}
-      usernameExists={usernameExists}
       invalidPassword={invalidPassword}
       screenHandler={screenHandler}
       logoUrl={logoUrl}
