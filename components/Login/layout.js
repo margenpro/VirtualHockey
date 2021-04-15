@@ -15,7 +15,7 @@ export function Layout({
   screenHandlerRegister,
   logoUrl,
   showPassword,
-  showPasswordHandler
+  showPasswordHandler,
 }) {
   return (
     <View style={styles.container}>
@@ -40,25 +40,26 @@ export function Layout({
             style={styles.input}
             autoCompleteType="email"
           />
+
           <Text style={styles.title}>PASSWORD</Text>
           <Input
             onChangeText={passInputHandler}
             errorMessage={wrongPassword ? "Invalid Password" : ""}
             rightIcon={<Icon name={showPassword ? "eye-slash" : "eye"} size={22} color="white" onPress={() => showPasswordHandler(!showPassword)} />}
+            rightIconContainerStyle={styles.inputIcon}
             placeholder="********"
             secureTextEntry={!showPassword}
             autoCompleteType="password"
-            style={styles.input}
+            style={styles.input2}
           />
+
           <TouchableOpacity
             onPress={submitHandler}
-            // onPress={screenHandlerLanding}
-            accessibilityLabel="Learn more about this purple button"
             style={styles.button}
           >
             <Text style={styles.buttonText}>LOG IN</Text>
           </TouchableOpacity>
-          <TouchableOpacity onPress={screenHandlerRegister}>
+          <TouchableOpacity onPress={screenHandlerRegister} style={styles.textTouch} accessibilityRole="text">
             <Text style={styles.footer}>New User? Sign Up!</Text>
           </TouchableOpacity>
         </View>

@@ -45,6 +45,13 @@ export default StyleSheet.create({
     fontSize: 16,
     top: 6
   },
+  textTouch: {
+    alignSelf: "center",
+    maxWidth: 200,
+    maxHeight: 1,
+    marginTop: 3,
+    alignItems: "center",
+  },
   button: {
     position: "relative",
     backgroundColor: "#00AEEF",

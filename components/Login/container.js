@@ -3,7 +3,7 @@ import "firebase/auth";
 import { getStorage } from "../../firebase";
 import { useFirebaseApp } from "reactfire";
 import { Layout } from "./layout";
-
+import Icon from "react-native-vector-icons/FontAwesome";
 export function Login({ navigation }) {
   const storage = getStorage();
   const firebase = useFirebaseApp();

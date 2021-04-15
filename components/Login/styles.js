@@ -2,7 +2,7 @@ import { StyleSheet } from "react-native";
 
 export default StyleSheet.create({
   container: {
-    flex: 1
+    flex: 1,
   },
   container2: {
     margin: 20
@@ -32,7 +32,19 @@ export default StyleSheet.create({
     height: 40,
     borderBottomColor: "#6EC1E4",
     borderBottomWidth: 2,
-    paddingHorizontal: 4
+  },
+  input2: {
+    fontStyle: "normal",
+    color: "white",
+    height: 40,
+    borderBottomColor: "#6EC1E4",
+    borderBottomWidth: 2,
+    marginBottom: -4,
+  },
+  inputIcon: {
+    borderBottomColor: "#6EC1E4",
+    borderBottomWidth: 2,
+    marginBottom: 0
   },
   footer: {
     position: "relative",
@@ -43,7 +55,14 @@ export default StyleSheet.create({
     marginTop: 20,
     alignSelf: "center",
     fontSize: 16,
-    top: 6
+    top: 6,
+  },
+  textTouch: {
+    alignSelf: "center",
+    maxWidth: 150,
+    maxHeight: 1,
+    marginTop: 3,
+    alignItems: "center",
   },
   button: {
     position: "relative",

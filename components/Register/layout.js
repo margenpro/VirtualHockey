@@ -41,7 +41,7 @@ export function Layout({
           <Text style={styles.title}>PASSWORD</Text>
           <Input
             onChangeText={passInputHandler}
-            secureTextEntry={!showPassword}
+            //secureTextEntry={!showPassword}
             placeholder={"********"}
             style={styles.input}
           />
@@ -52,7 +52,7 @@ export function Layout({
           >
             <Text style={styles.buttonText}>REGISTER</Text>
           </TouchableOpacity>
-          <TouchableOpacity onPress={screenHandler}>
+          <TouchableOpacity onPress={screenHandler} style={styles.textTouch} accessibilityRole="text">
             <Text style={styles.footer}>I'm already a member</Text>
           </TouchableOpacity>
         </View>
