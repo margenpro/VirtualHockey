@@ -48,7 +48,7 @@ export function Layout({
           <Text style={styles.title}>PASSWORD</Text>
           <Input
             onChangeText={passInputHandler}
-            //secureTextEntry={!showPassword}
+            secureTextEntry={!showPassword}
             placeholder={"********"}
             style={styles.input}
           />
