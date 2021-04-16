@@ -9,7 +9,7 @@ export function Layout({
   emailInputHandler,
   passInputHandler,
   submitHandler,
-  wrongUsername,
+  wrongEmail,
   wrongPassword,
   screenHandlerLanding,
   screenHandlerRegister,
@@ -35,7 +35,7 @@ export function Layout({
           <Text style={styles.title}>EMAIL</Text>
           <Input
             onChangeText={emailInputHandler}
-            errorMessage={wrongUsername ? "Invalid Email" : ""}
+            errorMessage={wrongEmail ? "Invalid Email" : ""}
             placeholder="john.doe@example.com"
             style={styles.input}
             autoCompleteType="email"
