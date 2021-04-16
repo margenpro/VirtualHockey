@@ -8,7 +8,6 @@ export default StyleSheet.create({
     
     container: {
         flex: 1,
-        //backgroundColor: '#021C3B',
         margin: 0,
         alignItems: 'center',
         justifyContent: 'center',
@@ -31,8 +30,7 @@ export default StyleSheet.create({
       
     },
     containerTextoInicial :{
-      //width: 200,
-      //justifyContent: 'center',
+      
       alignItems: 'center',
       marginBottom: 20,
 
@@ -65,7 +63,6 @@ export default StyleSheet.create({
       backgroundColor: '#00AEEF',
       padding: 10,
       borderRadius: 10,
-      width: 320,
       marginTop: 20,
       marginBottom:40,
       
@@ -87,9 +84,11 @@ export default StyleSheet.create({
       fontSize: 18,
       color: '#fff',
       textAlign: 'center',
-      width: 320,
       marginBottom: 25
-  
+      ,maxWidth: 550
+      ,paddingHorizontal: 20
+      
+
     },
 
   

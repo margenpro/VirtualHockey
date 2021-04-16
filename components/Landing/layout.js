@@ -10,12 +10,12 @@ export function Layout({
     //screenHandler 
 }) {
     return (
-        <ScrollView >
+        <ScrollView style={{flex:1}}>
+            <LinearGradient 
+                style={styles.container}
+                colors={["rgba(2, 28, 59, 1)", "rgba(19, 38, 135, 1)"]}
+                >
             <View style={styles.container}>
-                <LinearGradient 
-                    style={styles.container}
-                    colors={["rgba(2, 28, 59, 1)", "rgba(19, 38, 135, 1)"]}
-                    >
         
                     <View style={styles.containerImagenTitulo}>
                         <Image 
@@ -74,8 +74,8 @@ export function Layout({
         
                   
         
+                    </View>
                 </LinearGradient>
-            </View>
         </ScrollView>
     );
   }
