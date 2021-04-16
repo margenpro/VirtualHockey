@@ -52,8 +52,6 @@ export default StyleSheet.create({
   textTouch: {
     fontFamily:"comfortaa",
     alignSelf: "center",
-    maxWidth: 200,
-    maxHeight: 1,
     marginTop: 3,
     alignItems: "center",
   },

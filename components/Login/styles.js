@@ -8,7 +8,7 @@ export default StyleSheet.create({
     margin: 20
   },
   pagetitle: {
-    fontFamily:"comfortaa",
+    fontFamily:"Comfortaa-YJnL",
     fontSize: 38,
     textAlign: "center",
     color: "white"
@@ -21,7 +21,7 @@ export default StyleSheet.create({
     width: 350
   },
   title: {
-    fontFamily:"comfortaa",
+    fontFamily:"Comfortaa-YJnL",
     position: "relative",
     fontStyle: "normal",
     color: "#6EC1E4",
@@ -29,7 +29,7 @@ export default StyleSheet.create({
     marginLeft: 10
   },
   input: {
-    fontFamily:"comfortaa",
+    fontFamily:"Comfortaa-YJnL",
     fontStyle: "normal",
     color: "white",
     height: 40,
@@ -37,7 +37,7 @@ export default StyleSheet.create({
     borderBottomWidth: 2,
   },
   input2: {
-    fontFamily:"comfortaa",
+    fontFamily:"Comfortaa-YJnL",
     fontStyle: "normal",
     color: "white",
     height: 40,
@@ -46,13 +46,13 @@ export default StyleSheet.create({
     marginBottom: -4,
   },
   inputIcon: {
-    fontFamily:"comfortaa",
+    fontFamily:"Comfortaa-YJnL",
     borderBottomColor: "#6EC1E4",
     borderBottomWidth: 2,
     marginBottom: 0
   },
   footer: {
-    fontFamily:"comfortaa",
+    fontFamily:"Comfortaa-YJnL",
     position: "relative",
     fontStyle: "normal",
     color: "#6EC1E4",
@@ -64,15 +64,13 @@ export default StyleSheet.create({
     top: 6,
   },
   textTouch: {
-    fontFamily:"comfortaa",
+    fontFamily:"Comfortaa-YJnL",
     alignSelf: "center",
-    maxWidth: 150,
-    maxHeight: 1,
     marginTop: 3,
     alignItems: "center",
   },
   button: {
-    fontFamily:"comfortaa",
+    fontFamily:"Comfortaa-YJnL",
     position: "relative",
     backgroundColor: "#00AEEF",
     borderRadius: 4,
@@ -84,7 +82,7 @@ export default StyleSheet.create({
     alignSelf: "center"
   },
   buttonText: {
-    fontFamily:"comfortaa",
+    fontFamily:"Comfortaa-YJnL",
     fontStyle: "normal",
     color: "white",
     fontWeight: "normal",
