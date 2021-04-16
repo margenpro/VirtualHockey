@@ -4,6 +4,7 @@ import Icon from "react-native-vector-icons/FontAwesome";
 import { Input } from "react-native-elements";
 import styles from "./styles";
 import { LinearGradient } from "expo-linear-gradient";
+import { useFonts } from 'expo-font';
 
 export function Layout({
   userInputHandler,
@@ -15,6 +16,12 @@ export function Layout({
   showPassword,
   showPasswordHandler
 }) {
+  const [loaded] = useFonts({
+    comfortaa: require('../../assets/fonts/Comfortaa-YJnL.ttf')
+  })
+  if (!loaded){
+    return null
+  }
   return (
     <View style={styles.container}>
       <LinearGradient
