@@ -2,9 +2,10 @@ import React from 'react';
 import { Text, View, Image, TouchableOpacity, ScrollView, FlatList } from 'react-native';
 import { LinearGradient } from "expo-linear-gradient";
 import styles from "./styles";
-
 import imagenTitulo from '../../assets/imagenTitulo.png'
 import imagenVideo from '../../assets/imagenVideo.png'
+
+
 
 export function Layout({
     // size
@@ -61,7 +62,7 @@ export function Layout({
                     </Text>
                     <Text style={styles.textoChico}>ACHIEVEMENT REWARDS</Text>
                     <Text style={styles.textoInfo}>
-                    Earn ribbons, medals and trophies for reaching milestones. Take control of the leaderboard and brag about it on social media! 
+                        Earn ribbons, medals and trophies for reaching milestones. Take control of the leaderboard and brag about it on social media!
 #virtualhockeybeast</Text>
                 </View>
             </LinearGradient>

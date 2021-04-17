@@ -1,8 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { Image } from "react-native";
 import { Layout } from "./layout";
+import { getFont } from '../../fonts'
 
 export function Landing({ navigation }) {
+
+    getFont()
+
     // const [size, setSize] = useState({ width: 0, height: 0 });
 
     // useEffect(() => {
