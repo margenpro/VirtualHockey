@@ -4,7 +4,9 @@ import { getStorage, getFirestore } from "../../firebase";
 import { useFirebaseApp } from "reactfire";
 import { Layout } from "./layout";
 
+
 export function Register({ navigation }) {
+
   const storage = getStorage();
   const firebase = useFirebaseApp();
   const storageRef = storage.ref();

@@ -5,12 +5,11 @@ import styles from "./styles";
 import imagenTitulo from '../../assets/imagenTitulo.png'
 import imagenVideo from '../../assets/imagenVideo.png'
 
-
-
 export function Layout({
     // size
     //screenHandler 
 }) {
+
     return (
         <ScrollView style={styles.scroll}>
             <LinearGradient
@@ -63,7 +62,7 @@ export function Layout({
                     <Text style={styles.textoChico}>ACHIEVEMENT REWARDS</Text>
                     <Text style={styles.textoInfo}>
                         Earn ribbons, medals and trophies for reaching milestones. Take control of the leaderboard and brag about it on social media!
-#virtualhockeybeast</Text>
+                        #virtualhockeybeast</Text>
                 </View>
             </LinearGradient>
         </ScrollView>
