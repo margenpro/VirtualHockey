@@ -2,9 +2,10 @@ import React from 'react';
 import { Text, View, Image, TouchableOpacity, ScrollView, FlatList } from 'react-native';
 import { LinearGradient } from "expo-linear-gradient";
 import styles from "./styles";
-
 import imagenTitulo from '../../assets/imagenTitulo.png'
 import imagenVideo from '../../assets/imagenVideo.png'
+
+
 
 export function Layout({
     // size

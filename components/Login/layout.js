@@ -18,6 +18,8 @@ export function Layout({
   showPassword,
   showPasswordHandler,
 }) {
+
+  // TODO poner en una carpeta e importar en cada vista
   const [loaded] = useFonts({
     comfortaa: require('../../assets/fonts/Comfortaa-YJnL.ttf')
   })
