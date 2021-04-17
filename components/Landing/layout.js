@@ -61,7 +61,7 @@ export function Layout({
                     </Text>
                     <Text style={styles.textoChico}>ACHIEVEMENT REWARDS</Text>
                     <Text style={styles.textoInfo}>
-                    Earn ribbons, medals and trophies for reaching milestones. Take control of the leaderboard and brag about it on social media! 
+                        Earn ribbons, medals and trophies for reaching milestones. Take control of the leaderboard and brag about it on social media!
 #virtualhockeybeast</Text>
                 </View>
             </LinearGradient>
