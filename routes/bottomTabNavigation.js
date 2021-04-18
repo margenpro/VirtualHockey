@@ -1,9 +1,8 @@
-import { createAppContainer } from "react-navigation";
+import React from "react";
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { Dashboard } from "../components/Dashboard/container";
 import { Profile } from "../components/Profile/container";
-
-import React, { useState, useEffect } from "react";
+import { Leaderboard } from "../components/Leaderboard/container";
 
 export function BottomTab({ }) {
     const Tab = createBottomTabNavigator();
@@ -11,7 +10,7 @@ export function BottomTab({ }) {
         <Tab.Navigator>
             <Tab.Screen name="Dashboard" component={Dashboard} />
             <Tab.Screen name="Profile" component={Profile} />
-
+            <Tab.Screen name="Leaderboard" component={Leaderboard} />
         </Tab.Navigator>
     );
 }
