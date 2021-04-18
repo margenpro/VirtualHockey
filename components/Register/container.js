@@ -102,7 +102,8 @@ export function Register({ navigation }) {
       .createUserWithEmailAndPassword(email, password)
       .then(userCredential => {
         db.collection("users").doc(userCredential.user.uid).set({
-          username
+          username,
+          isMember: false
         })
         console.log("usuario creado " + username)
       })

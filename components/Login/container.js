@@ -11,6 +11,8 @@ export function Login({ navigation }) {
   const firebase = useFirebaseApp();
   const storageRef = storage.ref();
 
+  const db = firebase.firestore()
+
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [wrongEmail, setWrongEmail] = useState(false);
@@ -33,8 +35,21 @@ export function Login({ navigation }) {
     navigation.navigate("Register");
   };
 
-  const screenHandlerLanding = () => {
-    navigation.navigate("Landing");
+  const getCurrentUserData = async () => {
+    try {
+      let user = firebase.auth().currentUser
+      let doc = await db.collection("users").doc(user.uid).get()
+      let data = doc.data()
+      return data
+    } catch (error) {
+      throw new Error(error.message)
+    }
+  }
+
+
+  const screenHandlerLanding = async () => {
+    let usr = await getCurrentUserData()
+    usr.isMember ? navigation.navigate("BottomTab") : navigation.navigate("Landing");
   };
 
   const forTesting = () => {
@@ -56,7 +71,6 @@ export function Login({ navigation }) {
       .signInWithEmailAndPassword(email, password)
       .then(() => {
         console.log("logueo exitoso")
-        navigation.navigate("Landing");
         screenHandlerLanding()
       })
       .catch(error => {
