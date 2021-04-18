@@ -16,6 +16,7 @@ export function Layout({
   logoUrl,
   showPassword,
   showPasswordHandler,
+  forTesting,
 }) {
 
   // TODO poner en una carpeta e importar en cada vista
@@ -65,6 +66,9 @@ export function Layout({
           </TouchableOpacity>
           <TouchableOpacity onPress={screenHandlerRegister} style={styles.textTouch} accessibilityRole="text">
             <Text style={styles.footer}>New User? Sign Up!</Text>
+          </TouchableOpacity>
+          <TouchableOpacity onPress={forTesting} style={styles.textTouch} accessibilityRole="text">
+            <Text style={styles.footer}>For Testing</Text>
           </TouchableOpacity>
         </View>
       </LinearGradient>

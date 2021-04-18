@@ -37,6 +37,10 @@ export function Login({ navigation }) {
     navigation.navigate("Landing");
   };
 
+  const forTesting = () => {
+    navigation.navigate("BottomTab");
+  };
+
   const emailInputHandler = newValue => {
     setEmail(newValue);
     setWrongEmail(false);
@@ -79,6 +83,7 @@ export function Login({ navigation }) {
         logoUrl={logoUrl}
         showPassword={showPassword}
         showPasswordHandler={showPasswordHandler}
+        forTesting={forTesting}
       />
     </>
   );
