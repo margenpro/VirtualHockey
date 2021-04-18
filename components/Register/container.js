@@ -103,7 +103,9 @@ export function Register({ navigation }) {
       .then(userCredential => {
         db.collection("users").doc(userCredential.user.uid).set({
           username,
-          isMember: false
+          isMember: false,
+          points: 0,
+          lastVideoWatched: 0
         })
         console.log("usuario creado " + username)
       })
