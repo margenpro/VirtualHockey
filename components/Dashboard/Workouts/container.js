@@ -1,21 +1,15 @@
 import React, { useState, useEffect } from "react";
-import { Image } from "react-native";
+import { Image, View, Text } from "react-native";
 import { Layout } from "./layout";
+import { WorkoutCard } from './WorkoutCard/container'
+import {styles } from './styles'
 
-export function Dashboard({ navigation }) {
-    // const [size, setSize] = useState({ width: 0, height: 0 });
-    // useEffect(() => {
-    //     const width = Dimensions.get('window').width
-    //     const height = Dimensions.get('window').height
-    //     setSize(width, height)
-    // }, [])
-    /* const screenHandler = () => {
-        navigation.navigate("Pagos");
-    }; */
+export function Workouts({ navigation }) {
+
     return (
-        <Layout
-        // size={size}
-        //screenHandler={screenHandler}
-        />
+        <View>
+
+            <Layout />
+        </View>
     );
 }

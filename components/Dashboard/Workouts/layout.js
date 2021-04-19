@@ -1,9 +1,8 @@
 import React from 'react';
-import { Text, View, Image, TouchableOpacity, ScrollView, FlatList } from 'react-native';
+import { View, Text } from 'react-native';
 import { LinearGradient } from "expo-linear-gradient";
-import styles from "./styles";
-import imagenTitulo from '../../assets/imagenTitulo.png'
-import imagenVideo from '../../assets/imagenVideo.png'
+import styles from './styles'
+import { WorkoutCard } from './WorkoutCard/container'
 
 export function Layout({
     // size
@@ -14,18 +13,12 @@ export function Layout({
             style={styles.container}
             colors={["rgba(2, 28, 59, 1)", "rgba(19, 38, 135, 1)"]}>
             <View style={styles.container}>
-                <View style={styles.containerImagenTitulo}>
-                    <Image
-                        source={imagenTitulo}
-                        style={styles.imagenTitulo}>
-                    </Image>
-                </View>
-                <View style={styles.containerTextoInicial}>
-                    <View style={{ flexDirection: 'row' }}>
-                        <Text style={styles.celeste}>THIS IS THE DASHBOARD</Text>
-                    </View>
+                <View style={styles.usernameAndPosition}>
+                    <Text style={styles.username}>Elina </Text>
+                    <Text style={styles.username}># 1</Text>
                 </View>
             </View>
-        </LinearGradient>
+            <WorkoutCard />
+        </LinearGradient >
     );
 }

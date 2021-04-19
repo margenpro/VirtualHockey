@@ -10,6 +10,7 @@ export default StyleSheet.create({
     margin: 0,
     alignItems: 'center',
     justifyContent: 'center',
+    minHeight: height
   },
   containerImagenTitulo: {
     marginTop: 10,
@@ -20,62 +21,62 @@ export default StyleSheet.create({
   },
   imagenTitulo: {
     flex: 1,
-    width: width*.8,
+    width: width * .8,
     height: 80,
     resizeMode: 'contain'
-  },  
-  containerTextoInicial: {
-    alignItems: 'center',
-    marginBottom: 20,
   },
-  celeste: {
-    fontFamily:"comfortaa",
-    fontSize: 25,
-    color: '#00AEEF',
+  circle: {
+    width: 150,
+    height: 150,
+    borderRadius: 75,
+    borderColor: '#6EC1E4',
+    borderWidth: 4,
   },
-  blanco: {
-    fontFamily:"comfortaa",
-    fontSize: 25,
-    color: '#fff',
+  username: {
+    fontFamily: "comfortaa",
+    fontSize: 30,
+    color: '#ffffff',
   },
-  containerImagenVideo: {
-    margin: 10,
+  usernameAndPosition: {
+    flexDirection: 'row',
+    flexWrap: 'wrap'
   },
-  imagenVideo: {
-    width: width*.8,
-    height: 200,
-    borderRadius: 15
+  trophyAndRanking: {
+    flexDirection: 'row',
+    flexWrap: 'wrap'
   },
-  boton: {
-    width: width*.8,
+  explanationMessage: {
+    flexDirection: 'row',
+    flexWrap: 'wrap'
+  },
+  explanationMessageText: {
+    fontFamily: "comfortaa",
+    fontSize: 15,
+    color: '#ffffff',
+  },
+  explanationMessageYellow: {
+    fontFamily: "comfortaa",
+    fontSize: 15,
+    color: '#E9D41B',
+  },
+  button: {
+    width: width * .8,
     backgroundColor: '#00AEEF',
     padding: 10,
     borderRadius: 10,
     marginTop: 20,
     marginBottom: 40,
   },
-  textoBoton: {
-    fontFamily:"comfortaa",
+  buttonText: {
+    fontFamily: "comfortaa",
     color: '#fff',
     textAlign: 'center',
     fontSize: 20,
     fontWeight: "600"
   },
-  textoChico: {
-    fontFamily:"comfortaa",
-    color: '#00AEEF',
-    fontSize: 20,
-    marginBottom: 25
-  },
-  textoInfo: {
-    fontFamily:"comfortaa",
-    fontSize: 18,
-    color: '#fff',
-    textAlign: 'center',
-    marginBottom: 25,
-    paddingHorizontal: 20
-  },
-  scroll: {
-    flex: 1,
+  allWorkoutsText: {
+    fontFamily: "comfortaa",
+    fontSize: 15,
+    color: '#ffffff',
   }
 });

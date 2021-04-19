@@ -5,7 +5,8 @@ import styles from "./styles";
 
 
 export function Layout({
-    getProfileImage
+    getProfileImage,
+    navigateToWorkouts
 }) {
     return (
         <LinearGradient
@@ -34,7 +35,9 @@ export function Layout({
                     <Text style={styles.buttonText}>RESUME WORKOUT</Text>
                 </TouchableOpacity>
                 <Text style={styles.explanationMessageText}>or</Text>
-                <Text style={styles.allWorkoutsText}>View all your workouts</Text>
+                <Text 
+                onPress={navigateToWorkouts}
+                style={styles.allWorkoutsText}>View all your workouts</Text>
 
             </View>
         </LinearGradient>

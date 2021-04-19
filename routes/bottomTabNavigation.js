@@ -5,8 +5,9 @@ import { Profile } from "../components/Profile/container";
 import { Leaderboard } from "../components/Leaderboard/container";
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import styles from './styles'
+import { WorkoutsStack } from './WorkoutsStack'
 
-export function BottomTab({ }) {
+export function BottomTab({ Navigator }) {
     const Tab = createBottomTabNavigator();
     return (
         <Tab.Navigator
@@ -25,7 +26,7 @@ export function BottomTab({ }) {
                 style: styles.bottomTab,
             }}
         >
-            <Tab.Screen name="Workouts" component={Dashboard} />
+            <Tab.Screen name="Workouts" component={WorkoutsStack} />
             <Tab.Screen name="Profile" component={Profile} />
             <Tab.Screen name="Leaderboard" component={Leaderboard} />
         </Tab.Navigator>
