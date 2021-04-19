@@ -10,6 +10,7 @@ export default StyleSheet.create({
     margin: 0,
     alignItems: 'center',
     justifyContent: 'center',
+    minHeight: height
   },
   containerImagenTitulo: {
     marginTop: 10,
