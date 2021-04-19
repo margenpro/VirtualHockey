@@ -7,9 +7,6 @@ import {styles } from './styles'
 export function Workouts({ navigation }) {
 
     return (
-        <View>
-
             <Layout />
-        </View>
     );
 }

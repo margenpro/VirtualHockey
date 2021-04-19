@@ -21,7 +21,7 @@ export default StyleSheet.create({
   imagenTitulo: {
     flex: 1,
     width: width*.8,
-    height: 80,
+    height: 300,
     resizeMode: 'contain'
   },  
   containerTextoInicial: {
