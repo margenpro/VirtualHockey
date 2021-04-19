@@ -4,7 +4,6 @@ import { getStorage, getFirestore } from "../../firebase";
 import { useFirebaseApp } from "reactfire";
 import { Layout } from "./layout";
 
-
 export function Register({ navigation }) {
 
   const storage = getStorage();
@@ -16,10 +15,10 @@ export function Register({ navigation }) {
   const [email, setEmail] = useState("");
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const [emailExists, setEmailExists] = useState(false);
+  const [emailExists, setEmailExists] = useState({exists:false, msg:""});
   // const [usernameExists, setUsernameExists] = useState(0);
-  const [usernameExistsDisplay, setUsernameExistsDisplay] = useState(false);
-  const [invalidPassword, setInvalidPassword] = useState(false);
+  const [usernameExists, setUsernameExists] = useState({exists:false, msg:""});
+  const [invalidPassword, setInvalidPassword] = useState({invalid:false, msg:""});
   const [logoUrl, setLogoUrl] = useState();
   const [showPassword, setShowPassword] = useState(false);
 
@@ -33,19 +32,18 @@ export function Register({ navigation }) {
       .catch(e => console.log(e.code, e.message));
   }, []);
 
-  // SF Direccionar a la screen Login
   const screenHandler = () => {
     navigation.navigate("Login");
   };
 
   const emailInputHandler = newValue => {
     setEmail(newValue);
-    setEmailExists(false);
+    setEmailExists({exists:false})
   };
 
   const userInputHandler = newValue => {
     setUsername(newValue);
-    setUsernameExistsDisplay(false)
+    setUsernameExists({exists:false})
   };
 
   const passInputHandler = newValue => {
@@ -60,60 +58,61 @@ export function Register({ navigation }) {
   const submitHandler = async () => {
     console.log("empezando el submit")
     try {
-      const temp = await checkIfUsernameExists(username)
-      console.log(temp)
+      const temp = await checkIfUsernameExists()
+
       if (!temp) {
         console.log("empezando a crear usuario")
-        createUser()
+        await createUser()
         screenHandler()
-      } else {
-        console.log("no creo el usuario")
-        setUsernameExistsDisplay(true)
-        throw new Error("auth/username-exists")
       }
     }
-    catch (e) {
-      console.log(e.code, e.message)
+    catch (error) {
+      console.log(error.message, typeof error.message, error.code)
+      if (error.code === "username-exists" || error.code === "empty-username") setUsernameExists({exists:true, msg:error.message});
+      else if (error.code === "auth/email-already-in-use" || error.code === "auth/invalid-email" ) setEmailExists({exists:true, msg:error.message});
+      else if (error.code === "auth/weak-password") setInvalidPassword({invalid:true, msg:error.message});
     }
   };
 
-  const checkIfUsernameExists = async (username) => {
-    let retorno = false
-    console.log("chequeando si el usuario existe")
+  const checkIfUsernameExists = async () => {
+    if(username.match(/[ `!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~]/)) throw { code:"empty-username", message:"Username cannot contain white spaces or special characters" }
+    if(username.trim() === "") throw { code:"empty-username", message:"You must enter a valid username" }
+
     try {
       const db = getFirestore()
       let querySnapshot = await db.collection("users").where("username", "==", username)
         .get()
       if (querySnapshot.docs[0] != undefined) {
         console.log("user already exists in database")
-        retorno = true
+        throw { code:"username-exists", message:`The username ${username} is already in use` }
       }
     }
     catch (error) {
       console.log(error)
-      retorno = true
+      throw error
     }
-    finally { return retorno }
   }
 
-  const createUser = () => {
-    firebase
-      .auth()
-      .createUserWithEmailAndPassword(email, password)
-      .then(userCredential => {
-        db.collection("users").doc(userCredential.user.uid).set({
-          username,
-          isMember: false,
-          points: 0,
-          lastVideoWatched: 0
-        })
-        console.log("usuario creado " + username)
+  const createUser = async () => {
+    
+    try {
+     
+      const userCreds = await firebase.auth().createUserWithEmailAndPassword(email, password)
+     
+      db.collection("users").doc(userCreds.user.uid).set({
+        username,
+        isMember: false,
+        points: 0,
+        lastVideoWatched: 0
       })
-      .catch(error => {
-        console.log("hubo un error", error.code, error.message);
-        if (error.code === "auth/email-already-exists") setEmailExists(true);
-        else if (error.code === "auth/invalid-password") setInvalidPassword(true);
-      });
+
+      return {code: null}
+
+    } catch (error) {
+      console.log(error.code)
+     
+      throw { code: error.code, message: error.message }
+    }
   }
 
   return (
@@ -127,7 +126,7 @@ export function Register({ navigation }) {
       showPassword={showPassword}
       emailInputHandler={emailInputHandler}
       showPasswordHandler={showPasswordHandler}
-      usernameExistsDisplay={usernameExistsDisplay}
+      usernameExists={usernameExists}
       emailExists={emailExists}
     />
   );

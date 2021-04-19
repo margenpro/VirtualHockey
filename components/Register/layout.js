@@ -13,7 +13,9 @@ export function Layout({
   screenHandler,
   logoUrl,
   showPassword,
-  showPasswordHandler
+  invalidPassword,
+  emailExists,
+  usernameExists
 }) {
 
   return (
@@ -35,13 +37,15 @@ export function Layout({
           <Input
             onChangeText={userInputHandler}
             style={styles.input}
+            errorMessage={usernameExists.exists ? usernameExists.msg : ""}
             placeholder={"JohnDoe"}
           />
           <Text style={styles.title}>EMAIL</Text>
-          <Input style={styles.input} onChangeText={emailInputHandler}  placeholder={"john.doe@example.com"} />
+          <Input style={styles.input} errorMessage={emailExists.exists ? emailExists.msg : ""} onChangeText={emailInputHandler}  placeholder={"john.doe@example.com"} />
           <Text style={styles.title}>PASSWORD</Text>
           <Input
             onChangeText={passInputHandler}
+            errorMessage={invalidPassword.invalid ? invalidPassword.msg : ""}
             secureTextEntry={!showPassword}
             placeholder={"********"}
             style={styles.input}
