@@ -47,8 +47,13 @@ export function Login({ navigation }) {
   }
 
   const screenHandlerLanding = async () => {
-    let usr = await getCurrentUserData()
-    usr.isMember ? navigation.navigate("BottomTab") : navigation.navigate("Landing");
+    try {
+      let usr = await getCurrentUserData()
+      usr.isMember ? navigation.navigate("BottomTab") : navigation.navigate("Landing");
+    
+    } catch (error) {
+      alert("An error ocurred, please try again")
+    }
   };
 
   const forTesting = () => {
