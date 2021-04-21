@@ -22,20 +22,17 @@ export function Frame(props) {
 
 
 const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        margin: 0,
-        alignItems: 'center',
-        justifyContent: 'center',
-    },
     statusBar: {
         flex: 1,
         paddingTop: Platform.OS === 'android' ? StatusBar.currentHeight : 0,
         flexWrap: 'wrap',
         flexDirection: 'row',
+        margin: 0,
+        padding: 0,
     },
     gradient: {
         flex: 1,
         margin: 0,
+        padding: 0,
     },
 });

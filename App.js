@@ -29,7 +29,7 @@ export default function App() {
     return (
 
       <FirebaseAppProvider firebaseConfig={firebaseConfig}>
-        <StatusBar backgroundColor='rgba(2, 28, 59, 1)' barStyle='light-content' />
+        <StatusBar animated={true} backgroundColor='rgba(2, 28, 59, 1)' barStyle='light-content' />
         <NavigationContainer>
           <Navigator>
           </Navigator>

@@ -9,6 +9,5 @@ export default StyleSheet.create({
     width: width * .9,
     height: 150,
     resizeMode: 'contain',
-    marginLeft: 10,
   },
 });
