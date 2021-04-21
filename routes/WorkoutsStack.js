@@ -3,7 +3,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 import { createAppContainer } from "react-navigation";
 import { Dashboard } from "../components/Dashboard/container";
 import { Workouts } from '../components/Dashboard/Workouts/container'
-
+import { LinearGradient } from "expo-linear-gradient";
 
 export function WorkoutsStack({ Navigator }) {
 

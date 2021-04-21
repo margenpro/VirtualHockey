@@ -3,7 +3,9 @@ import { View, Text, TouchableOpacity, Image } from "react-native";
 import Icon from "react-native-vector-icons/FontAwesome";
 import { Input } from "react-native-elements";
 import styles from "./styles";
-import { LinearGradient } from "expo-linear-gradient";
+import { Frame } from '../Frame'
+
+// import { LinearGradient } from "expo-linear-gradient";
 
 export function Layout({
   userInputHandler,
@@ -19,11 +21,8 @@ export function Layout({
 }) {
 
   return (
+    <Frame>
     <View style={styles.container}>
-      <LinearGradient
-        style={styles.container}
-        colors={["rgba(2, 28, 59, 1)", "rgba(19, 38, 135, 1)"]}
-      >
         <Image
           style={styles.logo}
           source={{
@@ -61,7 +60,7 @@ export function Layout({
             <Text style={styles.footer}>I'm already a member</Text>
           </TouchableOpacity>
         </View>
-      </LinearGradient>
     </View>
+    </Frame>
   );
 }

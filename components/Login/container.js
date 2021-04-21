@@ -46,7 +46,6 @@ export function Login({ navigation }) {
     }
   }
 
-
   const screenHandlerLanding = async () => {
     let usr = await getCurrentUserData()
     usr.isMember ? navigation.navigate("BottomTab") : navigation.navigate("Landing");

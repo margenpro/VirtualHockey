@@ -1,10 +1,10 @@
 import React from 'react';
 import { View, Text } from 'react-native';
-import { LinearGradient } from "expo-linear-gradient";
+// import { LinearGradient } from "expo-linear-gradient";
 import styles from './styles'
 import { WorkoutCard } from './WorkoutCard/container'
 import { OldWorkoutCard } from './OldWorkoutCard/container'
-
+import { Frame } from '../../Frame'
 import { ScrollView } from 'react-native-gesture-handler';
 
 export function Layout({
@@ -12,9 +12,7 @@ export function Layout({
     //screenHandler 
 }) {
     return (
-        <LinearGradient
-            style={styles.container}
-            colors={["rgba(2, 28, 59, 1)", "rgba(19, 38, 135, 1)"]}>
+        <Frame>
             <View
                 style={styles.superior}>
                 <Text style={styles.username}>Hello,</Text>
@@ -30,6 +28,6 @@ export function Layout({
                 <Text style={styles.username}>Previous Workouts</Text>
                 <ScrollView horizontal={true}><OldWorkoutCard /><OldWorkoutCard /><OldWorkoutCard /></ScrollView>
             </View>
-        </LinearGradient >
+            </Frame>
     );
 }

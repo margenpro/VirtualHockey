@@ -77,5 +77,6 @@ export default StyleSheet.create({
     fontFamily: "comfortaa",
     fontSize: 15,
     color: '#ffffff',
-  }
+  },
+
 });

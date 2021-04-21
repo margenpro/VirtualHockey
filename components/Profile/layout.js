@@ -2,17 +2,17 @@ import React from 'react';
 import { Text, View, Image, TouchableOpacity, ScrollView, FlatList } from 'react-native';
 import { LinearGradient } from "expo-linear-gradient";
 import styles from "./styles";
+import { Frame } from '../Frame'
 import imagenTitulo from '../../assets/imagenTitulo.png'
 import imagenVideo from '../../assets/imagenVideo.png'
+
 
 export function Layout({
     // size
     //screenHandler 
 }) {
     return (
-        <LinearGradient
-            style={styles.container}
-            colors={["rgba(2, 28, 59, 1)", "rgba(19, 38, 135, 1)"]}>
+        <Frame>
             <View style={styles.container}>
                 <View style={styles.containerImagenTitulo}>
                     <Image
@@ -26,6 +26,6 @@ export function Layout({
                     </View>
                 </View>
             </View>
-        </LinearGradient>
+        </Frame >
     );
 }

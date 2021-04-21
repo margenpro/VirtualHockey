@@ -1,7 +1,8 @@
 import React from 'react';
 import { Text, View, Image, TouchableOpacity, ScrollView, FlatList } from 'react-native';
-import { LinearGradient } from "expo-linear-gradient";
+// import { LinearGradient } from "expo-linear-gradient";
 import styles from "./styles";
+import { Frame } from '../Frame'
 
 
 export function Layout({
@@ -9,9 +10,8 @@ export function Layout({
     navigateToWorkouts
 }) {
     return (
-        <LinearGradient
-            style={styles.container}
-            colors={["rgba(2, 28, 59, 1)", "rgba(19, 38, 135, 1)"]}>
+        <Frame>
+        <View style={styles.statusBar}>
             <View style={styles.container}>
                 <View style={styles.containerTextoInicial}>
                     <Image style={styles.circle}
@@ -35,11 +35,12 @@ export function Layout({
                     <Text style={styles.buttonText}>RESUME WORKOUT</Text>
                 </TouchableOpacity>
                 <Text style={styles.explanationMessageText}>or</Text>
-                <Text 
-                onPress={navigateToWorkouts}
-                style={styles.allWorkoutsText}>View all your workouts</Text>
-
+                <Text
+                    onPress={navigateToWorkouts}
+                    style={styles.allWorkoutsText}>View all your workouts
+                </Text>
             </View>
-        </LinearGradient>
-    );
+        </View>
+        </Frame>
+    )
 }

@@ -1,4 +1,4 @@
-import { Dimensions, StyleSheet } from "react-native";
+import { Dimensions, StyleSheet, Platform, StatusBar } from "react-native";
 
 const width = Dimensions.get('window').width
 const height = Dimensions.get('window').height
@@ -10,7 +10,8 @@ export default StyleSheet.create({
     margin: 0,
     alignItems: 'center',
     justifyContent: 'center',
-    minHeight: height
+    minHeight: height,
+    // paddingTop: Platform.OS === 'android' ? StatusBar.currentHeight : 0
   },
   username: {
     fontFamily: "comfortaa",
@@ -26,5 +27,8 @@ export default StyleSheet.create({
   inferior: {
     flex: 1,
   },
+  // statusBar: {
+  //   paddingTop: Platform.OS === 'android' ? StatusBar.currentHeight : 0
+  // },
 
 });
