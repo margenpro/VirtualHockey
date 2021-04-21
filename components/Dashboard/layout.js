@@ -7,7 +7,8 @@ import { Frame } from '../Frame'
 
 export function Layout({
     getProfileImage,
-    navigateToWorkouts
+    navigateToWorkouts,
+    playLast
 }) {
     return (
         <Frame>
@@ -31,7 +32,8 @@ export function Layout({
                     <Text style={styles.explanationMessageText}>!</Text>
                 </View>
                 <TouchableOpacity
-                    style={styles.button}>
+                    style={styles.button}
+                    onPress={playLast}>
                     <Text style={styles.buttonText}>RESUME WORKOUT</Text>
                 </TouchableOpacity>
                 <Text style={styles.explanationMessageText}>or</Text>
