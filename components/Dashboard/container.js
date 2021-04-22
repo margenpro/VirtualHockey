@@ -6,6 +6,7 @@ import WorkoutsStack from '../../routes/WorkoutsStack'
 import "firebase/auth";
 import { getStorage } from "../../firebase";
 import { useFirebaseApp } from "reactfire";
+import { UserContext } from '../../context/userContext'
 
 
 export function Dashboard({ navigation }) {
@@ -14,7 +15,7 @@ export function Dashboard({ navigation }) {
     const storage = getStorage();
     const firebase = useFirebaseApp();
     const storageRef = storage.ref();
-  
+
     const db = firebase.firestore()
 
     const [userName, setUserName] = useState("");
@@ -46,12 +47,12 @@ export function Dashboard({ navigation }) {
             vid = vid.data()
             console.log(vid)
         } catch (error) {
-            
+
         }
     }
 
 
-    useEffect( () => {
+    useEffect(() => {
         const getCurrentUserData = async () => {
             try {
                 let user = firebase.auth().currentUser
@@ -67,16 +68,17 @@ export function Dashboard({ navigation }) {
 
         getCurrentUserData()
 
-    }, [] );
+    }, []);
 
     return (
         // <WorkoutsStack />
-            <Layout
-                getProfileImage={getProfileImage}
-                navigateToWorkouts={navigateToWorkouts}
-                playLast={playLast}
-                userName={userName}
-                userPoints={userPoints}
-            />
+        <Layout
+            getProfileImage={getProfileImage}
+            navigateToWorkouts={navigateToWorkouts}
+            playLast={playLast}
+            userName={userName}
+            userPoints={userPoints}
+        >
+        </Layout>
     );
 }
