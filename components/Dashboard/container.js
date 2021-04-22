@@ -16,6 +16,10 @@ export function Dashboard({ navigation }) {
   
     const db = firebase.firestore()
 
+    const [userName, setUserName] = useState("");
+    const [userPoints, setUserPoints] = useState("");
+
+
     const navigateToWorkouts = () => {
         console.log("voy a navegar")
         navigation.navigate("Workouts")
@@ -45,12 +49,33 @@ export function Dashboard({ navigation }) {
         }
     }
 
+
+    useEffect( () => {
+        const getCurrentUserData = async () => {
+            try {
+                let user = firebase.auth().currentUser
+                let doc = await db.collection("users").doc(user.uid).get()
+                let data = doc.data()
+                console.log(data)
+                setUserName(data.username)
+                setUserPoints(data.points)
+            } catch (error) {
+                throw new Error(error.message)
+            }
+        }
+
+        getCurrentUserData()
+
+    }, [] );
+
     return (
         // <WorkoutsStack />
             <Layout
                 getProfileImage={getProfileImage}
                 navigateToWorkouts={navigateToWorkouts}
                 playLast={playLast}
+                userName={userName}
+                userPoints={userPoints}
             />
     );
 }
