@@ -24,47 +24,71 @@ export default StyleSheet.create({
     height: 80,
     resizeMode: 'contain'
   },
+
+  containerImage: {
+    justifyContent:'flex-start',
+    marginBottom: 30
+  },
+
+  
   circle: {
-    width: 150,
-    height: 150,
-    borderRadius: 75,
+    width: 130,
+    height: 130,
+    borderRadius: 65,
     borderColor: '#6EC1E4',
     borderWidth: 4,
   },
   username: {
     fontFamily: "comfortaa",
-    fontSize: 30,
+    fontSize: 35,
     color: '#ffffff',
   },
+
+  usernameYellow: {
+    fontFamily: "comfortaa",
+    fontSize: 35,
+    color: '#E9D41B',
+  },
+  
   usernameAndPosition: {
     flexDirection: 'row',
-    flexWrap: 'wrap'
+    flexWrap: 'wrap',
+    marginBottom: 15
   },
+
   trophyAndRanking: {
     flexDirection: 'row',
-    flexWrap: 'wrap'
+    flexWrap: 'wrap',
+    marginBottom: 15
   },
+
   explanationMessage: {
     flexDirection: 'row',
-    flexWrap: 'wrap'
+    flexWrap: 'wrap', 
+    marginBottom: 25,
+    marginHorizontal: 30,
   },
+
   explanationMessageText: {
     fontFamily: "comfortaa",
-    fontSize: 15,
+    fontSize: 22,
     color: '#ffffff',
+    textAlign:'center'
   },
   explanationMessageYellow: {
     fontFamily: "comfortaa",
-    fontSize: 15,
+    fontSize: 22,
     color: '#E9D41B',
+    textAlign:'center', 
   },
+
+
   button: {
     width: width * .8,
     backgroundColor: '#00AEEF',
     padding: 10,
     borderRadius: 10,
-    marginTop: 20,
-    marginBottom: 40,
+    marginBottom: 20,
   },
   buttonText: {
     fontFamily: "comfortaa",
@@ -73,10 +97,21 @@ export default StyleSheet.create({
     fontSize: 20,
     fontWeight: "600"
   },
+
+  explanationMessageTextOr: {
+    fontFamily: "comfortaa",
+    fontSize: 25,
+    color: '#ffffff',
+    textAlign:'center',
+    marginBottom: 15,
+  },
+
+
   allWorkoutsText: {
     fontFamily: "comfortaa",
-    fontSize: 15,
-    color: '#ffffff',
+    fontSize: 25,
+    color: '#6EC1E4',
+    marginBottom: 100,
   },
 
 });

@@ -50,9 +50,8 @@ export function Login({ navigation }) {
     try {
       let usr = await getCurrentUserData()
       usr.isMember ? navigation.navigate("BottomTab") : navigation.navigate("Landing");
-    
     } catch (error) {
-      alert("An error ocurred, please try again")
+      console.log(error.message)
     }
   };
 
@@ -70,18 +69,22 @@ export function Login({ navigation }) {
     setWrongEmail(false);
   };
 
-  const submitHandler = () => {
-    firebase.auth()
-      .signInWithEmailAndPassword(email, password)
-      .then(() => {
-        console.log("logueo exitoso")
-        screenHandlerLanding()
-      })
-      .catch(error => {
-        console.log("hubo un error", error.code, error.message);
-        if (error.code === "auth/user-not-found") setWrongEmail(true);
-        else if (error.code === "auth/wrong-password") setWrongPassword(true);
-      });
+  const submitHandler = async () => {
+
+    try {
+      await firebase.auth().signInWithEmailAndPassword(email, password)
+      console.log("logueo exitoso")
+      
+      /* await getCurrentUserData()
+      setUserData({
+
+      }) */
+      screenHandlerLanding()
+    } catch (error) {
+      console.log("hubo un error", error.code, error.message);
+      if (error.code === "auth/user-not-found") setWrongEmail(true);
+      else if (error.code === "auth/wrong-password") setWrongPassword(true);
+    }
   };
 
   const showPasswordHandler = newValue => {

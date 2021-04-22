@@ -7,6 +7,7 @@ import { Dashboard } from "../components/Dashboard/container";
 import { BottomTab } from './bottomTabNavigation'
 
 const screens = {
+
   Login: {
     screen: Login
   },
