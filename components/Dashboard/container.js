@@ -12,10 +12,10 @@ import { UserContext } from '../../context/userContext'
 export function Dashboard({ navigation }) {
     const { user, setUser } = useContext(UserContext)
 
-    const storage = getStorage();
+   /*  const storage = getStorage();
+    const storageRef = storage.ref(); */
+    
     const firebase = useFirebaseApp();
-    const storageRef = storage.ref();
-
     const db = firebase.firestore()
 
     const [userName, setUserName] = useState("");

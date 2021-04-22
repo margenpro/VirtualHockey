@@ -75,10 +75,10 @@ export function Login({ navigation }) {
       await firebase.auth().signInWithEmailAndPassword(email, password)
       console.log("logueo exitoso")
       
-      await getCurrentUserData()
+      /* await getCurrentUserData()
       setUserData({
 
-      })
+      }) */
       screenHandlerLanding()
     } catch (error) {
       console.log("hubo un error", error.code, error.message);
