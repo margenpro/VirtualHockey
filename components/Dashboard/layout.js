@@ -3,11 +3,16 @@ import { Text, View, Image, TouchableOpacity, ScrollView, FlatList } from 'react
 // import { LinearGradient } from "expo-linear-gradient";
 import styles from "./styles";
 import { Frame } from '../Frame'
+import Ionicons from 'react-native-vector-icons/Ionicons';
+
 
 
 export function Layout({
     getProfileImage,
-    navigateToWorkouts
+    navigateToWorkouts,
+    playLast,
+    userName,
+    userPoints
 }) {
     return (
         <Frame>
@@ -18,12 +23,12 @@ export function Layout({
                         source={getProfileImage()} />
                 </View>
                 <View style={styles.usernameAndPosition}>
-                    <Text style={styles.username}>Elina </Text>
+                    <Text style={styles.username}>{userName} </Text>
                     <Text style={styles.username}># 1</Text>
                 </View>
                 <View style={styles.trophyAndRanking}>
                     <Text style={styles.username}>+ </Text>
-                    <Text style={styles.username}>2450</Text>
+                    <Text style={styles.username}> <Ionicons name={'trophy'} size={25} color={'#E9D41B'} /> {userPoints}</Text>
                 </View>
                 <View style={styles.explanationMessage}>
                     <Text style={styles.explanationMessageText}>Resume your workouts, earn points and get to the top of the </Text>
@@ -31,7 +36,8 @@ export function Layout({
                     <Text style={styles.explanationMessageText}>!</Text>
                 </View>
                 <TouchableOpacity
-                    style={styles.button}>
+                    style={styles.button}
+                    onPress={playLast}>
                     <Text style={styles.buttonText}>RESUME WORKOUT</Text>
                 </TouchableOpacity>
                 <Text style={styles.explanationMessageText}>or</Text>
