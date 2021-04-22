@@ -4,7 +4,6 @@ import { Layout } from "./layout";
 import profileImage from '../../assets/images/user.jpg'
 import WorkoutsStack from '../../routes/WorkoutsStack'
 
-
 export function Dashboard({ navigation }) {
 
     const navigateToWorkouts = () => {
@@ -12,15 +11,21 @@ export function Dashboard({ navigation }) {
         navigation.navigate("Workouts")
     }
 
+    const navigateToVideo = () => {
+        console.log("voy a ver el video")
+        navigation.navigate("Video")
+    }
+
     const getProfileImage = () => {
         return profileImage
     }
 
-    return (
-        // <WorkoutsStack />
-            <Layout
-                getProfileImage={getProfileImage}
-                navigateToWorkouts={navigateToWorkouts}
-            />
-    );
+return (
+    // <WorkoutsStack />
+    <Layout
+        getProfileImage={getProfileImage}
+        navigateToWorkouts={navigateToWorkouts}
+        navigateToVideo={navigateToVideo}
+    />
+);
 }
