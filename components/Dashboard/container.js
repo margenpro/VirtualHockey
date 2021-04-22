@@ -82,6 +82,7 @@ export function Dashboard({ navigation }) {
             playLast={playLast}
             userName={userName}
             userPoints={userPoints}
+            navigateToVideo={navigateToVideo}
         >
         </Layout>
     );

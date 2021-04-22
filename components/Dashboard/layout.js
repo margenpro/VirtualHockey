@@ -10,6 +10,7 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 export function Layout({
     getProfileImage,
     navigateToWorkouts,
+    navigateToVideo,
     playLast,
     userName,
     userPoints
@@ -40,7 +41,7 @@ export function Layout({
 
                 <TouchableOpacity
                     style={styles.button}
-                    onPress={playLast}>
+                    onPress={navigateToVideo}>
                     <Text style={styles.buttonText}>RESUME WORKOUT</Text>
                 </TouchableOpacity>
                 <Text style={styles.explanationMessageTextOr}>or</Text>
