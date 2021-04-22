@@ -6,13 +6,10 @@ import { FirebaseAppProvider } from "reactfire";
 import { firebaseConfig } from "./firebase";
 import Navigator from "./routes/loginStack";
 import { getFont } from './fonts'
-
-
-const width = Dimensions.get('window').width
+import { Context } from './context/userContext'
 
 export default function App() {
   const [fontLoaded, setfontLoaded] = useState(false)
-
 
   useEffect(() => {
     async function loadFont() {
@@ -22,18 +19,16 @@ export default function App() {
     loadFont()
   }, [])
 
-  const color1 = "rgba(2, 28, 59, 1)"
-  const color2 = "rgba(19, 38, 135, 1)"
-
   if (fontLoaded) {
     return (
-
       <FirebaseAppProvider firebaseConfig={firebaseConfig}>
         <StatusBar animated={true} backgroundColor='rgba(2, 28, 59, 1)' barStyle='light-content' />
-        <NavigationContainer>
-          <Navigator>
-          </Navigator>
-        </NavigationContainer>
+        <Context>
+          <NavigationContainer>
+            <Navigator>
+            </Navigator>
+          </NavigationContainer>
+        </Context>
       </FirebaseAppProvider>
     );
   } else return null

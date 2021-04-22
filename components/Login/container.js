@@ -50,9 +50,8 @@ export function Login({ navigation }) {
     try {
       let usr = await getCurrentUserData()
       usr.isMember ? navigation.navigate("BottomTab") : navigation.navigate("Landing");
-    
     } catch (error) {
-      alert("An error ocurred, please try again")
+      console.log(error.message)
     }
   };
 
