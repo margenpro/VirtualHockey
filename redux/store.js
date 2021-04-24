@@ -1,10 +1,5 @@
 import { createStore } from 'redux'
-
-function reducers() {
-    return {
-        testing: 'pruebando'
-    }
-}
+import { reducers } from './reducers'
 
 export default () => {
     return {

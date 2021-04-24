@@ -4,12 +4,10 @@ import { getStorage } from "../../firebase";
 import { useFirebaseApp } from "reactfire";
 import { Layout } from "./layout";
 import Icon from "react-native-vector-icons/FontAwesome";
-import {useSelector} from 'react-redux'
+import { connect } from 'react-redux'
 
-export function Login({ navigation }) {
-  const data = useSelector(state => {
-   console.log(state)
-  })
+const Login = ({ navigation, user })  => {
+
   const storage = getStorage();
   const firebase = useFirebaseApp();
   const storageRef = storage.ref();
@@ -23,15 +21,15 @@ export function Login({ navigation }) {
   const [logoUrl, setLogoUrl] = useState();
   const [showPassword, setShowPassword] = useState(false);
 
-  useEffect(() => {
-    storageRef
-      .child("images/vh_favico[3].png")
-      .getDownloadURL()
-      .then(resolve => {
-        setLogoUrl(resolve);
-      })
-      .catch(e => console.log(e.code, e.message));
-  }, []);
+  // useEffect(({usr}) => {
+  //   storageRef
+  //     .child("images/vh_favico[3].png")
+  //     .getDownloadURL()
+  //     .then(resolve => {
+  //       setLogoUrl(resolve);
+  //     })
+  //     .catch(e => console.log(e.code, e.message));
+  // }, []);
 
   // SF Direccionar a la screen Register
   const screenHandlerRegister = () => {
@@ -40,8 +38,8 @@ export function Login({ navigation }) {
 
   const getCurrentUserData = async () => {
     try {
-      let user = firebase.auth().currentUser
-      let doc = await db.collection("users").doc(user.uid).get()
+      let usr = firebase.auth().currentUser
+      let doc = await db.collection("users").doc(usr.uid).get()
       let data = doc.data()
       return data
     } catch (error) {
@@ -77,7 +75,7 @@ export function Login({ navigation }) {
     try {
       await firebase.auth().signInWithEmailAndPassword(email, password)
       console.log("logueo exitoso")
-      
+
       /* await getCurrentUserData()
       setUserData({
 
@@ -96,6 +94,7 @@ export function Login({ navigation }) {
 
   return (
     <>
+    {console.log(user)}
       <Layout
         emailInputHandler={emailInputHandler}
         passInputHandler={passInputHandler}
@@ -104,7 +103,7 @@ export function Login({ navigation }) {
         screenHandlerLanding={screenHandlerLanding}
         screenHandlerRegister={screenHandlerRegister}
         wrongPassword={wrongPassword}
-        logoUrl={logoUrl}
+        // logoUrl={logoUrl}
         showPassword={showPassword}
         showPasswordHandler={showPasswordHandler}
         forTesting={forTesting}
@@ -112,3 +111,12 @@ export function Login({ navigation }) {
     </>
   );
 }
+const mapStateToProps = state => ({
+  user: state.user
+})
+
+const mapDispatchToProps = dispatch => ({
+
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(Login)
