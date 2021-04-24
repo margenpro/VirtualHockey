@@ -4,9 +4,12 @@ import { getStorage } from "../../firebase";
 import { useFirebaseApp } from "reactfire";
 import { Layout } from "./layout";
 import Icon from "react-native-vector-icons/FontAwesome";
-
+import {useSelector} from 'react-redux'
 
 export function Login({ navigation }) {
+  const data = useSelector(state => {
+   console.log(state)
+  })
   const storage = getStorage();
   const firebase = useFirebaseApp();
   const storageRef = storage.ref();
