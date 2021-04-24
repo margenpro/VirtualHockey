@@ -4,6 +4,7 @@ import Icon from "react-native-vector-icons/FontAwesome";
 import { Input } from "react-native-elements";
 import styles from "./styles";
 import { Frame } from '../Frame'
+import mainLogo from '../../assets/images/mainLogo.png'
 // import { LinearGradient } from "expo-linear-gradient";
 
 export function Layout({
@@ -12,7 +13,7 @@ export function Layout({
   submitHandler,
   wrongEmail,
   wrongPassword,
-  screenHandlerLanding,
+  // screenHandlerLanding,
   screenHandlerRegister,
   logoUrl,
   showPassword,
@@ -33,7 +34,7 @@ export function Layout({
         <Image
           style={styles.logo}
           source={{
-            uri: logoUrl
+            uri: mainLogo
           }}
         />
         <Text style={styles.pagetitle}>Log In</Text>
