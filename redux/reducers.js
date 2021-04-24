@@ -3,24 +3,47 @@
 //         testing: 'pruebando'
 //     }
 // }
-import React from 'react';
-import { USER } from "./actions";
-
+import { SET_USER } from "./actions";
 
 const initialState = {
     user: {
-        mail: "",
+        email: "",
         username: "something",
         role: 0,
         lastVideo: 0,
     }
 }
 
+const differentState = {
+    user: {
+        email: "else",
+        username: "else",
+        role: 0,
+        lastVideo: 0,
+    }
+}
+
 export const reducers = (state = initialState, action) => {
-    if (action.type === 'USER') {
+    if (action.type == "SETTER_USER") {
+        console.log("entre a SETTER USER")
         return {
-            state
+            ...state,
+            user: {
+                email: action.email ? action.email : state.user.email,
+                username: action.username ? action.username : state.user.username,
+                role: action.role ? action.role : state.user.role,
+                lastVideo: action.lastVideo ? action.lastVideo : state.user.lastVideo,
+            }
         }
     }
-    else return state
+    if (action.type == "SET_USER") {
+        console.log("entre a set user")
+        return {
+            differentState
+        }
+    }
+    else {
+        console.log("aca no tengo que llegar")
+        return state
+    }
 }

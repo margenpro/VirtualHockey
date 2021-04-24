@@ -5,8 +5,10 @@ import { useFirebaseApp } from "reactfire";
 import { Layout } from "./layout";
 import Icon from "react-native-vector-icons/FontAwesome";
 import { connect } from 'react-redux'
+import { UserContext } from "../../context/userContext";
+import { setUserAction } from '../../redux/actions'
 
-const Login = ({ navigation, user })  => {
+const Login = ({ navigation, user, setterUserAction }) => {
 
   const storage = getStorage();
   const firebase = useFirebaseApp();
@@ -30,6 +32,10 @@ const Login = ({ navigation, user })  => {
   //     })
   //     .catch(e => console.log(e.code, e.message));
   // }, []);
+
+  useEffect(() => {
+    console.log(user)
+  }, [])
 
   // SF Direccionar a la screen Register
   const screenHandlerRegister = () => {
@@ -71,11 +77,13 @@ const Login = ({ navigation, user })  => {
   };
 
   const submitHandler = async () => {
-
+    console.log("voy a increment")
+    setterUserAction(email)
+    // setUser({ email })
+    console.log(user)
     try {
       await firebase.auth().signInWithEmailAndPassword(email, password)
       console.log("logueo exitoso")
-
       /* await getCurrentUserData()
       setUserData({
 
@@ -94,7 +102,6 @@ const Login = ({ navigation, user })  => {
 
   return (
     <>
-    {console.log(user)}
       <Layout
         emailInputHandler={emailInputHandler}
         passInputHandler={passInputHandler}
@@ -115,8 +122,13 @@ const mapStateToProps = state => ({
   user: state.user
 })
 
-const mapDispatchToProps = dispatch => ({
-
-})
+const mapDispatchToProps = (dispatch) => {
+  return {
+    setterUserAction: (email) => dispatch({ 
+      type: 'SETTER_USER', 
+      email
+    }),
+  }
+}
 
 export default connect(mapStateToProps, mapDispatchToProps)(Login)
