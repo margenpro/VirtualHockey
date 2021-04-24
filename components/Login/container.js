@@ -33,9 +33,6 @@ const Login = ({ navigation, user, setUser }) => {
   //     .catch(e => console.log(e.code, e.message));
   // }, []);
 
-  useEffect(() => {
-    console.log(user)
-  }, [])
 
   // SF Direccionar a la screen Register
   const screenHandlerRegister = () => {
@@ -52,6 +49,8 @@ const Login = ({ navigation, user, setUser }) => {
       throw new Error(error.message)
     }
   }
+
+
 
   const screenHandlerLanding = async () => {
     try {
@@ -77,18 +76,12 @@ const Login = ({ navigation, user, setUser }) => {
   };
 
   const submitHandler = async () => {
-    console.log("voy a increment")
-    const username = "lalala"
-    await setUser({ email, username })
-    // setUser({ email })
-    console.log(user)
     try {
       await firebase.auth().signInWithEmailAndPassword(email, password)
       console.log("logueo exitoso")
-      /* await getCurrentUserData()
-      setUserData({
+      const data = await getCurrentUserData()
+      setUser({ email, username: data.username, role: data.isMember, lastVideo: data.lastVideoWatched })
 
-      }) */
       screenHandlerLanding()
     } catch (error) {
       console.log("hubo un error", error.code, error.message);

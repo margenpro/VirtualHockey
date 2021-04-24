@@ -1,19 +1,21 @@
 import React, { useState, useEffect, useContext } from "react";
-import { Image, View } from "react-native";
+// import { Image, View } from "react-native";
 import { Layout } from "./layout";
 import profileImage from '../../assets/images/user.jpg'
-import WorkoutsStack from '../../routes/WorkoutsStack'
+// import WorkoutsStack from '../../routes/WorkoutsStack'
 import "firebase/auth";
-import { getStorage } from "../../firebase";
+// import { getStorage } from "../../firebase";
 import { useFirebaseApp } from "reactfire";
 import { UserContext } from '../../context/userContext'
+import { connect } from 'react-redux'
 
-export function Dashboard({ navigation }) {
-    const { user, setUser } = useContext(UserContext)
 
-   /*  const storage = getStorage();
-    const storageRef = storage.ref(); */
-    
+const Dashboard = ({ navigation, user }) => {
+    const { _user, _setUser } = useContext(UserContext)
+
+    /*  const storage = getStorage();
+     const storageRef = storage.ref(); */
+
     const firebase = useFirebaseApp();
     const db = firebase.firestore()
 
@@ -37,8 +39,8 @@ export function Dashboard({ navigation }) {
 
     const playLast = async () => {
         try {
-            let user = firebase.auth().currentUser
-            let doc = await db.collection("users").doc(user.uid).get()
+            let _user = firebase.auth().currentUser
+            let doc = await db.collection("users").doc(_user.uid).get()
             getVideo(doc.data().lastVideoWatched)
         } catch (error) {
             console.log(error)
@@ -59,8 +61,8 @@ export function Dashboard({ navigation }) {
     useEffect(() => {
         const getCurrentUserData = async () => {
             try {
-                let user = firebase.auth().currentUser
-                let doc = await db.collection("users").doc(user.uid).get()
+                let _user = firebase.auth().currentUser
+                let doc = await db.collection("users").doc(_user.uid).get()
                 let data = doc.data()
                 console.log(data)
                 setUserName(data.username)
@@ -76,14 +78,22 @@ export function Dashboard({ navigation }) {
 
     return (
         // <WorkoutsStack />
-        <Layout
-            getProfileImage={getProfileImage}
-            navigateToWorkouts={navigateToWorkouts}
-            playLast={playLast}
-            userName={userName}
-            userPoints={userPoints}
-            navigateToVideo={navigateToVideo}
-        >
-        </Layout>
+        <>
+            {console.log(user)}
+            <Layout
+                getProfileImage={getProfileImage}
+                navigateToWorkouts={navigateToWorkouts}
+                playLast={playLast}
+                userName={userName}
+                userPoints={userPoints}
+                navigateToVideo={navigateToVideo}
+            >
+            </Layout>
+        </>
     );
 }
+const mapStateToProps = state => ({
+    user: state.user
+})
+
+export default connect(mapStateToProps, {})(Dashboard)
