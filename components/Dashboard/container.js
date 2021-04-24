@@ -8,14 +8,13 @@ import { getStorage } from "../../firebase";
 import { useFirebaseApp } from "reactfire";
 import { UserContext } from '../../context/userContext'
 
-
 export function Dashboard({ navigation }) {
     const { user, setUser } = useContext(UserContext)
 
-    const storage = getStorage();
+   /*  const storage = getStorage();
+    const storageRef = storage.ref(); */
+    
     const firebase = useFirebaseApp();
-    const storageRef = storage.ref();
-
     const db = firebase.firestore()
 
     const [userName, setUserName] = useState("");
@@ -25,6 +24,11 @@ export function Dashboard({ navigation }) {
     const navigateToWorkouts = () => {
         console.log("voy a navegar")
         navigation.navigate("Workouts")
+    }
+
+    const navigateToVideo = () => {
+        console.log("voy a ver el video")
+        navigation.navigate("Video")
     }
 
     const getProfileImage = () => {
@@ -78,6 +82,7 @@ export function Dashboard({ navigation }) {
             playLast={playLast}
             userName={userName}
             userPoints={userPoints}
+            navigateToVideo={navigateToVideo}
         >
         </Layout>
     );
