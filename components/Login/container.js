@@ -6,9 +6,9 @@ import { Layout } from "./layout";
 import Icon from "react-native-vector-icons/FontAwesome";
 import { connect } from 'react-redux'
 import { UserContext } from "../../context/userContext";
-import { setUserAction } from '../../redux/actions'
+import { setterUserAction } from '../../redux/actions'
 
-const Login = ({ navigation, user, setterUserAction }) => {
+const Login = ({ navigation, user, setUser }) => {
 
   const storage = getStorage();
   const firebase = useFirebaseApp();
@@ -78,7 +78,8 @@ const Login = ({ navigation, user, setterUserAction }) => {
 
   const submitHandler = async () => {
     console.log("voy a increment")
-    setterUserAction(email)
+    const username = "lalala"
+    await setUser({ email, username })
     // setUser({ email })
     console.log(user)
     try {
@@ -122,13 +123,8 @@ const mapStateToProps = state => ({
   user: state.user
 })
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-    setterUserAction: (email) => dispatch({ 
-      type: 'SETTER_USER', 
-      email
-    }),
-  }
-}
+const mapDispatchToProps = ({
+  setUser: setterUserAction
+})
 
 export default connect(mapStateToProps, mapDispatchToProps)(Login)
