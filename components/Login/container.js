@@ -5,7 +5,7 @@ import { useFirebaseApp } from "reactfire";
 import { Layout } from "./layout";
 import Icon from "react-native-vector-icons/FontAwesome";
 import { connect } from 'react-redux'
-import { UserContext } from "../../context/userContext";
+// import { UserContext } from "../../context/userContext";
 import { setterUserAction } from '../../redux/actions'
 
 const Login = ({ navigation, user, setUser }) => {

@@ -12,30 +12,33 @@ import trophy from '../../../assets/images/trophy.png'
 export function Layout({
     // size
     //screenHandler 
+    username,
+    ranking,
 }) {
     return (
         <Frame>
             <View style={styles.container}>
                 <View
                     style={styles.superior}>
-                        <View>
-                    <Text style={styles.username}>Hello,</Text>
-                    <Text style={styles.username}>Elina </Text>
+                    <View style={styles.leftHeader}>
+                        <Text style={styles.welcome}>Hello,</Text>
+                        <Text style={styles.username}>{username}</Text>
                     </View>
-                    <View>
-                    <Image
-                        source={trophy}
-                        style={styles.trophy}>
-                    </Image>
-                    <Text style={styles.username}>2450</Text>
+                    <View style={styles.rightHeader}>
+                        <Image
+                            source={trophy}
+                            style={styles.trophy}>
+                        </Image>
+                        <Text style={styles.ranking}>{ranking}</Text>
                     </View>
                 </View>
                 <View
                     style={styles.middle}>
-                    <WorkoutCard />
+                    <WorkoutCard
+                        style={styles.workOutCard}
+                    />
                 </View>
-                <View
-                    style={styles.inferior}>
+                <View style={styles.inferior}>
                     <Text style={styles.previousWorkouts}>Previous Workouts</Text>
                     <ScrollView horizontal={true}><OldWorkoutCard /><OldWorkoutCard /><OldWorkoutCard /></ScrollView>
                 </View>

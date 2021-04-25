@@ -6,12 +6,12 @@ import profileImage from '../../assets/images/user.jpg'
 import "firebase/auth";
 // import { getStorage } from "../../firebase";
 import { useFirebaseApp } from "reactfire";
-import { UserContext } from '../../context/userContext'
+// import { UserContext } from '../../context/userContext'
 import { connect } from 'react-redux'
 
 
 const Dashboard = ({ navigation, user }) => {
-    const { _user, _setUser } = useContext(UserContext)
+    // const { _user, _setUser } = useContext(UserContext)
 
     /*  const storage = getStorage();
      const storageRef = storage.ref(); */
@@ -57,7 +57,6 @@ const Dashboard = ({ navigation, user }) => {
         }
     }
 
-
     useEffect(() => {
         const getCurrentUserData = async () => {
             try {
@@ -71,9 +70,7 @@ const Dashboard = ({ navigation, user }) => {
                 throw new Error(error.message)
             }
         }
-
         getCurrentUserData()
-
     }, []);
 
     return (
