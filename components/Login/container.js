@@ -75,13 +75,31 @@ const Login = ({ navigation, user, setUser }) => {
     setWrongEmail(false);
   };
 
+  const getAllVideos = async () => {
+      try {
+          let videosList = []
+          let videos = await db.collection("videos").get()
+
+          videos.forEach(video => {
+            videosList.push(video.data().videoUrl)
+          });
+
+          console.log("devuelvo vids: " + videosList)
+          return videosList
+            } catch (error) {
+              alert(error)
+            }
+  
+  }
+
   const submitHandler = async () => {
     try {
       await firebase.auth().signInWithEmailAndPassword(email, password)
       console.log("logueo exitoso")
       const data = await getCurrentUserData()
       setUser({ email, username: data.username, role: data.isMember, lastVideo: data.lastVideoWatched })
-      
+      let videoList = await getAllVideos()
+      console.log(videoList)
       screenHandlerLanding()
     } catch (error) {
       console.log("hubo un error", error.code, error.message);
