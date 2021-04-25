@@ -81,7 +81,7 @@ const Login = ({ navigation, user, setUser }) => {
       console.log("logueo exitoso")
       const data = await getCurrentUserData()
       setUser({ email, username: data.username, role: data.isMember, lastVideo: data.lastVideoWatched })
-
+      
       screenHandlerLanding()
     } catch (error) {
       console.log("hubo un error", error.code, error.message);
