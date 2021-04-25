@@ -33,9 +33,7 @@ export function Layout({
       > */}
         <Image
           style={styles.logo}
-          source={{
-            uri: mainLogo
-          }}
+          source={mainLogo}
         />
         <Text style={styles.pagetitle}>Log In</Text>
 
