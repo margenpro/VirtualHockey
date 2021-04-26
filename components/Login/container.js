@@ -6,9 +6,9 @@ import { Layout } from "./layout";
 import Icon from "react-native-vector-icons/FontAwesome";
 import { connect } from 'react-redux'
 // import { UserContext } from "../../context/userContext";
-import { setterUserAction } from '../../redux/actions'
+import { setVideosAction, setterUserAction } from '../../redux/actions'
 
-const Login = ({ navigation, user, setUser }) => {
+const Login = ({ navigation, user, setUser, setVideos }) => {
 
   const storage = getStorage();
   const firebase = useFirebaseApp();
@@ -85,10 +85,12 @@ const Login = ({ navigation, user, setUser }) => {
           });
 
           console.log("devuelvo vids: " + videosList)
+      
+          
           return videosList
-            } catch (error) {
+        } catch (error) {
               alert(error)
-            }
+        }
   
   }
 
@@ -98,8 +100,9 @@ const Login = ({ navigation, user, setUser }) => {
       console.log("logueo exitoso")
       const data = await getCurrentUserData()
       setUser({ email, username: data.username, role: data.isMember, lastVideo: data.lastVideoWatched })
-      let videoList = await getAllVideos()
-      console.log(videoList)
+      let videosList = await getAllVideos()
+      await setVideos(videosList)
+      console.log("Lla guardamo lo bideo " + videosList)
       screenHandlerLanding()
     } catch (error) {
       console.log("hubo un error", error.code, error.message);
@@ -131,11 +134,13 @@ const Login = ({ navigation, user, setUser }) => {
   );
 }
 const mapStateToProps = state => ({
-  user: state.user
+  user: state.user,
+  videos: state.videos
 })
 
 const actionCreators ={
-    setUser: setterUserAction
+    setUser: setterUserAction,
+    setVideos: setVideosAction
 }
 
 export default connect(mapStateToProps, actionCreators)(Login)

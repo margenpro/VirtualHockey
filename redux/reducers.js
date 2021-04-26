@@ -1,4 +1,4 @@
-import { SETTER_USER } from "./actions";
+import { SETTER_USER, SET_VIDEOS } from "./actions";
 
 const initialState = {
     user: {
@@ -6,7 +6,8 @@ const initialState = {
         username: "",
         role: 0,
         lastVideo: 0,
-    }
+    },
+    videos: []
 }
 
 export const reducers = (state = initialState, action) => {
@@ -18,6 +19,13 @@ export const reducers = (state = initialState, action) => {
         return {
             ...state,
             user: { email, username, role, lastVideo }
+        }
+
+    }
+    else if (action.type === SET_VIDEOS) {
+        return {
+            ...state,
+            videos: action.payload.videos 
         }
     }
     return state

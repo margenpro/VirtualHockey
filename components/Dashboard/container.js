@@ -10,7 +10,7 @@ import { useFirebaseApp } from "reactfire";
 import { connect } from 'react-redux'
 
 
-const Dashboard = ({ navigation, user }) => {
+const Dashboard = ({ navigation, user, videos }) => {
     // const { _user, _setUser } = useContext(UserContext)
 
     /*  const storage = getStorage();
@@ -73,6 +73,7 @@ const Dashboard = ({ navigation, user }) => {
                 let doc = await db.collection("users").doc(_user.uid).get()
                 let data = doc.data()
                 console.log(data)
+                console.log("Videitohhh " + await videos)
                 setUserName(data.username)
                 setUserPoints(data.points)
             } catch (error) {
@@ -85,6 +86,7 @@ const Dashboard = ({ navigation, user }) => {
     return (
         // <WorkoutsStack />
         <>
+          {console.log("imprimimo lo videoh" + videos)}
             {console.log(user)}
             <Layout
                 getProfileImage={getProfileImage}
@@ -98,7 +100,8 @@ const Dashboard = ({ navigation, user }) => {
     );
 }
 const mapStateToProps = state => ({
-    user: state.user
+    user: state.user,
+    videos: state.videos
 })
 
 export default connect(mapStateToProps, {})(Dashboard)
