@@ -6,6 +6,7 @@ const initialState = {
         username: "",
         role: 0,
         lastVideo: 0,
+        ranking: 0,
     }
 }
 

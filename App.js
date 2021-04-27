@@ -32,7 +32,7 @@ export default function App() {
               <Navigator>
               </Navigator>
             </NavigationContainer>
-          {/* </Ckontext> */}
+          {/* </Context> */}
         </FirebaseAppProvider>
       </Provider>
     );

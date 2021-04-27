@@ -116,8 +116,8 @@ const mapStateToProps = state => ({
   user: state.user
 })
 
-const actionCreators ={
-    setUser: setterUserAction
+const actionCreators = {
+  setUser: setterUserAction
 }
 
 export default connect(mapStateToProps, actionCreators)(Login)
