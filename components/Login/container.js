@@ -6,7 +6,8 @@ import { Layout } from "./layout";
 import Icon from "react-native-vector-icons/FontAwesome";
 import { connect } from 'react-redux'
 // import { UserContext } from "../../context/userContext";
-import { setVideosAction, setterUserAction } from '../../redux/actions'
+import { setterUserAction } from '../../redux/actions/userActions'
+import { setVideosAction } from '../../redux/actions/videosActions'
 
 const Login = ({ navigation, user, setUser, setVideos }) => {
 
@@ -101,8 +102,8 @@ const Login = ({ navigation, user, setUser, setVideos }) => {
       const data = await getCurrentUserData()
       setUser({ email, username: data.username, role: data.isMember, lastVideo: data.lastVideoWatched })
       let videosList = await getAllVideos()
-      await setVideos(videosList)
-      console.log("Lla guardamo lo bideo " + videosList)
+      // setVideos(videosList)
+      console.log(videosList)
       screenHandlerLanding()
     } catch (error) {
       console.log("hubo un error", error.code, error.message);

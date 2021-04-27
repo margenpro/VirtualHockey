@@ -1,10 +1,16 @@
-import { createStore } from 'redux'
-import { reducers } from './reducers'
+import { createStore, combineReducers } from 'redux'
+import { userReducer } from './reducers/userReducer'
+import { videosReducer } from './reducers/videosReducer'
 
 export default () => {
     return {
         ...createStore(
-            reducers, /* preloadedState, */
+            combineReducers({
+
+            
+            userReducer,
+            videosReducer, /* preloadedState, */
+        }),
             window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
         )
     }

@@ -73,7 +73,7 @@ const Dashboard = ({ navigation, user, videos }) => {
                 let doc = await db.collection("users").doc(_user.uid).get()
                 let data = doc.data()
                 console.log(data)
-                console.log("Videitohhh " + await videos)
+                console.log("usuariooooo " + user)
                 setUserName(data.username)
                 setUserPoints(data.points)
             } catch (error) {

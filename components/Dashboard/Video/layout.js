@@ -6,15 +6,15 @@ import { Frame } from '../../Frame'
 import { Audio, Video } from 'expo-av';
 
 export function Layout({
-    //videoUri,
+    videoUri,
     getUrl
 }) {
-    const idVideo = "95716154"
+    const vid = videoUri()
     return (
         <Frame>
             <Video
                 source={{
-                    uri: getUrl() //videoUri,
+                    uri: vid //videoUri,
                 }}
                 useNativeControls
                 resizeMode='contain'
