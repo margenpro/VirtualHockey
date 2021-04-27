@@ -11,7 +11,6 @@ export function Layout({
     getProfileImage,
     navigateToWorkouts,
     navigateToVideo,
-    playLast,
     userName,
     userPoints
 }) {

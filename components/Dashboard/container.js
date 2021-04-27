@@ -10,7 +10,7 @@ import { useFirebaseApp } from "reactfire";
 import { connect } from 'react-redux'
 
 
-const Dashboard = ({ navigation, user }) => {
+const Dashboard = ({ navigation, user, videos }) => {
     // const { _user, _setUser } = useContext(UserContext)
 
     /*  const storage = getStorage();
@@ -28,20 +28,28 @@ const Dashboard = ({ navigation, user }) => {
         navigation.navigate("Workouts")
     }
 
-    const navigateToVideo = () => {
-        console.log("voy a ver el video")
-        navigation.navigate("Video")
+    const navigateToVideo = async () => {
+        const url = await getNextUrl()
+        console.log("nos fuimos al video: " + url)
+        navigation.navigate("Video", {
+            url
+        })
     }
 
     const getProfileImage = () => {
         return profileImage
     }
-
-    const playLast = async () => {
+    const getNextUrl = async () => {
         try {
+            //Busqueda por campo id
             let _user = firebase.auth().currentUser
             let doc = await db.collection("users").doc(_user.uid).get()
-            getVideo(doc.data().lastVideoWatched)
+            console.log(doc.data())
+            let lastVidId = (+doc.data().lastVideoWatched + +1).toString();
+            console.log("lvid " + typeof(lastVidId))
+            let video = await getVideo(lastVidId) //Siguiente del ultimo visto
+            console.log("devuelvo url " + video.videoUrl)
+            return video.videoUrl
         } catch (error) {
             console.log(error)
         }
@@ -50,9 +58,10 @@ const Dashboard = ({ navigation, user }) => {
     const getVideo = async (id) => {
         try {
             let vid = await db.collection("videos").doc(id).get()
-            vid = vid.data()
-            console.log(vid)
-        } catch (error) {
+            let data = vid.data()
+            console.log("devuelvo vid: " + data)
+            return data
+              } catch (error) {
 
         }
     }
@@ -64,6 +73,7 @@ const Dashboard = ({ navigation, user }) => {
                 let doc = await db.collection("users").doc(_user.uid).get()
                 let data = doc.data()
                 console.log(data)
+                console.log("usuariooooo " + user)
                 setUserName(data.username)
                 setUserPoints(data.points)
             } catch (error) {
@@ -76,11 +86,11 @@ const Dashboard = ({ navigation, user }) => {
     return (
         // <WorkoutsStack />
         <>
+          {console.log("imprimimo lo videoh" + videos)}
             {console.log(user)}
             <Layout
                 getProfileImage={getProfileImage}
                 navigateToWorkouts={navigateToWorkouts}
-                playLast={playLast}
                 userName={userName}
                 userPoints={userPoints}
                 navigateToVideo={navigateToVideo}
@@ -90,7 +100,8 @@ const Dashboard = ({ navigation, user }) => {
     );
 }
 const mapStateToProps = state => ({
-    user: state.user
+    user: state.user,
+    videos: state.videos
 })
 
 export default connect(mapStateToProps, {})(Dashboard)

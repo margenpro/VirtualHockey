@@ -1,4 +1,4 @@
-import { SETTER_USER } from "./actions";
+import { SETTER_USER } from "../actions/userActions";
 
 const initialState = {
     user: {
@@ -6,11 +6,11 @@ const initialState = {
         username: "",
         role: 0,
         lastVideo: 0,
-        ranking: 0,
-    }
+    },
+    videos: []
 }
 
-export const reducers = (state = initialState, action) => {
+export const userReducer = (state = initialState, action) => {
     if (action.type === SETTER_USER) {
         const email = action.payload.email ? action.payload.email : state.user.email
         const username = action.payload.username ? action.payload.username : state.user.username
@@ -20,6 +20,7 @@ export const reducers = (state = initialState, action) => {
             ...state,
             user: { email, username, role, lastVideo }
         }
+
     }
     return state
 }

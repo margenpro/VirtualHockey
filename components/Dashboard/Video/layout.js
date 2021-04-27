@@ -2,15 +2,14 @@ import React from 'react';
 import { Image, Text, View } from 'react-native';
 import { LinearGradient } from "expo-linear-gradient";
 import styles from "./styles";
-import { WebView } from 'react-native-webview';
 import { Frame } from '../../Frame'
-
+import { Audio, Video } from 'expo-av';
 
 export function Layout({
-
+    videoUri,
+    getUrl
 }) {
-    const idVideo = "95716154"
-
+    const vid = videoUri()
     return (
 
         <WebView
@@ -31,5 +30,15 @@ export function Layout({
             mediaPlaybackRequiresUserAction={false}
         />
 
+        // <Frame>
+        //     <Video
+        //         source={{
+        //             uri: vid //videoUri,
+        //         }}
+        //         useNativeControls
+        //         resizeMode='contain'
+        //         isLooping
+        //     />
+        // </Frame>
     );
 }

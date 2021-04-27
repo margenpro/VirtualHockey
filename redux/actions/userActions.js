@@ -4,3 +4,4 @@ export const setterUserAction = ({ email, username, role, lastVideo }) => ({
   type: SETTER_USER,
   payload: { email, username, role, lastVideo }
 })
+
