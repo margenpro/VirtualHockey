@@ -67,20 +67,8 @@ const Dashboard = ({ navigation, user, videos }) => {
     }
 
     useEffect(() => {
-        const getCurrentUserData = async () => {
-            try {
-                let _user = firebase.auth().currentUser
-                let doc = await db.collection("users").doc(_user.uid).get()
-                let data = doc.data()
-                console.log(data)
-                console.log("usuariooooo " + user)
-                setUserName(data.username)
-                setUserPoints(data.points)
-            } catch (error) {
-                throw new Error(error.message)
-            }
-        }
-        getCurrentUserData()
+        
+        console.log(user)
     }, []);
 
     return (
@@ -99,9 +87,6 @@ const Dashboard = ({ navigation, user, videos }) => {
         </>
     );
 }
-const mapStateToProps = state => ({
-    user: state.user,
-    videos: state.videos
-})
+const mapStateToProps = state => {return {user: state.user, videos: state.videos}}
 
 export default connect(mapStateToProps, {})(Dashboard)
