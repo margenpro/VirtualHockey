@@ -1,31 +1,35 @@
 import React from 'react';
 import styles from "./styles";
+import { View } from 'react-native'
 import { WebView } from 'react-native-webview'
-
 
 export function Layout({
     videoUri,
     getUrl
 }) {
     const vid = videoUri()
-    return (
 
-        <WebView
-            source={{ uri: "https://player.vimeo.com/external/475218949.hd.mp4?s=ba45e54d6ef6152a1837619dd9e4ce5fe8641ea0&profile_id=175" + "&autoplay=1&mute=1&showinfo=0&controls=1&fullscreen=1" }}
-            style={{ flex: 1, alignSelf: 'stretch' }}
-            allowsFullscreenVideo={true}
-            scalesPageToFit={true}
-            originWhitelist={['https://*']}
-            allowsFullscreenVideo={true}
-            allowsInlineMediaPlayback={true}
-            javaScriptEnabled={true}
-            scalesPageToFit={true}
-            domStorageEnabled={true}
-            scrollEnabled={false}
-            automaticallyAdjustContentInsets={true}
-            startInLoadingState={true}
-            injectedJavaScript="document.body.scrollHeight;"
-            mediaPlaybackRequiresUserAction={false}
-        />
-    );
+    return (
+            <WebView
+                source={{
+                    // uri: "https://vimeo.com/495050901/21df89583c?playsinline=0"
+                    html: '<iframe src="https://player.vimeo.com/video/495050901?autoplay=1&playsinline=0" width="640" height="480" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>'
+                }}
+                style={{ flex: 1 }}
+                // injectedJavaScript='document.getElementsByTagName("iframe")[0].pause();'
+                allowsFullscreenVideo={true}
+                scalesPageToFit={false}
+                originWhitelist={['https://*']}
+                allowsFullscreenVideo={true}
+                allowsInlineMediaPlayback={true}
+                javaScriptEnabled={true}
+                scalesPageToFit={true}
+                domStorageEnabled={true}
+                scrollEnabled={false}
+                automaticallyAdjustContentInsets={false}
+                startInLoadingState={true}
+                mediaPlaybackRequiresUserAction={false}
+                useWebKit={true}
+            />
+            );
 }
