@@ -12,6 +12,7 @@ export function Layout({
     navigateToWorkouts,
     navigateToVideo,
     userName,
+    userPosition,
     userPoints
 }) {
     return (
@@ -24,7 +25,7 @@ export function Layout({
                 </View>
                 <View style={styles.usernameAndPosition}>
                     <Text style={styles.username}>{userName} </Text>
-                    <Text style={styles.usernameYellow}>#1</Text>
+                    <Text style={styles.usernameYellow}>#{userPosition}</Text>
                 </View>
                 <View style={styles.trophyAndRanking}>
                     {/* <Text style={styles.username}>+ </Text> */}

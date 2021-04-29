@@ -21,6 +21,7 @@ const Dashboard = ({ navigation, user, videos }) => {
 
     const [userName, setUserName] = useState("");
     const [userPoints, setUserPoints] = useState("");
+    const [userPosition, setUserPosition] = useState("");
 
 
     const navigateToWorkouts = () => {
@@ -61,7 +62,7 @@ const Dashboard = ({ navigation, user, videos }) => {
             let data = vid.data()
             console.log("devuelvo vid: " + data)
             return data
-              } catch (error) {
+        } catch (error) {
 
         }
     }
@@ -70,19 +71,40 @@ const Dashboard = ({ navigation, user, videos }) => {
         const getCurrentUserData = async () => {
             try {
                 let _user = firebase.auth().currentUser
+                
                 let doc = await db.collection("users").doc(_user.uid).get()
                 let data = doc.data()
+                //console.log(data)
+                console.log("Videitohhh " + await videos)
+
                 console.log(data)
                 console.log("usuariooooo " + user)
                 setUserName(data.username)
                 setUserPoints(data.points)
+                await calculationRanking(data.points)               
             } catch (error) {
                 throw new Error(error.message)
             }
         }
         getCurrentUserData()
     }, []);
+    
 
+
+    const calculationRanking = async (points) => {
+        const UsuariosRef = await db.collection('users').where('points', '>' ,points)
+        
+        UsuariosRef.onSnapshot(snap => {
+            let cont = 0
+            snap.forEach(snapHijo =>  {
+                cont ++            
+            })
+            //console.log(cont)
+            setUserPosition(cont+1)
+        })
+    }
+    
+    
     return (
         // <WorkoutsStack />
         <>
@@ -93,6 +115,7 @@ const Dashboard = ({ navigation, user, videos }) => {
                 navigateToWorkouts={navigateToWorkouts}
                 userName={userName}
                 userPoints={userPoints}
+                userPosition={userPosition}
                 navigateToVideo={navigateToVideo}
             >
             </Layout>
