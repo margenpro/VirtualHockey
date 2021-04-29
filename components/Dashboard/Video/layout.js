@@ -4,12 +4,13 @@ import { LinearGradient } from "expo-linear-gradient";
 import styles from "./styles";
 import { Frame } from '../../Frame'
 import { Audio, Video } from 'expo-av';
+import WebView from 'react-native-webview'
 
 export function Layout({
-    videoUri,
-    getUrl
+   // videoUri,
+    //getUrl
 }) {
-    const vid = videoUri()
+    //const vid = videoUri()
     return (
 
         <WebView
