@@ -15,7 +15,7 @@ function Workouts({ navigation, user }) {
     );
 }
 const mapStateToProps = state => ({
-    user: state.user
+    user: state.userReducer.user
 })
 
 export default connect(mapStateToProps, {})(Workouts)
