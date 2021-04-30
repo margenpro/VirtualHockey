@@ -87,6 +87,6 @@ const Dashboard = ({ navigation, user, videos }) => {
         </>
     );
 }
-const mapStateToProps = state => {return {user: state.user, videos: state.videos}}
+const mapStateToProps = state => {return {user: state.userReducer.user, videos: state.videosReducer.videos}}
 
 export default connect(mapStateToProps, {})(Dashboard)

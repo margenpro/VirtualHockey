@@ -97,12 +97,6 @@ const Login = ({ navigation, user, setUser, setVideos, videos }) => {
   }
 
   const submitHandler = async () => {
-    let videosList = await getAllVideos()
-    console.log(videosList)
-    setVideos(videosList)
-    setUser({ email:"@dsa", username:"testtt" })
-     console.log(user)
-     console.log(videos)
     try {
       await firebase.auth().signInWithEmailAndPassword(email, password)
       console.log("logueo exitoso")
