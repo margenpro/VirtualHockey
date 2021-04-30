@@ -47,7 +47,7 @@ const Dashboard = ({ navigation, user, videos }) => {
             let doc = await db.collection("users").doc(_user.uid).get()
             console.log(doc.data())
             let lastVidId = (+doc.data().lastVideoWatched + +1).toString();
-            console.log("lvid " + typeof(lastVidId))
+            console.log("lvid " + typeof (lastVidId))
             let video = await getVideo(lastVidId) //Siguiente del ultimo visto
             console.log("devuelvo url " + video.videoUrl)
             return video.videoUrl
@@ -71,7 +71,7 @@ const Dashboard = ({ navigation, user, videos }) => {
         const getCurrentUserData = async () => {
             try {
                 let _user = firebase.auth().currentUser
-                
+
                 let doc = await db.collection("users").doc(_user.uid).get()
                 let data = doc.data()
                 //console.log(data)
@@ -81,34 +81,29 @@ const Dashboard = ({ navigation, user, videos }) => {
                 console.log("usuariooooo " + user)
                 setUserName(data.username)
                 setUserPoints(data.points)
-                await calculationRanking(data.points)               
+                await calculationRanking(data.points)
             } catch (error) {
                 throw new Error(error.message)
             }
         }
         getCurrentUserData()
     }, []);
-    
-
 
     const calculationRanking = async (points) => {
-        const UsuariosRef = await db.collection('users').where('points', '>' ,points)
-        
-        UsuariosRef.onSnapshot(snap => {
-            let cont = 0
-            snap.forEach(snapHijo =>  {
-                cont ++            
+        try {
+            db.collection('users').where('points', '>', points).onSnapshot(snap => {
+                const size = snap.size + 1
+                setUserPosition(size)
             })
-            //console.log(cont)
-            setUserPosition(cont+1)
-        })
+        } catch (e) {
+            console.log(e.message)
+        }
     }
-    
-    
+
     return (
         // <WorkoutsStack />
         <>
-          {console.log("imprimimo lo videoh" + videos)}
+            {console.log("imprimimo lo videoh" + videos)}
             {console.log(user)}
             <Layout
                 getProfileImage={getProfileImage}
