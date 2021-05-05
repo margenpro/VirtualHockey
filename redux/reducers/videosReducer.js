@@ -1,20 +1,16 @@
 import { SET_VIDEOS } from "../actions/videosActions.js";
 
 const initialState = {
-    user: {
-        email: "",
-        username: "",
-        role: 0,
-        lastVideo: 0,
-    },
     videos: []
 }
 
 export const videosReducer = (state = initialState, action) => {
+    console.log("PV");
+    console.log(action.type);
     if (action.type === SET_VIDEOS) {
         return {
             ...state,
-            videos: action.payload.videos 
+            videos: action.payload 
         }
     }
     return state

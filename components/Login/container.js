@@ -9,7 +9,7 @@ import { connect } from 'react-redux'
 import { setterUserAction } from '../../redux/actions/userActions'
 import { setVideosAction } from '../../redux/actions/videosActions'
 
-const Login = ({ navigation, user, setUser, setVideos }) => {
+const Login = ({ navigation, user, setUser, setVideos, videos }) => {
 
   const storage = getStorage();
   const firebase = useFirebaseApp();
@@ -54,6 +54,7 @@ const Login = ({ navigation, user, setUser, setVideos }) => {
 
 
   const screenHandlerLanding = async () => {
+    
     try {
       let usr = await getCurrentUserData()
       usr.isMember ? navigation.navigate("BottomTab") : navigation.navigate("Landing");
@@ -100,13 +101,13 @@ const Login = ({ navigation, user, setUser, setVideos }) => {
       await firebase.auth().signInWithEmailAndPassword(email, password)
       console.log("logueo exitoso")
       const data = await getCurrentUserData()
+      console.log("set user")
       setUser({ email, username: data.username, role: data.isMember, lastVideo: data.lastVideoWatched })
+      console.log(user)
       let videosList = await getAllVideos()
-      // setVideos(videosList)
-      console.log(videosList)
+      setVideos(videosList)
       screenHandlerLanding()
     } catch (error) {
-      console.log("hubo un error", error.code, error.message);
       if (error.code === "auth/user-not-found") setWrongEmail(true);
       else if (error.code === "auth/wrong-password") setWrongPassword(true);
     }
@@ -134,10 +135,12 @@ const Login = ({ navigation, user, setUser, setVideos }) => {
     </>
   );
 }
-const mapStateToProps = state => ({
-  user: state.user,
-  videos: state.videos
-})
+const mapStateToProps = state => {
+  console.log(state);
+ return{ 
+   user: state.userReducer.user,
+  videos: state.videosReducer.videos}
+}
 
 const actionCreators = {
   setUser: setterUserAction,

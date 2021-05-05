@@ -36,8 +36,7 @@
     "react-redux": "^7.2.3",
     "react-router-dom": "^5.2.0",
     "reactfire": "^3.0.0-rc.0",
-    "redux": "^4.0.5",
-    "vimeo": "^2.1.1"
+    "redux": "^4.0.5"
   },
   "devDependencies": {
     "@babel/core": "^7.9.0"
