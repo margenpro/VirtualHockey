@@ -5,11 +5,10 @@ const height = Dimensions.get('window').height
 
 export default StyleSheet.create({
 
-  container: {
-    flex: 1,
-    margin: 0,
-    alignItems: 'center',
-    justifyContent: 'center',
+  video: {
+    alignSelf: 'center',
+    width: 320,
+    height: 200,
   },
 
 });
