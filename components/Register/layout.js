@@ -4,6 +4,9 @@ import Icon from "react-native-vector-icons/FontAwesome";
 import { Input } from "react-native-elements";
 import styles from "./styles";
 import { Frame } from '../Frame'
+import mainLogo from '../../assets/images/mainLogo.png'
+import fontStyles from '../../assets/styles/fontStyles'
+import commonStyles from '../../assets/styles/commonStyles'
 
 // import { LinearGradient } from "expo-linear-gradient";
 
@@ -13,7 +16,6 @@ export function Layout({
   passInputHandler,
   submitHandler,
   screenHandler,
-  logoUrl,
   showPassword,
   invalidPassword,
   emailExists,
@@ -22,45 +24,40 @@ export function Layout({
 
   return (
     <Frame>
-    <View style={styles.container}>
-        <Image
+      <View style={commonStyles.layoutContainer}>
+      <Image
           style={styles.logo}
-          source={{
-            uri: logoUrl
-          }}
+          source={mainLogo}
         />
-        <Text style={styles.pagetitle}>Register</Text>
-
-        <View style={styles.container2}>
-          <Text style={styles.title}>USERNAME</Text>
-          <Input
-            onChangeText={userInputHandler}
-            style={styles.input}
-            errorMessage={usernameExists.exists ? usernameExists.msg : ""}
-            placeholder={"JohnDoe"}
-          />
-          <Text style={styles.title}>EMAIL</Text>
-          <Input style={styles.input} errorMessage={emailExists.exists ? emailExists.msg : ""} onChangeText={emailInputHandler}  placeholder={"john.doe@example.com"} />
-          <Text style={styles.title}>PASSWORD</Text>
-          <Input
-            onChangeText={passInputHandler}
-            errorMessage={invalidPassword.invalid ? invalidPassword.msg : ""}
-            secureTextEntry={!showPassword}
-            placeholder={"********"}
-            style={styles.input}
-          />
-          <TouchableOpacity
-            onPress={submitHandler}
-            accessibilityLabel="Learn more about this purple button"
-            style={styles.button}
-          >
-            <Text style={styles.buttonText}>REGISTER</Text>
-          </TouchableOpacity>
-          <TouchableOpacity onPress={screenHandler} style={styles.textTouch} accessibilityRole="text">
-            <Text style={styles.footer}>I'm already a member</Text>
-          </TouchableOpacity>
-        </View>
-    </View>
+        <Text style={fontStyles.title}>Register</Text>
+        <Text style={fontStyles.subTitle}>USERNAME</Text>
+        <Input
+          onChangeText={userInputHandler}
+          style={styles.input}
+          errorMessage={usernameExists.exists ? usernameExists.msg : ""}
+          placeholder={"JohnDoe"}
+        />
+        <Text style={fontStyles.subTitle}>EMAIL</Text>
+        <Input style={styles.input} errorMessage={emailExists.exists ? emailExists.msg : ""} onChangeText={emailInputHandler} placeholder={"john.doe@example.com"} />
+        <Text style={fontStyles.subTitle}>PASSWORD</Text>
+        <Input
+          onChangeText={passInputHandler}
+          errorMessage={invalidPassword.invalid ? invalidPassword.msg : ""}
+          secureTextEntry={!showPassword}
+          placeholder={"********"}
+          style={styles.input}
+        />
+        <TouchableOpacity
+          onPress={submitHandler}
+          accessibilityLabel="Learn more about this purple button"
+          style={styles.button}
+        >
+          <Text style={fontStyles.buttonText}>REGISTER</Text>
+        </TouchableOpacity>
+        <TouchableOpacity onPress={screenHandler} style={styles.textTouch} accessibilityRole="text">
+          <Text style={fontStyles.footerText}>I'm already a member</Text>
+        </TouchableOpacity>
+      </View>
     </Frame>
   );
 }

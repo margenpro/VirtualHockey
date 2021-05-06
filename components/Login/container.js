@@ -127,7 +127,6 @@ const Login = ({ navigation, user, setUser, setVideos, videos }) => {
         screenHandlerLanding={screenHandlerLanding}
         screenHandlerRegister={screenHandlerRegister}
         wrongPassword={wrongPassword}
-        // logoUrl={logoUrl}
         showPassword={showPassword}
         showPasswordHandler={showPasswordHandler}
         forTesting={forTesting}

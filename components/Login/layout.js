@@ -6,7 +6,8 @@ import styles from "./styles";
 import { Frame } from '../Frame'
 import mainLogo from '../../assets/images/mainLogo.png'
 import fontStyles from '../../assets/styles/fontStyles'
-// import { LinearGradient } from "expo-linear-gradient";
+import commonStyles from '../../assets/styles/commonStyles'
+
 
 export function Layout({
   emailInputHandler,
@@ -14,66 +15,55 @@ export function Layout({
   submitHandler,
   wrongEmail,
   wrongPassword,
-  // screenHandlerLanding,
   screenHandlerRegister,
-  logoUrl,
   showPassword,
   showPasswordHandler,
   forTesting,
 }) {
 
-  // TODO poner en una carpeta e importar en cada vista
-
-
   return (
     <Frame>
-      <View style={styles.container}>
-        {/* <LinearGradient
-        style={styles.container}
-        colors={["rgba(2, 28, 59, 1)", "rgba(19, 38, 135, 1)"]}
-      > */}
-        <Image
-          style={styles.logo}
-          source={mainLogo}
+      <View style={commonStyles.layoutContainer}>
+        {/* <View style={commonStyles.headerContainer}> */}
+          <Image
+            style={styles.logo}
+            source={mainLogo}
+          />
+          <Text style={fontStyles.title}>Log In</Text>
+        {/* </View> */}
+        <Text style={fontStyles.subTitle}>EMAIL</Text>
+        <Input
+          onChangeText={emailInputHandler}
+          errorMessage={wrongEmail ? "Invalid Email" : ""}
+          placeholder="john.doe@example.com"
+          style={styles.input}
+          autoCompleteType="email"
         />
-        <Text style={fontStyles.title}>Log In</Text>
 
-        <View style={styles.container2}>
-          <Text style={fontStyles.subTitle}>EMAIL</Text>
-          <Input
-            onChangeText={emailInputHandler}
-            errorMessage={wrongEmail ? "Invalid Email" : ""}
-            placeholder="john.doe@example.com"
-            style={styles.input}
-            autoCompleteType="email"
-          />
+        <Text style={fontStyles.subTitle}>PASSWORD</Text>
+        <Input
+          onChangeText={passInputHandler}
+          errorMessage={wrongPassword ? "Invalid Password" : ""}
+          rightIcon={<Icon name={showPassword ? "eye-slash" : "eye"} size={22} color="white" onPress={() => showPasswordHandler(!showPassword)} />}
+          rightIconContainerStyle={styles.inputIcon}
+          placeholder="********"
+          secureTextEntry={!showPassword}
+          autoCompleteType="password"
+          style={styles.input2}
+        />
 
-          <Text style={fontStyles.subTitle}>PASSWORD</Text>
-          <Input
-            onChangeText={passInputHandler}
-            errorMessage={wrongPassword ? "Invalid Password" : ""}
-            rightIcon={<Icon name={showPassword ? "eye-slash" : "eye"} size={22} color="white" onPress={() => showPasswordHandler(!showPassword)} />}
-            rightIconContainerStyle={styles.inputIcon}
-            placeholder="********"
-            secureTextEntry={!showPassword}
-            autoCompleteType="password"
-            style={styles.input2}
-          />
-
-          <TouchableOpacity
-            onPress={submitHandler}
-            style={styles.button}
-          >
-            <Text style={styles.buttonText}>LOG IN</Text>
-          </TouchableOpacity>
-          <TouchableOpacity onPress={screenHandlerRegister} style={styles.textTouch} accessibilityRole="text">
-            <Text style={styles.footer}>New User? Sign Up!</Text>
-          </TouchableOpacity>
-          <TouchableOpacity onPress={forTesting} style={styles.textTouch} accessibilityRole="text">
-            <Text style={styles.footer}>For Testing</Text>
-          </TouchableOpacity>
-        </View>
-        {/* </LinearGradient> */}
+        <TouchableOpacity
+          onPress={submitHandler}
+          style={styles.button}
+        >
+          <Text style={fontStyles.buttonText}>LOG IN</Text>
+        </TouchableOpacity>
+        <TouchableOpacity onPress={screenHandlerRegister} style={styles.textTouch} accessibilityRole="text">
+          <Text style={fontStyles.footerText}>New User? Sign Up!</Text>
+        </TouchableOpacity>
+        <TouchableOpacity onPress={forTesting} style={styles.textTouch} accessibilityRole="text">
+          <Text style={fontStyles.footerText}>For Testing</Text>
+        </TouchableOpacity>
       </View>
     </Frame>
   );

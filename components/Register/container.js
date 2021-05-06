@@ -22,15 +22,15 @@ export function Register({ navigation }) {
   const [logoUrl, setLogoUrl] = useState();
   const [showPassword, setShowPassword] = useState(false);
 
-  useEffect(() => {
-    storageRef
-      .child("images/vh_favico[3].png")
-      .getDownloadURL()
-      .then(resolve => {
-        setLogoUrl(resolve);
-      })
-      .catch(e => console.log(e.code, e.message));
-  }, []);
+  // useEffect(() => {
+  //   storageRef
+  //     .child("images/vh_favico[3].png")
+  //     .getDownloadURL()
+  //     .then(resolve => {
+  //       setLogoUrl(resolve);
+  //     })
+  //     .catch(e => console.log(e.code, e.message));
+  // }, []);
 
   const screenHandler = () => {
     navigation.navigate("Login");
@@ -122,7 +122,6 @@ export function Register({ navigation }) {
       submitHandler={submitHandler}
       invalidPassword={invalidPassword}
       screenHandler={screenHandler}
-      logoUrl={logoUrl}
       showPassword={showPassword}
       emailInputHandler={emailInputHandler}
       showPasswordHandler={showPasswordHandler}

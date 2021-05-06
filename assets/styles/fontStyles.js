@@ -10,7 +10,7 @@ export default StyleSheet.create({
         ...defaultFont,
         fontSize: 38,
         textAlign: "center",
-        color: "white"
+        color: "white",
     },
     subTitle: {
         ...defaultFont,
@@ -20,4 +20,23 @@ export default StyleSheet.create({
         fontWeight: "bold",
         marginLeft: 10
     },
+    buttonText: {
+        ...defaultFont,
+        fontStyle: "normal",
+        color: "white",
+        fontWeight: "normal",
+        fontSize: 20
+    },
+    footerText: {
+        ...defaultFont,
+        position: "relative",
+        fontStyle: "normal",
+        color: "#6EC1E4",
+        display: "flex",
+        alignItems: "center",
+        marginTop: 20,
+        alignSelf: "center",
+        fontSize: 16,
+        top: 6,
+      },
 });
