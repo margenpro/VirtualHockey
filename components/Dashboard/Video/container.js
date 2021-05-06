@@ -1,11 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Image, View } from "react-native";
 import { Layout } from "./layout";
-<<<<<<< HEAD
-// import { Vimeo } from "vimeo"
-=======
 //import { Vimeo } from "vimeo"
->>>>>>> baeaa56301b214f56db300e95a66e85cf4af3a81
 
 export function Video({ navigation, route }) {
 
@@ -33,16 +29,6 @@ export function Video({ navigation, route }) {
         //     method: 'GET',
         //     path: '/videos/541377453',
            
-<<<<<<< HEAD
-        // }, function (error, body, status_code, headers) {
-        //     if (error) {
-        //         console.log(error);
-        //     }
-        //     console.log("Seteo el video")
-        //     setVideoUri(body)
-        // })
-    }
-=======
         }, function (error, body, status_code, headers) {
             if (error) {
                 console.log(error);
@@ -51,7 +37,6 @@ export function Video({ navigation, route }) {
             setVideoUri(body)
         })
     }*/
->>>>>>> baeaa56301b214f56db300e95a66e85cf4af3a81
     return (
         <>
             <Layout

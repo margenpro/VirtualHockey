@@ -5,6 +5,7 @@ import { Input } from "react-native-elements";
 import styles from "./styles";
 import { Frame } from '../Frame'
 import mainLogo from '../../assets/images/mainLogo.png'
+import fontStyles from '../../assets/styles/fontStyles'
 // import { LinearGradient } from "expo-linear-gradient";
 
 export function Layout({
@@ -35,10 +36,10 @@ export function Layout({
           style={styles.logo}
           source={mainLogo}
         />
-        <Text style={styles.pagetitle}>Log In</Text>
+        <Text style={fontStyles.title}>Log In</Text>
 
         <View style={styles.container2}>
-          <Text style={styles.title}>EMAIL</Text>
+          <Text style={fontStyles.subTitle}>EMAIL</Text>
           <Input
             onChangeText={emailInputHandler}
             errorMessage={wrongEmail ? "Invalid Email" : ""}
@@ -47,7 +48,7 @@ export function Layout({
             autoCompleteType="email"
           />
 
-          <Text style={styles.title}>PASSWORD</Text>
+          <Text style={fontStyles.subTitle}>PASSWORD</Text>
           <Input
             onChangeText={passInputHandler}
             errorMessage={wrongPassword ? "Invalid Password" : ""}
