@@ -24,19 +24,19 @@ export function Layout({
   return (
     <Frame>
       <View style={commonStyles.layoutContainer}>
-        {/* <View style={commonStyles.headerContainer}> */}
+        <View style={commonStyles.headerContainer}>
           <Image
             style={styles.logo}
             source={mainLogo}
           />
           <Text style={fontStyles.title}>Log In</Text>
-        {/* </View> */}
+        </View>
         <Text style={fontStyles.subTitle}>EMAIL</Text>
         <Input
           onChangeText={emailInputHandler}
           errorMessage={wrongEmail ? "Invalid Email" : ""}
           placeholder="john.doe@example.com"
-          style={styles.input}
+          style={commonStyles.inputUser}
           autoCompleteType="email"
         />
 
@@ -49,12 +49,12 @@ export function Layout({
           placeholder="********"
           secureTextEntry={!showPassword}
           autoCompleteType="password"
-          style={styles.input2}
+          style={commonStyles.inputPassword}
         />
 
         <TouchableOpacity
           onPress={submitHandler}
-          style={styles.button}
+          style={commonStyles.actionButton}
         >
           <Text style={fontStyles.buttonText}>LOG IN</Text>
         </TouchableOpacity>

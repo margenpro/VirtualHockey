@@ -25,15 +25,17 @@ export function Layout({
   return (
     <Frame>
       <View style={commonStyles.layoutContainer}>
+      <View style={commonStyles.headerContainer}>
       <Image
           style={styles.logo}
           source={mainLogo}
         />
         <Text style={fontStyles.title}>Register</Text>
+        </View>
         <Text style={fontStyles.subTitle}>USERNAME</Text>
         <Input
           onChangeText={userInputHandler}
-          style={styles.input}
+          style={commonStyles.inputUser}
           errorMessage={usernameExists.exists ? usernameExists.msg : ""}
           placeholder={"JohnDoe"}
         />
@@ -45,12 +47,12 @@ export function Layout({
           errorMessage={invalidPassword.invalid ? invalidPassword.msg : ""}
           secureTextEntry={!showPassword}
           placeholder={"********"}
-          style={styles.input}
+          style={commonStyles.inputUser}
         />
         <TouchableOpacity
           onPress={submitHandler}
           accessibilityLabel="Learn more about this purple button"
-          style={styles.button}
+          style={commonStyles.actionButton}
         >
           <Text style={fontStyles.buttonText}>REGISTER</Text>
         </TouchableOpacity>

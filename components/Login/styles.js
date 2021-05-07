@@ -1,7 +1,9 @@
 import { StyleSheet } from "react-native";
 import fontStyle from '../../assets/styles/fontStyles'
+import {colorsPalette} from '../../assets/styles/colorsPalette'
 
 console.log(fontStyle)
+
 export default StyleSheet.create({
 
   input: {
@@ -9,7 +11,7 @@ export default StyleSheet.create({
     fontStyle: "normal",
     color: "white",
     height: 40,
-    borderBottomColor: "#6EC1E4",
+    borderBottomColor: colorsPalette.colorOne,
     borderBottomWidth: 2,
   },
   input2: {
@@ -17,13 +19,13 @@ export default StyleSheet.create({
     fontStyle: "normal",
     color: "white",
     height: 40,
-    borderBottomColor: "#6EC1E4",
+    borderBottomColor: colorsPalette.colorOne,
     borderBottomWidth: 2,
     marginBottom: -4,
   },
   inputIcon: {
     ...fontStyle.fontType,
-    borderBottomColor: "#6EC1E4",
+    borderBottomColor: colorsPalette.colorOne,
     borderBottomWidth: 2,
     marginBottom: 0
   },
@@ -32,18 +34,6 @@ export default StyleSheet.create({
     alignSelf: "center",
     marginTop: 3,
     alignItems: "center",
-  },
-  button: {
-    ...fontStyle.fontType,
-    position: "relative",
-    backgroundColor: "#00AEEF",
-    borderRadius: 4,
-    alignItems: "center",
-    justifyContent: "center",
-    height: 40,
-    width: 250,
-    top: 8,
-    alignSelf: "center"
   },
   logo: {
     position: "relative",
