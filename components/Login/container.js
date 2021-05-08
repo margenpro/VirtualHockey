@@ -118,7 +118,6 @@ const Login = ({ navigation, user, setUser, setVideos, videos }) => {
   };
 
   return (
-    <>
       <Layout
         emailInputHandler={emailInputHandler}
         passInputHandler={passInputHandler}
@@ -131,7 +130,6 @@ const Login = ({ navigation, user, setUser, setVideos, videos }) => {
         showPasswordHandler={showPasswordHandler}
         forTesting={forTesting}
       />
-    </>
   );
 }
 const mapStateToProps = state => {

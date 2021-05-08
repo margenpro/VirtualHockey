@@ -1,16 +1,12 @@
 import { Dimensions, StyleSheet } from "react-native";
+import commonStyles from '../../assets/styles/commonStyles'
 
 const width = Dimensions.get('window').width
 const height = Dimensions.get('window').height
 
 export default StyleSheet.create({
 
-  container: {
-    flex: 1,
-    margin: 0,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
+
   containerImagenTitulo: {
     marginTop: 10,
     marginLeft: 10,
@@ -26,11 +22,9 @@ export default StyleSheet.create({
   },
 
   containerImage: {
-    justifyContent:'flex-start',
+    justifyContent: 'flex-start',
     marginBottom: 30
   },
-
-  
   circle: {
     width: 130,
     height: 130,
@@ -49,7 +43,7 @@ export default StyleSheet.create({
     fontSize: 35,
     color: '#E9D41B',
   },
-  
+
   usernameAndPosition: {
     flexDirection: 'row',
     flexWrap: 'wrap',
@@ -64,7 +58,7 @@ export default StyleSheet.create({
 
   explanationMessage: {
     flexDirection: 'row',
-    flexWrap: 'wrap', 
+    flexWrap: 'wrap',
     marginBottom: 25,
     marginHorizontal: 30,
   },
@@ -73,13 +67,13 @@ export default StyleSheet.create({
     fontFamily: "comfortaa",
     fontSize: 22,
     color: '#ffffff',
-    textAlign:'center'
+    textAlign: 'center'
   },
   explanationMessageYellow: {
     fontFamily: "comfortaa",
     fontSize: 22,
     color: '#E9D41B',
-    textAlign:'center', 
+    textAlign: 'center',
   },
 
 
@@ -102,7 +96,7 @@ export default StyleSheet.create({
     fontFamily: "comfortaa",
     fontSize: 25,
     color: '#ffffff',
-    textAlign:'center',
+    textAlign: 'center',
     marginBottom: 15,
   },
 

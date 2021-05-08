@@ -1,19 +1,19 @@
 import { StyleSheet } from "react-native";
 
-const defaultFont = {
+export const fontType = {
     fontFamily: "comfortaa",
 }
 
 export default StyleSheet.create({
 
     title: {
-        ...defaultFont,
+        ...fontType,
         fontSize: 38,
         textAlign: "center",
         color: "white",
     },
     subTitle: {
-        ...defaultFont,
+        ...fontType,
         position: "relative",
         fontStyle: "normal",
         color: "#6EC1E4",
@@ -21,14 +21,14 @@ export default StyleSheet.create({
         marginLeft: 10
     },
     buttonText: {
-        ...defaultFont,
+        ...fontType,
         fontStyle: "normal",
         color: "white",
         fontWeight: "normal",
         fontSize: 20
     },
     footerText: {
-        ...defaultFont,
+        ...fontType,
         position: "relative",
         fontStyle: "normal",
         color: "#6EC1E4",
