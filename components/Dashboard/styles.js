@@ -6,11 +6,7 @@ const height = Dimensions.get('window').height
 
 export default StyleSheet.create({
 
-  container: {
-    ...commonStyles.layoutContainer,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
+
   containerImagenTitulo: {
     marginTop: 10,
     marginLeft: 10,
