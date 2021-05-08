@@ -16,7 +16,9 @@ export function Layout({
 }) {
     return (
         <Frame>
-            <View style={styles.container}>
+            {console.log("el layoutContainer es")}
+            {console.log(commonStyles)}
+            <View style={[commonStyles.centeredAlignedAndJustified, commonStyles.layoutContainer]}>
                 <View style={styles.containerImage}>
                     <Image style={styles.circle}
                         source={getProfileImage()} />
@@ -31,9 +33,9 @@ export function Layout({
                 </View>
                 <View style={styles.explanationMessage}>
                     <Text style={styles.explanationMessageText}>Resume your workouts, earn points and get to the top of the
-                        <Text style={styles.explanationMessageYellow}> ranking 
+                        <Text style={styles.explanationMessageYellow}> ranking
                             <Text style={styles.explanationMessageText}>!</Text>
-                        </Text> 
+                        </Text>
                     </Text>
                 </View>
 

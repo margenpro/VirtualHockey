@@ -61,4 +61,8 @@ export default StyleSheet.create({
         borderRadius: 100,
         resizeMode: "contain"
     },
+    centeredAlignedAndJustified: {
+        alignItems: 'center',
+        justifyContent: 'center',
+    },
 });
