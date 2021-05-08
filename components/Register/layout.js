@@ -2,7 +2,6 @@ import React from "react";
 import { View, Text, TouchableOpacity, Image } from "react-native";
 import Icon from "react-native-vector-icons/FontAwesome";
 import { Input } from "react-native-elements";
-import styles from "./styles";
 import { Frame } from '../Frame'
 import mainLogo from '../../assets/images/mainLogo.png'
 import fontStyles from '../../assets/styles/fontStyles'
@@ -27,7 +26,7 @@ export function Layout({
       <View style={commonStyles.layoutContainer}>
       <View style={commonStyles.headerContainer}>
       <Image
-          style={styles.logo}
+          style={commonStyles.mainLogo}
           source={mainLogo}
         />
         <Text style={fontStyles.title}>Register</Text>
@@ -40,7 +39,7 @@ export function Layout({
           placeholder={"JohnDoe"}
         />
         <Text style={fontStyles.subTitle}>EMAIL</Text>
-        <Input style={styles.input} errorMessage={emailExists.exists ? emailExists.msg : ""} onChangeText={emailInputHandler} placeholder={"john.doe@example.com"} />
+        <Input style={commonStyles.inputPassword} errorMessage={emailExists.exists ? emailExists.msg : ""} onChangeText={emailInputHandler} placeholder={"john.doe@example.com"} />
         <Text style={fontStyles.subTitle}>PASSWORD</Text>
         <Input
           onChangeText={passInputHandler}
@@ -56,7 +55,7 @@ export function Layout({
         >
           <Text style={fontStyles.buttonText}>REGISTER</Text>
         </TouchableOpacity>
-        <TouchableOpacity onPress={screenHandler} style={styles.textTouch} accessibilityRole="text">
+        <TouchableOpacity onPress={screenHandler} style={commonStyles.textTouch} accessibilityRole="text">
           <Text style={fontStyles.footerText}>I'm already a member</Text>
         </TouchableOpacity>
       </View>

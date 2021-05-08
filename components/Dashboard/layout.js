@@ -4,8 +4,7 @@ import { Text, View, Image, TouchableOpacity, ScrollView, FlatList } from 'react
 import styles from "./styles";
 import { Frame } from '../Frame'
 import Ionicons from 'react-native-vector-icons/Ionicons';
-
-
+import commonStyles from '../../assets/styles/commonStyles'
 
 export function Layout({
     getProfileImage,
@@ -17,7 +16,6 @@ export function Layout({
 }) {
     return (
         <Frame>
-        <View style={styles.statusBar}>
             <View style={styles.container}>
                 <View style={styles.containerImage}>
                     <Image style={styles.circle}
@@ -50,7 +48,6 @@ export function Layout({
                     style={styles.allWorkoutsText}>View all your workouts
                 </Text>
             </View>
-        </View>
         </Frame>
     )
 }
