@@ -31,16 +31,16 @@ export function Layout({
         />
         <Text style={fontStyles.title}>Register</Text>
         </View>
-        <Text style={fontStyles.subTitle}>USERNAME</Text>
+        <Text style={fontStyles.inputHeader}>USERNAME</Text>
         <Input
           onChangeText={userInputHandler}
           style={commonStyles.inputUser}
           errorMessage={usernameExists.exists ? usernameExists.msg : ""}
           placeholder={"JohnDoe"}
         />
-        <Text style={fontStyles.subTitle}>EMAIL</Text>
+        <Text style={fontStyles.inputHeader}>EMAIL</Text>
         <Input style={commonStyles.inputPassword} errorMessage={emailExists.exists ? emailExists.msg : ""} onChangeText={emailInputHandler} placeholder={"john.doe@example.com"} />
-        <Text style={fontStyles.subTitle}>PASSWORD</Text>
+        <Text style={fontStyles.inputHeader}>PASSWORD</Text>
         <Input
           onChangeText={passInputHandler}
           errorMessage={invalidPassword.invalid ? invalidPassword.msg : ""}

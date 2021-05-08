@@ -30,7 +30,7 @@ export function Layout({
           />
           <Text style={fontStyles.title}>Log In</Text>
         </View>
-        <Text style={fontStyles.subTitle}>EMAIL</Text>
+        <Text style={fontStyles.inputHeader}>EMAIL</Text>
         <Input
           onChangeText={emailInputHandler}
           errorMessage={wrongEmail ? "Invalid Email" : ""}
@@ -39,7 +39,7 @@ export function Layout({
           autoCompleteType="email"
         />
 
-        <Text style={fontStyles.subTitle}>PASSWORD</Text>
+        <Text style={fontStyles.inputHeader}>PASSWORD</Text>
         <Input
           onChangeText={passInputHandler}
           errorMessage={wrongPassword ? "Invalid Password" : ""}

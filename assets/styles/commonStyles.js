@@ -1,6 +1,10 @@
-import { StyleSheet } from "react-native";
+import { StyleSheet, Dimensions } from "react-native";
 import fontStyle from '../../assets/styles/fontStyles'
 import { colorsPalette } from '../../assets/styles/colorsPalette'
+
+const width = Dimensions.get('window').width
+const height = Dimensions.get('window').height
+
 
 export default StyleSheet.create({
     layoutContainer: {
@@ -13,14 +17,14 @@ export default StyleSheet.create({
     actionButton: {
         ...fontStyle.fontType,
         position: "relative",
-        backgroundColor: colorsPalette.colorOne,
+        backgroundColor: colorsPalette.colorTwo,
         borderRadius: 4,
         alignItems: "center",
         justifyContent: "center",
         height: 40,
-        width: 250,
-        top: 8,
-        alignSelf: "center"
+        width: width * .8,
+        alignSelf: "center",
+        margin: 20,
     },
     inputUser: {
         ...fontStyle.fontType,
@@ -61,8 +65,8 @@ export default StyleSheet.create({
         borderRadius: 100,
         resizeMode: "contain"
     },
-    centeredAlignedAndJustified: {
+    centeredAligned: {
         alignItems: 'center',
-        justifyContent: 'center',
+        // justifyContent: 'center',
     },
 });

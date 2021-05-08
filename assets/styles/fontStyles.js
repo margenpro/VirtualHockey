@@ -12,13 +12,17 @@ export default StyleSheet.create({
         textAlign: "center",
         color: "white",
     },
-    subTitle: {
+    inputHeader: {
         ...fontType,
         position: "relative",
         fontStyle: "normal",
         color: "#6EC1E4",
         fontWeight: "bold",
-        marginLeft: 10
+        marginLeft: 10,
+    },
+    regularText: {
+        ...fontType,
+        fontSize: 20,
     },
     buttonText: {
         ...fontType,
@@ -34,9 +38,8 @@ export default StyleSheet.create({
         color: "#6EC1E4",
         display: "flex",
         alignItems: "center",
-        marginTop: 20,
         alignSelf: "center",
-        fontSize: 16,
+        fontSize: 18,
         top: 6,
       },
 });
