@@ -102,7 +102,7 @@ const Login = ({ navigation, user, setUser, setVideos, videos }) => {
       console.log("logueo exitoso")
       const data = await getCurrentUserData()
       console.log("set user")
-      setUser({ email, username: data.username, role: data.isMember, lastVideo: data.lastVideoWatched })
+      setUser({ email, username: data.username, role: data.isMember, lastVideo: data.lastVideoWatched, points: data.points })
       console.log(user)
       let videosList = await getAllVideos()
       setVideos(videosList)

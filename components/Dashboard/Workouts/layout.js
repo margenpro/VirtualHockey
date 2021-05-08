@@ -2,8 +2,8 @@ import React from 'react';
 import { Image, View, Text } from 'react-native';
 // import { LinearGradient } from "expo-linear-gradient";
 import styles from './styles'
-import { WorkoutCard } from './WorkoutCard/container'
-import { OldWorkoutCard } from './OldWorkoutCard/container'
+import  WorkoutCard  from './WorkoutCard/container'
+import  OldWorkoutCard  from './OldWorkoutCard/container'
 import { Frame } from '../../Frame'
 import { ScrollView } from 'react-native-gesture-handler';
 import trophy from '../../../assets/images/trophy.png'
@@ -13,7 +13,7 @@ export function Layout({
     // size
     //screenHandler 
     username,
-    ranking,
+    points,
 }) {
     return (
         <Frame>
@@ -29,7 +29,7 @@ export function Layout({
                             source={trophy}
                             style={styles.trophy}>
                         </Image>
-                        <Text style={styles.ranking}>{ranking}</Text>
+                        <Text style={styles.points}>{points}</Text>
                     </View>
                 </View>
                 <View
@@ -40,7 +40,7 @@ export function Layout({
                 </View>
                 <View style={styles.inferior}>
                     <Text style={styles.previousWorkouts}>Previous Workouts</Text>
-                    <ScrollView horizontal={true}><OldWorkoutCard /><OldWorkoutCard /><OldWorkoutCard /></ScrollView>
+                    <OldWorkoutCard />
                 </View>
             </View>
         </Frame>

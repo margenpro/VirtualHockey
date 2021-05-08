@@ -6,13 +6,14 @@ import card from '../../../../assets/images/card.png'
 
 export function Layout({
     // size
-    //screenHandler 
+    //screenHandler
+    videoImage
 }) {
     return (
         <View>
             <Image
                 style={styles.imagenTitulo}
-                source={card}
+                source={videoImage}
             />
         </View>
     );

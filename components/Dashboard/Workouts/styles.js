@@ -51,7 +51,7 @@ export default StyleSheet.create({
     justifyContent: 'center',
     // paddingTop: 10,
   },
-  ranking: {
+  points: {
     ...font,
     fontSize: 14,
     marginRight: 'auto',

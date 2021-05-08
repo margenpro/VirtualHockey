@@ -10,8 +10,8 @@ function Workouts({ navigation, user }) {
 
     return (
         <Layout username={user.username ? user.username : "Elina"}
-            ranking={user.ranking ? user.ranking : "2450"}
-        />
+        points={user.points ? user.points : "2450"}
+    />
     );
 }
 const mapStateToProps = state => ({

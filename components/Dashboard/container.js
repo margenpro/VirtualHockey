@@ -8,9 +8,10 @@ import "firebase/auth";
 import { useFirebaseApp } from "reactfire";
 // import { UserContext } from '../../context/userContext'
 import { connect } from 'react-redux'
+import { setterUserAction } from '../../redux/actions/userActions'
 
 
-const Dashboard = ({ navigation, user, videos }) => {
+const Dashboard = ({ navigation, user, videos, setUserRanking }) => {
     // const { _user, _setUser } = useContext(UserContext)
 
     /*  const storage = getStorage();
@@ -70,16 +71,9 @@ const Dashboard = ({ navigation, user, videos }) => {
     useEffect(() => {
         const getCurrentUserData = async () => {
             try {
-                let _user = firebase.auth().currentUser
-
-                let doc = await db.collection("users").doc(_user.uid).get()
-                let data = doc.data()
-                //console.log(data)
-                console.log("Videitohhh " + videos)
-                console.log("usuariooooo " + user)
-                setUserName(data.username)
-                setUserPoints(data.points)
-                await calculationRanking(data.points)
+                setUserName(user.username)
+                setUserPoints(user.points)
+                await calculationRanking(user.points) 
             } catch (error) {
                 throw new Error(error.message)
             }
@@ -92,6 +86,7 @@ const Dashboard = ({ navigation, user, videos }) => {
             db.collection('users').where('points', '>', points).onSnapshot(snap => {
                 const size = snap.size + 1
                 setUserPosition(size)
+                setUserRanking({position: size})
             })
         } catch (e) {
             console.log(e.message)
@@ -115,9 +110,15 @@ const Dashboard = ({ navigation, user, videos }) => {
         </>
     );
 }
+
+
 const mapStateToProps = state => ({
-    user: state.user,
-    videos: state.videos
+    user: state.userReducer.user,
+    videos: state.videosReducer.videos
 })
 
-export default connect(mapStateToProps, {})(Dashboard)
+const actionCreators = {
+    setUserRanking: setterUserAction,
+}
+
+export default connect(mapStateToProps, actionCreators)(Dashboard)
