@@ -69,4 +69,13 @@ export default StyleSheet.create({
         alignItems: 'center',
         // justifyContent: 'center',
     },
+    spacingWrapper: {
+        paddingHorizontal: 20,
+        paddingVertical: 10,
+    },
+    rowedAndWrapped: {
+        flexDirection: 'row',
+        flexWrap: 'wrap',
+        marginBottom: 10,
+    }
 });

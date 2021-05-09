@@ -8,6 +8,18 @@ const height = Dimensions.get('window').height
 
 export default StyleSheet.create({
 
+  container: {
+    flex: 1,
+    margin: 0,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  containerImagenTitulo: {
+    marginTop: 10,
+    marginHorizontal: 10,
+    justifyContent: 'flex-start',
+    height: 80,
+  },
   imagenTitulo: {
     flex: 1,
     width: width * .8,
@@ -26,39 +38,13 @@ export default StyleSheet.create({
     borderColor: colorsPalette.colorOne,
     borderWidth: 4,
   },
-  username: {
+  usernameText: {
     ...fontStyle.fontFamily,
     fontSize: 35,
-    color: '#ffffff',
   },
-  usernameYellow: {
-    ...fontStyle.fontFamily,
-    fontSize: 35,
-    color: '#E9D41B',
-  },
-  usernameAndPosition: {
-    flexDirection: 'row',
-    flexWrap: 'wrap',
-    marginBottom: 15
-  },
-  trophyAndRanking: {
-    flexDirection: 'row',
-    flexWrap: 'wrap',
-    marginBottom: 15
-  },
-  explanationMessage: {
-    flexDirection: 'row',
-    flexWrap: 'wrap',
-    marginBottom: 25,
-    marginHorizontal: 30,
-  },
-
   explanationMessageText: {
-    color: colorsPalette.colorThree,
-    textAlign: 'center'
-  },
-  explanationMessageYellow: {
-    color: colorsPalette.colorFour,
+    ...fontStyle.fontType,
     textAlign: 'center',
   },
+
 });

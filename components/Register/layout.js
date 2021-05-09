@@ -56,7 +56,7 @@ export function Layout({
           <Text style={fontStyles.buttonText}>REGISTER</Text>
         </TouchableOpacity>
         <TouchableOpacity onPress={screenHandler} style={commonStyles.textTouch} accessibilityRole="text">
-          <Text style={fontStyles.footerText}>I'm already a member</Text>
+          <Text style={[fontStyles.smallSize, fontStyles.footerText]}>I'm already a member</Text>
         </TouchableOpacity>
       </View>
     </Frame>

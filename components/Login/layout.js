@@ -58,7 +58,7 @@ export function Layout({
           <Text style={fontStyles.buttonText}>LOG IN</Text>
         </TouchableOpacity>
         <TouchableOpacity onPress={screenHandlerRegister} style={commonStyles.textTouch} accessibilityRole="text">
-          <Text style={fontStyles.footerText}>New User? Sign Up!</Text>
+          <Text style={[fontStyles.smallSize, fontStyles.footerText]}>New User? Sign Up!</Text>
         </TouchableOpacity>
         <TouchableOpacity onPress={forTesting} style={commonStyles.textTouch} accessibilityRole="text">
           <Text style={fontStyles.footerText}>For Testing</Text>
