@@ -8,6 +8,7 @@ export function Video({ navigation, route }) {
     const video = useRef(null);
     //const [status, setStatus] = useState({});
     const [urlVideo, setUrlVideo] = useState('');
+    const [show, setShow] = useState(false)
 
     const playFullScreen = () => {
         video.current.presentFullscreenPlayer()
@@ -28,7 +29,8 @@ export function Video({ navigation, route }) {
                 urlVideo={urlVideo}
                 video={video}
                 playFullScreen={playFullScreen}
-                exitFullScreen={exitFullScreen}
+                show={setShow}
+                setShow={setShow}
             />
         </>
     );

@@ -7,8 +7,7 @@ export default StyleSheet.create({
 
   video: {
     alignSelf: 'center',
-    width: 320,
-    height: 200,
+    display: 'none'
   },
 
 });

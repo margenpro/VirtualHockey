@@ -23,6 +23,7 @@
     "expo-screen-orientation": "~2.1.0",
     "expo-status-bar": "~1.0.3",
     "firebase": "^8.3.3",
+    "g": "^2.0.1",
     "install": "^0.13.0",
     "react": "16.13.1",
     "react-dom": "16.13.1",
@@ -41,7 +42,8 @@
     "reactfire": "^3.0.0-rc.0",
     "redux": "^4.0.5",
     "symbol-observable": "^4.0.0",
-    "unimodules-permissions-interface": "^6.1.0"
+    "unimodules-permissions-interface": "^6.1.0",
+    "watchman": "^1.0.0"
   },
   "devDependencies": {
     "@babel/core": "^7.9.0"
