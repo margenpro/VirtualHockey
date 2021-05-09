@@ -1,4 +1,5 @@
 import { StyleSheet } from "react-native";
+import { colorsPalette } from '../../assets/styles/colorsPalette'
 
 export const fontType = {
     fontFamily: "comfortaa",
@@ -39,7 +40,18 @@ export default StyleSheet.create({
         display: "flex",
         alignItems: "center",
         alignSelf: "center",
-        fontSize: 18,
         top: 6,
-      },
+    },
+    smallSize: {
+        fontSize: 18,
+    },
+    normalSize: {
+        fontSize: 22,
+    },
+    white: {
+        color: colorsPalette.colorThree,
+    },
+    yellow: {
+        color: colorsPalette.colorFour,
+    }
 });
