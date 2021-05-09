@@ -18,7 +18,7 @@ export function Layout({
                     <View key={index}>
                         <Image
                             style={styles.imagenTitulo}
-                            source={e}
+                            source={{uri: e}}
                         />
                     </View> 
 

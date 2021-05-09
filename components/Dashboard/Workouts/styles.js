@@ -31,6 +31,7 @@ export default StyleSheet.create({
   },
   middle: {
     flex: 9,
+    marginBottom: 0,
     alignItems: 'center',
   },
   inferior: {

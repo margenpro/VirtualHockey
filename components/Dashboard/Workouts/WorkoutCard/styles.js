@@ -5,12 +5,7 @@ const height = Dimensions.get('window').height
 
 export default StyleSheet.create({
 
-  container: {
-    flex: 1,
-    margin: 0,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
+  
   containerImagenTitulo: {
     marginTop: 10,
     marginLeft: 10,
@@ -18,12 +13,14 @@ export default StyleSheet.create({
     justifyContent: 'flex-start',
     height: 80,
   },
+
   imagenTitulo: {
     flex: 1,
     width: width*.8,
     height: 300,
     resizeMode: 'contain'
-  },  
+  },
+    
   containerTextoInicial: {
     alignItems: 'center',
     marginBottom: 20,
@@ -77,5 +74,42 @@ export default StyleSheet.create({
   },
   scroll: {
     flex: 1,
+  },
+
+
+  container: {
+    flex: 1,
+    margin: 0,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  
+
+  videoImage:{
+    flex: 10,
+    width: width,
+    resizeMode: 'contain',
+    marginVertical: 15,
+    //alignItems: "center"
+    //marginBottom: 95,
+  },
+
+  videoTitle:{
+    flex: 2, 
+    color:'#fff',
+    fontSize: 22,
+    textAlign: "center" ,
+    fontWeight: 'bold'
+  },
+
+  videoInfo:{
+    flex: 4, 
+    color:'#fff',
+    fontSize: 17,
+    textAlign:"justify",
+    paddingHorizontal: 15,
+    
   }
+
+
 });

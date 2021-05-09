@@ -32,11 +32,8 @@ export function Layout({
                         <Text style={styles.points}>{points}</Text>
                     </View>
                 </View>
-                <View
-                    style={styles.middle}>
-                    <WorkoutCard
-                        style={styles.workOutCard}
-                    />
+                <View style={styles.middle}>
+                    <WorkoutCard/>
                 </View>
                 <View style={styles.inferior}>
                     <Text style={styles.previousWorkouts}>Previous Workouts</Text>
