@@ -42,6 +42,7 @@
     "reactfire": "^3.0.0-rc.0",
     "redux": "^4.0.5",
     "symbol-observable": "^4.0.0",
+    "tipsi-stripe": "^9.0.0",
     "unimodules-permissions-interface": "^6.1.0",
     "watchman": "^1.0.0"
   },

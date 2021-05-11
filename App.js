@@ -10,6 +10,7 @@ import storeFn from './redux/store'
 import { Provider } from 'react-redux'
 
 
+
 export default function App() {
   const store = storeFn()
   const [fontLoaded, setfontLoaded] = useState(false)
