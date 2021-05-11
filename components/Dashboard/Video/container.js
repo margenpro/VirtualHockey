@@ -1,36 +1,49 @@
 import React, { useState, useEffect, useRef } from "react";
 import { Layout } from "./layout";
 import * as ScreenOrientation from "expo-screen-orientation"
-import { BackHandler } from 'react-native'
+import * as vid from 'expo-av/build/Video';
 
 export function Video({ navigation, route }) {
 
     const video = useRef(null);
-    //const [status, setStatus] = useState({});
-    const [urlVideo, setUrlVideo] = useState('');
-    const [show, setShow] = useState(false)
+    //const [urlVideo, setUrlVideo] = useState('');
+    const urlVideo = "https://player.vimeo.com/external/475218949.hd.mp4?s=ba45e54d6ef6152a1837619dd9e4ce5fe8641ea0&profile_id=175"
 
-    const playFullScreen = () => {
+    const presentFullScreen = () => {
         video.current.presentFullscreenPlayer()
-        ScreenOrientation.lockAsync(ScreenOrientation.OrientationLock.LANDSCAPE)
+    }
+    const playVideo = () => {
         video.current.playAsync()
     }
-
-    const exitFullScreen = () => {
-        ScreenOrientation.lockAsync(ScreenOrientation.OrientationLock.PORTRAIT)
+    const fullScreenHandler = ({ fullscreenUpdate }) => {
+        switch (fullscreenUpdate) {
+            case vid.FULLSCREEN_UPDATE_PLAYER_WILL_PRESENT:
+                ScreenOrientation.lockAsync(ScreenOrientation.OrientationLock.LANDSCAPE)
+                break
+            case vid.IOS_FULLSCREEN_UPDATE_PLAYER_WILL_PRESENT:
+                ScreenOrientation.lockAsync(ScreenOrientation.OrientationLock.LANDSCAPE)
+                break
+            case vid.FULLSCREEN_UPDATE_PLAYER_WILL_DISMISS:
+                ScreenOrientation.lockAsync(ScreenOrientation.OrientationLock.PORTRAIT)
+                video.current.stopAsync()
+                navigation.navigate("Dashboard")
+                break
+            case vid.IOS_FULLSCREEN_UPDATE_PLAYER_WILL_DISMISS:
+                ScreenOrientation.lockAsync(ScreenOrientation.OrientationLock.PORTRAIT)
+                video.current.stopAsync()
+                navigation.navigate("Dashboard")
+                break
+        }
     }
-    useEffect(() => {
-        BackHandler.addEventListener("hardwareBackPress", exitFullScreen)
-        return () => BackHandler.removeEventListener("hardwareBackPress",exitFullScreen)
-    },[])
+
     return (
         <>
             <Layout
                 urlVideo={urlVideo}
                 video={video}
-                playFullScreen={playFullScreen}
-                show={setShow}
-                setShow={setShow}
+                presentFullScreen={presentFullScreen}
+                playVideo={playVideo}
+                fullScreenHandler={fullScreenHandler}
             />
         </>
     );
