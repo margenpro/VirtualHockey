@@ -2,9 +2,11 @@ import React, { PureComponent } from 'react'
 import { View, Text, StyleSheet } from 'react-native'
 import stripe from 'tipsi-stripe'
 import Button from './Button'
+import testID from './utils/testID'
 import { demoCardFormParameters } from './demodata/demodata'
 
-export const CardFormScreen = () => {
+export default class CardFormScreen extends PureComponent {
+  static title = 'Card Form'
 
   state = {
     loading: false,
@@ -23,7 +25,8 @@ export const CardFormScreen = () => {
     }
   }
 
-    // const { loading, paymentMethod } = this.state
+  render() {
+    const { loading, paymentMethod } = this.state
 
     return (
       <View style={styles.container}>
@@ -43,7 +46,7 @@ export const CardFormScreen = () => {
       </View>
     )
   }
-
+}
 
 const styles = StyleSheet.create({
   container: {
