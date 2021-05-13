@@ -6,6 +6,7 @@ import { Frame } from '../Frame'
 import mainLogo from '../../assets/images/mainLogo.png'
 import fontStyles from '../../assets/styles/fontStyles'
 import commonStyles from '../../assets/styles/commonStyles'
+import { WebView } from "react-native-webview"
 import {CardElement, useStripe, useElements} from '@stripe/react-stripe-js';
 
 export function Layout({ handlePayment }) {
