@@ -5,11 +5,11 @@ import { Register } from "../components/Register/container";
 import { Landing } from "../components/Landing/container";
 import { Dashboard } from "../components/Dashboard/container";
 import { BottomTab } from './bottomTabNavigation'
-import CardFormScreen from "../components/Payment/CardFormScreen"
+import {Payment} from "../components/Payment/container"
 
 const screens = {
-  CardFormScreen: {
-    screen: CardFormScreen
+  Payment: {
+    screen: Payment
   },
   Login: {
     screen: Login

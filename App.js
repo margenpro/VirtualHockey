@@ -12,9 +12,9 @@ import storeFn from './redux/store'
 import { Provider } from 'react-redux'
 
 console.log("esto no llega")
-const stripePromise = loadStripe({
-  publishableKey: 'pk_test_51Iov1mH463ReSVuZ0ZoWrohc3XnW8R1kZNQkCpU8qU5SEQw5aeFxaTf2D8hfQGz6bpuhSUod5Bltl05QkVbeNOZg00ZGxGGbXf'
-});
+const stripePromise = loadStripe(
+  'pk_test_51Iov1mH463ReSVuZ0ZoWrohc3XnW8R1kZNQkCpU8qU5SEQw5aeFxaTf2D8hfQGz6bpuhSUod5Bltl05QkVbeNOZg00ZGxGGbXf'
+);
 
 export default function App() {
 
