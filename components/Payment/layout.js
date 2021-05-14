@@ -1,27 +1,41 @@
-import React from "react";
-import { View, Text, TouchableOpacity, Image } from "react-native";
-import Icon from "react-native-vector-icons/FontAwesome";
-import { Input } from "react-native-elements";
-import { Frame } from '../Frame'
-import mainLogo from '../../assets/images/mainLogo.png'
-import fontStyles from '../../assets/styles/fontStyles'
-import commonStyles from '../../assets/styles/commonStyles'
-import { WebView } from "react-native-webview"
-import {CardElement, useStripe, useElements} from '@stripe/react-stripe-js';
+import {CardField} from "@stripe/stripe-react-native"
+import React from "react"
+import { Button, View } from "react-native"
 
-export function Layout({ handlePayment }) {
+export function Payment() {
 
-    const stripe = useStripe();
-    const elements = useElements();
-
-  return (
-   
+    const fetchPaymentIntentClientSecret = async () => {
+      const response = await fetch(`${API_URL}/apy/pay`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          currency: 'usd',
+        }),
+      });
+      const {clientSecret} = await response.json();
+  
+      return clientSecret;
+    };
+  
+    const handlePayPress = async () => {
+      if (!card) {
+        return;
+      }
+  
+      // Fetch the intent client secret from the backend
+      const clientSecret = await fetchPaymentIntentClientSecret();
+    };
+  
+    return (
       <View>
-      <CardElement />
-      <TouchableOpacity disabled={!stripe} onPress={handlePayment}>
-        <Text>Pay</Text>
-      </TouchableOpacity>
+        <CardField onCardChange={(cardDetails) => setCard(cardDetails)} />
+  
+        <Button onPress={handlePayPress} title="Pay"/>
       </View>
-   
-  );
+    );
+  
+  
+
 }
