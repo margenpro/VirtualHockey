@@ -4,33 +4,30 @@ import Login from "../components/Login/container";
 import { Register } from "../components/Register/container";
 import { Landing } from "../components/Landing/container";
 import { Dashboard } from "../components/Dashboard/container";
-import { BottomTab } from './bottomTabNavigation'
-import {Payment} from "../components/Payment/layout"
+import { BottomTab } from "./bottomTabNavigation";
+import { Payment } from "../components/Payment/layout";
 
 const screens = {
   Payment: {
-    screen: Payment
+    screen: Payment,
   },
   Login: {
-    screen: Login
+    screen: Login,
   },
   Register: {
-    screen: Register
+    screen: Register,
   },
   Landing: {
-    screen: Landing
+    screen: Landing,
   },
   BottomTab: {
-    screen: BottomTab
-  }
+    screen: BottomTab,
+  },
 };
 
 const LoginStack = createStackNavigator(screens, {
   defaultNavigationOptions: {
-    headerShown: null
-  }
+    headerShown: null,
+  },
 });
 export default createAppContainer(LoginStack);
-
-
-

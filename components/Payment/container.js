@@ -25,7 +25,7 @@ export const Payment = () => {
 
          const pm = await createPaymentMethod()
     console.log("Fetcheando");
-         fetch("http://192.168.56.1:3000/api/pay", {
+         fetch("https://us-central1-virtualhockey.cloudfunctions.net/app/api/pay", {
              method: "POST",
              headers: {
                "Content-Type": "application/json"
@@ -34,8 +34,8 @@ export const Payment = () => {
            })
            .then(response => response.json())
            .then(data => {
-            console.log("Sicreeeeeeeeeeeeeeeeeeeeeet");
-            console.log(data)
+            // console.log("Sicreeeeeeeeeeeeeeeeeeeeeet");
+            // console.log(data)
             payWithCard(stripe, pm.card, data.clientSecret)
            })
 
