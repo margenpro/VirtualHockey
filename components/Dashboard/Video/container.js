@@ -1,53 +1,57 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useRef } from "react";
 import { Layout } from "./layout";
-import * as ScreenOrientation from "expo-screen-orientation"
-import * as vid from 'expo-av/build/Video';
+import * as ScreenOrientation from "expo-screen-orientation";
+import { Platform } from "react-native";
 
-export function Video({ navigation, route }) {
+export function Video({ setvideoShow, urlVideo }) {
+  const video = useRef(null);
 
-    const video = useRef(null);
-    //const [urlVideo, setUrlVideo] = useState('');
-    const urlVideo = "https://player.vimeo.com/external/475218949.hd.mp4?s=ba45e54d6ef6152a1837619dd9e4ce5fe8641ea0&profile_id=175"
-
-    const presentFullScreen = () => {
-        video.current.presentFullscreenPlayer()
-    }
-    const playVideo = () => {
-        video.current.playAsync()
-    }
-    const fullScreenHandler = ({ fullscreenUpdate }) => {
-        switch (fullscreenUpdate) {
-            case vid.FULLSCREEN_UPDATE_PLAYER_WILL_PRESENT:
-                ScreenOrientation.lockAsync(ScreenOrientation.OrientationLock.LANDSCAPE)
-                break
-            case vid.IOS_FULLSCREEN_UPDATE_PLAYER_WILL_PRESENT:
-                ScreenOrientation.lockAsync(ScreenOrientation.OrientationLock.LANDSCAPE)
-                break
-            case vid.FULLSCREEN_UPDATE_PLAYER_WILL_DISMISS:
-                ScreenOrientation.lockAsync(ScreenOrientation.OrientationLock.PORTRAIT)
-                video.current.stopAsync()
-                navigation.navigate("Dashboard")
-                break
-            case vid.IOS_FULLSCREEN_UPDATE_PLAYER_WILL_DISMISS:
-                ScreenOrientation.lockAsync(ScreenOrientation.OrientationLock.PORTRAIT)
-                video.current.stopAsync()
-                navigation.navigate("Dashboard")
-                break
+  const presentFullScreen = () => {
+    video.current.presentFullscreenPlayer();
+  };
+  const playVideo = () => {
+    video.current.playAsync();
+  };
+  const fullScreenHandler = async ({ fullscreenUpdate }) => {
+    switch (fullscreenUpdate) {
+      case 0:
+        if (Platform.OS === "ios" || Platform.OS === "android") {
+          ScreenOrientation.lockAsync(
+            ScreenOrientation.OrientationLock.LANDSCAPE
+          );
         }
+        break;
+      case 2:
+        console.log("-----------------");
+        console.log("2");
+        await video.current.stopAsync();
+        try {
+          if (Platform.OS === "ios") {
+            ScreenOrientation.lockAsync(
+              ScreenOrientation.OrientationLock.PORTRAIT_UP
+            );
+          } else if (Platform.OS === "android") {
+            await ScreenOrientation.lockAsync(
+              ScreenOrientation.OrientationLock.PORTRAIT
+            );
+          }
+        } catch (e) {
+          console.log(e);
+        }
+        setvideoShow(false);
+        break;
     }
+  };
 
-    return (
-        <>
-            <Layout
-                urlVideo={urlVideo}
-                video={video}
-                presentFullScreen={presentFullScreen}
-                playVideo={playVideo}
-                fullScreenHandler={fullScreenHandler}
-            />
-        </>
-    );
+  return (
+    <>
+      <Layout
+        urlVideo={urlVideo}
+        video={video}
+        presentFullScreen={presentFullScreen}
+        playVideo={playVideo}
+        fullScreenHandler={fullScreenHandler}
+      />
+    </>
+  );
 }
-
-
-

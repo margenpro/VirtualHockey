@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import stripe from "@agaweb/react-native-stripe";
 import { StatusBar } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { FirebaseAppProvider } from "reactfire";
@@ -9,8 +8,6 @@ import { getFont } from './fonts'
 // import { Context } from './context/userContext'
 import storeFn from './redux/store'
 import { Provider } from 'react-redux'
-
-stripe.initModule("pk_test_51Iov1mH463ReSVuZ0ZoWrohc3XnW8R1kZNQkCpU8qU5SEQw5aeFxaTf2D8hfQGz6bpuhSUod5Bltl05QkVbeNOZg00ZGxGGbXf")
 
 export default function App() {
   const store = storeFn()

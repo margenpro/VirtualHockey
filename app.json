@@ -18,7 +18,8 @@
     ],
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "vh"
+      "bundleIdentifier": "vh",
+      "requireFullScreen": true
     },
     "android": {
       "adaptiveIcon": {

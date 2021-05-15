@@ -86,7 +86,6 @@ const Login = ({ navigation, user, setUser, setVideos, videos }) => {
         videosList.push(video.data().videoUrl)
       });
 
-      console.log("devuelvo vids: " + videosList)
 
 
       return videosList
@@ -99,11 +98,8 @@ const Login = ({ navigation, user, setUser, setVideos, videos }) => {
   const submitHandler = async () => {
     try {
       await firebase.auth().signInWithEmailAndPassword(email, password)
-      console.log("logueo exitoso")
       const data = await getCurrentUserData()
-      console.log("set user")
       setUser({ email, username: data.username, role: data.isMember, lastVideo: data.lastVideoWatched, points: data.points })
-      console.log(user)
       let videosList = await getAllVideos()
       setVideos(videosList)
       screenHandlerLanding()
@@ -133,7 +129,6 @@ const Login = ({ navigation, user, setUser, setVideos, videos }) => {
   );
 }
 const mapStateToProps = state => {
-  console.log(state);
  return{ 
    user: state.userReducer.user,
   videos: state.videosReducer.videos}

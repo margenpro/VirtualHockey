@@ -56,18 +56,15 @@ export function Register({ navigation }) {
   };
 
   const submitHandler = async () => {
-    console.log("empezando el submit")
     try {
       const temp = await checkIfUsernameExists()
 
       if (!temp) {
-        console.log("empezando a crear usuario")
         await createUser()
         screenHandler()
       }
     }
     catch (error) {
-      console.log(error.message, typeof error.message, error.code)
       if (error.code === "username-exists" || error.code === "empty-username") setUsernameExists({exists:true, msg:error.message});
       else if (error.code === "auth/email-already-in-use" || error.code === "auth/invalid-email" ) setEmailExists({exists:true, msg:error.message});
       else if (error.code === "auth/weak-password") setInvalidPassword({invalid:true, msg:error.message});
@@ -83,12 +80,10 @@ export function Register({ navigation }) {
       let querySnapshot = await db.collection("users").where("username", "==", username)
         .get()
       if (querySnapshot.docs[0] != undefined) {
-        console.log("user already exists in database")
         throw { code:"username-exists", message:`The username ${username} is already in use` }
       }
     }
     catch (error) {
-      console.log(error)
       throw error
     }
   }

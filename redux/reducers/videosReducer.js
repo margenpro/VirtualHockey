@@ -5,8 +5,6 @@ const initialState = {
 }
 
 export const videosReducer = (state = initialState, action) => {
-    console.log("PV");
-    console.log(action.type);
     if (action.type === SET_VIDEOS) {
         return {
             ...state,
