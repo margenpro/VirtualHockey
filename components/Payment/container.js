@@ -26,7 +26,7 @@ export const Payment = () => {
 
     try {
       let response = await fetch(
-        'http://192.168.0.26:3000/api/pay',
+        'https://us-central1-virtualhockey.cloudfunctions.net/app/api/pay',
         {
           headers: {
           'Accept': 'application/json',
