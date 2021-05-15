@@ -5,9 +5,12 @@ import { Register } from "../components/Register/container";
 import { Landing } from "../components/Landing/container";
 import { Dashboard } from "../components/Dashboard/container";
 import { BottomTab } from './bottomTabNavigation'
+import {Payment} from "../components/Payment/layout"
 
 const screens = {
-
+  Payment: {
+    screen: Payment
+  },
   Login: {
     screen: Login
   },

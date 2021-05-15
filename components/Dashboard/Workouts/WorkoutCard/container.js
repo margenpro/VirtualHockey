@@ -18,12 +18,13 @@ const WorkoutCard = ({ navigation, lastVideo }) => {
         
         const getUrlVideoImage = async () =>{
 
+            console.log(lastVideo+4)
             const nextVideo = parseInt(lastVideo+1)
             await storageRef
                 .child("images/videoImages/"+nextVideo+".png")
                 .getDownloadURL()
                 .then(resolve => {
-                   setVideoImage(resolve)          
+                   setVideoImage(resolve)
                 })
                 .catch(e => console.log(e.code, e.message));    
         }
@@ -36,7 +37,6 @@ const WorkoutCard = ({ navigation, lastVideo }) => {
     return (
         <Layout 
             videoImage={videoImage}
-            nextVideo={lastVideo +1}
         />  
     );
 }

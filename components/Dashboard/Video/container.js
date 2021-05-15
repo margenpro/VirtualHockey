@@ -10,39 +10,37 @@ export function Video({ setvideoShow, urlVideo }) {
     video.current.presentFullscreenPlayer();
   };
   const playVideo = () => {
-    video.current.playAsync();
-  };
-  const fullScreenHandler = async ({ fullscreenUpdate }) => {
-    switch (fullscreenUpdate) {
-      case 0:
-        if (Platform.OS === "ios" || Platform.OS === "android") {
-          ScreenOrientation.lockAsync(
-            ScreenOrientation.OrientationLock.LANDSCAPE
-          );
-        }
-        break;
-      case 2:
-        console.log("-----------------");
-        console.log("2");
-        await video.current.stopAsync();
-        try {
-          if (Platform.OS === "ios") {
-            ScreenOrientation.lockAsync(
-              ScreenOrientation.OrientationLock.PORTRAIT_UP
-            );
-          } else if (Platform.OS === "android") {
-            await ScreenOrientation.lockAsync(
-              ScreenOrientation.OrientationLock.PORTRAIT
-            );
-          }
-        } catch (e) {
-          console.log(e);
-        }
-        setvideoShow(false);
-        break;
-    }
-  };
-
+      video.current.playAsync();
+    };
+    const fullScreenHandler = async ({ fullscreenUpdate }) => {
+        switch (fullscreenUpdate) {
+            case 0:
+                if (Platform.OS === "ios" || Platform.OS === "android") {
+                    ScreenOrientation.lockAsync(
+                        ScreenOrientation.OrientationLock.LANDSCAPE
+                        );
+                    }
+                    break;
+                    case 2:
+                        await video.current.stopAsync();
+                        try {
+                            if (Platform.OS === "ios") {
+                                ScreenOrientation.lockAsync(
+                                    ScreenOrientation.OrientationLock.PORTRAIT_UP
+                                    );
+                                } else if (Platform.OS === "android") {
+                                    await ScreenOrientation.lockAsync(
+                                        ScreenOrientation.OrientationLock.PORTRAIT
+                                        );
+                                    }
+                                } catch (e) {
+                                    console.log(e);
+                                }
+                                setvideoShow(false);º
+                                break;
+                            }
+                        };
+                        
   return (
     <>
       <Layout

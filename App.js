@@ -10,6 +10,8 @@ import storeFn from './redux/store'
 import { Provider } from 'react-redux'
 
 export default function App() {
+
+
   const store = storeFn()
   const [fontLoaded, setfontLoaded] = useState(false)
 
@@ -27,10 +29,10 @@ export default function App() {
         <FirebaseAppProvider firebaseConfig={firebaseConfig}>
           <StatusBar animated={true} backgroundColor='rgba(2, 28, 59, 1)' barStyle='light-content' />
           {/* <Context> */}
-            <NavigationContainer>
+          <NavigationContainer>
               <Navigator>
               </Navigator>
-            </NavigationContainer>
+          </NavigationContainer>
           {/* </Context> */}
         </FirebaseAppProvider>
       </Provider>
