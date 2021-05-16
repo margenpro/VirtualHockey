@@ -7,10 +7,13 @@ import mainLogo from "../../assets/images/mainLogo.png";
 import fontStyles from "../../assets/styles/fontStyles";
 import commonStyles from "../../assets/styles/commonStyles";
 import UserAvatar from "../Dashboard/HomeWork/UserAvatar/container";
+import styles from "../Dashboard/Video/styles";
+import { ScrollView } from "react-native-gesture-handler";
 
 // import { LinearGradient } from "expo-linear-gradient";
 
 export function Layout({
+  username,
   userInputHandler,
   emailInputHandler,
   passInputHandler,
@@ -20,16 +23,22 @@ export function Layout({
   invalidPassword,
   emailExists,
   usernameExists,
+  changeAvatar,
 }) {
   return (
     <Frame>
+      <ScrollView>
       <View style={commonStyles.layoutContainer}>
         <View style={commonStyles.headerContainer}>
-          <UserAvatar></UserAvatar>
-          <Text style={fontStyles.title}>Profile</Text>
+          <TouchableOpacity onPress={()=>{changeAvatar()}}><UserAvatar></UserAvatar></TouchableOpacity>
+          <Text style={fontStyles.title}>{username && username}'s Profile</Text>
+        </View>
+        <View style={commonStyles.pointsContainer}>
+          <Text style={fontStyles.points}>2450 Points</Text>
         </View>
         <Text style={fontStyles.inputHeader}>USERNAME</Text>
         <Input
+          disabled
           onChangeText={userInputHandler}
           style={commonStyles.inputUser}
           errorMessage={usernameExists.exists ? usernameExists.msg : ""}
@@ -37,12 +46,29 @@ export function Layout({
         />
         <Text style={fontStyles.inputHeader}>EMAIL</Text>
         <Input
+          disabled
           style={commonStyles.inputPassword}
           errorMessage={emailExists.exists ? emailExists.msg : ""}
           onChangeText={emailInputHandler}
           placeholder={"john.doe@example.com"}
         />
-        <Text style={fontStyles.inputHeader}>PASSWORD</Text>
+        <Text style={fontStyles.inputHeader}>OLD PASSWORD</Text>
+        <Input
+          onChangeText={passInputHandler}
+          errorMessage={invalidPassword.invalid ? invalidPassword.msg : ""}
+          secureTextEntry={!showPassword}
+          placeholder={"********"}
+          style={commonStyles.inputUser}
+        />
+        <Text style={fontStyles.inputHeader}>NEW PASSWORD</Text>
+        <Input
+          onChangeText={passInputHandler}
+          errorMessage={invalidPassword.invalid ? invalidPassword.msg : ""}
+          secureTextEntry={!showPassword}
+          placeholder={"********"}
+          style={commonStyles.inputUser}
+        />
+        <Text style={fontStyles.inputHeader}>REPEAT NEW PASSWORD</Text>
         <Input
           onChangeText={passInputHandler}
           errorMessage={invalidPassword.invalid ? invalidPassword.msg : ""}
@@ -53,20 +79,12 @@ export function Layout({
         <TouchableOpacity
           onPress={submitHandler}
           accessibilityLabel="Learn more about this purple button"
-          style={commonStyles.actionButton}
+          style={[commonStyles.actionButton, {marginBottom: 50}]}
         >
           <Text style={fontStyles.buttonText}>SAVE</Text>
         </TouchableOpacity>
-        <TouchableOpacity
-          onPress={screenHandler}
-          style={commonStyles.textTouch}
-          accessibilityRole="text"
-        >
-          <Text style={[fontStyles.smallSize, fontStyles.footerText]}>
-            Edit my membership
-          </Text>
-        </TouchableOpacity>
       </View>
+      </ScrollView>
     </Frame>
   );
 }
