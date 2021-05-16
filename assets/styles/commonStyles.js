@@ -12,7 +12,8 @@ export default StyleSheet.create({
         margin: 20,
     },
     headerContainer: {
-        marginBottom: 20
+        marginBottom: 20,
+        alignItems: 'center'
     },
     actionButton: {
         ...fontStyle.fontType,

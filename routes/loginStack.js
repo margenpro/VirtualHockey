@@ -8,9 +8,9 @@ import { BottomTab } from './bottomTabNavigation'
 import {Payment} from "../components/Payment/container"
 
 const screens = {
-  Payment: {
-    screen: Payment,
-  },
+  // Payment: {
+  //   screen: Payment,
+  // },
   Login: {
     screen: Login,
   },

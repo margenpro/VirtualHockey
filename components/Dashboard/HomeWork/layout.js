@@ -6,24 +6,22 @@ import Ionicons from "react-native-vector-icons/Ionicons";
 import commonStyles from "../../../assets/styles/commonStyles";
 import fontStyles from "../../../assets/styles/fontStyles";
 import { colorsPalette } from "../../../assets/styles/colorsPalette";
+import UserAvatar from "./UserAvatar/container";
 
 export function Layout({
-    setvideoShow,
+  setvideoShow,
   getProfileImage,
   navigateToWorkouts,
   userName,
   userPosition,
   userPoints,
 }) {
-
   return (
     <Frame>
       <View
         style={[commonStyles.centeredAligned, commonStyles.layoutContainer]}
       >
-        <View style={styles.containerImage}>
-          <Image style={styles.circle} source={getProfileImage()} />
-        </View>
+        <UserAvatar />
         <View style={commonStyles.rowedAndWrapped}>
           <Text style={[styles.usernameText, fontStyles.white]}>
             {userName}{" "}
