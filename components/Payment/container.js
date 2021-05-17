@@ -4,11 +4,15 @@ import { getStorage } from "../../firebase";
 import { useFirebaseApp } from "reactfire";
 import { Layout } from "./layout";
 import { PaymentsStripe as Stripe } from 'expo-payments-stripe';
+import { connect } from 'react-redux'
+import { setterUserAction } from '../../redux/actions/userActions'
+import { setVideosAction } from '../../redux/actions/videosActions'
 
-export const Payment = () => {
+
+const Payment = ({ user, navigation }) => {
 
   const storage = getStorage();
-  const firebase = useFirebaseApp();
+  const firebase = useFirebaseApp(); 
   const storageRef = storage.ref();
 
   const db = firebase.firestore()
@@ -19,14 +23,13 @@ export const Payment = () => {
   });
   
   const handlePayment = async () => {
-        
+    
     const token = await Stripe.paymentRequestWithCardFormAsync();
        
-    console.log(token);
-
     try {
       let response = await fetch(
-        'https://us-central1-virtualhockey.cloudfunctions.net/app/api/pay',
+        // 'https://us-central1-virtualhockey.cloudfunctions.net/app/api/pay',
+        "http://192.168.0.26:3000/api/pay", 
         {
           headers: {
           'Accept': 'application/json',
@@ -38,7 +41,13 @@ export const Payment = () => {
       );
       
       let res = await response.json();
-      console.log(res)
+      
+      if (res.status === "succeeded") {
+        await makeMember();
+        console.log(user);
+        navigation.navigate("BottomTab")
+      }
+
     } catch (error) {
       // Alert.alert(
       //   "Oops!",
@@ -47,9 +56,33 @@ export const Payment = () => {
     }
   };
 
+  const makeMember = async() => {
+    console.log(user);
+    await db.collection("users")
+      .doc(user.id)
+      .update({
+        "role": 2
+      })
+  }
+
   return (
       <Layout
          handlePayment={handlePayment}
       />
   );
+
 }
+
+const mapStateToProps = state => {
+  return{ 
+    user: state.userReducer.user,
+   videos: state.videosReducer.videos
+  }
+ }
+
+ const actionCreators = {
+  setUser: setterUserAction,
+  setVideos: setVideosAction
+}
+
+ export default connect(mapStateToProps, actionCreators)(Payment)
