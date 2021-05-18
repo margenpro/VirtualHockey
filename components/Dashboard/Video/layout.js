@@ -8,7 +8,8 @@ export function Layout({
     video,
     presentFullScreen,
     playVideo,
-    fullScreenHandler
+    fullScreenHandler,
+    onVideoFinish,
 }) {
     return (
         <Frame>
@@ -21,6 +22,7 @@ export function Layout({
                 onLoadStart={presentFullScreen}
                 onReadyForDisplay={playVideo}
                 onFullscreenUpdate={fullScreenHandler}
+                onPlaybackStatusUpdate={status => onVideoFinish(status)}
             />
         </Frame>
     )
