@@ -5,12 +5,9 @@ import { Register } from "../components/Register/container";
 import { Landing } from "../components/Landing/container";
 import { Dashboard } from "../components/Dashboard/container";
 import { BottomTab } from './bottomTabNavigation'
-import {Payment} from "../components/Payment/container"
+import Payment from "../components/Payment/container"
 
 const screens = {
-  // Payment: {
-  //   screen: Payment,
-  // },
   Login: {
     screen: Login,
   },
@@ -23,6 +20,9 @@ const screens = {
   BottomTab: {
     screen: BottomTab,
   },
+  Payment: {
+    screen: Payment,
+  }
 };
 
 const LoginStack = createStackNavigator(screens, {

@@ -12,10 +12,15 @@ export function Landing({ navigation }) {
     /* const screenHandler = () => {
         navigation.navigate("Pagos");
     }; */
+
+    const navigateToPaymentForm = () => {
+        navigation.navigate("Payment")
+    }
+
     return (
         <Layout
         // size={size}
-        //screenHandler={screenHandler}
+        navigateToPaymentForm={navigateToPaymentForm}
         />
     );
 }

@@ -9,6 +9,7 @@ import { Frame } from '../Frame'
 export function Layout({
     // size
     //screenHandler 
+    navigateToPaymentForm
 }) {
     return (
         <Frame>
@@ -38,7 +39,8 @@ export function Layout({
                     </Image>
                 </View>
                 <TouchableOpacity
-                    style={styles.boton}>
+                    style={styles.boton}
+                    onPress={navigateToPaymentForm}>
                     <Text style={styles.textoBoton}> START YOUR FREE TRAIL </Text>
                 </TouchableOpacity>
                 <Text style={styles.textoChico}>TAKE A CLOSER LOOK</Text>

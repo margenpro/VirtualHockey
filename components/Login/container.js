@@ -45,6 +45,7 @@ const Login = ({ navigation, user, setUser, setVideos, videos }) => {
       let usr = firebase.auth().currentUser
       let doc = await db.collection("users").doc(usr.uid).get()
       let data = doc.data()
+      data.id = usr.uid
       return data
     } catch (error) {
       throw new Error(error.message)
@@ -57,7 +58,7 @@ const Login = ({ navigation, user, setUser, setVideos, videos }) => {
 
     try {
       let usr = await getCurrentUserData()
-      usr.isMember ? navigation.navigate("BottomTab") : navigation.navigate("Landing");
+      usr.role === 2 || usr.role === 3 ? navigation.navigate("BottomTab") : navigation.navigate("Landing");
     } catch (error) {
       console.log(error.message)
     }
@@ -96,7 +97,9 @@ const Login = ({ navigation, user, setUser, setVideos, videos }) => {
     try {
       await firebase.auth().signInWithEmailAndPassword(email, password)
       const data = await getCurrentUserData()
-      setUser({ email, username: data.username, role: data.isMember, lastVideo: data.lastVideoWatched, points: data.points })
+      console.log("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
+      console.log(data.id);
+      setUser({ id: data.id, email, username: data.username, role: data.role, lastVideo: data.lastVideoWatched, points: data.points })
       let videosList = await getAllVideos()
       setVideos(videosList)
       //console.log(videosList)
