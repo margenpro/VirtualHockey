@@ -97,12 +97,9 @@ const Login = ({ navigation, user, setUser, setVideos, videos }) => {
     try {
       await firebase.auth().signInWithEmailAndPassword(email, password)
       const data = await getCurrentUserData()
-      console.log("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
-      console.log(data.id);
       setUser({ id: data.id, email, username: data.username, role: data.role, lastVideo: data.lastVideoWatched, points: data.points })
       let videosList = await getAllVideos()
       setVideos(videosList)
-      //console.log(videosList)
       screenHandlerLanding()
     } catch (error) {
       if (error.code === "auth/user-not-found") setWrongEmail(true);
