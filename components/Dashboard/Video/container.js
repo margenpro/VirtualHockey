@@ -9,28 +9,20 @@ import { getFirestore } from '../../../firebase'
 const Video = ({ setvideoShow, videos, user, nroVideo, setUser }) => {
 
   const video = useRef(null);
-  const [urlVideo, setUrlVideo] = useState("")
+  const [urlVideo, setUrlVideo] = useState(undefined)
   const db = getFirestore()
 
   useEffect(() => {
-    const getVideoUrl = (nro) => {
-      const vid = videos.find(v => v.nro === nro)
-      return vid.url
-    }
-    const url = getVideoUrl(nroVideo)
-    setUrlVideo(url)
+    setUrlVideo(videos.find(v => v.nro === nroVideo).url)
   }, [])
 
   const onVideoFinish = async playbackStatus => {
-    const almostFinish = playbackStatus.durationMillis - 7000
-    let dbSaved = false
-
-    if (playbackStatus.positionMillis >= almostFinish) {
+    if (playbackStatus.didJustFinish) {
       console.log("Terminaste de ver video N°: " + nroVideo)
 
       if (user.lastVideo < videos.length) {
         //actualizar lastVideoWatched del usuario logueado en firebase
-        user.lastVideo = nroVideo + 1
+        user.lastVideo = nroVideo++
         try {
           await db.collection("users")
             .doc(user.id)
@@ -38,15 +30,10 @@ const Video = ({ setvideoShow, videos, user, nroVideo, setUser }) => {
               "lastVideoWatched": user.lastVideo
             })
           console.log("Se grabo exitosamente en BD")
-          dbSaved = true
-        } catch (error) {
-          console.log("No se grabo en BD: " + error)
-        }
-        //habilitar el proximo video del usuario en sesion
-        if (dbSaved) {        
           setUser({ lastVideo: user.lastVideo })
           console.log("Debloqueaste Video N°: " + user.lastVideo)
-        } else {
+        } catch (error) {
+          console.log("No se grabo en BD: " + error)
           console.log("No se pudo actualizar el ultimo video visto")
         }
       }
@@ -91,6 +78,8 @@ const Video = ({ setvideoShow, videos, user, nroVideo, setUser }) => {
   };
 
   return (
+    <>
+    {urlVideo && 
     <Layout
       urlVideo={urlVideo}
       video={video}
@@ -99,6 +88,8 @@ const Video = ({ setvideoShow, videos, user, nroVideo, setUser }) => {
       fullScreenHandler={fullScreenHandler}
       onVideoFinish={onVideoFinish}
     />
+    }
+    </>
   );
 }
 const mapStateToProps = state => {
