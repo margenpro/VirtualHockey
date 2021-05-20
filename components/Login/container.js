@@ -55,7 +55,7 @@ const Login = ({ navigation, user, setUser, setVideos, videos }) => {
 
 
   const screenHandlerLanding = async () => {
-    
+
     try {
       let usr = await getCurrentUserData()
       usr.role === 2 || usr.role === 3 ? navigation.navigate("BottomTab") : navigation.navigate("Landing");
@@ -84,11 +84,8 @@ const Login = ({ navigation, user, setUser, setVideos, videos }) => {
       let videos = await db.collection("videos").get()
 
       videos.forEach(video => {
-        videosList.push(video.data().videoUrl)
+        videosList.push(video.data())
       });
-
-
-
       return videosList
     } catch (error) {
       alert(error)
@@ -100,8 +97,6 @@ const Login = ({ navigation, user, setUser, setVideos, videos }) => {
     try {
       await firebase.auth().signInWithEmailAndPassword(email, password)
       const data = await getCurrentUserData()
-      console.log("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
-      console.log(data.id);
       setUser({ id: data.id, email, username: data.username, role: data.role, lastVideo: data.lastVideoWatched, points: data.points })
       let videosList = await getAllVideos()
       setVideos(videosList)
@@ -117,24 +112,25 @@ const Login = ({ navigation, user, setUser, setVideos, videos }) => {
   };
 
   return (
-      <Layout
-        emailInputHandler={emailInputHandler}
-        passInputHandler={passInputHandler}
-        submitHandler={submitHandler}
-        wrongEmail={wrongEmail}
-        screenHandlerLanding={screenHandlerLanding}
-        screenHandlerRegister={screenHandlerRegister}
-        wrongPassword={wrongPassword}
-        showPassword={showPassword}
-        showPasswordHandler={showPasswordHandler}
-        forTesting={forTesting}
-      />
+    <Layout
+      emailInputHandler={emailInputHandler}
+      passInputHandler={passInputHandler}
+      submitHandler={submitHandler}
+      wrongEmail={wrongEmail}
+      screenHandlerLanding={screenHandlerLanding}
+      screenHandlerRegister={screenHandlerRegister}
+      wrongPassword={wrongPassword}
+      showPassword={showPassword}
+      showPasswordHandler={showPasswordHandler}
+      forTesting={forTesting}
+    />
   );
 }
 const mapStateToProps = state => {
- return{ 
-   user: state.userReducer.user,
-  videos: state.videosReducer.videos}
+  return {
+    user: state.userReducer.user,
+    videos: state.videosReducer.videos
+  }
 }
 
 const actionCreators = {

@@ -14,7 +14,6 @@ const initialState = {
 
 export const userReducer = (state = initialState, action) => {
     if (action.type === SETTER_USER) {
-        console.log(action.payload);
         const id = action.payload.id ? action.payload.id : state.user.id
         const email = action.payload.email ? action.payload.email : state.user.email
         const username = action.payload.username ? action.payload.username : state.user.username
