@@ -14,9 +14,9 @@ export function Layout({
         <Frame>
             <Video
                 ref={video}
-                style={styles.video}
+                // style={styles.video}
                 source={{ uri: urlVideo }}
-                // useNativeControls
+                useNativeControls
                 resizeMode="contain"
                 onLoadStart={presentFullScreen}
                 onReadyForDisplay={playVideo}

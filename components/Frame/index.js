@@ -30,10 +30,10 @@ const styles = StyleSheet.create({
   statusBar: {
     flex: 1,
     paddingTop: Platform.OS === "android" ? StatusBar.currentHeight : 0,
-    flexWrap: "wrap",
-    flexDirection: "row",
-    margin: 0,
-    padding: 0,
+    // flexWrap: "wrap",
+    // flexDirection: "row",
+    // margin: 0,
+    // padding: 0,
   },
   gradient: {
     flex: 1,

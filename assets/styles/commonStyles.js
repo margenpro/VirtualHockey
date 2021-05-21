@@ -9,10 +9,12 @@ export default StyleSheet.create({
   layoutContainer: {
     flex: 1,
     margin: 20,
+    // justifyContent: 'flex-start'
   },
   headerContainer: {
-    marginBottom: 20,
-    alignItems: "center",
+    flex: 1,
+    // marginBottom: 20,
+    // alignItems: "center",
   },
   actionButton: {
     ...fontStyle.fontType,
@@ -57,12 +59,11 @@ export default StyleSheet.create({
   },
   mainLogo: {
     position: "relative",
-    width: 160,
-    height: 160,
+    minWidth: 80,
+    minHeight: 80,
     alignItems: "center",
     alignSelf: "center",
-    margin: 20,
-    borderRadius: 100,
+    marginBottom: 20,
     resizeMode: "contain",
   },
   centeredAligned: {
@@ -82,5 +83,8 @@ export default StyleSheet.create({
     alignContent: "center",
     alignItems: "center",
     marginBottom: 20,
+  },
+  flexOne: {
+    flex: 1,
   },
 });

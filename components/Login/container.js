@@ -4,18 +4,17 @@ import { getStorage } from "../../firebase";
 import { useFirebaseApp } from "reactfire";
 import { Layout } from "./layout";
 import Icon from "react-native-vector-icons/FontAwesome";
-import { connect } from 'react-redux'
+import { connect } from "react-redux";
 // import { UserContext } from "../../context/userContext";
-import { setterUserAction } from '../../redux/actions/userActions'
-import { setVideosAction } from '../../redux/actions/videosActions'
+import { setterUserAction } from "../../redux/actions/userActions";
+import { setVideosAction } from "../../redux/actions/videosActions";
 
 const Login = ({ navigation, user, setUser, setVideos, videos }) => {
-
   const storage = getStorage();
   const firebase = useFirebaseApp();
   const storageRef = storage.ref();
 
-  const db = firebase.firestore()
+  const db = firebase.firestore();
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -34,32 +33,36 @@ const Login = ({ navigation, user, setUser, setVideos, videos }) => {
   //     .catch(e => console.log(e.code, e.message));
   // }, []);
 
-
   // SF Direccionar a la screen Register
   const screenHandlerRegister = () => {
     navigation.navigate("Register");
   };
 
+  const handleKeyDown = (e) => {
+    if (e.nativeEvent.key == "Enter") {
+      alert("oasdasdmñkls");
+    }
+  };
+
   const getCurrentUserData = async () => {
     try {
-      let usr = firebase.auth().currentUser
-      let doc = await db.collection("users").doc(usr.uid).get()
-      let data = doc.data()
-      return data
+      let usr = firebase.auth().currentUser;
+      let doc = await db.collection("users").doc(usr.uid).get();
+      let data = doc.data();
+      return data;
     } catch (error) {
-      throw new Error(error.message)
+      throw new Error(error.message);
     }
-  }
-
-
+  };
 
   const screenHandlerLanding = async () => {
-    
     try {
-      let usr = await getCurrentUserData()
-      usr.isMember ? navigation.navigate("BottomTab") : navigation.navigate("Landing");
+      let usr = await getCurrentUserData();
+      usr.isMember
+        ? navigation.navigate("BottomTab")
+        : navigation.navigate("Landing");
     } catch (error) {
-      console.log(error.message)
+      console.log(error.message);
     }
   };
 
@@ -67,76 +70,81 @@ const Login = ({ navigation, user, setUser, setVideos, videos }) => {
     navigation.navigate("BottomTab");
   };
 
-  const emailInputHandler = newValue => {
+  const emailInputHandler = (newValue) => {
     setEmail(newValue);
     setWrongEmail(false);
   };
 
-  const passInputHandler = newValue => {
+  const passInputHandler = (newValue) => {
     setPassword(newValue);
     setWrongEmail(false);
   };
 
   const getAllVideos = async () => {
     try {
-      let videosList = []
-      let videos = await db.collection("videos").get()
+      let videosList = [];
+      let videos = await db.collection("videos").get();
 
-      videos.forEach(video => {
-        videosList.push(video.data().videoUrl)
+      videos.forEach((video) => {
+        videosList.push(video.data().videoUrl);
       });
 
-
-
-      return videosList
+      return videosList;
     } catch (error) {
-      alert(error)
+      alert(error);
     }
-
-  }
+  };
 
   const submitHandler = async () => {
     try {
-      await firebase.auth().signInWithEmailAndPassword(email, password)
-      const data = await getCurrentUserData()
-      setUser({ email, username: data.username, role: data.isMember, lastVideo: data.lastVideoWatched, points: data.points })
-      let videosList = await getAllVideos()
-      setVideos(videosList)
-      screenHandlerLanding()
+      await firebase.auth().signInWithEmailAndPassword(email, password);
+      const data = await getCurrentUserData();
+      setUser({
+        email,
+        username: data.username,
+        role: data.isMember,
+        lastVideo: data.lastVideoWatched,
+        points: data.points,
+      });
+      let videosList = await getAllVideos();
+      setVideos(videosList);
+      screenHandlerLanding();
     } catch (error) {
       if (error.code === "auth/user-not-found") setWrongEmail(true);
       else if (error.code === "auth/wrong-password") setWrongPassword(true);
     }
   };
 
-  const showPasswordHandler = newValue => {
+  const showPasswordHandler = (newValue) => {
     setShowPassword(newValue);
   };
 
   return (
-      <Layout
-        emailInputHandler={emailInputHandler}
-        passInputHandler={passInputHandler}
-        submitHandler={submitHandler}
-        wrongEmail={wrongEmail}
-        screenHandlerLanding={screenHandlerLanding}
-        screenHandlerRegister={screenHandlerRegister}
-        wrongPassword={wrongPassword}
-        showPassword={showPassword}
-        showPasswordHandler={showPasswordHandler}
-        forTesting={forTesting}
-      />
+    <Layout
+      emailInputHandler={emailInputHandler}
+      passInputHandler={passInputHandler}
+      submitHandler={submitHandler}
+      wrongEmail={wrongEmail}
+      screenHandlerLanding={screenHandlerLanding}
+      screenHandlerRegister={screenHandlerRegister}
+      wrongPassword={wrongPassword}
+      showPassword={showPassword}
+      showPasswordHandler={showPasswordHandler}
+      forTesting={forTesting}
+      handleKeyDown={handleKeyDown}
+    />
   );
-}
-const mapStateToProps = state => {
- return{ 
-   user: state.userReducer.user,
-  videos: state.videosReducer.videos}
-}
+};
+const mapStateToProps = (state) => {
+  return {
+    user: state.userReducer.user,
+    videos: state.videosReducer.videos,
+  };
+};
 
 const actionCreators = {
   setUser: setterUserAction,
-  setVideos: setVideosAction
-}
+  setVideos: setVideosAction,
+};
 
-export default connect(mapStateToProps, actionCreators)(Login)
+export default connect(mapStateToProps, actionCreators)(Login);
