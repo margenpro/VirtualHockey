@@ -97,7 +97,8 @@ const Login = ({ navigation, user, setUser, setVideos, videos }) => {
     try {
       await firebase.auth().signInWithEmailAndPassword(email, password)
       const data = await getCurrentUserData()
-      setUser({ id: data.id, email, username: data.username, role: data.role, lastVideo: data.lastVideoWatched, points: data.points })
+      console.log(data);
+      setUser({ id: data.id, email, username: data.username, role: data.role, paymentDate: data.paymentDate, lastVideo: data.lastVideoWatched, points: data.points })
       let videosList = await getAllVideos()
       setVideos(videosList)
       screenHandlerLanding()

@@ -96,9 +96,10 @@ export function Register({ navigation }) {
      
       db.collection("users").doc(userCreds.user.uid).set({
         username,
-        isMember: false,
+        role: 1,
+        paymentDate: null,
+        lastVideo: 0,
         points: 0,
-        lastVideoWatched: 0
       })
 
       return {code: null}
