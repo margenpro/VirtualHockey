@@ -24,6 +24,7 @@ export function BottomTab({ Navigator }) {
                 activeTintColor: '#BD0938',
                 inactiveTintColor: '#333333',
                 style: styles.bottomTab,
+                keyboardHidesTabBar: true,
             }}
         >
             <Tab.Screen name="Workouts" component={WorkoutsStack} />

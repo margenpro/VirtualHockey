@@ -1,5 +1,12 @@
 import React from "react";
-import { View, Text, TouchableOpacity, Image } from "react-native";
+import {
+  View,
+  Text,
+  TouchableOpacity,
+  Image,
+  KeyboardAvoidingView,
+  Keyboard,
+} from "react-native";
 import Icon from "react-native-vector-icons/FontAwesome";
 import { Input } from "react-native-elements";
 import { Frame } from "../Frame";
@@ -14,6 +21,7 @@ import { ScrollView } from "react-native-gesture-handler";
 
 export function Layout({
   username,
+  email,
   userInputHandler,
   emailInputHandler,
   passInputHandler,
@@ -24,67 +32,99 @@ export function Layout({
   emailExists,
   usernameExists,
   changeAvatar,
+  points,
 }) {
   return (
     <Frame>
-      <ScrollView>
-      <View style={commonStyles.layoutContainer}>
-        <View style={commonStyles.headerContainer}>
-          <TouchableOpacity onPress={()=>{changeAvatar()}}><UserAvatar></UserAvatar></TouchableOpacity>
-          <Text style={fontStyles.title}>{username && username}'s Profile</Text>
-        </View>
-        <View style={commonStyles.pointsContainer}>
-          <Text style={fontStyles.points}>2450 Points</Text>
-        </View>
-        <Text style={fontStyles.inputHeader}>USERNAME</Text>
-        <Input
-          disabled
-          onChangeText={userInputHandler}
-          style={commonStyles.inputUser}
-          errorMessage={usernameExists.exists ? usernameExists.msg : ""}
-          placeholder={"JohnDoe"}
-        />
-        <Text style={fontStyles.inputHeader}>EMAIL</Text>
-        <Input
-          disabled
-          style={commonStyles.inputPassword}
-          errorMessage={emailExists.exists ? emailExists.msg : ""}
-          onChangeText={emailInputHandler}
-          placeholder={"john.doe@example.com"}
-        />
-        <Text style={fontStyles.inputHeader}>OLD PASSWORD</Text>
-        <Input
-          onChangeText={passInputHandler}
-          errorMessage={invalidPassword.invalid ? invalidPassword.msg : ""}
-          secureTextEntry={!showPassword}
-          placeholder={"********"}
-          style={commonStyles.inputUser}
-        />
-        <Text style={fontStyles.inputHeader}>NEW PASSWORD</Text>
-        <Input
-          onChangeText={passInputHandler}
-          errorMessage={invalidPassword.invalid ? invalidPassword.msg : ""}
-          secureTextEntry={!showPassword}
-          placeholder={"********"}
-          style={commonStyles.inputUser}
-        />
-        <Text style={fontStyles.inputHeader}>REPEAT NEW PASSWORD</Text>
-        <Input
-          onChangeText={passInputHandler}
-          errorMessage={invalidPassword.invalid ? invalidPassword.msg : ""}
-          secureTextEntry={!showPassword}
-          placeholder={"********"}
-          style={commonStyles.inputUser}
-        />
-        <TouchableOpacity
-          onPress={submitHandler}
-          accessibilityLabel="Learn more about this purple button"
-          style={[commonStyles.actionButton, {marginBottom: 50}]}
-        >
-          <Text style={fontStyles.buttonText}>SAVE</Text>
-        </TouchableOpacity>
-      </View>
-      </ScrollView>
+      <KeyboardAvoidingView
+        style={[commonStyles.flexOne]}
+        {...(Platform.OS === "ios" && { behavior: "padding" })}
+        keyboardVerticalOffset={10}
+        enabled
+      >
+        <ScrollView>
+          <TouchableOpacity
+            activeOpacity={1}
+            style={commonStyles.flexOne}
+            onPress={() => {
+              Keyboard.dismiss();
+            }}
+          >
+            <View style={commonStyles.layoutContainer}>
+              <View style={commonStyles.headerContainer}>
+                <TouchableOpacity
+                  onPress={() => {
+                    changeAvatar();
+                  }}
+                >
+                  <View style={{ alignItems: "center" }}>
+                    <UserAvatar />
+                  </View>
+                </TouchableOpacity>
+                <Text style={fontStyles.title}>
+                  {username && username}'s Profile
+                </Text>
+              </View>
+              <View style={commonStyles.pointsContainer}>
+                <Text style={fontStyles.points}>{points} points</Text>
+              </View>
+              <Text style={fontStyles.inputHeader}>USERNAME</Text>
+              <Input
+                disabled
+                onChangeText={userInputHandler}
+                style={commonStyles.inputUser}
+                errorMessage={usernameExists.exists ? usernameExists.msg : ""}
+                placeholder={username}
+              />
+              <Text style={fontStyles.inputHeader}>EMAIL</Text>
+              <Input
+                disabled
+                style={commonStyles.inputPassword}
+                errorMessage={emailExists.exists ? emailExists.msg : ""}
+                onChangeText={emailInputHandler}
+                placeholder={email}
+              />
+              <Text style={fontStyles.inputHeader}>OLD PASSWORD</Text>
+              <Input
+                onChangeText={passInputHandler}
+                errorMessage={
+                  invalidPassword.invalid ? invalidPassword.msg : ""
+                }
+                secureTextEntry={!showPassword}
+                placeholder={"********"}
+                style={commonStyles.inputUser}
+              />
+              <Text style={fontStyles.inputHeader}>NEW PASSWORD</Text>
+              <Input
+                onChangeText={passInputHandler}
+                errorMessage={
+                  invalidPassword.invalid ? invalidPassword.msg : ""
+                }
+                secureTextEntry={!showPassword}
+                placeholder={"********"}
+                style={commonStyles.inputUser}
+              />
+              <Text style={fontStyles.inputHeader}>REPEAT NEW PASSWORD</Text>
+              <Input
+                onChangeText={passInputHandler}
+                errorMessage={
+                  invalidPassword.invalid ? invalidPassword.msg : ""
+                }
+                secureTextEntry={!showPassword}
+                placeholder={"********"}
+                style={commonStyles.inputUser}
+              />
+              <TouchableOpacity
+                onPress={submitHandler}
+                accessibilityLabel="Learn more about this purple button"
+                style={[commonStyles.actionButton, { marginBottom: 80 }]}
+              >
+                <Text style={fontStyles.buttonText}>SAVE</Text>
+              </TouchableOpacity>
+            </View>
+          </TouchableOpacity>
+        </ScrollView>
+      </KeyboardAvoidingView>
     </Frame>
   );
 }

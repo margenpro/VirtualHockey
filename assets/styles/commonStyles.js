@@ -26,7 +26,6 @@ export default StyleSheet.create({
     height: 40,
     width: width * 0.8,
     alignSelf: "center",
-    margin: 20,
   },
   inputUser: {
     ...fontStyle.fontType,
@@ -82,7 +81,8 @@ export default StyleSheet.create({
   pointsContainer: {
     alignContent: "center",
     alignItems: "center",
-    marginBottom: 20,
+    marginBottom: 30,
+    marginTop: 20,
   },
   flexOne: {
     flex: 1,

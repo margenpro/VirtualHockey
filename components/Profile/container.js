@@ -11,7 +11,8 @@ export function Profile({ navigation }) {
 
   const db = firebase.firestore();
 
-  const [email, setEmail] = useState("");
+  const [points, setPoints] = useState("2450");
+  const [email, setEmail] = useState("Elina@mail.com");
   const [username, setUsername] = useState("Elina");
   const [password, setPassword] = useState("");
   const [emailExists, setEmailExists] = useState({ exists: false, msg: "" });
@@ -147,6 +148,8 @@ export function Profile({ navigation }) {
       emailExists={emailExists}
       username={username}
       changeAvatar={changeAvatar}
+      email={email}
+      points={points}
     />
   );
 }

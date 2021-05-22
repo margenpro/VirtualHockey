@@ -8,7 +8,7 @@ const height = Dimensions.get("window").height;
 
 export default StyleSheet.create({
   containerImage: {
-    marginTop: 10,
+    marginTop: 20,
     justifyContent: "flex-start",
     marginBottom: 30,
   },
