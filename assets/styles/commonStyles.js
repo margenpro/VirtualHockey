@@ -58,13 +58,13 @@ export default StyleSheet.create({
     alignItems: "center",
   },
   mainLogo: {
-    position: "relative",
-    minWidth: 80,
-    minHeight: 80,
+    // position: "relative",
     alignItems: "center",
     alignSelf: "center",
     marginBottom: 20,
     resizeMode: "contain",
+    width: 150,
+    height: 150,
   },
   centeredAligned: {
     alignItems: "center",
@@ -87,4 +87,5 @@ export default StyleSheet.create({
   flexOne: {
     flex: 1,
   },
+  mainCredentialContainer: { flex: 2, marginTop: 40 },
 });

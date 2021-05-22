@@ -46,12 +46,14 @@ export function Layout({
             Keyboard.dismiss();
           }}
         >
-          <Image
-            style={[commonStyles.mainLogo, commonStyles.flexOne]}
-            source={mainLogo}
-          />
-          <Text style={[fontStyles.title]}>Log In</Text>
-          <View style={{ flex: 5, marginTop: 40 }}>
+          <View style={commonStyles.flexOne}>
+            <Image
+              style={[commonStyles.mainLogo, commonStyles.flexOne]}
+              source={mainLogo}
+            />
+            <Text style={[fontStyles.title]}>Log In</Text>
+          </View>
+          <View style={commonStyles.mainCredentialContainer}>
             <TouchableOpacity
               pointerEvents="none"
               activeOpacity={1}
