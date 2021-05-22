@@ -1,20 +1,31 @@
 import React, { useState, useEffect } from "react";
 import { Layout } from "./layout";
+import { connect } from 'react-redux'
 
-export const Dashboard = ({ navigation }) => {
+const Dashboard = ({ navigation, user, videos }) => {
   const [videoShow, setvideoShow] = useState(false);
-  const [urlVideo, setUrlVideo] = useState(
-    "https://player.vimeo.com/external/475218949.hd.mp4?s=ba45e54d6ef6152a1837619dd9e4ce5fe8641ea0&profile_id=175"
-  );
+  const [nroVideo, setNroVideo] = useState("")
 
-  useEffect(() => {}, [videoShow]);
+  useEffect(() => { 
+    const lastVideo = user.lastVideo == 0 ? 1: user.lastVideo
+    setNroVideo(lastVideo)
+  }, [videoShow]);
 
   return (
-    <Layout
-      videoShow={videoShow}
-      setvideoShow={setvideoShow}
-      navigation={navigation}
-      urlVideo={urlVideo}
-    />
+    <>
+      <Layout
+        videoShow={videoShow}
+        setvideoShow={setvideoShow}
+        navigation={navigation}
+        nroVideo={nroVideo}
+      />
+    </>
   );
 };
+const mapStateToProps = state => {
+  return {
+    user: state.userReducer.user,
+    videos: state.videosReducer.videos
+  }
+}
+export default connect(mapStateToProps, {})(Dashboard)

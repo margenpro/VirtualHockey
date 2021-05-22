@@ -2,10 +2,9 @@ import React, { useState, useEffect, useContext } from "react";
 import { Layout } from "./layout";
 import profileImage from '../../../assets/images/user.jpg'
 import "firebase/auth";
-import { useFirebaseApp } from "reactfire";
+import { firestore, useFirebaseApp } from "reactfire";
 import { connect } from 'react-redux'
 import { setterUserAction } from '../../../redux/actions/userActions'
-
 
 const HomeWork = ({ navigation, setvideoShow, user, videos, setUserRanking }) => {
     // const { _user, _setUser } = useContext(UserContext)
@@ -19,7 +18,6 @@ const HomeWork = ({ navigation, setvideoShow, user, videos, setUserRanking }) =>
     const [userName, setUserName] = useState("");
     const [userPoints, setUserPoints] = useState("");
     const [userPosition, setUserPosition] = useState("");
-
 
     const navigateToWorkouts = () => {
         navigation.navigate("Workouts")
@@ -55,11 +53,12 @@ const HomeWork = ({ navigation, setvideoShow, user, videos, setUserRanking }) =>
             try {
                 setUserName(user.username)
                 setUserPoints(user.points)
-                await calculationRanking(user.points) 
+                await calculationRanking(user.points)
             } catch (error) {
                 throw new Error(error.message)
             }
         }
+
         getCurrentUserData()
     }, []);
 
@@ -68,12 +67,13 @@ const HomeWork = ({ navigation, setvideoShow, user, videos, setUserRanking }) =>
             db.collection('users').where('points', '>', points).onSnapshot(snap => {
                 const size = snap.size + 1
                 setUserPosition(size)
-                setUserRanking({position: size})
+                setUserRanking({ position: size })
             })
         } catch (e) {
             console.log(e.message)
         }
     }
+
 
     return (
         // <WorkoutsStack />

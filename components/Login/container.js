@@ -46,21 +46,21 @@ const Login = ({ navigation, user, setUser, setVideos, videos }) => {
 
   const getCurrentUserData = async () => {
     try {
-      let usr = firebase.auth().currentUser;
-      let doc = await db.collection("users").doc(usr.uid).get();
-      let data = doc.data();
-      return data;
+      let usr = firebase.auth().currentUser
+      let doc = await db.collection("users").doc(usr.uid).get()
+      let data = doc.data()
+      data.id = usr.uid
+      return data
     } catch (error) {
       throw new Error(error.message);
     }
   };
 
   const screenHandlerLanding = async () => {
+
     try {
-      let usr = await getCurrentUserData();
-      usr.isMember
-        ? navigation.navigate("BottomTab")
-        : navigation.navigate("Landing");
+      let usr = await getCurrentUserData()
+      usr.role === 2 || usr.role === 3 ? navigation.navigate("BottomTab") : navigation.navigate("Landing");
     } catch (error) {
       console.log(error.message);
     }
@@ -85,11 +85,10 @@ const Login = ({ navigation, user, setUser, setVideos, videos }) => {
       let videosList = [];
       let videos = await db.collection("videos").get();
 
-      videos.forEach((video) => {
-        videosList.push(video.data().videoUrl);
+      videos.forEach(video => {
+        videosList.push(video.data())
       });
-
-      return videosList;
+      return videosList
     } catch (error) {
       alert(error);
     }
@@ -97,18 +96,12 @@ const Login = ({ navigation, user, setUser, setVideos, videos }) => {
 
   const submitHandler = async () => {
     try {
-      await firebase.auth().signInWithEmailAndPassword(email, password);
-      const data = await getCurrentUserData();
-      setUser({
-        email,
-        username: data.username,
-        role: data.isMember,
-        lastVideo: data.lastVideoWatched,
-        points: data.points,
-      });
-      let videosList = await getAllVideos();
-      setVideos(videosList);
-      screenHandlerLanding();
+      await firebase.auth().signInWithEmailAndPassword(email, password)
+      const data = await getCurrentUserData()
+      setUser({ id: data.id, email, username: data.username, role: data.role, lastVideo: data.lastVideoWatched, points: data.points })
+      let videosList = await getAllVideos()
+      setVideos(videosList)
+      screenHandlerLanding()
     } catch (error) {
       if (error.code === "auth/user-not-found") setWrongEmail(true);
       else if (error.code === "auth/wrong-password") setWrongPassword(true);
@@ -134,13 +127,13 @@ const Login = ({ navigation, user, setUser, setVideos, videos }) => {
       handleKeyDown={handleKeyDown}
     />
   );
-};
-const mapStateToProps = (state) => {
+}
+const mapStateToProps = state => {
   return {
     user: state.userReducer.user,
-    videos: state.videosReducer.videos,
-  };
-};
+    videos: state.videosReducer.videos
+  }
+}
 
 const actionCreators = {
   setUser: setterUserAction,
