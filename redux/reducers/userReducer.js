@@ -6,6 +6,7 @@ const initialState = {
         email: "",
         username: "",
         role: 0,
+        paymentDate: "",
         lastVideo: 0,
         points: 0,
         position: 0,
@@ -18,13 +19,14 @@ export const userReducer = (state = initialState, action) => {
         const email = action.payload.email ? action.payload.email : state.user.email
         const username = action.payload.username ? action.payload.username : state.user.username
         const role = action.payload.role ? action.payload.role : state.user.role
+        const paymentDate = action.payload.paymentDate ? action.payload.paymentDate : state.user.paymentDate
         const lastVideo = action.payload.lastVideo ? action.payload.lastVideo : state.user.lastVideo
         const points = action.payload.points ? action.payload.points : state.user.points
         const position = action.payload.position ? action.payload.position : state.user.position
         
         return {
             ...state,
-            user: { id, email, username, role, lastVideo, points, position }
+            user: { id, email, username, role, paymentDate, lastVideo, points, position }
         }
 
     }

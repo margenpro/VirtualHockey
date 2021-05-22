@@ -10,7 +10,7 @@ const Dashboard = ({ navigation, user, videos }) => {
     const lastVideo = user.lastVideo == 0 ? 1: user.lastVideo
     setNroVideo(lastVideo)
   }, [videoShow]);
-
+ 
   return (
     <>
       <Layout
