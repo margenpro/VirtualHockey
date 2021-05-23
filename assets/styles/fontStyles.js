@@ -57,4 +57,19 @@ export default StyleSheet.create({
     color: colorsPalette.colorOne,
     fontSize: 24,
   },
+  videoTitle: {
+    ...fontType,
+    flex: 2,
+    color: colorsPalette.colorThree,
+    fontSize: 24,
+    fontWeight: "bold",
+  },
+  videoInfo: {
+    ...fontType,
+    flex: 4,
+    color: colorsPalette.colorThree,
+    fontSize: 14,
+    textAlign: "justify",
+    lineHeight: 20,
+  },
 });

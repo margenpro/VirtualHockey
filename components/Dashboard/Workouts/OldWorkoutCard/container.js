@@ -1,53 +1,17 @@
 import React, { useState, useEffect } from "react";
-import { Layout } from './layout';
-import { connect } from 'react-redux'
-import { getStorage} from "../../../../firebase";
+import { Image, Text } from "react-native";
+import { Layout } from "./layout";
+import { connect } from "react-redux";
+import { getStorage } from "../../../../firebase";
 
+const OldWorkoutCard = ({ navigation, image, nro }) => {
+  const placeholder = 'https://app.virtualhockey.com/wp-content/uploads/2020/11/1.png';
 
-const OldWorkoutCard = ({ navigation, lastVideo }) => {
+  return <Layout image={placeholder} nro={nro} />;
+};
 
-    const [videoImages, setVideoImages] = useState([]);
+const mapStateToProps = (state) => ({
+  lastVideo: state.userReducer.user.lastVideo,
+});
 
-
-
-    const storage = getStorage();
-    const storageRef = storage.ref();
-
-
-    useEffect( () => {
-        
-        videosList()
-
-    }, []);
-
-
-    const videosList = async () => {     
-        let arrayVideos = []
-        for (let i = lastVideo; i > 0; i--) {
-            
-            await storageRef
-                .child("images/videoImages/"+i+".png")
-                .getDownloadURL()
-                .then(resolve => {
-                    arrayVideos[lastVideo -i] = resolve;                    
-                })
-                .catch(e => console.log(e.code, e.message));          
-        }
-        setVideoImages(arrayVideos);
-      
-    }
-
-    return (
-        
-        <Layout 
-            videoImages={videoImages}
-        />
-    );
-}
-
-
-const mapStateToProps = state => ({
-    lastVideo: state.userReducer.user.lastVideo,
-})
-
-export default connect(mapStateToProps, {})(OldWorkoutCard)
+export default connect(mapStateToProps, {})(OldWorkoutCard);

@@ -7,6 +7,7 @@ import {
   KeyboardAvoidingView,
   Keyboard,
   ScrollView,
+  TextInput,
 } from "react-native";
 import { Input } from "react-native-elements";
 import { Frame } from "../Frame/index";
@@ -14,8 +15,13 @@ import commonStyles from "../../assets/styles/commonStyles";
 import fontStyles from "../../assets/styles/fontStyles";
 import mainLogo from "../../assets/images/mainLogo.png";
 import { useFirestoreDocData } from "reactfire";
+import { colorsPalette } from "../../assets/styles/colorsPalette";
 
-export const Layout = ({ handlePayment, inputHandler }) => {
+export const Layout = ({
+  handlePayment,
+  inputHandler,
+  formCompleteMessage,
+}) => {
   return (
     <Frame>
       <ScrollView>
@@ -33,7 +39,7 @@ export const Layout = ({ handlePayment, inputHandler }) => {
               Keyboard.dismiss();
             }}
           >
-            <View style={commonStyles.flexOne, {marginBottom: 20}}>
+            <View style={(commonStyles.flexOne, { marginBottom: 20 })}>
               <Image
                 style={[commonStyles.mainLogo, commonStyles.flexOne]}
                 source={mainLogo}
@@ -42,32 +48,32 @@ export const Layout = ({ handlePayment, inputHandler }) => {
             </View>
             <Text style={fontStyles.inputHeader}>NAME</Text>
             <Input
-              onChange={(evt) => inputHandler("name", evt)}
-              //  errorMessage={wrongEmail ? "Invalid Name" : ""}
+              onChangeText={(evt) => inputHandler("name", evt)}
+              //  errorMessage={wrongName ? "Invalid Name" : ""}
               placeholder="John Doe"
               style={commonStyles.inputUser}
               autoCompleteType="name"
             />
             <Text style={fontStyles.inputHeader}>COUNTRY</Text>
             <Input
-              onChange={(evt) => inputHandler("country", evt)}
-              //  errorMessage={wrongEmail ? "Invalid Name" : ""}
+              onChangeText={(evt) => inputHandler("country", evt)}
+              //  errorMessage={wrongCountry ? "Invalid Country" : ""}
               placeholder="Canada"
               style={commonStyles.inputUser}
               autoCompleteType="name"
             />
             <Text style={fontStyles.inputHeader}>CITY</Text>
             <Input
-              onChange={(evt) => inputHandler("city", evt)}
-              //  errorMessage={wrongEmail ? "Invalid Name" : ""}
+              onChangeText={(evt) => inputHandler("city", evt)}
+              //  errorMessage={wrongCity ? "Invalid City" : ""}
               placeholder="Toronto"
               style={commonStyles.inputUser}
               autoCompleteType="name"
             />
             <Text style={fontStyles.inputHeader}>ADDRESS</Text>
             <Input
-              onChange={(evt) => inputHandler("address", evt)}
-              //  errorMessage={wrongEmail ? "Invalid Name" : ""}
+              onChangeText={(evt) => inputHandler("address", evt)}
+              //  errorMessage={wrongAddress ? "Invalid Adress" : ""}
               placeholder="Evergreen 714"
               style={commonStyles.inputUser}
               autoCompleteType="name"
@@ -79,6 +85,13 @@ export const Layout = ({ handlePayment, inputHandler }) => {
               >
                 <Text style={fontStyles.buttonText}>PAY WITH CREDIT CARD</Text>
               </TouchableOpacity>
+              {formCompleteMessage && (
+                <View style={[commonStyles.centeredAligned, { marginTop: 20 }]}>
+                  <Text style={{ color: colorsPalette.red }}>
+                    You need to complete all fields before paying!
+                  </Text>
+                </View>
+              )}
             </View>
           </TouchableOpacity>
         </KeyboardAvoidingView>

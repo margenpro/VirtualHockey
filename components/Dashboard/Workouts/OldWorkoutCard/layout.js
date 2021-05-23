@@ -1,32 +1,32 @@
-import React from 'react';
-import { Image, View, ScrollView, Text } from 'react-native';
+import React from "react";
+import { Image, Text, View } from "react-native";
+import { LinearGradient } from "expo-linear-gradient";
 import styles from "./styles";
-import oldCard from '../../../../assets/images/courseCard.png'
-
-
+import card from "../../../../assets/images/card.png";
+import { TouchableOpacity } from "react-native-gesture-handler";
+import commonStyles from "../../../../assets/styles/commonStyles";
+import fontStyles from "../../../../assets/styles/fontStyles";
+import lalala from '../../../../assets/images/card.png'
 export function Layout({
-    // size
-    //screenHandler 
-    videoImages
+  // size
+  //screenHandler
+  image,
+  nro,
+  placeholder,
 }) {
-    return (
-        <ScrollView horizontal={true} >
-                
-            {
-                videoImages.length > 0 ? videoImages.map((e, index) => 
-
-                    <View key={index}>
-                        <Image
-                            style={styles.imagenTitulo}
-                            source={{uri: e}}
-                        />
-                    </View> 
-
-                   
-                ) : <Text>Empieza con el primer Video</Text> 
-                
-            }
-
-        </ScrollView>
-    );
+  return (
+    <TouchableOpacity
+      style={[commonStyles.flexOne, styles.whiteTransparentBox]}
+    >
+      {/* <Text adjustsFontSizeToFit={true} style={fontStyles.videoTitle}>
+        Rookie Workout #{nro ? nro : "1"}
+      </Text> */}
+      <Image
+        style={styles.videoImage}
+        source={{ uri: image }}
+        resizeMode={"contain"}
+      />
+      <View style={styles.descriptionContainer}></View>
+    </TouchableOpacity>
+  );
 }

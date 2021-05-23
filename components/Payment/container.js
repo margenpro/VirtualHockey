@@ -9,7 +9,14 @@ import { setterUserAction } from "../../redux/actions/userActions";
 import { Alert } from "react-native";
 
 const Payment = ({ user, navigation, setUser }) => {
-  const [userData, setUserData] = useState({});
+  const [userData, setUserData] = useState({
+    name: "",
+    city: "",
+    country: "",
+    address: "",
+  });
+
+  const [formCompleteMessage, setFormCompleteMessage] = useState(false);
   const storage = getStorage();
   const firebase = useFirebaseApp();
   const storageRef = storage.ref();
@@ -19,9 +26,14 @@ const Payment = ({ user, navigation, setUser }) => {
   const inputHandler = (title, evt) => {
     setUserData({
       ...userData,
-      [title]: evt.nativeEvent.text,
+      [title]: evt,
     });
-    console.log(userData);
+    setFormCompleteMessage(false);
+  };
+
+  const validateForm = () => {
+    for (let key in userData) if (userData[key] === "") return false;
+    return true;
   };
 
   Stripe.setOptionsAsync({
@@ -31,6 +43,10 @@ const Payment = ({ user, navigation, setUser }) => {
   });
 
   const handlePayment = async () => {
+    if (!validateForm()) {
+      setFormCompleteMessage(true);
+      return null;
+    }
     const token = await Stripe.paymentRequestWithCardFormAsync();
     try {
       let response = await fetch(
@@ -74,6 +90,7 @@ const Payment = ({ user, navigation, setUser }) => {
       handlePayment={handlePayment}
       inputHandler={inputHandler}
       userData={userData}
+      formCompleteMessage={formCompleteMessage}
     />
   );
 };

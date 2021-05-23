@@ -13,7 +13,6 @@ export default StyleSheet.create({
 
   container: {
     flex: 1,
-    padding: 10,
     minHeight: availableHeight,
     maxHeight: availableHeight,
     // paddingTop: Platform.OS === 'android' ? StatusBar.currentHeight : 0
@@ -24,6 +23,7 @@ export default StyleSheet.create({
     // marginRight: 'auto',
   },
   superior: {
+    margin: 20,
     flex: 2,
     flexDirection: 'row',
     paddingLeft: 12,
@@ -32,6 +32,7 @@ export default StyleSheet.create({
   middle: {
     flex: 9,
     marginBottom: 0,
+    // marginHorizontal: 20,
     alignItems: 'center',
   },
   inferior: {
@@ -41,7 +42,8 @@ export default StyleSheet.create({
     ...font,
     fontSize: 15,
     fontWeight: '700',
-    padding: 10
+    padding: 10,
+    marginLeft: 10,
   },
   leftHeader: {
     justifyContent: 'center',
@@ -69,6 +71,10 @@ export default StyleSheet.create({
     marginBottom: 2,
   },
   workOutCard : {
+  },
+  horizontalScroll: {
+    margin: 0,
+    width,
   }
 
 });

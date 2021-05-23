@@ -10,4 +10,6 @@ export const colorsPalette = {
     colorFour: '#E9D41B',
     // black
     colorFive: '#000000',
+    // red
+    red: 'red',
 }
