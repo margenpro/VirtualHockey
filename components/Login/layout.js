@@ -30,6 +30,7 @@ export function Layout({
   showPasswordHandler,
   forTesting,
   handleKeyDown,
+  toPayments,
 }) {
   return (
     <Frame>
@@ -110,6 +111,13 @@ export function Layout({
               accessibilityRole="text"
             >
               <Text style={fontStyles.footerText}>For Testing</Text>
+            </TouchableOpacity>
+            <TouchableOpacity
+              onPress={toPayments}
+              style={commonStyles.textTouch}
+              accessibilityRole="text"
+            >
+              <Text style={fontStyles.footerText}>To Payments</Text>
             </TouchableOpacity>
           </View>
         </TouchableOpacity>

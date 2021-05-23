@@ -71,6 +71,9 @@ const Login = ({ navigation, user, setUser, setVideos, videos }) => {
     navigation.navigate("BottomTab");
   };
 
+  const toPayments = () => {
+    navigation.navigate("Payment");
+  };
   const emailInputHandler = (newValue) => {
     setEmail(newValue);
     setWrongEmail(false);
@@ -97,13 +100,20 @@ const Login = ({ navigation, user, setUser, setVideos, videos }) => {
 
   const submitHandler = async () => {
     try {
-      await firebase.auth().signInWithEmailAndPassword(email, password)
-      const data = await getCurrentUserData()
-      console.log(data);
-      setUser({ id: data.id, email, username: data.username, role: data.role, paymentDate: data.paymentDate, lastVideo: data.lastVideoWatched, points: data.points })
-      let videosList = await getAllVideos()
-      setVideos(videosList)
-      screenHandlerLanding()
+      await firebase.auth().signInWithEmailAndPassword(email, password);
+      const data = await getCurrentUserData();
+      setUser({
+        id: data.id,
+        email,
+        username: data.username,
+        role: data.role,
+        paymentDate: data.paymentDate,
+        lastVideo: data.lastVideoWatched,
+        points: data.points,
+      });
+      let videosList = await getAllVideos();
+      setVideos(videosList);
+      screenHandlerLanding();
     } catch (error) {
       if (error.code === "auth/user-not-found") setWrongEmail(true);
       else if (error.code === "auth/wrong-password") setWrongPassword(true);
@@ -127,6 +137,7 @@ const Login = ({ navigation, user, setUser, setVideos, videos }) => {
       showPasswordHandler={showPasswordHandler}
       forTesting={forTesting}
       handleKeyDown={handleKeyDown}
+      toPayments={toPayments}
     />
   );
 };

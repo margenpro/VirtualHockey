@@ -18,8 +18,6 @@ const Video = ({ setvideoShow, videos, user, nroVideo, setUser }) => {
 
   const onVideoFinish = async playbackStatus => {
     if (playbackStatus.didJustFinish) {
-      console.log("Terminaste de ver video N°: " + nroVideo)
-
       if (user.lastVideo < videos.length) {
         //actualizar lastVideoWatched del usuario logueado en firebase
         user.lastVideo = nroVideo++
@@ -29,12 +27,8 @@ const Video = ({ setvideoShow, videos, user, nroVideo, setUser }) => {
             .update({
               "lastVideoWatched": user.lastVideo
             })
-          console.log("Se grabo exitosamente en BD")
           setUser({ lastVideo: user.lastVideo })
-          console.log("Debloqueaste Video N°: " + user.lastVideo)
         } catch (error) {
-          console.log("No se grabo en BD: " + error)
-          console.log("No se pudo actualizar el ultimo video visto")
         }
       }
 
@@ -45,7 +39,6 @@ const Video = ({ setvideoShow, videos, user, nroVideo, setUser }) => {
     video.current.presentFullscreenPlayer();
   };
   const playVideo = () => {
-    console.log("Vas a ver video N°: " + nroVideo)
     video.current.playAsync();
   };
   const fullScreenHandler = async ({ fullscreenUpdate }) => {

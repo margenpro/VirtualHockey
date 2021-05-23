@@ -18,7 +18,6 @@ const WorkoutCard = ({ navigation, lastVideo }) => {
         
         const getUrlVideoImage = async () =>{
 
-            console.log(lastVideo+4)
             const nextVideo = parseInt(lastVideo+1)
             await storageRef
                 .child("images/videoImages/"+nextVideo+".png")

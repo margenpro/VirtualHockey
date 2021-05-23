@@ -88,4 +88,12 @@ export default StyleSheet.create({
     flex: 1,
   },
   mainCredentialContainer: { flex: 2, marginTop: 40 },
+  topLogoContainer: {
+    flex: 1,
+    marginVertical: 20,
+  },
+  topLogo: {
+    paddingHorizontal: 100,
+    resizeMode: "contain",
+  },
 });

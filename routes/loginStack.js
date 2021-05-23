@@ -22,7 +22,7 @@ const screens = {
   },
   Payment: {
     screen: Payment,
-  }
+  },
 };
 
 const LoginStack = createStackNavigator(screens, {
