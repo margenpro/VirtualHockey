@@ -63,12 +63,14 @@ export function Layout({
             </Text>
           </Text>
         </View>
-        <TouchableOpacity
-          style={commonStyles.actionButton}
-          onPress={() => setvideoShow(true)}
-        >
-          <Text style={fontStyles.buttonText}>RESUME WORKOUT</Text>
-        </TouchableOpacity>
+        <View style={{ marginVertical: 20 }}>
+          <TouchableOpacity
+            style={commonStyles.actionButton}
+            onPress={() => setvideoShow(true)}
+          >
+            <Text style={fontStyles.buttonText}>RESUME WORKOUT</Text>
+          </TouchableOpacity>
+        </View>
         <View style={{ marginBottom: 10 }}>
           <Text
             style={[
