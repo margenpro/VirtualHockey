@@ -7,6 +7,7 @@ import OldWorkoutCard from "./OldWorkoutCard/container";
 import { Frame } from "../../Frame";
 import { ScrollView } from "react-native-gesture-handler";
 import trophy from "../../../assets/images/trophy.png";
+import fontStyles from "../../../assets/styles/fontStyles";
 
 export function Layout({
   // size
@@ -21,7 +22,7 @@ export function Layout({
         <View style={styles.superior}>
           <View style={styles.leftHeader}>
             <Text style={styles.welcome}>Hello,</Text>
-            <Text style={styles.username}>{username}</Text>
+            <Text style={fontStyles.username}>{username}</Text>
           </View>
           <View style={styles.rightHeader}>
             <Image source={trophy} style={styles.trophy}></Image>

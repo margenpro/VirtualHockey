@@ -13,13 +13,18 @@ export default StyleSheet.create({
     backgroundColor: "rgba(255,255,255,0.16)",
     borderRadius: 10,
     // overflow: 'hidden',
+    flexDirection: "column",
+    justifyContent: "space-between",
+    // alignItems: "space-evenly"
   },
   videoImage: {
-    alignItems: "center",
-    alignSelf: "center",
+    // alignItems: "center",
+    // alignSelf: "center",
     // resizeMode: "cover",
-    width: "100%",
-    height: 200,
+    flex: 1,
+    maxWidth: "100%",
+    // minHeight: 200,
+    overflow: "hidden",
   },
   cardContainer: { flex: 1 },
   textoInfo: {
@@ -30,10 +35,18 @@ export default StyleSheet.create({
     marginBottom: 25,
     paddingHorizontal: 20,
   },
-  
-  descriptionContainer: {
+  titleContainer: {
     flex: 1,
     paddingHorizontal: 15,
+    flexDirection: "row",
+    alignItems: "center",
+    // marginVertical: 10,
+    // justifyContent: "center",
   },
-
+  descriptionContainer: {
+    flex: 2,
+    paddingHorizontal: 15,
+    flexDirection: "row",
+    alignItems: "center",
+  },
 });

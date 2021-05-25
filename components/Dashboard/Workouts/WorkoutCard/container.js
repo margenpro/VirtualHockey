@@ -7,7 +7,7 @@ import { getStorage } from "../../../../firebase";
 const WorkoutCard = ({ navigation, lastVideo }) => {
   const placeholder = "../../../../assets/images/card.png";
   const videoDescription =
-    "Hands and puck skills are a big part of this workout. Work on your dexterity while pushing your fitness limits";
+    "Hands and puck skills are a big part of this workout. Work on your dexterity while pushing your fitness limits.";
 
   const storage = getStorage();
   const storageRef = storage.ref();

@@ -4,11 +4,6 @@ const width = Dimensions.get('window').width
 const height = Dimensions.get('window').height
 const availableHeight = height - 105
 
-const font = {
-  fontFamily: "comfortaa",
-  color: '#ffffff',
-}
-
 export default StyleSheet.create({
 
   container: {
@@ -17,11 +12,7 @@ export default StyleSheet.create({
     maxHeight: availableHeight,
     // paddingTop: Platform.OS === 'android' ? StatusBar.currentHeight : 0
   },
-  username: {
-    ...font,
-    fontSize: 30,
-    // marginRight: 'auto',
-  },
+
   superior: {
     margin: 20,
     flex: 2,
