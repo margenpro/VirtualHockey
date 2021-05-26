@@ -1,4 +1,21 @@
 import React from "react";
+import Video from "../Video/container"
+import HomeCards from "./HomeCards/container"
+
+export function Layout({ videoShow, setVideoShow, navigation, nroVideo, setNroVideo }) {
+  return (
+    <React.Fragment>
+      {videoShow ? (
+        <Video setvideoShow={setVideoShow} nroVideo={nroVideo}/>
+      ) : (
+        <HomeCards setVideoShow={setVideoShow} navigation={navigation} setNroVideo={setNroVideo}/>
+      )}
+    </React.Fragment>
+  );
+}
+
+/*
+import React from "react";
 import { Image, View, Text } from "react-native";
 // import { LinearGradient } from "expo-linear-gradient";
 import styles from "./styles";
@@ -14,6 +31,7 @@ export function Layout({
   username,
   points,
   videoImages,
+  setVideoShow,
 }) {
   return (
     <Frame>
@@ -29,15 +47,15 @@ export function Layout({
           </View>
         </View>
         <View style={styles.middle}>
-          <WorkoutCard />
+          <WorkoutCard setVideoShow={setVideoShow}/>
         </View>
         <View style={styles.inferior}>
           <Text style={styles.previousWorkouts}>Previous Workouts</Text>
 
           <ScrollView horizontal={true} style={styles.horizontalScroll}>
             {videoImages.length > 0 ? (
-              videoImages.map((e, index) => (
-                <OldWorkoutCard image={e.image} nro={e.nro} />
+              videoImages.map(e => (
+                <OldWorkoutCard image={e.image} nroVideo={e.nro} setVideoShow={setVideoShow}/>
               ))
             ) : (
               <Text>Empieza con el primer Video</Text>
@@ -48,3 +66,4 @@ export function Layout({
     </Frame>
   );
 }
+*/

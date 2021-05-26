@@ -20,14 +20,14 @@ const Video = ({ setvideoShow, videos, user, nroVideo, setUser }) => {
     if (playbackStatus.didJustFinish) {
       if (user.lastVideo < videos.length) {
         //actualizar lastVideoWatched del usuario logueado en firebase
-        user.lastVideo = nroVideo++
+        nroVideo++
         try {
           await db.collection("users")
             .doc(user.id)
             .update({
-              "lastVideoWatched": user.lastVideo
+              "lastVideoWatched": nroVideo
             })
-          setUser({ lastVideo: user.lastVideo })
+          setUser({ lastVideo: nroVideo })
         } catch (error) {
         }
       }

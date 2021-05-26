@@ -4,7 +4,7 @@ import { Layout } from "./layout";
 import { connect } from "react-redux";
 import { getStorage } from "../../../../firebase";
 
-const WorkoutCard = ({ navigation, lastVideo }) => {
+const WorkoutCard = ({ navigation, lastVideo, user, setVideoShow, setNroVideo }) => {
   const placeholder = "../../../../assets/images/card.png";
   const videoDescription =
     "Hands and puck skills are a big part of this workout. Work on your dexterity while pushing your fitness limits";
@@ -25,15 +25,26 @@ const WorkoutCard = ({ navigation, lastVideo }) => {
         })
         .catch((e) => console.log(e.code, e.message));
     };
-
+    setNroVideo(user.lastVideo)
     getUrlVideoImage();
   }, []);
 
-  return <Layout videoImage={videoImage} videoDescription={videoDescription}/>;
+  return (
+    <>
+
+    <Layout
+      videoImage={videoImage}
+      videoDescription={videoDescription}
+      setVideoShow={setVideoShow}
+    />
+     </>
+    )
+   
 };
 
 const mapStateToProps = (state) => ({
   lastVideo: state.userReducer.user.lastVideo,
+  user: state.userReducer.user
 });
 
 export default connect(mapStateToProps, {})(WorkoutCard);

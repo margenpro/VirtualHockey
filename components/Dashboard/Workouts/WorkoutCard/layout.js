@@ -1,6 +1,5 @@
 import React from "react";
 import { Image, Text, View } from "react-native";
-import { LinearGradient } from "expo-linear-gradient";
 import styles from "./styles";
 import card from "../../../../assets/images/card.png";
 import { TouchableOpacity } from "react-native-gesture-handler";
@@ -12,11 +11,12 @@ export function Layout({
   //screenHandler
   videoImage,
   videoDescription,
-  nextVideo,
+  setVideoShow,
 }) {
   return (
     <TouchableOpacity
       style={[commonStyles.flexOne, styles.whiteTransparentBox]}
+      onPress={()=> setVideoShow(true)}
     >
       <Image
         style={styles.videoImage}
@@ -25,7 +25,7 @@ export function Layout({
       />
       <View style={styles.descriptionContainer}>
         <Text adjustsFontSizeToFit={true} style={fontStyles.videoTitle}>
-          Rookie Workout #{nextVideo ? nextVideo : "1"}
+          Rookie Workout #1{/*nroVideo*/}
         </Text>
         <Text adjustsFontSizeToFit={true} style={fontStyles.videoInfo}>
           {videoDescription}

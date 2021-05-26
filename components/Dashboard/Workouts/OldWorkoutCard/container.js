@@ -4,10 +4,23 @@ import { Layout } from "./layout";
 import { connect } from "react-redux";
 import { getStorage } from "../../../../firebase";
 
-const OldWorkoutCard = ({ navigation, image, nro }) => {
+const OldWorkoutCard = ({ navigation, image, nro, setVideoShow, setNroVideo }) => {
   const placeholder = 'https://app.virtualhockey.com/wp-content/uploads/2020/11/1.png';
 
-  return <Layout image={placeholder} nro={nro} />;
+  useEffect(()=> {
+    setNroVideo(nro)
+  },[])
+
+  return (
+    <>
+    {console.log("Numero en OldCard: "+nro)}
+    <Layout
+      image={placeholder}
+      setVideoShow={setVideoShow}
+      setNroVideo={setNroVideo}
+    />
+    </>
+  );
 };
 
 const mapStateToProps = (state) => ({

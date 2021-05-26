@@ -11,12 +11,13 @@ export function Layout({
   // size
   //screenHandler
   image,
-  nro,
   placeholder,
+  setVideoShow
 }) {
   return (
     <TouchableOpacity
       style={[commonStyles.flexOne, styles.whiteTransparentBox]}
+      onPress={()=>setVideoShow(true)}
     >
       {/* <Text adjustsFontSizeToFit={true} style={fontStyles.videoTitle}>
         Rookie Workout #{nro ? nro : "1"}
