@@ -38,35 +38,3 @@ const mapStateToProps = (state) => ({
 });
 
 export default connect(mapStateToProps, {})(HomeCards);
-/*
-import React, { useState, useEffect } from "react";
-import { Layout } from "./layout";
-import { connect } from 'react-redux'
-
-const HomeCards = ({ navigation, user, videos, nroVideo }) => {
-  const [videoShow, setvideoShow] = useState(false);
-  const [nroVideo, setNroVideo] = useState("")
-
-  useEffect(() => { 
-    setNroVideo(nroVideo)
-  }, [videoShow]);
- 
-  return (
-    <>
-      <Layout
-        videoShow={videoShow}
-        setvideoShow={setvideoShow}
-        navigation={navigation}
-        nroVideo={nroVideo}
-      />
-    </>
-  );
-};
-const mapStateToProps = state => {
-  return {
-    user: state.userReducer.user,
-    videos: state.videosReducer.videos
-  }
-}
-export default connect(mapStateToProps, {})(HomeCards)
-*/

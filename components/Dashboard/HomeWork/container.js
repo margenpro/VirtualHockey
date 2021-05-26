@@ -7,11 +7,6 @@ import { connect } from 'react-redux'
 import { setterUserAction } from '../../../redux/actions/userActions'
 
 const HomeWork = ({ navigation, setvideoShow, user, videos, setUserRanking }) => {
-    // const { _user, _setUser } = useContext(UserContext)
-
-    /*  const storage = getStorage();
-     const storageRef = storage.ref(); */
-
     const firebase = useFirebaseApp();
     const db = firebase.firestore()
 
@@ -25,27 +20,6 @@ const HomeWork = ({ navigation, setvideoShow, user, videos, setUserRanking }) =>
 
     const getProfileImage = () => {
         return profileImage
-    }
-    const getNextUrl = async () => {
-        try {
-            //Busqueda por campo id
-            let _user = firebase.auth().currentUser
-            let doc = await db.collection("users").doc(_user.uid).get()
-            let lastVidId = (+doc.data().lastVideoWatched + +1).toString();
-            let video = await getVideo(lastVidId) //Siguiente del ultimo visto
-            return video.videoUrl
-        } catch (error) {
-            console.log(error)
-        }
-    }
-
-    const getVideo = async (id) => {
-        try {
-            let vid = await db.collection("videos").doc(id).get()
-            let data = vid.data()
-            return data
-        } catch (error) {
-        }
     }
 
     useEffect(() => {
@@ -76,7 +50,6 @@ const HomeWork = ({ navigation, setvideoShow, user, videos, setUserRanking }) =>
 
 
     return (
-        // <WorkoutsStack />
         <>
             <Layout
                 getProfileImage={getProfileImage}

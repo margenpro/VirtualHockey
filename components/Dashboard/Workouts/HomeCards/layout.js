@@ -8,8 +8,6 @@ import { ScrollView } from "react-native-gesture-handler";
 import trophy from "../../../../assets/images/trophy.png"
 
 export function Layout({
-  // size
-  //screenHandler
   username,
   points,
   videoImages,
@@ -49,21 +47,3 @@ export function Layout({
     </Frame>
   );
 }
-
-/*
-import React from "react";
-import Video from "../../Video/container";
-import Workouts from "../container";
-
-export function Layout({ videoShow, setvideoShow, navigation, nroVideo }) {
-  return (
-    <React.Fragment>
-      {videoShow ? (
-        <Video setvideoShow={setvideoShow} nroVideo={nroVideo}/>
-      ) : (
-        <Workouts setvideoShow={setvideoShow} navigation={navigation}/>
-      )}
-    </React.Fragment>
-  );
-}
-*/
