@@ -18,15 +18,19 @@ export function Layout({
       style={[commonStyles.flexOne, styles.whiteTransparentBox]}
       onPress={()=> setVideoShow(true)}
     >
-      <Image
-        style={styles.videoImage}
-        source={{ uri: videoImage }}
-        resizeMode={"contain"}
-      />
-      <View style={styles.descriptionContainer}>
+      <View style={{ flex: 5, marginBottom: 5 }}>
+        <Image
+          style={styles.videoImage}
+          source={{ uri: videoImage }}
+          resizeMode={"center"}
+        />
+      </View>
+      <View style={styles.titleContainer}>
         <Text adjustsFontSizeToFit={true} style={fontStyles.videoTitle}>
           Rookie Workout #1{/*nroVideo*/}
         </Text>
+      </View>
+      <View style={styles.descriptionContainer}>
         <Text adjustsFontSizeToFit={true} style={fontStyles.videoInfo}>
           {videoDescription}
         </Text>

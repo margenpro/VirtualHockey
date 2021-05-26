@@ -59,17 +59,28 @@ export default StyleSheet.create({
   },
   videoTitle: {
     ...fontType,
-    flex: 2,
     color: colorsPalette.colorThree,
     fontSize: 24,
     fontWeight: "bold",
+    // marginVertical: 2,
   },
   videoInfo: {
     ...fontType,
-    flex: 4,
     color: colorsPalette.colorThree,
     fontSize: 14,
     textAlign: "justify",
-    lineHeight: 20,
+    // lineHeight: 20,
+  },
+  oldTitle: {
+    ...fontType,
+    fontSize: 12,
+    color: colorsPalette.colorThree,
+    textAlign: "center"
+  },
+  username: {
+    ...fontType,
+    fontSize: 30,
+    color: colorsPalette.colorThree,
+    // marginRight: 'auto',
   },
 });
