@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import { Image, Text } from "react-native";
 import { Layout } from "./layout";
 import { connect } from "react-redux";
 import { getStorage } from "../../../../firebase";
@@ -13,11 +12,11 @@ const OldWorkoutCard = ({ navigation, image, nro, setVideoShow, setNroVideo }) =
 
   return (
     <>
-    {console.log("Numero en OldCard: "+nro)}
     <Layout
-      image={placeholder}
+      image={image}
       setVideoShow={setVideoShow}
       setNroVideo={setNroVideo}
+      nro={nro}
     />
     </>
   );

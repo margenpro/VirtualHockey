@@ -14,6 +14,7 @@ export function Layout({
   setVideoShow,
   setNroVideo,
 }) {
+  const nro = 1
   return (
     <Frame>
       <View style={styles.container}>
@@ -36,7 +37,7 @@ export function Layout({
           <ScrollView horizontal={true} style={styles.horizontalScroll}>
             {videoImages.length > 0 ? (
               videoImages.map((e) => (
-                <OldWorkoutCard image={e} nro={1} setVideoShow={setVideoShow} setNroVideo={setNroVideo} />
+                <OldWorkoutCard image={e.toString()} nro={nro} setVideoShow={setVideoShow} setNroVideo={setNroVideo} />
               ))
             ) : (
               <Text>Empieza con el primer Video</Text>

@@ -1,8 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { Layout } from "./layout";
 import { connect } from "react-redux";
+import { getStorage} from "../../../../firebase";
 
 function HomeCards({ navigation, user, setVideoShow, setNroVideo }) {
+  const storage = getStorage();
+  const storageRef = storage.ref();
+  
   const [videoImages, setVideoImages] = useState([{},{},{}]);
 
   useEffect(() => {
@@ -24,6 +28,7 @@ function HomeCards({ navigation, user, setVideoShow, setNroVideo }) {
   };
 
   return (
+    <>
     <Layout
       username={user.username ? user.username : "Elina"}
       points={user.points ? user.points : "2450"}
@@ -31,6 +36,7 @@ function HomeCards({ navigation, user, setVideoShow, setNroVideo }) {
       setVideoShow={setVideoShow}
       setNroVideo={setNroVideo}
     />
+    </>
   );
 }
 const mapStateToProps = (state) => ({
