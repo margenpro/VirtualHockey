@@ -11,6 +11,8 @@ export function Register({ navigation }) {
 
   const db = firebase.firestore();
 
+  const [loading, setLoading] = useState(false)
+
   const [email, setEmail] = useState("");
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -67,6 +69,7 @@ export function Register({ navigation }) {
   };
 
   const submitHandler = async () => {
+    setLoading(true)
     try {
       const temp = await checkIfUsernameExists();
 
@@ -85,6 +88,7 @@ export function Register({ navigation }) {
       else if (error.code === "auth/weak-password")
         setInvalidPassword({ invalid: true, msg: error.message });
     }
+    setLoading(false)
   };
 
   const checkIfUsernameExists = async () => {
@@ -153,6 +157,7 @@ export function Register({ navigation }) {
       usernameExists={usernameExists}
       emailExists={emailExists}
       handleKeyDown={handleKeyDown}
+      loading={loading}
     />
   );
 }

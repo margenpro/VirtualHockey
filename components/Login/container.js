@@ -22,6 +22,7 @@ const Login = ({ navigation, user, setUser, setVideos, videos }) => {
   const [wrongPassword, setWrongPassword] = useState(false);
   const [logoUrl, setLogoUrl] = useState();
   const [showPassword, setShowPassword] = useState(false);
+  const [loading, setLoading] = useState(false)
 
   // useEffect(({usr}) => {
   //   storageRef
@@ -99,6 +100,7 @@ const Login = ({ navigation, user, setUser, setVideos, videos }) => {
   };
 
   const submitHandler = async () => {
+    setLoading(true)
     try {
       await firebase.auth().signInWithEmailAndPassword(email, password);
       const data = await getCurrentUserData();
@@ -118,6 +120,7 @@ const Login = ({ navigation, user, setUser, setVideos, videos }) => {
       if (error.code === "auth/user-not-found") setWrongEmail(true);
       else if (error.code === "auth/wrong-password") setWrongPassword(true);
     }
+    setLoading(false)
   };
 
   const showPasswordHandler = (newValue) => {
@@ -138,6 +141,7 @@ const Login = ({ navigation, user, setUser, setVideos, videos }) => {
       forTesting={forTesting}
       handleKeyDown={handleKeyDown}
       toPayments={toPayments}
+      loading={loading}
     />
   );
 };

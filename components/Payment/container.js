@@ -17,6 +17,8 @@ const Payment = ({ user, navigation, setUser }) => {
   });
 
   const [formCompleteMessage, setFormCompleteMessage] = useState(false);
+  const [loading, setLoading] = useState(false)
+
   const storage = getStorage();
   const firebase = useFirebaseApp();
   const storageRef = storage.ref();
@@ -42,23 +44,36 @@ const Payment = ({ user, navigation, setUser }) => {
     androidPayMode: "test",
   });
 
+  // const loadingHandler = () => {
+  //   setLoading(!loading);
+  // };
+
   const handlePayment = async () => {
     if (!validateForm()) {
       setFormCompleteMessage(true);
       return null;
     }
+
     const token = await Stripe.paymentRequestWithCardFormAsync();
+
+    setLoading(true)
+    
+    token.card.name = userData.name
+    token.card.country = userData.country
+    token.card.addressCity = userData.city 
+    token.card.addressLine1 = userData.address
+
     try {
       let response = await fetch(
-        "https://us-central1-virtualhockey.cloudfunctions.net/app/api/pay",
-        // "http://192.168.0.26:3000/api/pay",
+        //"https://us-central1-virtualhockey.cloudfunctions.net/app/api/pay",
+         "http://192.168.0.26:3000/api/pay",
         {
           headers: {
             Accept: "application/json",
             "Content-Type": "application/json",
           },
           method: "POST",
-          body: JSON.stringify({ token: token.tokenId }),
+          body: JSON.stringify({ token: token }),
         }
       );
 
@@ -76,6 +91,7 @@ const Payment = ({ user, navigation, setUser }) => {
         `An error has occurred! Please try again or contact administrator :(`
       );
     }
+    setLoading(false)
   };
 
   const makeMember = async (date) => {
@@ -87,6 +103,7 @@ const Payment = ({ user, navigation, setUser }) => {
 
   return (
     <Layout
+      loading={loading}
       handlePayment={handlePayment}
       inputHandler={inputHandler}
       userData={userData}

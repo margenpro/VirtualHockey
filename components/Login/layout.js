@@ -10,6 +10,7 @@ import {
   Keyboard,
   Alert,
   ScrollView,
+  ActivityIndicator
 } from "react-native";
 import Icon from "react-native-vector-icons/FontAwesome";
 import { Input } from "react-native-elements";
@@ -31,6 +32,7 @@ export function Layout({
   forTesting,
   handleKeyDown,
   toPayments,
+  loading
 }) {
   return (
     <Frame>
@@ -94,7 +96,9 @@ export function Layout({
               onPress={submitHandler}
               style={commonStyles.actionButton}
             >
-              <Text style={fontStyles.buttonText}>LOG IN</Text>
+              <Text style={fontStyles.buttonText}>
+              {loading ? <ActivityIndicator size="large" color="#fff"/> : "LOG IN"} 
+              </Text>
             </TouchableOpacity>
             <TouchableOpacity
               onPress={screenHandlerRegister}

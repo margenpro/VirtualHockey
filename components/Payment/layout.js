@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   View,
   Text,
@@ -8,6 +8,7 @@ import {
   Keyboard,
   ScrollView,
   TextInput,
+  ActivityIndicator
 } from "react-native";
 import { Input } from "react-native-elements";
 import { Frame } from "../Frame/index";
@@ -21,7 +22,9 @@ export const Layout = ({
   handlePayment,
   inputHandler,
   formCompleteMessage,
+  loading
 }) => {
+
   return (
     <Frame>
       <ScrollView>
@@ -32,6 +35,7 @@ export const Layout = ({
           // keyboardVerticalOffset={0}
           enabled
         >
+          
           <TouchableOpacity
             activeOpacity={1}
             style={commonStyles.flexOne}
@@ -83,7 +87,10 @@ export const Layout = ({
                 onPress={handlePayment}
                 style={commonStyles.actionButton}
               >
-                <Text style={fontStyles.buttonText}>PAY WITH CREDIT CARD</Text>
+                <Text style={fontStyles.buttonText}>
+                {loading ? <ActivityIndicator size="large" color="#fff"/> : "PAY NOW"}   
+                
+                </Text>
               </TouchableOpacity>
               {formCompleteMessage && (
                 <View style={[commonStyles.centeredAligned, { marginTop: 20 }]}>
