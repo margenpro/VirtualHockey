@@ -7,7 +7,7 @@ function HomeCards({ navigation, user, setVideoShow, setNroVideo }) {
   const storage = getStorage();
   const storageRef = storage.ref();
   
-  const [videoImages, setVideoImages] = useState([{},{},{}]);
+  const [videoImages, setVideoImages] = useState([]);
 
   useEffect(() => {
     videosList();
