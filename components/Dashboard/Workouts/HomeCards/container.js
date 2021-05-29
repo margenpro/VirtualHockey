@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { Layout } from "./layout";
 import { connect } from "react-redux";
-import { getStorage} from "../../../../firebase";
+import { getStorage } from "../../../../firebase";
 
 function HomeCards({ navigation, user, setVideoShow, setNroVideo }) {
   const storage = getStorage();
   const storageRef = storage.ref();
-  
-  const [videoImages, setVideoImages] = useState([{},{},{}]);
+
+  const [videoImages, setVideoImages] = useState([{}, {}, {}]);
 
   useEffect(() => {
     videosList();
@@ -29,13 +29,13 @@ function HomeCards({ navigation, user, setVideoShow, setNroVideo }) {
 
   return (
     <>
-    <Layout
-      username={user.username ? user.username : "Elina"}
-      points={user.points ? user.points : "2450"}
-      videoImages={videoImages}
-      setVideoShow={setVideoShow}
-      setNroVideo={setNroVideo}
-    />
+      <Layout
+        username={user.username ? user.username : "Elina"}
+        points={user.points ? user.points : "2450"}
+        videoImages={videoImages}
+        setVideoShow={setVideoShow}
+        setNroVideo={setNroVideo}
+      />
     </>
   );
 }

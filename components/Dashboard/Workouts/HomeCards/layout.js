@@ -1,11 +1,11 @@
 import React from "react";
 import { Image, View, Text } from "react-native";
 import styles from "./styles";
-import WorkoutCard from "../WorkoutCard/container"
-import OldWorkoutCard from "../OldWorkoutCard/container"
-import { Frame } from "../../../Frame"
+import WorkoutCard from "../WorkoutCard/container";
+import OldWorkoutCard from "../OldWorkoutCard/container";
+import { Frame } from "../../../Frame";
 import { ScrollView } from "react-native-gesture-handler";
-import trophy from "../../../../assets/images/trophy.png"
+import trophy from "../../../../assets/images/trophy.png";
 
 export function Layout({
   username,
@@ -14,7 +14,7 @@ export function Layout({
   setVideoShow,
   setNroVideo,
 }) {
-  const nro = 1
+  const nro = 1;
   return (
     <Frame>
       <View style={styles.container}>
@@ -35,12 +35,17 @@ export function Layout({
           <Text style={styles.previousWorkouts}>Previous Workouts</Text>
 
           <ScrollView horizontal={true} style={styles.horizontalScroll}>
-            {videoImages.length > 0 ? (
+            {videoImages ? (
               videoImages.map((e) => (
-                <OldWorkoutCard image={e.toString()} nro={nro} setVideoShow={setVideoShow} setNroVideo={setNroVideo} />
+                <OldWorkoutCard
+                  image={e.toString()}
+                  nro={nro}
+                  setVideoShow={setVideoShow}
+                  setNroVideo={setNroVideo}
+                />
               ))
             ) : (
-              <Text>Empieza con el primer Video</Text>
+              <Text style={styles.noVideos}>Start with the first Video!</Text>
             )}
           </ScrollView>
         </View>

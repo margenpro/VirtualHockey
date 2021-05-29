@@ -14,7 +14,7 @@ import mainLogo from "../../assets/images/mainLogo.png";
 import fontStyles from "../../assets/styles/fontStyles";
 import commonStyles from "../../assets/styles/commonStyles";
 import UserAvatar from "../Dashboard/HomeWork/UserAvatar/container";
-import styles from "../Dashboard/Video/styles";
+import styles from "./styles";
 import { ScrollView } from "react-native-gesture-handler";
 
 // import { LinearGradient } from "expo-linear-gradient";
@@ -64,26 +64,11 @@ export function Layout({
                 <Text style={fontStyles.title}>
                   {username && username}'s Profile
                 </Text>
+              <View style={{marginTop: 20}}><Text style={fontStyles.subTitle}>{email}</Text></View>
               </View>
               <View style={commonStyles.pointsContainer}>
                 <Text style={fontStyles.points}>{points} points</Text>
               </View>
-              <Text style={fontStyles.inputHeader}>USERNAME</Text>
-              <Input
-                disabled
-                onChangeText={userInputHandler}
-                style={commonStyles.inputUser}
-                errorMessage={usernameExists.exists ? usernameExists.msg : ""}
-                placeholder={username}
-              />
-              <Text style={fontStyles.inputHeader}>EMAIL</Text>
-              <Input
-                disabled
-                style={commonStyles.inputPassword}
-                errorMessage={emailExists.exists ? emailExists.msg : ""}
-                onChangeText={emailInputHandler}
-                placeholder={email}
-              />
               <Text style={fontStyles.inputHeader}>OLD PASSWORD</Text>
               <Input
                 onChangeText={passInputHandler}
