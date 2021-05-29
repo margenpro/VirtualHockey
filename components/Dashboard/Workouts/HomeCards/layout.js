@@ -35,14 +35,9 @@ export function Layout({
           <Text style={styles.previousWorkouts}>Previous Workouts</Text>
 
           <ScrollView horizontal={true} style={styles.horizontalScroll}>
-            {videoImages ? (
-              videoImages.map((e) => (
-                <OldWorkoutCard
-                  image={e.toString()}
-                  nro={nro}
-                  setVideoShow={setVideoShow}
-                  setNroVideo={setNroVideo}
-                />
+            {videoImages.length > 0 ? (
+              videoImages.map((e, index) => (
+                <OldWorkoutCard image={e.toString()} nro={index} setVideoShow={setVideoShow} setNroVideo={setNroVideo} />
               ))
             ) : (
               <Text style={styles.noVideos}>Start with the first Video!</Text>

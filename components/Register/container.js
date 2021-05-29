@@ -130,13 +130,12 @@ export function Register({ navigation }) {
         username,
         role: 1,
         paymentDate: null,
-        lastVideo: 0,
+        lastVideoWatched: 0,
         points: 0,
       })
 
       return {code: null}
-
-      return { code: null };
+      
     } catch (error) {
       console.log(error.code);
 
