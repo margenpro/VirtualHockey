@@ -75,6 +75,9 @@ export default StyleSheet.create({
   horizontalScroll: {
     margin: 0,
     width,
+  },
+  noVideos: {
+    ...font,
   }
 
 });

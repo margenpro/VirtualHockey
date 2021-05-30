@@ -1,10 +1,10 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Layout } from "./layout";
-import profileImage from "../../../../assets/images/user.jpg";
 import "firebase/auth";
 import { useFirebaseApp } from "reactfire";
 import { connect } from "react-redux";
 import { setterUserAction } from "../../../../redux/actions/userActions";
+import { getStorage } from "../../../../firebase";
 
 const UserAvatar = ({
   navigation,
@@ -12,17 +12,36 @@ const UserAvatar = ({
   user,
   videos,
   setUserRanking,
+  name="sample_image",
 }) => {
+  const DEFAULT_URL = "https://thumbs.dreamstime.com/z/default-avatar-profile-vector-user-profile-default-avatar-profile-vector-user-profile-profile-179376714.jpg"
   const firebase = useFirebaseApp();
   const db = firebase.firestore();
+  const [profileImage, setProfileImage] = useState(DEFAULT_URL);
+  const storage = getStorage();
+  const storageRef = storage.ref();
+  const URL = "images/sample_image.png"
 
-  const getProfileImage = () => {
-    return profileImage;
+  useEffect(() => {
+    getProfileImage();
+  });
+
+  const getProfileImage = async () => {
+    let temp;
+    await storageRef
+      .child(URL)
+      .getDownloadURL()
+      .then((resolve) => {
+        temp = resolve;
+        console.log(temp);
+      })
+      .catch((e) => console.log(e.code, e.message));
+    setProfileImage(temp);
   };
 
   return (
     <>
-      <Layout getProfileImage={getProfileImage}></Layout>
+      <Layout profileImage={profileImage}></Layout>
     </>
   );
 };

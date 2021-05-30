@@ -4,11 +4,11 @@ import styles from "./styles";
 
 
 export function Layout({
-  getProfileImage,
+  profileImage,
 }) {
   return (
       <View style={styles.containerImage}>
-        <Image style={styles.circle} source={getProfileImage()} />
+        <Image style={styles.circle} source={{uri:profileImage}} />
       </View>
   );
 }

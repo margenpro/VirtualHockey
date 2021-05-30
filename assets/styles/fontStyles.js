@@ -1,3 +1,4 @@
+import color from "color";
 import { StyleSheet } from "react-native";
 import { colorsPalette } from "../../assets/styles/colorsPalette";
 
@@ -10,13 +11,27 @@ export default StyleSheet.create({
     ...fontType,
     fontSize: 38,
     textAlign: "center",
-    color: "white",
+    color: colorsPalette.colorThree,
+  },
+  subTitle: {
+    ...fontType,
+    fontSize: 22,
+    textAlign: "center",
+    color: colorsPalette.colorThree,
   },
   inputHeader: {
     ...fontType,
     position: "relative",
     fontStyle: "normal",
-    color: "#6EC1E4",
+    color: colorsPalette.colorOne,
+    fontWeight: "bold",
+    marginLeft: 10,
+  },
+  contentData: {
+    ...fontType,
+    position: "relative",
+    fontStyle: "normal",
+    color: colorsPalette.colorThree,
     fontWeight: "bold",
     marginLeft: 10,
   },
@@ -75,7 +90,7 @@ export default StyleSheet.create({
     ...fontType,
     fontSize: 12,
     color: colorsPalette.colorThree,
-    textAlign: "center"
+    textAlign: "center",
   },
   username: {
     ...fontType,
