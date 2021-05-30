@@ -3,27 +3,31 @@ import { Layout } from "./layout";
 import { connect } from "react-redux";
 import { getStorage } from "../../../../firebase";
 
-const OldWorkoutCard = ({ navigation, image, nro, setVideoShow, setNroVideo }) => {
-  const placeholder = 'https://app.virtualhockey.com/wp-content/uploads/2020/11/1.png';
+const OldWorkoutCard = ({ navigation, image, nro, setVideoShow, setNroVideo, videos }) => {
 
-  useEffect(()=> {
+  const video = videos.find(v => v.nro === nro)
+  const videoDescription = video.description
+  const videoTitle = video.title
+
+  const handleOnPress = () => {
     setNroVideo(nro)
-  },[])
+    setVideoShow(true)
+  }
 
   return (
     <>
     <Layout
       image={image}
-      setVideoShow={setVideoShow}
-      setNroVideo={setNroVideo}
-      nro={nro}
+      handleOnPress={handleOnPress}
+      videoDescription={videoDescription}
+      videoTitle={videoTitle}
     />
     </>
   );
 };
 
 const mapStateToProps = (state) => ({
-  lastVideo: state.userReducer.user.lastVideo,
+  videos: state.videosReducer.videos
 });
 
 export default connect(mapStateToProps, {})(OldWorkoutCard);

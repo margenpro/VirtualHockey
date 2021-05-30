@@ -4,47 +4,53 @@ import { Layout } from "./layout";
 import { connect } from "react-redux";
 import { getStorage } from "../../../../firebase";
 
-const WorkoutCard = ({ navigation, lastVideo, user, setVideoShow, setNroVideo }) => {
-  const placeholder = "../../../../assets/images/card.png";
-  const videoDescription =
-    "Hands and puck skills are a big part of this workout. Work on your dexterity while pushing your fitness limits.";
+const WorkoutCard = ({ navigation, user, setVideoShow, setNroVideo, videos }) => {
+  const lastVideo = user.lastVideo
+  const video = videos.find(v => v.nro === lastVideo)
+  const videoDescription = video.description
+  const videoTitle = video.title
 
   const storage = getStorage();
   const storageRef = storage.ref();
 
-  const [videoImage, setVideoImage] = useState(placeholder);
+  const [videoImage, setVideoImage] = useState();
 
   useEffect(() => {
-    const getUrlVideoImage = async () => {
-      const nextVideo = parseInt(lastVideo + 1);
-      await storageRef
-        .child("images/videoImages/" + nextVideo + ".png")
-        .getDownloadURL()
-        .then((resolve) => {
-          setVideoImage(resolve);
-        })
-        .catch((e) => console.log(e.code, e.message));
-    };
-    setNroVideo(user.lastVideo)
     getUrlVideoImage();
   }, []);
+
+  const getUrlVideoImage = async () => {
+    await storageRef
+      .child("images/videoImages/" + lastVideo + ".png")
+      .getDownloadURL()
+      .then((resolve) => {
+        setVideoImage(resolve);
+      })
+      .catch((e) => console.log(e.code, e.message));
+  };
+
+  const handleOnPress = () =>{
+    setNroVideo(lastVideo)
+    setVideoShow(true)
+  }
 
   return (
     <>
 
-    <Layout
-      videoImage={videoImage}
-      videoDescription={videoDescription}
-      setVideoShow={setVideoShow}
-    />
-     </>
-    )
-   
+      <Layout
+        videoImage={videoImage}
+        videoDescription={videoDescription}
+        handleOnPress={handleOnPress}
+        videoTitle={videoTitle}
+      />
+    </>
+  )
+
 };
 
 const mapStateToProps = (state) => ({
-  lastVideo: state.userReducer.user.lastVideo,
-  user: state.userReducer.user
+  user: state.userReducer.user,
+  videos: state.videosReducer.videos
 });
 
 export default connect(mapStateToProps, {})(WorkoutCard);

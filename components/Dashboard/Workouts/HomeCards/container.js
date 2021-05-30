@@ -1,26 +1,29 @@
 import React, { useState, useEffect } from "react";
 import { Layout } from "./layout";
 import { connect } from "react-redux";
-import { getStorage} from "../../../../firebase";
+import { getStorage } from "../../../../firebase";
 
 function HomeCards({ navigation, user, setVideoShow, setNroVideo }) {
   const storage = getStorage();
   const storageRef = storage.ref();
-  
-  const [videoImages, setVideoImages] = useState([]);
 
+  const [videoImages, setVideoImages] = useState([]);
+  const lastVideo = user.lastVideo
   useEffect(() => {
     videosList();
   }, []);
 
   const videosList = async () => {
-    let arrayVideos = [];
-    for (let i = user.lastVideo; i > 0; i--) {
+    let arrayVideos = []
+    for (let i = (lastVideo - 1); i > 0 ; i--) {
       await storageRef
         .child("images/videoImages/" + i + ".png")
         .getDownloadURL()
         .then((resolve) => {
-          arrayVideos[user.lastVideo - i] = resolve;
+          arrayVideos[(lastVideo - i)] = {
+            url: resolve,
+            id: i
+          }
         })
         .catch((e) => console.log(e.code, e.message));
     }
@@ -29,13 +32,13 @@ function HomeCards({ navigation, user, setVideoShow, setNroVideo }) {
 
   return (
     <>
-    <Layout
-      username={user.username ? user.username : "Elina"}
-      points={user.points ? user.points : "2450"}
-      videoImages={videoImages}
-      setVideoShow={setVideoShow}
-      setNroVideo={setNroVideo}
-    />
+      <Layout
+        username={user.username}
+        points={user.points}
+        videoImages={videoImages}
+        setVideoShow={setVideoShow}
+        setNroVideo={setNroVideo}
+      />
     </>
   );
 }

@@ -6,17 +6,17 @@ import commonStyles from "../../../../assets/styles/commonStyles";
 import fontStyles from "../../../../assets/styles/fontStyles";
 export function Layout({
   image,
-  setVideoShow,
-  nro
+  handleOnPress,
+  videoTitle
 }) {
   return (
     <TouchableOpacity
       style={[commonStyles.flexOne, styles.whiteTransparentBox]}
-      onPress={()=>setVideoShow(true)}
+      onPress={handleOnPress}
     >
       <View style={{ flex: 1, justifyContent: "center", paddingVertical: 2 }}>
         <Text adjustsFontSizeToFit={true} style={fontStyles.oldTitle}>
-          Rookie Workout #{nro ? nro : "1"}
+          {videoTitle}
         </Text>
       </View>
       <View style={{ flex: 10 }}>
