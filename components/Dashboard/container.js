@@ -1,16 +1,39 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import { Layout } from "./layout";
-import { connect } from 'react-redux'
+import { connect } from "react-redux";
+import { useFocusEffect } from "@react-navigation/native";
+import { BackHandler, Alert } from "react-native";
 
 const Dashboard = ({ navigation, user, videos }) => {
   const [videoShow, setvideoShow] = useState(false);
-  const [nroVideo, setNroVideo] = useState("")
+  const [nroVideo, setNroVideo] = useState("");
 
-  useEffect(() => { 
-    const lastVideo = user.lastVideo == 0 ? 1: user.lastVideo
-    setNroVideo(lastVideo)
+  useFocusEffect(
+    useCallback(() => {
+      const onBackPress = () => {
+        Alert.alert("Hold on!", "Are you sure you want to Exit?", [
+          {
+            text: "Cancel",
+            onPress: () => null,
+            style: "cancel",
+          },
+          { text: "YES", onPress: () => BackHandler.exitApp() },
+        ]);
+        return true;
+      };
+
+      BackHandler.addEventListener("hardwareBackPress", onBackPress);
+
+      return () =>
+        BackHandler.removeEventListener("hardwareBackPress", onBackPress);
+    }, [])
+  );
+
+  useEffect(() => {
+    const lastVideo = user.lastVideo == 0 ? 1 : user.lastVideo;
+    setNroVideo(lastVideo);
   }, [videoShow]);
- 
+
   return (
     <>
       <Layout
@@ -22,10 +45,10 @@ const Dashboard = ({ navigation, user, videos }) => {
     </>
   );
 };
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return {
     user: state.userReducer.user,
-    videos: state.videosReducer.videos
-  }
-}
-export default connect(mapStateToProps, {})(Dashboard)
+    videos: state.videosReducer.videos,
+  };
+};
+export default connect(mapStateToProps, {})(Dashboard);

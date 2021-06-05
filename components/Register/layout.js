@@ -6,7 +6,7 @@ import {
   Image,
   KeyboardAvoidingView,
   Keyboard,
-  ActivityIndicator
+  ActivityIndicator,
 } from "react-native";
 import Icon from "react-native-vector-icons/FontAwesome";
 import { Input } from "react-native-elements";
@@ -29,7 +29,8 @@ export function Layout({
   usernameExists,
   showPasswordHandler,
   handleKeyDown,
-  loading
+  loading,
+  topHandler,
 }) {
   return (
     <Frame>
@@ -97,14 +98,18 @@ export function Layout({
                 autoCompleteType="password"
                 style={commonStyles.inputPassword}
               />
-            <TouchableOpacity
-              onPress={submitHandler}
-              accessibilityLabel="Learn more about this purple button"
-              style={commonStyles.actionButton}
+              <TouchableOpacity
+                onPress={submitHandler}
+                accessibilityLabel="Learn more about this purple button"
+                style={commonStyles.actionButton}
               >
-              <Text style={fontStyles.buttonText}>
-                {loading ? <ActivityIndicator size="large" color="#fff"/> : "REGISTER"}   
-              </Text>
+                <Text style={fontStyles.buttonText}>
+                  {loading ? (
+                    <ActivityIndicator size="large" color="#fff" />
+                  ) : (
+                    "REGISTER"
+                  )}
+                </Text>
               </TouchableOpacity>
               <TouchableOpacity
                 onPress={screenHandler}

@@ -3,7 +3,6 @@ import { createAppContainer } from "react-navigation";
 import Login from "../components/Login/container";
 import { Register } from "../components/Register/container";
 import { Landing } from "../components/Landing/container";
-import { Dashboard } from "../components/Dashboard/container";
 import { BottomTab } from './bottomTabNavigation'
 import Payment from "../components/Payment/container"
 

@@ -1,11 +1,10 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import "firebase/auth";
 import { getStorage } from "../../firebase";
 import { useFirebaseApp } from "reactfire";
 import { Layout } from "./layout";
 import Icon from "react-native-vector-icons/FontAwesome";
 import { connect } from "react-redux";
-// import { UserContext } from "../../context/userContext";
 import { setterUserAction } from "../../redux/actions/userActions";
 import { setVideosAction } from "../../redux/actions/videosActions";
 
@@ -22,7 +21,7 @@ const Login = ({ navigation, user, setUser, setVideos, videos }) => {
   const [wrongPassword, setWrongPassword] = useState(false);
   const [logoUrl, setLogoUrl] = useState();
   const [showPassword, setShowPassword] = useState(false);
-  const [loading, setLoading] = useState(false)
+  const [loading, setLoading] = useState(false);
 
   // useEffect(({usr}) => {
   //   storageRef
@@ -75,6 +74,7 @@ const Login = ({ navigation, user, setUser, setVideos, videos }) => {
   const toPayments = () => {
     navigation.navigate("Payment");
   };
+
   const emailInputHandler = (newValue) => {
     setEmail(newValue);
     setWrongEmail(false);
@@ -100,7 +100,7 @@ const Login = ({ navigation, user, setUser, setVideos, videos }) => {
   };
 
   const submitHandler = async () => {
-    setLoading(true)
+    setLoading(true);
     try {
       await firebase.auth().signInWithEmailAndPassword(email, password);
       const data = await getCurrentUserData();
@@ -120,7 +120,7 @@ const Login = ({ navigation, user, setUser, setVideos, videos }) => {
       if (error.code === "auth/user-not-found") setWrongEmail(true);
       else if (error.code === "auth/wrong-password") setWrongPassword(true);
     }
-    setLoading(false)
+    setLoading(false);
   };
 
   const showPasswordHandler = (newValue) => {

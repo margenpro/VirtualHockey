@@ -2,7 +2,10 @@ import React, { useState, useEffect } from "react";
 import { Image } from "react-native";
 import { Layout } from "./layout";
 
+
 export function Leaderboard({ navigation }) {
+
+
     // const [size, setSize] = useState({ width: 0, height: 0 });
     // useEffect(() => {
     //     const width = Dimensions.get('window').width
