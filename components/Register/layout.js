@@ -14,6 +14,7 @@ import { Frame } from "../Frame";
 import mainLogo from "../../assets/images/mainLogo.png";
 import fontStyles from "../../assets/styles/fontStyles";
 import commonStyles from "../../assets/styles/commonStyles";
+import { Password } from "../../utils/Password/container";
 
 // import { LinearGradient } from "expo-linear-gradient";
 
@@ -23,11 +24,9 @@ export function Layout({
   passInputHandler,
   submitHandler,
   screenHandler,
-  showPassword,
   invalidPassword,
   emailExists,
   usernameExists,
-  showPasswordHandler,
   handleKeyDown,
   loading,
   topHandler,
@@ -75,28 +74,10 @@ export function Layout({
                 onChangeText={emailInputHandler}
                 placeholder={"john.doe@example.com"}
               />
-              <Text style={fontStyles.inputHeader}>PASSWORD</Text>
-              <Input
-                onChangeText={passInputHandler}
-                errorMessage={
-                  invalidPassword.invalid ? invalidPassword.msg : ""
-                }
-                onKeyPress={(e) => {
-                  handleKeyDown(e);
-                }}
-                rightIcon={
-                  <Icon
-                    name={showPassword ? "eye-slash" : "eye"}
-                    size={22}
-                    color="white"
-                    onPress={() => showPasswordHandler(!showPassword)}
-                  />
-                }
-                rightIconContainerStyle={commonStyles.inputIcon}
-                placeholder="********"
-                secureTextEntry={!showPassword}
-                autoCompleteType="password"
-                style={commonStyles.inputPassword}
+              <Password
+                tag={"PASSWORD"}
+                passInputHandler={passInputHandler}
+                wrongPassword={invalidPassword}
               />
               <TouchableOpacity
                 onPress={submitHandler}

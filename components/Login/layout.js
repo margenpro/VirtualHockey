@@ -19,6 +19,7 @@ import mainLogo from "../../assets/images/mainLogo.png";
 import fontStyles from "../../assets/styles/fontStyles";
 import commonStyles from "../../assets/styles/commonStyles";
 import { Header } from "react-navigation-stack";
+import { Password } from "../../utils/Password/container";
 
 export function Layout({
   emailInputHandler,
@@ -27,8 +28,6 @@ export function Layout({
   wrongEmail,
   wrongPassword,
   screenHandlerRegister,
-  showPassword,
-  showPasswordHandler,
   forTesting,
   handleKeyDown,
   toPayments,
@@ -69,26 +68,10 @@ export function Layout({
                 style={commonStyles.inputUser}
                 autoCompleteType="email"
               />
-              <Text style={fontStyles.inputHeader}>PASSWORD</Text>
-              <Input
-                onChangeText={passInputHandler}
-                errorMessage={wrongPassword ? wrongPassword.msg : ""}
-                onKeyPress={(e) => {
-                  handleKeyDown(e);
-                }}
-                rightIcon={
-                  <Icon
-                    name={showPassword ? "eye-slash" : "eye"}
-                    size={22}
-                    color="white"
-                    onPress={() => showPasswordHandler(!showPassword)}
-                  />
-                }
-                rightIconContainerStyle={commonStyles.inputIcon}
-                placeholder="********"
-                secureTextEntry={!showPassword}
-                autoCompleteType="password"
-                style={commonStyles.inputPassword}
+              <Password
+                tag={"PASSWORD"}
+                passInputHandler={passInputHandler}
+                wrongPassword={wrongPassword}
               />
             </TouchableOpacity>
             <TouchableOpacity
