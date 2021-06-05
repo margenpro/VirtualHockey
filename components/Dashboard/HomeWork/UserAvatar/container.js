@@ -5,14 +5,15 @@ import { useFirebaseApp } from "reactfire";
 import { connect } from "react-redux";
 import { setterUserAction } from "../../../../redux/actions/userActions";
 import { getStorage } from "../../../../firebase";
+import { useIsFocused } from "@react-navigation/native";
 
 const UserAvatar = ({
   navigation,
   setvideoShow,
   user,
-  videos,
   setUserRanking,
   name = "sample_image",
+  changeEvent,
 }) => {
   const DEFAULT_URL =
     "https://thumbs.dreamstime.com/z/default-avatar-profile-vector-user-profile-default-avatar-profile-vector-user-profile-profile-179376714.jpg";
@@ -21,11 +22,17 @@ const UserAvatar = ({
   const [profileImage, setProfileImage] = useState(DEFAULT_URL);
   const storage = getStorage();
   const storageRef = storage.ref();
-  const URL = "images/sample_image.png";
+  const URL = "images/avatars/" + user.username + ".png";
+
+  const isFocused = useIsFocused();
 
   useEffect(() => {
     getProfileImage();
   });
+
+  useEffect(() => {
+    console.log("hcie un re redner de user avatarqwe");
+  }, []);
 
   const getProfileImage = async () => {
     let temp;
@@ -39,12 +46,11 @@ const UserAvatar = ({
     setProfileImage(temp);
   };
 
-  return <Layout profileImage={profileImage}></Layout>;
+  return isFocused ? <Layout profileImage={profileImage}></Layout> : <Layout profileImage={null}></Layout>;
 };
 
 const mapStateToProps = (state) => ({
   user: state.userReducer.user,
-  videos: state.videosReducer.videos,
 });
 
 const actionCreators = {

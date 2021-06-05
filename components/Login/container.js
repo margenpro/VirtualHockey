@@ -23,7 +23,6 @@ const Login = ({ navigation, user, setUser, setVideos, videos }) => {
     msg: "",
   });
   const [logoUrl, setLogoUrl] = useState();
-  const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(false);
 
   // useEffect(({usr}) => {
@@ -128,10 +127,6 @@ const Login = ({ navigation, user, setUser, setVideos, videos }) => {
     setLoading(false);
   };
 
-  const showPasswordHandler = (newValue) => {
-    setShowPassword(newValue);
-  };
-
   return (
     <Layout
       emailInputHandler={emailInputHandler}
@@ -140,8 +135,6 @@ const Login = ({ navigation, user, setUser, setVideos, videos }) => {
       screenHandlerLanding={screenHandlerLanding}
       screenHandlerRegister={screenHandlerRegister}
       wrongPassword={wrongPassword}
-      showPassword={showPassword}
-      showPasswordHandler={showPasswordHandler}
       forTesting={forTesting}
       handleKeyDown={handleKeyDown}
       toPayments={toPayments}

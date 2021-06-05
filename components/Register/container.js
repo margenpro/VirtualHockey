@@ -28,7 +28,6 @@ export function Register({ navigation }) {
     msg: "",
   });
   const [logoUrl, setLogoUrl] = useState();
-  const [showPassword, setShowPassword] = useState(false);
 
   // useEffect(() => {
   //   storageRef
@@ -48,10 +47,6 @@ export function Register({ navigation }) {
     if (e.nativeEvent.key == "Enter") {
       // CURRENTLY NOT WORKING
     }
-  };
-
-  const showPasswordHandler = (newValue) => {
-    setShowPassword(newValue);
   };
 
   const emailInputHandler = (newValue) => {
@@ -150,9 +145,7 @@ export function Register({ navigation }) {
       submitHandler={submitHandler}
       invalidPassword={invalidPassword}
       screenHandler={screenHandler}
-      showPassword={showPassword}
       emailInputHandler={emailInputHandler}
-      showPasswordHandler={showPasswordHandler}
       usernameExists={usernameExists}
       emailExists={emailExists}
       handleKeyDown={handleKeyDown}

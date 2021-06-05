@@ -58,7 +58,7 @@ export function Layout({
                   }}
                 >
                   <View style={{ alignItems: "center" }}>
-                    <UserAvatar />
+                    <UserAvatar changeEvent={image} />
                   </View>
                 </TouchableOpacity>
                 <Text style={fontStyles.title}>

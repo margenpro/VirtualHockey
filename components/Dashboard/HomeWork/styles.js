@@ -1,35 +1,34 @@
 import { Dimensions, StyleSheet } from "react-native";
-import commonStyles from '../../../assets/styles/commonStyles'
+import commonStyles from "../../../assets/styles/commonStyles";
 import { colorsPalette } from "../../../assets/styles/colorsPalette";
-import fontStyle from '../../../assets/styles/fontStyles'
+import fontStyle from "../../../assets/styles/fontStyles";
 
-const width = Dimensions.get('window').width
-const height = Dimensions.get('window').height
+const width = Dimensions.get("window").width;
+const height = Dimensions.get("window").height;
 
 export default StyleSheet.create({
-
   container: {
     flex: 1,
     margin: 0,
-    alignItems: 'center',
-    justifyContent: 'center',
+    alignItems: "center",
+    justifyContent: "center",
   },
   containerImagenTitulo: {
     marginTop: 10,
     marginHorizontal: 10,
-    justifyContent: 'flex-start',
+    justifyContent: "flex-start",
     height: 80,
   },
   imagenTitulo: {
     flex: 1,
-    width: width * .8,
+    width: width * 0.8,
     height: 80,
-    resizeMode: 'contain'
+    resizeMode: "contain",
   },
   containerImage: {
     marginTop: 10,
-    justifyContent: 'flex-start',
-    marginBottom: 30
+    justifyContent: "flex-start",
+    marginBottom: 30,
   },
   circle: {
     width: 130,
@@ -39,12 +38,11 @@ export default StyleSheet.create({
     borderWidth: 4,
   },
   usernameText: {
-    ...fontStyle.fontFamily,
+    fontFamily: "Comfortaa_400Regular",
     fontSize: 35,
   },
   explanationMessageText: {
     ...fontStyle.fontType,
-    textAlign: 'center',
+    textAlign: "center",
   },
-
 });
