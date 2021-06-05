@@ -5,7 +5,7 @@ const height = Dimensions.get("window").height;
 const availableHeight = height - 105;
 
 const font = {
-  fontFamily: "comfortaa",
+  fontFamily: "Comfortaa_400Regular",
   color: "#ffffff",
 };
 

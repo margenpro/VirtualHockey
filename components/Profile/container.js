@@ -1,15 +1,13 @@
 import React, { useState, useEffect } from "react";
 import "firebase/auth";
-import { getStorage, getFirestore } from "../../firebase";
+import { getStorage } from "../../firebase";
 import { useFirebaseApp } from "reactfire";
 import { Layout } from "./layout";
 import * as ImagePicker from "expo-image-picker";
-import { Platform } from "react-native";
 
 export function Profile({ navigation }) {
   const storage = getStorage();
   const firebase = useFirebaseApp();
-  const storageRef = storage.ref();
 
   const db = firebase.firestore();
   const [image, setImage] = useState(null);
@@ -30,25 +28,15 @@ export function Profile({ navigation }) {
   const [logoUrl, setLogoUrl] = useState();
   const [showPassword, setShowPassword] = useState(false);
 
-  // useEffect(() => {
-  //   storageRef
-  //     .child("images/vh_favico[3].png")
-  //     .getDownloadURL()
-  //     .then(resolve => {
-  //       setLogoUrl(resolve);
-  //     })
-  //     .catch(e => console.log(e.code, e.message));
-  // }, []);
+  const uploadImage = async (image) => {
+    const response = await fetch(image);
+    const blob = await response.blob();
+    var ref = firebase.storage().ref().child("/images/avatars/testingImageUp.png");
+    return ref.put(blob);
+  };
+
+
   const askPermissions = async () => {
-    // if (Platform.OS !== "web") {
-    //   const { status } =
-    //     await ImagePicker.requestMediaLibraryPermissionsAsync();
-    //   if (status !== "granted") {
-    //     alert("Sorry, we need media library permissions to make this work!");
-    //   } else {
-    //     return true;
-    //   }
-    // } else {
     const { status } = await ImagePicker.requestMediaLibraryPermissionsAsync();
     console.log(status);
     if (status !== "granted") {
@@ -62,16 +50,16 @@ export function Profile({ navigation }) {
     if (await askPermissions()) {
       let result = await ImagePicker.launchImageLibraryAsync({
         mediaTypes: ImagePicker.MediaTypeOptions.Images,
-        // allowsEditing: true,
-        // aspect: [4, 3],
         quality: 1,
       });
       console.log(result);
       if (!result.cancelled) {
         setImage(result.uri);
+        uploadImage(result.uri);
       }
     }
   };
+
   const screenHandler = () => {
     navigation.navigate("Login");
   };
@@ -131,6 +119,7 @@ export function Profile({ navigation }) {
       changeAvatar={changeAvatar}
       email={email}
       points={points}
+      image={image}
     />
   );
 }

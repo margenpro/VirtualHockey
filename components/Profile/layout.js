@@ -32,6 +32,7 @@ export function Layout({
   emailExists,
   changeAvatar,
   points,
+  image,
 }) {
   return (
     <Frame>
