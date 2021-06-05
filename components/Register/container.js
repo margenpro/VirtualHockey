@@ -131,8 +131,8 @@ export function Register({ navigation }) {
         username,
         role: 1,
         paymentDate: null,
-        lastVideoWatched: 0,
-        points: 0,
+        lastVideoWatched: 1,
+        points: 250,
       });
 
       return { code: null };
