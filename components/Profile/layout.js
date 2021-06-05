@@ -30,9 +30,9 @@ export function Layout({
   showPassword,
   invalidPassword,
   emailExists,
-  usernameExists,
   changeAvatar,
   points,
+  image,
 }) {
   return (
     <Frame>
@@ -64,7 +64,9 @@ export function Layout({
                 <Text style={fontStyles.title}>
                   {username && username}'s Profile
                 </Text>
-              <View style={{marginTop: 20}}><Text style={fontStyles.subTitle}>{email}</Text></View>
+                <View style={{ marginTop: 20 }}>
+                  <Text style={fontStyles.subTitle}>{email}</Text>
+                </View>
               </View>
               <View style={commonStyles.pointsContainer}>
                 <Text style={fontStyles.points}>{points} points</Text>

@@ -26,7 +26,7 @@ export default StyleSheet.create({
   },
   cardContainer: { flex: 1 },
   textoInfo: {
-    fontFamily: "comfortaa",
+    fontFamily: "Comfortaa_400Regular",
     fontSize: 18,
     color: "#fff",
     textAlign: "center",

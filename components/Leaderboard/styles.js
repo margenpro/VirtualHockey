@@ -29,12 +29,12 @@ export default StyleSheet.create({
     marginBottom: 20,
   },
   celeste: {
-    fontFamily:"comfortaa",
+    fontFamily:"Comfortaa_400Regular",
     fontSize: 25,
     color: '#00AEEF',
   },
   blanco: {
-    fontFamily:"comfortaa",
+    fontFamily:"Comfortaa_400Regular",
     fontSize: 25,
     color: '#fff',
   },
@@ -55,20 +55,20 @@ export default StyleSheet.create({
     marginBottom: 40,
   },
   textoBoton: {
-    fontFamily:"comfortaa",
+    fontFamily:"Comfortaa_400Regular",
     color: '#fff',
     textAlign: 'center',
     fontSize: 20,
     fontWeight: "600"
   },
   textoChico: {
-    fontFamily:"comfortaa",
+    fontFamily:"Comfortaa_400Regular",
     color: '#00AEEF',
     fontSize: 20,
     marginBottom: 25
   },
   textoInfo: {
-    fontFamily:"comfortaa",
+    fontFamily:"Comfortaa_400Regular",
     fontSize: 18,
     color: '#fff',
     textAlign: 'center',

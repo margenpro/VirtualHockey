@@ -40,7 +40,7 @@ export function Layout({
                 <OldWorkoutCard key={e.url} image={e.url} nro={e.id} setVideoShow={setVideoShow} setNroVideo={setNroVideo} />
               ))
             ) : (
-              <Text style={styles.noVideos}>Start with the first Video!</Text>
+              <View style={styles.noVideosContainer}><Text style={styles.noVideos}>Start with the first Video!</Text></View>
             )}
           </ScrollView>
         </View>

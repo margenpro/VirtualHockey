@@ -12,15 +12,16 @@ const UserAvatar = ({
   user,
   videos,
   setUserRanking,
-  name="sample_image",
+  name = "sample_image",
 }) => {
-  const DEFAULT_URL = "https://thumbs.dreamstime.com/z/default-avatar-profile-vector-user-profile-default-avatar-profile-vector-user-profile-profile-179376714.jpg"
+  const DEFAULT_URL =
+    "https://thumbs.dreamstime.com/z/default-avatar-profile-vector-user-profile-default-avatar-profile-vector-user-profile-profile-179376714.jpg";
   const firebase = useFirebaseApp();
   const db = firebase.firestore();
   const [profileImage, setProfileImage] = useState(DEFAULT_URL);
   const storage = getStorage();
   const storageRef = storage.ref();
-  const URL = "images/sample_image.png"
+  const URL = "images/sample_image.png";
 
   useEffect(() => {
     getProfileImage();
@@ -33,17 +34,12 @@ const UserAvatar = ({
       .getDownloadURL()
       .then((resolve) => {
         temp = resolve;
-        console.log(temp);
       })
       .catch((e) => console.log(e.code, e.message));
     setProfileImage(temp);
   };
 
-  return (
-    <>
-      <Layout profileImage={profileImage}></Layout>
-    </>
-  );
+  return <Layout profileImage={profileImage}></Layout>;
 };
 
 const mapStateToProps = (state) => ({

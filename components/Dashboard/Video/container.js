@@ -72,7 +72,6 @@ const Video = ({ setvideoShow, videos, user, nroVideo, setUser }) => {
 
   return (
     <>
-    {console.log("vas a ver video: "+nroVideo)}
     {urlVideo && 
     <Layout
       urlVideo={urlVideo}

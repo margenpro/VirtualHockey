@@ -3,7 +3,7 @@ import { StyleSheet } from "react-native";
 import { colorsPalette } from "../../assets/styles/colorsPalette";
 
 export const fontType = {
-  fontFamily: "comfortaa",
+  fontFamily: "Comfortaa_400Regular",
 };
 
 export default StyleSheet.create({

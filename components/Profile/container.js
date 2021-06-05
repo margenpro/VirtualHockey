@@ -1,16 +1,16 @@
 import React, { useState, useEffect } from "react";
 import "firebase/auth";
-import { getStorage, getFirestore } from "../../firebase";
+import { getStorage } from "../../firebase";
 import { useFirebaseApp } from "reactfire";
 import { Layout } from "./layout";
+import * as ImagePicker from "expo-image-picker";
 
 export function Profile({ navigation }) {
   const storage = getStorage();
   const firebase = useFirebaseApp();
-  const storageRef = storage.ref();
 
   const db = firebase.firestore();
-
+  const [image, setImage] = useState(null);
   const [points, setPoints] = useState("2450");
   const [email, setEmail] = useState("Elina@mail.com");
   const [username, setUsername] = useState("Elina");
@@ -28,17 +28,37 @@ export function Profile({ navigation }) {
   const [logoUrl, setLogoUrl] = useState();
   const [showPassword, setShowPassword] = useState(false);
 
-  // useEffect(() => {
-  //   storageRef
-  //     .child("images/vh_favico[3].png")
-  //     .getDownloadURL()
-  //     .then(resolve => {
-  //       setLogoUrl(resolve);
-  //     })
-  //     .catch(e => console.log(e.code, e.message));
-  // }, []);
+  const uploadImage = async (image) => {
+    const response = await fetch(image);
+    const blob = await response.blob();
+    var ref = firebase.storage().ref().child("/images/avatars/testingImageUp.png");
+    return ref.put(blob);
+  };
 
-  const changeAvatar = () => {};
+
+  const askPermissions = async () => {
+    const { status } = await ImagePicker.requestMediaLibraryPermissionsAsync();
+    console.log(status);
+    if (status !== "granted") {
+      alert("Sorry, we need media library permissions to make this work!");
+    } else {
+      return true;
+    }
+    // }
+  };
+  const changeAvatar = async () => {
+    if (await askPermissions()) {
+      let result = await ImagePicker.launchImageLibraryAsync({
+        mediaTypes: ImagePicker.MediaTypeOptions.Images,
+        quality: 1,
+      });
+      console.log(result);
+      if (!result.cancelled) {
+        setImage(result.uri);
+        uploadImage(result.uri);
+      }
+    }
+  };
 
   const screenHandler = () => {
     navigation.navigate("Login");
@@ -84,56 +104,6 @@ export function Profile({ navigation }) {
     }
   };
 
-  const checkIfUsernameExists = async () => {
-    if (username.match(/[ `!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~]/))
-      throw {
-        code: "empty-username",
-        message: "Username cannot contain white spaces or special characters",
-      };
-    if (username.trim() === "")
-      throw {
-        code: "empty-username",
-        message: "You must enter a valid username",
-      };
-
-    try {
-      const db = getFirestore();
-      let querySnapshot = await db
-        .collection("users")
-        .where("username", "==", username)
-        .get();
-      if (querySnapshot.docs[0] != undefined) {
-        throw {
-          code: "username-exists",
-          message: `The username ${username} is already in use`,
-        };
-      }
-    } catch (error) {
-      throw error;
-    }
-  };
-
-  const createUser = async () => {
-    try {
-      const userCreds = await firebase
-        .auth()
-        .createUserWithEmailAndPassword(email, password);
-
-      db.collection("users").doc(userCreds.user.uid).set({
-        username,
-        isMember: false,
-        points: 0,
-        lastVideoWatched: 0,
-      });
-
-      return { code: null };
-    } catch (error) {
-      console.log(error.code);
-
-      throw { code: error.code, message: error.message };
-    }
-  };
-
   return (
     <Layout
       userInputHandler={userInputHandler}
@@ -144,12 +114,12 @@ export function Profile({ navigation }) {
       showPassword={showPassword}
       emailInputHandler={emailInputHandler}
       showPasswordHandler={showPasswordHandler}
-      usernameExists={usernameExists}
       emailExists={emailExists}
       username={username}
       changeAvatar={changeAvatar}
       email={email}
       points={points}
+      image={image}
     />
   );
 }
