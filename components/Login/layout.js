@@ -72,7 +72,7 @@ export function Layout({
               <Text style={fontStyles.inputHeader}>PASSWORD</Text>
               <Input
                 onChangeText={passInputHandler}
-                errorMessage={wrongPassword ? "Invalid Password" : ""}
+                errorMessage={wrongPassword ? wrongPassword.msg : ""}
                 onKeyPress={(e) => {
                   handleKeyDown(e);
                 }}
