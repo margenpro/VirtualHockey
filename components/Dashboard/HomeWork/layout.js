@@ -10,7 +10,6 @@ import UserAvatar from "./UserAvatar/container";
 
 export function Layout({
   setvideoShow,
-  getProfileImage,
   navigateToWorkouts,
   userName,
   userPosition,
@@ -21,10 +20,12 @@ export function Layout({
       <View
         style={[commonStyles.centeredAligned, commonStyles.layoutContainer]}
       >
-        <UserAvatar />
+        <UserAvatar 
+        changeEvent={true}
+        />
         <View style={commonStyles.rowedAndWrapped}>
           <Text style={[styles.usernameText, fontStyles.white]}>
-            {userName}{" "}
+            {userName + " "}
           </Text>
           <Text style={[styles.usernameText, fontStyles.yellow]}>
             #{userPosition}
