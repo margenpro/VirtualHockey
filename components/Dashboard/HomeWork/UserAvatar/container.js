@@ -33,7 +33,6 @@ const UserAvatar = ({
       .getDownloadURL()
       .then((resolve) => {
         temp = resolve;
-        console.log(temp);
       })
       .catch((e) => console.log(e.code, e.message));
     setProfileImage(temp);

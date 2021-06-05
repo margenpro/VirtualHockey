@@ -4,11 +4,23 @@ import { Layout } from "./layout";
 import { connect } from "react-redux";
 import { getStorage } from "../../../../firebase";
 
-const WorkoutCard = ({ navigation, user, setVideoShow, setNroVideo, videos }) => {
-  const lastVideo = user.lastVideo
-  const video = videos.find(v => v.nro === lastVideo)
-  const videoDescription = video.description
-  const videoTitle = video.title
+const WorkoutCard = ({
+  navigation,
+  user,
+  setVideoShow,
+  setNroVideo,
+  videos,
+}) => {
+  const lastVideo = user.lastVideo;
+  const video = () => {
+    try {
+      videos.find((v) => v.nro === lastVideo);
+    } catch (e) {
+      console.log(e);
+    }
+  };
+  const videoDescription = video.description;
+  const videoTitle = video.title;
 
   const storage = getStorage();
   const storageRef = storage.ref();
@@ -29,14 +41,13 @@ const WorkoutCard = ({ navigation, user, setVideoShow, setNroVideo, videos }) =>
       .catch((e) => console.log(e.code, e.message));
   };
 
-  const handleOnPress = () =>{
-    setNroVideo(lastVideo)
-    setVideoShow(true)
-  }
+  const handleOnPress = () => {
+    setNroVideo(lastVideo);
+    setVideoShow(true);
+  };
 
   return (
     <>
-
       <Layout
         videoImage={videoImage}
         videoDescription={videoDescription}
@@ -44,13 +55,12 @@ const WorkoutCard = ({ navigation, user, setVideoShow, setNroVideo, videos }) =>
         videoTitle={videoTitle}
       />
     </>
-  )
-
+  );
 };
 
 const mapStateToProps = (state) => ({
   user: state.userReducer.user,
-  videos: state.videosReducer.videos
+  videos: state.videosReducer.videos,
 });
 
 export default connect(mapStateToProps, {})(WorkoutCard);

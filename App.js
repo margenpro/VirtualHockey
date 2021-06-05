@@ -14,6 +14,7 @@ export default function App() {
   const [fontLoaded, setfontLoaded] = useState(false);
 
   LogBox.ignoreLogs(["Setting a timer"]);
+  LogBox.ignoreLogs(["Remote debugger"]);
 
   useEffect(() => {
     async function loadFont() {
