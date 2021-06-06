@@ -6,6 +6,7 @@ import { Layout } from "./layout";
 import * as ImagePicker from "expo-image-picker";
 import { connect } from "react-redux";
 import { signOutAction } from "../../redux/actions/userActions";
+import {} from "../../";
 
 const Profile = ({ navigation, user, signOutUser }) => {
   const storage = getStorage();
@@ -14,19 +15,19 @@ const Profile = ({ navigation, user, signOutUser }) => {
   const db = firebase.firestore();
   const [image, setImage] = useState(null);
   const [points, setPoints] = useState(user.points ? user.points : 0);
-  const [email, setEmail] = useState(user.email ? user.email : "");
-  const [username, setUsername] = useState(user.username ? user.username : "");
-  const [password, setPassword] = useState("");
+  const [email, setEmail] = useState(user.email ? user.email : "no@email.com");
+  const [username, setUsername] = useState(
+    user.username ? user.username : "noLog"
+  );
+  const [oldPassword, setOldPassword] = useState("");
+  const [newPassword, setNewPassword] = useState("");
+  const [repeatPassword, setRepeatPassword] = useState("");
+
   // const [usernameExists, setUsernameExists] = useState(0);
-  const [usernameExists, setUsernameExists] = useState({
-    exists: false,
-    msg: "",
-  });
   const [invalidPassword, setInvalidPassword] = useState({
     invalid: false,
     msg: "",
   });
-  const [showPassword, setShowPassword] = useState(false);
 
   const uploadImage = async (image) => {
     const response = await fetch(image);
@@ -74,32 +75,38 @@ const Profile = ({ navigation, user, signOutUser }) => {
     navigation.navigate("Login");
   };
 
-  const emailInputHandler = (newValue) => {
-    setEmail(newValue);
-    setEmailExists({ exists: false });
+  const oldPassInputHandler = (newValue) => {
+    setOldPassword(newValue);
+    // setInvalidPassword(false);
   };
-
-  const userInputHandler = (newValue) => {
-    setUsername(newValue);
-    setUsernameExists({ exists: false });
+  const newPassInputHandler = (newValue) => {
+    setNewPassword(newValue);
+    // setInvalidPassword(false);
   };
-
-  const passInputHandler = (newValue) => {
-    setPassword(newValue);
-    setInvalidPassword(false);
+  const repeatPassInputHandler = (newValue) => {
+    setRepeatPassword(newValue);
+    // setInvalidPassword(false);
   };
 
   const showPasswordHandler = (newValue) => {
     setShowPassword(newValue);
   };
 
+  const submitHandler = () => {
+    if (newPassword.length && repeatPassword.length && newPassword === repeatPassword) {
+      console.log("do something");
+    } else {
+      console.log("passwords do not match");
+    }
+  };
+
   return (
     <Layout
-      userInputHandler={userInputHandler}
-      passInputHandler={passInputHandler}
+      oldPassInputHandler={oldPassInputHandler}
+      newPassInputHandler={newPassInputHandler}
+      repeatPassInputHandler={repeatPassInputHandler}
+      submitHandler={submitHandler}
       invalidPassword={invalidPassword}
-      showPassword={showPassword}
-      emailInputHandler={emailInputHandler}
       showPasswordHandler={showPasswordHandler}
       username={username}
       changeAvatar={changeAvatar}
@@ -107,6 +114,8 @@ const Profile = ({ navigation, user, signOutUser }) => {
       points={points ? points : 0}
       image={image}
       signOut={signOut}
+      newPassword={newPassword}
+      oldPassword={oldPassword}
     />
   );
 };

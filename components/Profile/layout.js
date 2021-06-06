@@ -17,15 +17,16 @@ import UserAvatar from "../Dashboard/HomeWork/UserAvatar/container";
 import styles from "./styles";
 import { ScrollView } from "react-native-gesture-handler";
 import { colorsPalette } from "../../assets/styles/colorsPalette";
+import { Password } from "../../utils/Password/container.js";
 
 // import { LinearGradient } from "expo-linear-gradient";
 
 export function Layout({
   username,
   email,
-  userInputHandler,
-  emailInputHandler,
-  passInputHandler,
+  oldPassInputHandler,
+  newPassInputHandler,
+  repeatPassInputHandler,
   submitHandler,
   showPassword,
   invalidPassword,
@@ -71,38 +72,23 @@ export function Layout({
               <View style={commonStyles.pointsContainer}>
                 <Text style={fontStyles.points}>{points && points} points</Text>
               </View>
-              <Text style={fontStyles.inputHeader}>OLD PASSWORD</Text>
-              <Input
-                onChangeText={passInputHandler}
-                errorMessage={
-                  invalidPassword.invalid ? invalidPassword.msg : ""
-                }
-                secureTextEntry={!showPassword}
-                placeholder={"********"}
-                style={commonStyles.inputUser}
+              <Password
+                tag={"OLD PASSWORD"}
+                passInputHandler={oldPassInputHandler}
+                // wrongPassword={wrongPassword}
               />
-              <Text style={fontStyles.inputHeader}>NEW PASSWORD</Text>
-              <Input
-                onChangeText={passInputHandler}
-                errorMessage={
-                  invalidPassword.invalid ? invalidPassword.msg : ""
-                }
-                secureTextEntry={!showPassword}
-                placeholder={"********"}
-                style={commonStyles.inputUser}
+              <Password
+                tag={"NEW PASSWORD"}
+                passInputHandler={newPassInputHandler}
+                // wrongPassword={wrongPassword}
               />
-              <Text style={fontStyles.inputHeader}>REPEAT NEW PASSWORD</Text>
-              <Input
-                onChangeText={passInputHandler}
-                errorMessage={
-                  invalidPassword.invalid ? invalidPassword.msg : ""
-                }
-                secureTextEntry={!showPassword}
-                placeholder={"********"}
-                style={commonStyles.inputUser}
+              <Password
+                tag={"REPEAT PASSWORD"}
+                passInputHandler={repeatPassInputHandler}
+                // wrongPassword={wrongPassword}
               />
               <TouchableOpacity
-                onPress={() => {}}
+                onPress={submitHandler}
                 accessibilityLabel="Learn more about this purple button"
                 style={[commonStyles.actionButton]}
               >
