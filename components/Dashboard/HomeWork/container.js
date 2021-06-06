@@ -20,7 +20,6 @@ const HomeWork = ({
   const [userName, setUserName] = useState("");
   const [userPoints, setUserPoints] = useState("");
   const [userPosition, setUserPosition] = useState("");
-  const [newRender, setNewRender] = useState("nadas");
 
   const navigateToWorkouts = () => {
     navigation.navigate("Workouts");

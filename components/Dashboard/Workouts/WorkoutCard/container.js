@@ -14,7 +14,7 @@ const WorkoutCard = ({
   const lastVideo = user.lastVideo;
   const video = () => {
     try {
-      videos.find((v) => v.nro === lastVideo);
+      return videos.find((v) => v.nro === lastVideo);
     } catch (e) {
       console.log(e);
     }
