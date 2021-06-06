@@ -1,7 +1,12 @@
 import React, { useState } from "react";
 import { Layout } from "./layout";
 
-export const Password = ({ tag, passInputHandler, wrongPassword }) => {
+export const Password = ({
+  tag,
+  passInputHandler,
+  wrongPassword,
+  textInput,
+}) => {
   const [showPassword, setShowPassword] = useState(false);
 
   const showPasswordHandler = (newValue) => {
@@ -15,6 +20,7 @@ export const Password = ({ tag, passInputHandler, wrongPassword }) => {
       wrongPassword={wrongPassword}
       showPassword={showPassword}
       showPasswordHandler={showPasswordHandler}
+      textInput={textInput}
     />
   );
 };

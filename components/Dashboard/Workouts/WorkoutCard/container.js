@@ -11,16 +11,18 @@ const WorkoutCard = ({
   setNroVideo,
   videos,
 }) => {
-  const lastVideo = user.lastVideo;
-  const video = () => {
-    try {
+  const lastVideo = user.lastVideo && user.lastVideo;
+  
+  const findVideos = () => {
+    if (videos && lastVideo) {
       return videos.find((v) => v.nro === lastVideo);
-    } catch (e) {
-      console.log(e);
     }
+    return [];
   };
-  const videoDescription = video.description;
-  const videoTitle = video.title;
+  const video = findVideos();
+  
+  const videoDescription = video.description && video.description;
+  const videoTitle = video.title && video.title;
 
   const storage = getStorage();
   const storageRef = storage.ref();

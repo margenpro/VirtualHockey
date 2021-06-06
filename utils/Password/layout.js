@@ -11,16 +11,24 @@ export function Layout({
   wrongPassword,
   showPassword,
   showPasswordHandler,
+  textInput,
 }) {
   return (
     <React.Fragment>
       <Text style={fontStyles.inputHeader}>{tag}</Text>
       <Input
-        onChangeText={passInputHandler}
-        errorMessage={wrongPassword ? wrongPassword.msg : ""}
-        onKeyPress={(e) => {
-          handleKeyDown(e);
+        ref={(input) => {
+          textInput = input;
         }}
+        onChangeText={passInputHandler}
+        // onChangeText={() => {
+        //   console.log(textInput.clear);
+        //   textInput.clear();
+        // }}
+        errorMessage={wrongPassword ? wrongPassword.msg : ""}
+        // onKeyPress={(e) => {
+        //   handleKeyDown(e);
+        // }}
         rightIcon={
           <Icon
             name={showPassword ? "eye-slash" : "eye"}

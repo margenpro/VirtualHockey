@@ -29,11 +29,14 @@ export function Layout({
   repeatPassInputHandler,
   submitHandler,
   showPassword,
-  invalidPassword,
   changeAvatar,
   points,
   image,
   signOut,
+  newWrongPassword,
+  repeatWrongPassword,
+  changed,
+  // textInput,
 }) {
   return (
     <Frame>
@@ -72,21 +75,26 @@ export function Layout({
               <View style={commonStyles.pointsContainer}>
                 <Text style={fontStyles.points}>{points && points} points</Text>
               </View>
-              <Password
-                tag={"OLD PASSWORD"}
-                passInputHandler={oldPassInputHandler}
-                // wrongPassword={wrongPassword}
-              />
-              <Password
-                tag={"NEW PASSWORD"}
-                passInputHandler={newPassInputHandler}
-                // wrongPassword={wrongPassword}
-              />
-              <Password
-                tag={"REPEAT PASSWORD"}
-                passInputHandler={repeatPassInputHandler}
-                // wrongPassword={wrongPassword}
-              />
+              {changed && (
+                <React.Fragment>
+                  <Password
+                    tag={"OLD PASSWORD"}
+                    passInputHandler={oldPassInputHandler}
+                    // wrongPassword={wrongPassword}
+                  />
+                  <Password
+                    tag={"NEW PASSWORD"}
+                    passInputHandler={newPassInputHandler}
+                    wrongPassword={newWrongPassword}
+                    // textInput={textInput}
+                  />
+                  <Password
+                    tag={"REPEAT PASSWORD"}
+                    passInputHandler={repeatPassInputHandler}
+                    wrongPassword={repeatWrongPassword}
+                  />
+                </React.Fragment>
+              )}
               <TouchableOpacity
                 onPress={submitHandler}
                 accessibilityLabel="Learn more about this purple button"

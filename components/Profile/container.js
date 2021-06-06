@@ -1,17 +1,16 @@
 import React, { useState, useEffect } from "react";
 import "firebase/auth";
+import { Alert } from "react-native";
 import { getStorage } from "../../firebase";
 import { useFirebaseApp } from "reactfire";
 import { Layout } from "./layout";
 import * as ImagePicker from "expo-image-picker";
 import { connect } from "react-redux";
 import { signOutAction } from "../../redux/actions/userActions";
-import {} from "../../";
 
 const Profile = ({ navigation, user, signOutUser }) => {
   const storage = getStorage();
   const firebase = useFirebaseApp();
-
   const db = firebase.firestore();
   const [image, setImage] = useState(null);
   const [points, setPoints] = useState(user.points ? user.points : 0);
@@ -22,13 +21,15 @@ const Profile = ({ navigation, user, signOutUser }) => {
   const [oldPassword, setOldPassword] = useState("");
   const [newPassword, setNewPassword] = useState("");
   const [repeatPassword, setRepeatPassword] = useState("");
+  const [changed, setChanged] = useState(true);
+  changed;
+
+  const [newWrongPassword, setNewWrongPassword] = useState("");
+  const [repeatWrongPassword, setRepeatWrongPassword] = useState("");
+
+  // let textInput;
 
   // const [usernameExists, setUsernameExists] = useState(0);
-  const [invalidPassword, setInvalidPassword] = useState({
-    invalid: false,
-    msg: "",
-  });
-
   const uploadImage = async (image) => {
     const response = await fetch(image);
     const blob = await response.blob();
@@ -71,6 +72,11 @@ const Profile = ({ navigation, user, signOutUser }) => {
 
   const signOut = () => {
     console.log("signing out");
+    try {
+      firebase.auth().signOut();
+    } catch (error) {
+      console.log(error);
+    }
     signOutUser();
     navigation.navigate("Login");
   };
@@ -92,11 +98,49 @@ const Profile = ({ navigation, user, signOutUser }) => {
     setShowPassword(newValue);
   };
 
-  const submitHandler = () => {
-    if (newPassword.length && repeatPassword.length && newPassword === repeatPassword) {
-      console.log("do something");
+  const changePassword = async () => {
+    var user = firebase.auth().currentUser;
+    try {
+      await user.updatePassword(newPassword);
+      return true;
+    } catch (e) {
+      console.log(e);
+      return false;
+    }
+  };
+
+  const submitHandler = async () => {
+    setNewWrongPassword("");
+    setRepeatWrongPassword("");
+    let result;
+    if (
+      newPassword.length &&
+      repeatPassword.length &&
+      newPassword === repeatPassword
+    ) {
+      try {
+        result = await changePassword();
+        if (result) {
+          console.log("password changed successfully");
+          setOldPassword("");
+          setNewPassword("");
+          setRepeatPassword("");
+          console.log(newPassword);
+          Alert.alert("The password has been changed");
+          setChanged(false);
+          setChanged(true);
+          // navigation.navigate("Workouts");
+        }
+      } catch (e) {
+        console.log(e);
+      }
     } else {
-      console.log("passwords do not match");
+      console.log("no coinciden");
+      setRepeatWrongPassword({ msg: "The passwords do not match" });
+      setNewWrongPassword({ msg: "The passwords do not match" });
+
+      console.log(newWrongPassword);
+      console.log(repeatWrongPassword);
     }
   };
 
@@ -106,7 +150,6 @@ const Profile = ({ navigation, user, signOutUser }) => {
       newPassInputHandler={newPassInputHandler}
       repeatPassInputHandler={repeatPassInputHandler}
       submitHandler={submitHandler}
-      invalidPassword={invalidPassword}
       showPasswordHandler={showPasswordHandler}
       username={username}
       changeAvatar={changeAvatar}
@@ -116,6 +159,10 @@ const Profile = ({ navigation, user, signOutUser }) => {
       signOut={signOut}
       newPassword={newPassword}
       oldPassword={oldPassword}
+      newWrongPassword={newWrongPassword}
+      repeatWrongPassword={repeatWrongPassword}
+      changed={changed}
+      // textInput={textInput}
     />
   );
 };
