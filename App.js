@@ -3,7 +3,7 @@ import { StatusBar, LogBox } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { FirebaseAppProvider } from "reactfire";
 import { firebaseConfig } from "./firebase";
-import Navigator from "./routes/loginStack";
+import { LoginStack } from "./routes/loginStack";
 // import { getFont } from "./fonts";
 // import { Context } from './context/userContext'
 import { useFonts, Comfortaa_400Regular } from "@expo-google-fonts/comfortaa";
@@ -44,7 +44,7 @@ export default function App() {
         />
         {/* <Context> */}
         <NavigationContainer>
-          <Navigator></Navigator>
+          <LoginStack></LoginStack>
         </NavigationContainer>
         {/* </Context> */}
       </FirebaseAppProvider>

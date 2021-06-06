@@ -16,6 +16,7 @@ import commonStyles from "../../assets/styles/commonStyles";
 import UserAvatar from "../Dashboard/HomeWork/UserAvatar/container";
 import styles from "./styles";
 import { ScrollView } from "react-native-gesture-handler";
+import { colorsPalette } from "../../assets/styles/colorsPalette";
 
 // import { LinearGradient } from "expo-linear-gradient";
 
@@ -26,13 +27,12 @@ export function Layout({
   emailInputHandler,
   passInputHandler,
   submitHandler,
-  screenHandler,
   showPassword,
   invalidPassword,
-  emailExists,
   changeAvatar,
   points,
   image,
+  signOut,
 }) {
   return (
     <Frame>
@@ -69,7 +69,7 @@ export function Layout({
                 </View>
               </View>
               <View style={commonStyles.pointsContainer}>
-                <Text style={fontStyles.points}>{points} points</Text>
+                <Text style={fontStyles.points}>{points && points} points</Text>
               </View>
               <Text style={fontStyles.inputHeader}>OLD PASSWORD</Text>
               <Input
@@ -102,11 +102,20 @@ export function Layout({
                 style={commonStyles.inputUser}
               />
               <TouchableOpacity
-                onPress={submitHandler}
+                onPress={() => {}}
                 accessibilityLabel="Learn more about this purple button"
-                style={[commonStyles.actionButton, { marginBottom: 80 }]}
+                style={[commonStyles.actionButton]}
               >
                 <Text style={fontStyles.buttonText}>SAVE</Text>
+              </TouchableOpacity>
+              <TouchableOpacity
+                onPress={signOut}
+                style={[commonStyles.textTouch, { marginBottom: 80 }]}
+                accessibilityRole="text"
+              >
+                <Text style={[fontStyles.smallSize, fontStyles.footerText]}>
+                  Sign Out
+                </Text>
               </TouchableOpacity>
             </View>
           </TouchableOpacity>

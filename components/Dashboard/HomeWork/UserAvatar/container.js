@@ -27,12 +27,8 @@ const UserAvatar = ({
   const isFocused = useIsFocused();
 
   useEffect(() => {
-    getProfileImage();
+    user.username && getProfileImage();
   });
-
-  useEffect(() => {
-    console.log("hcie un re redner de user avatarqwe");
-  }, []);
 
   const getProfileImage = async () => {
     let temp;
@@ -46,7 +42,11 @@ const UserAvatar = ({
     setProfileImage(temp);
   };
 
-  return isFocused ? <Layout profileImage={profileImage}></Layout> : <Layout profileImage={null}></Layout>;
+  return isFocused ? (
+    <Layout profileImage={profileImage}></Layout>
+  ) : (
+    <Layout profileImage={null}></Layout>
+  );
 };
 
 const mapStateToProps = (state) => ({

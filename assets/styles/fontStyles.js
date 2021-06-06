@@ -50,7 +50,7 @@ export default StyleSheet.create({
     ...fontType,
     position: "relative",
     fontStyle: "normal",
-    color: "#6EC1E4",
+    color: colorsPalette.colorOne,
     display: "flex",
     alignItems: "center",
     alignSelf: "center",

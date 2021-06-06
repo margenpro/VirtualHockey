@@ -5,18 +5,18 @@ import { useFirebaseApp } from "reactfire";
 import { Layout } from "./layout";
 import * as ImagePicker from "expo-image-picker";
 import { connect } from "react-redux";
+import { signOutAction } from "../../redux/actions/userActions";
 
-const Profile = ({ navigation, user }) => {
+const Profile = ({ navigation, user, signOutUser }) => {
   const storage = getStorage();
   const firebase = useFirebaseApp();
 
   const db = firebase.firestore();
   const [image, setImage] = useState(null);
-  const [points, setPoints] = useState(user.points);
-  const [email, setEmail] = useState(user.email);
-  const [username, setUsername] = useState(user.username);
+  const [points, setPoints] = useState(user.points ? user.points : 0);
+  const [email, setEmail] = useState(user.email ? user.email : "");
+  const [username, setUsername] = useState(user.username ? user.username : "");
   const [password, setPassword] = useState("");
-  const [emailExists, setEmailExists] = useState({ exists: false, msg: "" });
   // const [usernameExists, setUsernameExists] = useState(0);
   const [usernameExists, setUsernameExists] = useState({
     exists: false,
@@ -26,16 +26,17 @@ const Profile = ({ navigation, user }) => {
     invalid: false,
     msg: "",
   });
-  const [logoUrl, setLogoUrl] = useState();
   const [showPassword, setShowPassword] = useState(false);
 
   const uploadImage = async (image) => {
     const response = await fetch(image);
     const blob = await response.blob();
-    var ref = firebase
-      .storage()
-      .ref()
-      .child("/images/avatars/" + user.username + ".png");
+    var ref =
+      user.username &&
+      firebase
+        .storage()
+        .ref()
+        .child("/images/avatars/" + user.username + ".png");
     return ref.put(blob);
   };
 
@@ -67,9 +68,9 @@ const Profile = ({ navigation, user }) => {
     }
   };
 
-  useEffect(() => {}, [image]);
-
-  const screenHandler = () => {
+  const signOut = () => {
+    console.log("signing out");
+    signOutUser();
     navigation.navigate("Login");
   };
 
@@ -92,50 +93,33 @@ const Profile = ({ navigation, user }) => {
     setShowPassword(newValue);
   };
 
-  const submitHandler = async () => {
-    try {
-      const temp = await checkIfUsernameExists();
-
-      if (!temp) {
-        await createUser();
-        screenHandler();
-      }
-    } catch (error) {
-      if (error.code === "username-exists" || error.code === "empty-username")
-        setUsernameExists({ exists: true, msg: error.message });
-      else if (
-        error.code === "auth/email-already-in-use" ||
-        error.code === "auth/invalid-email"
-      )
-        setEmailExists({ exists: true, msg: error.message });
-      else if (error.code === "auth/weak-password")
-        setInvalidPassword({ invalid: true, msg: error.message });
-    }
-  };
-
   return (
     <Layout
       userInputHandler={userInputHandler}
       passInputHandler={passInputHandler}
-      submitHandler={submitHandler}
       invalidPassword={invalidPassword}
-      screenHandler={screenHandler}
       showPassword={showPassword}
       emailInputHandler={emailInputHandler}
       showPasswordHandler={showPasswordHandler}
-      emailExists={emailExists}
       username={username}
       changeAvatar={changeAvatar}
       email={email}
-      points={points}
+      points={points ? points : 0}
       image={image}
+      signOut={signOut}
     />
   );
 };
 
-const mapStateToProps = (state) => ({
-  user: state.userReducer.user,
-  videos: state.videosReducer.videos,
-});
+const mapStateToProps = (state) => {
+  return {
+    user: state.userReducer.user,
+    videos: state.videosReducer.videos,
+  };
+};
 
-export default connect(mapStateToProps, {})(Profile);
+const actionCreators = {
+  signOutUser: signOutAction,
+};
+
+export default connect(mapStateToProps, actionCreators)(Profile);
