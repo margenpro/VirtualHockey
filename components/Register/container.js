@@ -27,17 +27,37 @@ export function Register({ navigation }) {
     invalid: false,
     msg: "",
   });
+
+  const [confirmedPassword, setConfirmedPassword] = useState("");
+
   const [logoUrl, setLogoUrl] = useState();
 
-  // useEffect(() => {
-  //   storageRef
-  //     .child("images/vh_favico[3].png")
-  //     .getDownloadURL()
-  //     .then(resolve => {
-  //       setLogoUrl(resolve);
-  //     })
-  //     .catch(e => console.log(e.code, e.message));
-  // }, []);
+  const sendMail = async () => {
+    let user = {
+      email,
+      username,
+    };
+
+    try {
+      await fetch(
+        "https://us-central1-virtualhockey.cloudfunctions.net/app/api/email",
+        //"http://192.168.0.26:3000/api/email",
+        {
+          headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+          },
+          method: "POST",
+          body: JSON.stringify({ user }),
+        }
+      );
+    } catch (error) {
+      Alert.alert(
+        "Oops!",
+        `An error has occurred! Please try again or contact administrator :(`
+      );
+    }
+  };
 
   const screenHandler = () => {
     navigation.navigate("Login");
@@ -64,25 +84,58 @@ export function Register({ navigation }) {
     setInvalidPassword(false);
   };
 
+  const confirmPassInputHandler = (newValue) => {
+    setConfirmedPassword(newValue);
+  };
+
+  const validatePasswordConfirmation = () => {
+    if (password !== confirmedPassword) {
+      throw { code: "pass/no-match", message: "Passwords must match" };
+    }
+  };
+
+  const validatePassword = () => {
+    var strongRegex = new RegExp("^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.{8,})");
+
+    if (!strongRegex.test(password)) {
+      throw {
+        code: "pass/invalid-pass",
+        message:
+          "Password must contain:\nA minimum eight characters,\nAt least one uppercase letter\nAt least one lowercase letter and one number",
+      };
+    }
+  };
+
   const submitHandler = async () => {
     setLoading(true);
+
     try {
+      validatePassword();
+      validatePasswordConfirmation();
+
       const temp = await checkIfUsernameExists();
 
       if (!temp) {
         await createUser();
+        sendMail();
         screenHandler();
       }
     } catch (error) {
-      if (error.code === "username-exists" || error.code === "empty-username")
+      if (error.code === "username-exists" || error.code === "empty-username") {
         setUsernameExists({ exists: true, msg: error.message });
-      else if (
+      } else if (
         error.code === "auth/email-already-in-use" ||
         error.code === "auth/invalid-email"
-      )
+      ) {
         setEmailExists({ exists: true, msg: error.message });
-      else if (error.code === "auth/weak-password")
+      } else if (
+        error.code === "auth/weak-password" ||
+        error.code === "pass/invalid-pass"
+      ) {
         setInvalidPassword({ invalid: true, msg: error.message });
+      } else if (error.code === "pass/no-match") {
+        setConfirmedPassword({ invalid: true, msg: error.message });
+      }
     }
     setLoading(false);
   };
@@ -140,6 +193,8 @@ export function Register({ navigation }) {
 
   return (
     <Layout
+      confirmPassInputHandler={confirmPassInputHandler}
+      confirmedPassword={confirmedPassword}
       userInputHandler={userInputHandler}
       passInputHandler={passInputHandler}
       submitHandler={submitHandler}
