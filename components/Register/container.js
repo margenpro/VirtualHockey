@@ -117,6 +117,7 @@ export function Register({ navigation }) {
 
       if (!temp) {
         await createUser();
+        await sendMail();
         screenHandler();
       }
     } catch (error) {
