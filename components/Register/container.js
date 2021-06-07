@@ -77,7 +77,21 @@ export function Register({ navigation }) {
 
   const validatePasswordConfirmation = () => {
     if (password !== confirmedPassword) {
-      throw { code: "pass/no-match", message: "Password must contain..." };
+      throw { code: "pass/no-match", message: "Passwords must match" };
+    }
+  };
+
+  const validatePassword = () => {
+    var strongRegex = new RegExp(
+      "^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*])(?=.{8,})"
+    );
+
+    if (!strongRegex.test(password)) {
+      throw {
+        code: "pass/invalid-pass",
+        message:
+          "Password must contain:\nA minimum eight characters,\nAt least one uppercase letter\nAt least one lowercase letter and one number\nOne special character",
+      };
     }
   };
 
@@ -85,6 +99,7 @@ export function Register({ navigation }) {
     setLoading(true);
 
     try {
+      validatePassword();
       validatePasswordConfirmation();
 
       const temp = await checkIfUsernameExists();
@@ -101,7 +116,10 @@ export function Register({ navigation }) {
         error.code === "auth/invalid-email"
       ) {
         setEmailExists({ exists: true, msg: error.message });
-      } else if (error.code === "auth/weak-password") {
+      } else if (
+        error.code === "auth/weak-password" ||
+        error.code === "pass/invalid-pass"
+      ) {
         setInvalidPassword({ invalid: true, msg: error.message });
       } else if (error.code === "pass/no-match") {
         setConfirmedPassword({ invalid: true, msg: error.message });
