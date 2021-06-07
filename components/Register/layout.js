@@ -23,7 +23,7 @@ export function Layout({
   emailInputHandler,
   passInputHandler,
   confirmPassInputHandler,
-  confirmPassword,
+  confirmedPassword,
   submitHandler,
   screenHandler,
   invalidPassword,
@@ -84,7 +84,7 @@ export function Layout({
               <Password
                 tag={"CONFIRM PASSWORD"}
                 passInputHandler={confirmPassInputHandler}
-                wrongPassword={confirmPassword}
+                wrongPassword={confirmedPassword}
               />
               <TouchableOpacity
                 onPress={submitHandler}

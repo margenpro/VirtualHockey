@@ -28,22 +28,36 @@ export function Register({ navigation }) {
     msg: "",
   });
 
-  const [confirmedPassword, setConfirmedPassword] = useState({
-    invalid: false,
-    msg: "",
-  });
+  const [confirmedPassword, setConfirmedPassword] = useState("");
 
   const [logoUrl, setLogoUrl] = useState();
 
-  // useEffect(() => {
-  //   storageRef
-  //     .child("images/vh_favico[3].png")
-  //     .getDownloadURL()
-  //     .then(resolve => {
-  //       setLogoUrl(resolve);
-  //     })
-  //     .catch(e => console.log(e.code, e.message));
-  // }, []);
+  const sendMail = async () => {
+    let user = {
+      email,
+      username,
+    };
+
+    try {
+      await fetch(
+        "https://us-central1-virtualhockey.cloudfunctions.net/app/api/email",
+        //"http://192.168.0.26:3000/api/email",
+        {
+          headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+          },
+          method: "POST",
+          body: JSON.stringify({ user }),
+        }
+      );
+    } catch (error) {
+      Alert.alert(
+        "Oops!",
+        `An error has occurred! Please try again or contact administrator :(`
+      );
+    }
+  };
 
   const screenHandler = () => {
     navigation.navigate("Login");
@@ -72,7 +86,6 @@ export function Register({ navigation }) {
 
   const confirmPassInputHandler = (newValue) => {
     setConfirmedPassword(newValue);
-    setConfirmedPassword({ invalid: false });
   };
 
   const validatePasswordConfirmation = () => {
@@ -82,15 +95,13 @@ export function Register({ navigation }) {
   };
 
   const validatePassword = () => {
-    var strongRegex = new RegExp(
-      "^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*])(?=.{8,})"
-    );
+    var strongRegex = new RegExp("^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.{8,})");
 
     if (!strongRegex.test(password)) {
       throw {
         code: "pass/invalid-pass",
         message:
-          "Password must contain:\nA minimum eight characters,\nAt least one uppercase letter\nAt least one lowercase letter and one number\nOne special character",
+          "Password must contain:\nA minimum eight characters,\nAt least one uppercase letter\nAt least one lowercase letter and one number",
       };
     }
   };
@@ -182,7 +193,7 @@ export function Register({ navigation }) {
   return (
     <Layout
       confirmPassInputHandler={confirmPassInputHandler}
-      confirmPassword={confirmedPassword}
+      confirmedPassword={confirmedPassword}
       userInputHandler={userInputHandler}
       passInputHandler={passInputHandler}
       submitHandler={submitHandler}
