@@ -27,6 +27,12 @@ export function Register({ navigation }) {
     invalid: false,
     msg: "",
   });
+
+  const [confirmedPassword, setConfirmedPassword] = useState({
+    invalid: false,
+    msg: "",
+  });
+
   const [logoUrl, setLogoUrl] = useState();
 
   // useEffect(() => {
@@ -64,9 +70,23 @@ export function Register({ navigation }) {
     setInvalidPassword(false);
   };
 
+  const confirmPassInputHandler = (newValue) => {
+    setConfirmedPassword(newValue);
+    setConfirmedPassword({ invalid: false });
+  };
+
+  const validatePasswordConfirmation = () => {
+    if (password !== confirmedPassword) {
+      throw { code: "pass/no-match", message: "Password must contain..." };
+    }
+  };
+
   const submitHandler = async () => {
     setLoading(true);
+
     try {
+      validatePasswordConfirmation();
+
       const temp = await checkIfUsernameExists();
 
       if (!temp) {
@@ -74,15 +94,18 @@ export function Register({ navigation }) {
         screenHandler();
       }
     } catch (error) {
-      if (error.code === "username-exists" || error.code === "empty-username")
+      if (error.code === "username-exists" || error.code === "empty-username") {
         setUsernameExists({ exists: true, msg: error.message });
-      else if (
+      } else if (
         error.code === "auth/email-already-in-use" ||
         error.code === "auth/invalid-email"
-      )
+      ) {
         setEmailExists({ exists: true, msg: error.message });
-      else if (error.code === "auth/weak-password")
+      } else if (error.code === "auth/weak-password") {
         setInvalidPassword({ invalid: true, msg: error.message });
+      } else if (error.code === "pass/no-match") {
+        setConfirmedPassword({ invalid: true, msg: error.message });
+      }
     }
     setLoading(false);
   };
@@ -140,6 +163,8 @@ export function Register({ navigation }) {
 
   return (
     <Layout
+      confirmPassInputHandler={confirmPassInputHandler}
+      confirmPassword={confirmedPassword}
       userInputHandler={userInputHandler}
       passInputHandler={passInputHandler}
       submitHandler={submitHandler}
