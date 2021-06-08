@@ -130,36 +130,65 @@ const Profile = ({ navigation, user, signOutUser }) => {
     setNewWrongPassword("");
     setRepeatWrongPassword("");
     let result;
-    if (
-      newPassword.length &&
-      repeatPassword.length &&
-      newPassword === repeatPassword
-    ) {
-      try {
-        const tryCheck = await checkOldPassword();
-        if (tryCheck) {
-          setOldWrongPassword("");
-          result = await changePassword();
-          if (result) {
-            setOldPassword("");
-            setNewPassword("");
-            setRepeatPassword("");
-            Alert.alert("The password has been changed");
-            setChanged(false);
-            setChanged(true);
-          }
-        } else {
-          setOldWrongPassword({ msg: "The password is invalid." });
+
+    try {
+      const tryCheck = await checkOldPassword();
+      if (tryCheck) {
+        setOldWrongPassword("");
+        validatePassword();
+        checkSamePass();
+        comparePasswords();
+
+        result = await changePassword();
+        if (result) {
+          setOldPassword("");
+          setNewPassword("");
+          setRepeatPassword("");
+          Alert.alert("The password has been changed");
+          setChanged(false);
+          setChanged(true);
         }
-      } catch (e) {
-        console.log(e);
+      } else {
+        setOldWrongPassword({ msg: "The password is invalid." });
       }
-    } else {
-      setRepeatWrongPassword({ msg: "The passwords do not match" });
-      setNewWrongPassword({ msg: "The passwords do not match" });
+    } catch (e) {
+      if (e.code === "pass/invalid-pass" || e.code === "pass/same-pass")
+        setNewWrongPassword({
+          msg: e.message,
+        });
+      else if (e.code === "pass/no-match")
+        setRepeatWrongPassword({
+          msg: e.message,
+        });
     }
   };
 
+  const comparePasswords = () => {
+    if (newPassword !== repeatPassword) {
+      throw { code: "pass/no-match", message: "Passwords must match" };
+    }
+  };
+
+  const checkSamePass = () => {
+    if (oldPassword === newPassword) {
+      throw {
+        code: "pass/same-pass",
+        message: "Password can't be the same as before",
+      };
+    }
+  };
+
+  const validatePassword = () => {
+    var strongRegex = new RegExp("^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.{8,})");
+
+    if (!strongRegex.test(newPassword)) {
+      throw {
+        code: "pass/invalid-pass",
+        message:
+          "Password must have 8 characters, 1 upper, 1 lower and 1 number",
+      };
+    }
+  };
   return (
     <Layout
       oldPassInputHandler={oldPassInputHandler}
