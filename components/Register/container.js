@@ -29,6 +29,10 @@ export function Register({ navigation }) {
   });
 
   const [confirmedPassword, setConfirmedPassword] = useState("");
+  const [invalidConfirmedPassword, setInvalidConfirmedPassword] = useState({
+    invalid: false,
+    msg: "",
+  });
 
   const [logoUrl, setLogoUrl] = useState();
 
@@ -86,9 +90,11 @@ export function Register({ navigation }) {
 
   const confirmPassInputHandler = (newValue) => {
     setConfirmedPassword(newValue);
+    setInvalidConfirmedPassword(false);
   };
 
   const validatePasswordConfirmation = () => {
+    console.log(confirmedPassword);
     if (password !== confirmedPassword) {
       throw { code: "pass/no-match", message: "Passwords must match" };
     }
@@ -101,7 +107,7 @@ export function Register({ navigation }) {
       throw {
         code: "pass/invalid-pass",
         message:
-          "Password must contain:\nA minimum eight characters,\nAt least one uppercase letter\nAt least one lowercase letter and one number",
+          "Password must contain a minimum eight characters, one uppercase letter, one lowercase letter and one number",
       };
     }
   };
@@ -115,11 +121,11 @@ export function Register({ navigation }) {
 
       const temp = await checkIfUsernameExists();
 
-      if (!temp) {
-        await createUser();
-        sendMail();
-        screenHandler();
-      }
+      // if (!temp) {
+      //   await createUser();
+      //   sendMail();
+      //   screenHandler();
+      // }
     } catch (error) {
       if (error.code === "username-exists" || error.code === "empty-username") {
         setUsernameExists({ exists: true, msg: error.message });
@@ -134,7 +140,7 @@ export function Register({ navigation }) {
       ) {
         setInvalidPassword({ invalid: true, msg: error.message });
       } else if (error.code === "pass/no-match") {
-        setConfirmedPassword({ invalid: true, msg: error.message });
+        setInvalidConfirmedPassword({ invalid: true, msg: error.message });
       }
     }
     setLoading(false);
@@ -194,7 +200,7 @@ export function Register({ navigation }) {
   return (
     <Layout
       confirmPassInputHandler={confirmPassInputHandler}
-      confirmedPassword={confirmedPassword}
+      confirmedPassword={invalidConfirmedPassword}
       userInputHandler={userInputHandler}
       passInputHandler={passInputHandler}
       submitHandler={submitHandler}
