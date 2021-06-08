@@ -26,6 +26,7 @@ const Profile = ({ navigation, user, signOutUser }) => {
 
   const [newWrongPassword, setNewWrongPassword] = useState("");
   const [repeatWrongPassword, setRepeatWrongPassword] = useState("");
+  const [oldWrongPassword, setOldWrongPassword] = useState("");
 
   // let textInput;
 
@@ -109,6 +110,22 @@ const Profile = ({ navigation, user, signOutUser }) => {
     }
   };
 
+  const checkOldPassword = async () => {
+    let result = false;
+    try {
+      await firebase
+        .auth()
+        .signInWithEmailAndPassword(
+          user.email ? user.email : "",
+          oldPassword ? oldPassword : ""
+        );
+      result = true;
+    } catch (e) {
+      console.log(e);
+    }
+    return result;
+  };
+
   const submitHandler = async () => {
     setNewWrongPassword("");
     setRepeatWrongPassword("");
@@ -119,28 +136,27 @@ const Profile = ({ navigation, user, signOutUser }) => {
       newPassword === repeatPassword
     ) {
       try {
-        result = await changePassword();
-        if (result) {
-          console.log("password changed successfully");
-          setOldPassword("");
-          setNewPassword("");
-          setRepeatPassword("");
-          console.log(newPassword);
-          Alert.alert("The password has been changed");
-          setChanged(false);
-          setChanged(true);
-          // navigation.navigate("Workouts");
+        const tryCheck = await checkOldPassword();
+        if (tryCheck) {
+          setOldWrongPassword("");
+          result = await changePassword();
+          if (result) {
+            setOldPassword("");
+            setNewPassword("");
+            setRepeatPassword("");
+            Alert.alert("The password has been changed");
+            setChanged(false);
+            setChanged(true);
+          }
+        } else {
+          setOldWrongPassword({ msg: "The password is invalid." });
         }
       } catch (e) {
         console.log(e);
       }
     } else {
-      console.log("no coinciden");
       setRepeatWrongPassword({ msg: "The passwords do not match" });
       setNewWrongPassword({ msg: "The passwords do not match" });
-
-      console.log(newWrongPassword);
-      console.log(repeatWrongPassword);
     }
   };
 
@@ -161,6 +177,7 @@ const Profile = ({ navigation, user, signOutUser }) => {
       oldPassword={oldPassword}
       newWrongPassword={newWrongPassword}
       repeatWrongPassword={repeatWrongPassword}
+      oldWrongPassword={oldWrongPassword}
       changed={changed}
       // textInput={textInput}
     />

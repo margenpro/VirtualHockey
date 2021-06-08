@@ -35,6 +35,7 @@ export function Layout({
   signOut,
   newWrongPassword,
   repeatWrongPassword,
+  oldWrongPassword,
   changed,
   // textInput,
 }) {
@@ -80,7 +81,7 @@ export function Layout({
                   <Password
                     tag={"OLD PASSWORD"}
                     passInputHandler={oldPassInputHandler}
-                    // wrongPassword={wrongPassword}
+                    wrongPassword={oldWrongPassword}
                   />
                   <Password
                     tag={"NEW PASSWORD"}
