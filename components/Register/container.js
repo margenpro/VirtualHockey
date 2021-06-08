@@ -107,7 +107,7 @@ export function Register({ navigation }) {
       throw {
         code: "pass/invalid-pass",
         message:
-          "Password must contain a minimum eight characters, one uppercase letter, one lowercase letter and one number",
+          "Password must have 8 characters, 1 upper, 1 lower and 1 number",
       };
     }
   };
@@ -121,11 +121,11 @@ export function Register({ navigation }) {
 
       const temp = await checkIfUsernameExists();
 
-      // if (!temp) {
-      //   await createUser();
-      //   sendMail();
-      //   screenHandler();
-      // }
+      if (!temp) {
+        await createUser();
+        sendMail();
+        screenHandler();
+      }
     } catch (error) {
       if (error.code === "username-exists" || error.code === "empty-username") {
         setUsernameExists({ exists: true, msg: error.message });
