@@ -1,12 +1,11 @@
 import React, { useEffect, useRef, useState } from "react";
 import { Layout } from "./layout";
 import * as ScreenOrientation from "expo-screen-orientation";
-import { Platform } from "react-native";
+import { Platform, Alert } from "react-native";
 import { connect } from 'react-redux'
 import { setterUserAction } from '../../../redux/actions/userActions'
 import { getFirestore } from '../../../firebase'
 import { assignPoints } from '../../../utils/Functions/pointsHandler'
-import { Alert } from "react-native"
 
 const Video = ({ setvideoShow, videos, user, nroVideo, setUser }) => {
 
@@ -16,23 +15,32 @@ const Video = ({ setvideoShow, videos, user, nroVideo, setUser }) => {
   const db = getFirestore()
 
   useEffect(() => {
-    setUrlVideo(videos.find(v => v.nro === nroVideo).url)
-  }, [])
+    setUrlVideo(videos.find((v) => v.nro === nroVideo).url);
+  }, []);
 
-  const onVideoFinish = async playbackStatus => {
+  const loadErrorHandler = () => {
+    Alert.alert(
+      "Ooops!",
+      "An unexpected error has ocurred, please try again later.",
+      [
+        {
+          onPress: () => setvideoShow(false),
+        },
+      ]
+    );
+  };
+
+  const onVideoFinish = async (playbackStatus) => {
     if (playbackStatus.didJustFinish) {
 
       if (user.lastVideo < videos.length) {
         nroVideo++
         try {
-          await db.collection("users")
-            .doc(user.id)
-            .update({
-              "lastVideoWatched": nroVideo
-            })
-          setUser({ lastVideo: nroVideo })
-        } catch (error) {
-        }
+          await db.collection("users").doc(user.id).update({
+            lastVideoWatched: nroVideo,
+          });
+          setUser({ lastVideo: nroVideo });
+        } catch (error) {}
       }
       const points = await assignPoints("Video", user, setUser)
       if (points > 0) {
@@ -53,7 +61,7 @@ const Video = ({ setvideoShow, videos, user, nroVideo, setUser }) => {
         ],
       )
     }
-  }
+  };
 
   const presentFullScreen = () => {
     video.current.presentFullscreenPlayer();
@@ -94,27 +102,28 @@ const Video = ({ setvideoShow, videos, user, nroVideo, setUser }) => {
 
   return (
     <>
-      {urlVideo &&
+      {urlVideo && (
         <Layout
           urlVideo={urlVideo}
           video={video}
+          loadErrorHandler={loadErrorHandler}
           presentFullScreen={presentFullScreen}
           playVideo={playVideo}
           fullScreenHandler={fullScreenHandler}
           onVideoFinish={onVideoFinish}
         />
-      }
+      )}
     </>
   );
-}
-const mapStateToProps = state => {
+};
+const mapStateToProps = (state) => {
   return {
     user: state.userReducer.user,
-    videos: state.videosReducer.videos
-  }
-}
+    videos: state.videosReducer.videos,
+  };
+};
 const actionCreators = {
-  setUser: setterUserAction
-}
+  setUser: setterUserAction,
+};
 
 export default connect(mapStateToProps, actionCreators)(Video)
