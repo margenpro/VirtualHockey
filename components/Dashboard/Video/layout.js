@@ -13,17 +13,17 @@ export function Layout({
 }) {
     return (
         <Frame>
-            <Video
-                ref={video}
-                // style={styles.video}
-                source={{ uri: urlVideo }}
-                useNativeControls
-                resizeMode="contain"
-                onLoadStart={presentFullScreen}
-                onReadyForDisplay={playVideo}
-                onFullscreenUpdate={fullScreenHandler}
-                onPlaybackStatusUpdate={status => onVideoFinish(status)}
-            />
+                <Video
+                    ref={video}
+                    // style={styles.video}
+                    source={{ uri: urlVideo }}
+                    useNativeControls
+                    resizeMode="contain"
+                    onLoadStart={presentFullScreen}
+                    onReadyForDisplay={playVideo}
+                    onFullscreenUpdate={fullScreenHandler}
+                    onPlaybackStatusUpdate={status => onVideoFinish(status)}
+                />
         </Frame>
     )
 }

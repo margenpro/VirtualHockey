@@ -5,11 +5,14 @@ import { Platform } from "react-native";
 import { connect } from 'react-redux'
 import { setterUserAction } from '../../../redux/actions/userActions'
 import { getFirestore } from '../../../firebase'
+import { assignPoints } from '../../../utils/Functions/pointsHandler'
+import { Alert } from "react-native"
 
 const Video = ({ setvideoShow, videos, user, nroVideo, setUser }) => {
 
   const video = useRef(null);
   const [urlVideo, setUrlVideo] = useState(undefined)
+  const [earnedPoints, setEarnedPoints] = useState(0)
   const db = getFirestore()
 
   useEffect(() => {
@@ -18,8 +21,8 @@ const Video = ({ setvideoShow, videos, user, nroVideo, setUser }) => {
 
   const onVideoFinish = async playbackStatus => {
     if (playbackStatus.didJustFinish) {
+
       if (user.lastVideo < videos.length) {
-        //actualizar lastVideoWatched del usuario logueado en firebase
         nroVideo++
         try {
           await db.collection("users")
@@ -31,7 +34,24 @@ const Video = ({ setvideoShow, videos, user, nroVideo, setUser }) => {
         } catch (error) {
         }
       }
+      const points = await assignPoints("Video", user, setUser)
+      if (points > 0) {
+        setEarnedPoints(points)
+      }
+    }
+  }
 
+  const showEarnedPoints = () => {
+    if (earnedPoints > 0) {
+      Alert.alert(
+        "Congrats!!",
+        "You have earned " + earnedPoints + " points!",
+        [
+          {
+            text: "OK",
+          }
+        ],
+      )
     }
   }
 
@@ -57,10 +77,12 @@ const Video = ({ setvideoShow, videos, user, nroVideo, setUser }) => {
             ScreenOrientation.lockAsync(
               ScreenOrientation.OrientationLock.PORTRAIT_UP
             );
+            showEarnedPoints()
           } else if (Platform.OS === "android") {
             await ScreenOrientation.lockAsync(
               ScreenOrientation.OrientationLock.PORTRAIT
             );
+            showEarnedPoints()
           }
         } catch (e) {
           console.log(e);
@@ -72,16 +94,16 @@ const Video = ({ setvideoShow, videos, user, nroVideo, setUser }) => {
 
   return (
     <>
-    {urlVideo && 
-    <Layout
-      urlVideo={urlVideo}
-      video={video}
-      presentFullScreen={presentFullScreen}
-      playVideo={playVideo}
-      fullScreenHandler={fullScreenHandler}
-      onVideoFinish={onVideoFinish}
-    />
-    }
+      {urlVideo &&
+        <Layout
+          urlVideo={urlVideo}
+          video={video}
+          presentFullScreen={presentFullScreen}
+          playVideo={playVideo}
+          fullScreenHandler={fullScreenHandler}
+          onVideoFinish={onVideoFinish}
+        />
+      }
     </>
   );
 }

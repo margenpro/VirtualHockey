@@ -30,20 +30,16 @@ const HomeWork = ({
   };
 
   useEffect(() => {
-    const getCurrentUserData = async () => {
-      try {
-        setUserName(user.username);
-        setUserPoints(user.points);
-        await calculationRanking(user.points);
-      } catch (error) {
-        throw new Error(error.message);
-      }
-    };
-
     getCurrentUserData();
-  }, []);
+  }, [user.points]);
 
-  const calculationRanking = async (points) => {
+  const getCurrentUserData = () => {
+    setUserName(user.username);
+    setUserPoints(user.points);
+    calculationRanking(user.points);
+  };
+
+  const calculationRanking = (points) => {
     try {
       db.collection("users")
         .where("points", ">", points)

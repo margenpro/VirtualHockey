@@ -1,26 +1,25 @@
-//import { connect } from 'react-redux'
-//import { setterUserAction } from '../../redux/actions/userActions'
+import { connect } from 'react-redux'
+import { setterUserAction } from '../../redux/actions/userActions'
 import { getFirestore } from '../../firebase'
-import { useFirebaseApp } from "reactfire";
 
 const dailyLogin = 5
 const videoFinished = 20
 const db = getFirestore()
-const firebase = useFirebaseApp()
 
-export async function assignPoints (event, user, setUser) {
+export async function assignPoints(event, user, setUser) {
     const actualPoints = user.points
-    const updatedPoints = actualPoints
-    const earnPoints = 0
+    let updatedPoints = actualPoints
+    let earnPoints = 0
+    /*
     if (event === "Login") {
+        //Igualar que sea el mismo dia sino ganar puntos
         let lastSignIn = firebase.auth().currentUser.metadata.lastSignInTime
-        let d1 = new Date()
-        let today = new Date(d1.getUTCFullYear(), d1.getUTCMonth(), d1.getUTCDate(), d1.getUTCHours(), d1.getUTCMinutes(), d1.getUTCSeconds())
-        let dif = today - lastSignIn
-        if (dif >= 1) {
+        let today = new Date()
+        if (today != lastSignIn) {
             earnPoints = dailyLogin
         }
-    } else if (event === "Video") {
+    }*/
+    if (event === "Video") {
         earnPoints = videoFinished
     }
     updatedPoints = actualPoints + earnPoints
@@ -38,7 +37,7 @@ export async function assignPoints (event, user, setUser) {
     }
     return earnPoints
 }
-/*
+
 const mapStateToProps = state => {
     return {
         user: state.userReducer.user,
@@ -48,4 +47,3 @@ const actionCreators = {
     setUser: setterUserAction
 }
 connect(mapStateToProps, actionCreators)
-*/
