@@ -187,6 +187,7 @@ export function Register({ navigation }) {
         paymentDate: null,
         lastVideoWatched: 1,
         points: 250,
+        lastSignIn: "",
       });
 
       return { code: null };

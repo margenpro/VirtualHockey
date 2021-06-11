@@ -10,6 +10,7 @@ export const setterUserAction = ({
   lastVideo,
   points,
   position,
+  lastSignIn,
 }) => ({
   type: SETTER_USER,
   payload: {
@@ -21,6 +22,7 @@ export const setterUserAction = ({
     lastVideo,
     points,
     position,
+    lastSignIn,
   },
 });
 

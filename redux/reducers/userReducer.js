@@ -11,6 +11,7 @@ const initialState = {
     lastVideo: 0,
     points: 0,
     position: 0,
+    lastSignIn: "",
   },
 };
 
@@ -36,7 +37,9 @@ export const userReducer = (state = initialState, action) => {
     const position = action.payload.position
       ? action.payload.position
       : state.user.position;
-
+    const lastSignIn = action.payload.lastSignIn
+      ? action.payload.lastSignIn
+      : state.user.lastSignIn
     return {
       ...state,
       user: {
@@ -48,6 +51,7 @@ export const userReducer = (state = initialState, action) => {
         lastVideo,
         points,
         position,
+        lastSignIn,
       },
     };
   }
