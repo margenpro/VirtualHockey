@@ -1,5 +1,3 @@
-import { connect } from 'react-redux'
-import { setterUserAction } from '../../redux/actions/userActions'
 import { getFirestore } from '../../firebase'
 
 const dailyLogin = 5
@@ -7,18 +5,22 @@ const videoFinished = 20
 const db = getFirestore()
 
 export async function assignPoints(event, user, setUser) {
-    const actualPoints = user.points
+    const actualPoints = user.points ? user.points : 0
+    let lastSignIn = user.lastSignIn ? user.lastSignIn : ""
+    let today = new Date()
     let updatedPoints = actualPoints
     let earnPoints = 0
-    /*
     if (event === "Login") {
-        //Igualar que sea el mismo dia sino ganar puntos
-        let lastSignIn = firebase.auth().currentUser.metadata.lastSignInTime
-        let today = new Date()
-        if (today != lastSignIn) {
-            earnPoints = dailyLogin
+        let signIn = new Date()
+        signIn.setTime(Date.parse(lastSignIn))
+        if (today.getFullYear() >= signIn.getFullYear()) {
+            if (today.getMonth() >= signIn.getMonth()) {
+                if (today.getDate() !== signIn.getDate()) {
+                    earnPoints = dailyLogin
+                }
+            }
         }
-    }*/
+    }
     if (event === "Video") {
         earnPoints = videoFinished
     }
@@ -28,22 +30,13 @@ export async function assignPoints(event, user, setUser) {
             await db.collection("users")
                 .doc(user.id)
                 .update({
-                    "points": updatedPoints
+                    "points": updatedPoints,
+                    "lastSignIn": today.toString(),
                 })
-            setUser({ points: updatedPoints })
+            setUser({ points: updatedPoints, lastSignIn: today.toString() })
         } catch (error) {
             console.log(error)
         }
     }
     return earnPoints
 }
-
-const mapStateToProps = state => {
-    return {
-        user: state.userReducer.user,
-    }
-}
-const actionCreators = {
-    setUser: setterUserAction
-}
-connect(mapStateToProps, actionCreators)

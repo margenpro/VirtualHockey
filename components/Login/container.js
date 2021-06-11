@@ -7,6 +7,8 @@ import Icon from "react-native-vector-icons/FontAwesome";
 import { connect } from "react-redux";
 import { setterUserAction } from "../../redux/actions/userActions";
 import { setVideosAction } from "../../redux/actions/videosActions";
+import { assignPoints } from "../../utils/Functions/pointsHandler"
+import { Alert } from "react-native";
 
 const Login = ({ navigation, user, setUser, setVideos, videos }) => {
   const storage = getStorage();
@@ -25,25 +27,8 @@ const Login = ({ navigation, user, setUser, setVideos, videos }) => {
   const [logoUrl, setLogoUrl] = useState();
   const [loading, setLoading] = useState(false);
 
-  // useEffect(({usr}) => {
-  //   storageRef
-  //     .child("images/vh_favico[3].png")
-  //     .getDownloadURL()
-  //     .then(resolve => {
-  //       setLogoUrl(resolve);
-  //     })
-  //     .catch(e => console.log(e.code, e.message));
-  // }, []);
-
-  // SF Direccionar a la screen Register
   const screenHandlerRegister = () => {
     navigation.navigate("Register");
-  };
-
-  const handleKeyDown = (e) => {
-    if (e.nativeEvent.key == "Enter") {
-      // CURRENTLY NOT WORKING
-    }
   };
 
   const getCurrentUserData = async () => {
@@ -101,11 +86,27 @@ const Login = ({ navigation, user, setUser, setVideos, videos }) => {
     }
   };
 
+  const showEarnedPoints = (earnedPoints) => {
+    if (earnedPoints > 0) {
+      Alert.alert(
+        "Welcome Back!!",
+        "You have earned " + earnedPoints + " points!",
+        [
+          {
+            text: "OK",
+          }
+        ],
+      )
+    }
+  };
+
   const submitHandler = async () => {
     setLoading(true);
     try {
       await firebase.auth().signInWithEmailAndPassword(email, password);
       const data = await getCurrentUserData();
+
+      const signInDate = firebase.auth().currentUser.metadata.lastSignInTime
       setUser({
         id: data.id,
         email,
@@ -114,8 +115,13 @@ const Login = ({ navigation, user, setUser, setVideos, videos }) => {
         paymentDate: data.paymentDate,
         lastVideo: data.lastVideoWatched,
         points: data.points,
+        lastSignIn: signInDate,
       });
       let videosList = await getAllVideos();
+
+      const points = await assignPoints("Login",data,setUser)
+      showEarnedPoints(points)
+
       setVideos(videosList);
       screenHandlerLanding();
     } catch (error) {
@@ -136,7 +142,6 @@ const Login = ({ navigation, user, setUser, setVideos, videos }) => {
       screenHandlerRegister={screenHandlerRegister}
       wrongPassword={wrongPassword}
       forTesting={forTesting}
-      handleKeyDown={handleKeyDown}
       toPayments={toPayments}
       loading={loading}
     />

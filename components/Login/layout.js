@@ -29,7 +29,6 @@ export function Layout({
   wrongPassword,
   screenHandlerRegister,
   forTesting,
-  handleKeyDown,
   toPayments,
   loading,
 }) {

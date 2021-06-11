@@ -82,7 +82,7 @@ const Video = ({ setvideoShow, videos, user, nroVideo, setUser }) => {
         await video.current.stopAsync();
         try {
           if (Platform.OS === "ios") {
-            ScreenOrientation.lockAsync(
+            await ScreenOrientation.lockAsync(
               ScreenOrientation.OrientationLock.PORTRAIT_UP
             );
             showEarnedPoints()
