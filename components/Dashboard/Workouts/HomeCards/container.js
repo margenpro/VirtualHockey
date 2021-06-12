@@ -13,6 +13,25 @@ function HomeCards({ navigation, user, setVideoShow, setNroVideo }) {
     videosList();
   }, []);
 
+
+  const videosList = async () => {
+    let arrayVideos = [];
+    try {
+      for (let i = lastVideo - 1; i > 0; i--) {
+        let resolve = await storageRef
+          .child("images/videoImages/" + i + ".png")
+          .getDownloadURL();
+        arrayVideos[lastVideo - i] = {
+          url: resolve,
+          id: i,
+        };
+      }
+      setVideoImages(arrayVideos);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  /*
   const videosList = async () => {
     let arrayVideos = []
     for (let i = (lastVideo - 1); i > 0 ; i--) {
@@ -29,7 +48,7 @@ function HomeCards({ navigation, user, setVideoShow, setNroVideo }) {
     }
     setVideoImages(arrayVideos);
   };
-
+*/
   return (
     <>
       <Layout

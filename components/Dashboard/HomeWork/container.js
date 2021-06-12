@@ -31,7 +31,8 @@ const HomeWork = ({
 
   useEffect(() => {
     getCurrentUserData();
-  }, [user.points]);
+    console.log(user.points)
+  }, []);
 
   const getCurrentUserData = () => {
     setUserName(user.username);
@@ -58,8 +59,8 @@ const HomeWork = ({
       <Layout
         getProfileImage={getProfileImage}
         navigateToWorkouts={navigateToWorkouts}
-        userName={userName}
-        userPoints={userPoints}
+        userName={user.username}
+        userPoints={user.points}
         userPosition={userPosition}
         setvideoShow={setvideoShow}
       ></Layout>

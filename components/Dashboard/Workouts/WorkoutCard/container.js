@@ -33,15 +33,15 @@ const WorkoutCard = ({
     getUrlVideoImage();
   }, []);
 
-  const getUrlVideoImage = async () => {
-    await storageRef
+  const getUrlVideoImage = () => {
+    storageRef
       .child("images/videoImages/" + lastVideo + ".png")
       .getDownloadURL()
       .then((resolve) => {
         setVideoImage(resolve);
       })
       .catch((e) => console.log(e.code, e.message));
-  };
+  }
 
   const handleOnPress = () => {
     setNroVideo(lastVideo);
