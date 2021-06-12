@@ -7,7 +7,7 @@ import Icon from "react-native-vector-icons/FontAwesome";
 import { connect } from "react-redux";
 import { setterUserAction } from "../../redux/actions/userActions";
 import { setVideosAction } from "../../redux/actions/videosActions";
-import { assignPoints } from "../../utils/Functions/pointsHandler"
+import { assignPoints } from "../../utils/functions/pointsHandler"
 import { Alert } from "react-native";
 
 const Login = ({ navigation, user, setUser, setVideos, videos }) => {
