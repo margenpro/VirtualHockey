@@ -11,7 +11,7 @@ function HomeCards({ navigation, user, setVideoShow, setNroVideo }) {
   const lastVideo = user.lastVideo
   useEffect(() => {
     videosList();
-  }, []);
+  });
 
   const videosList = async () => {
     let arrayVideos = []

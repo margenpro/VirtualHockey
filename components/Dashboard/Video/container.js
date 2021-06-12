@@ -5,7 +5,7 @@ import { Platform, Alert } from "react-native";
 import { connect } from 'react-redux'
 import { setterUserAction } from '../../../redux/actions/userActions'
 import { getFirestore } from '../../../firebase'
-import { assignPoints } from '../../../utils/Functions/pointsHandler'
+import { assignPoints } from '../../../utils/functions/pointsHandler'
 
 const Video = ({ setvideoShow, videos, user, nroVideo, setUser }) => {
 
@@ -16,7 +16,7 @@ const Video = ({ setvideoShow, videos, user, nroVideo, setUser }) => {
 
   useEffect(() => {
     setUrlVideo(videos.find((v) => v.nro === nroVideo).url);
-  }, []);
+  });
 
   const loadErrorHandler = () => {
     Alert.alert(

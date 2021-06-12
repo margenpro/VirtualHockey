@@ -3,11 +3,10 @@ import "firebase/auth";
 import { getStorage } from "../../firebase";
 import { useFirebaseApp } from "reactfire";
 import { Layout } from "./layout";
-import Icon from "react-native-vector-icons/FontAwesome";
 import { connect } from "react-redux";
 import { setterUserAction } from "../../redux/actions/userActions";
 import { setVideosAction } from "../../redux/actions/videosActions";
-import { assignPoints } from "../../utils/Functions/pointsHandler"
+import { assignPoints } from "../../utils/functions/pointsHandler";
 import { Alert } from "react-native";
 
 const Login = ({ navigation, user, setUser, setVideos, videos }) => {
@@ -94,9 +93,25 @@ const Login = ({ navigation, user, setUser, setVideos, videos }) => {
         [
           {
             text: "OK",
-          }
-        ],
-      )
+          },
+        ]
+      );
+    }
+  };
+
+  const getPosition = async (points) => {
+    let rank = 1;
+    try {
+      const snap = await db
+        .collection("users")
+        .where("points", ">", points)
+        .get();
+      snap.forEach(() => {
+        rank++;
+      });
+      return rank;
+    } catch (e) {
+      console.log(e.message);
     }
   };
 
@@ -105,8 +120,9 @@ const Login = ({ navigation, user, setUser, setVideos, videos }) => {
     try {
       await firebase.auth().signInWithEmailAndPassword(email, password);
       const data = await getCurrentUserData();
-
-      const signInDate = firebase.auth().currentUser.metadata.lastSignInTime
+      data.position = await getPosition(data.points);
+      const signInDate = firebase.auth().currentUser.metadata.lastSignInTime;
+      console.log("la position es", data.position);
       setUser({
         id: data.id,
         email,
@@ -116,11 +132,12 @@ const Login = ({ navigation, user, setUser, setVideos, videos }) => {
         lastVideo: data.lastVideoWatched,
         points: data.points,
         lastSignIn: signInDate,
+        position: data.position,
       });
       let videosList = await getAllVideos();
 
-      const points = await assignPoints("Login",data,setUser)
-      showEarnedPoints(points)
+      const points = await assignPoints("Login", data, setUser);
+      showEarnedPoints(points);
 
       setVideos(videosList);
       screenHandlerLanding();
