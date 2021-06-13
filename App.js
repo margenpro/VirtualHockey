@@ -14,8 +14,12 @@ export default function App() {
   const store = storeFn();
   // const [fontLoaded, setfontLoaded] = useState(false);
 
-  LogBox.ignoreLogs(["Setting a timer"]);
-  LogBox.ignoreLogs(["Remote debugger"]);
+  LogBox.ignoreLogs([
+    "Can't perform a React state update on an unmounted component",
+    "Setting a timer",
+    "Remote debugger"
+  ]);
+  
 
   let [fontsLoaded] = useFonts({
     Comfortaa_400Regular,

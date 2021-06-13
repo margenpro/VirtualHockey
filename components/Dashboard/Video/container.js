@@ -15,8 +15,10 @@ const Video = ({ setvideoShow, videos, user, nroVideo, setUser }) => {
   const db = getFirestore()
 
   useEffect(() => {
+    
     setUrlVideo(videos.find((v) => v.nro === nroVideo).url);
-  });
+
+  }, []);
 
   const loadErrorHandler = () => {
     Alert.alert(
@@ -40,7 +42,7 @@ const Video = ({ setvideoShow, videos, user, nroVideo, setUser }) => {
             lastVideoWatched: nroVideo,
           });
           setUser({ lastVideo: nroVideo });
-        } catch (error) {}
+        } catch (error) { }
       }
       const points = await assignPoints("Video", user, setUser)
       if (points > 0) {
@@ -73,7 +75,7 @@ const Video = ({ setvideoShow, videos, user, nroVideo, setUser }) => {
     switch (fullscreenUpdate) {
       case 0:
         if (Platform.OS === "ios" || Platform.OS === "android") {
-          ScreenOrientation.lockAsync(
+          await ScreenOrientation.lockAsync(
             ScreenOrientation.OrientationLock.LANDSCAPE
           );
         }

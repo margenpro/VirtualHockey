@@ -10,24 +10,26 @@ function HomeCards({ navigation, user, setVideoShow, setNroVideo }) {
   const [videoImages, setVideoImages] = useState([]);
   const lastVideo = user.lastVideo
   useEffect(() => {
-    videosList();
-  });
+      videosList()
+  }, []);
+
 
   const videosList = async () => {
-    let arrayVideos = []
-    for (let i = (lastVideo - 1); i > 0 ; i--) {
-      await storageRef
-        .child("images/videoImages/" + i + ".png")
-        .getDownloadURL()
-        .then((resolve) => {
-          arrayVideos[(lastVideo - i)] = {
-            url: resolve,
-            id: i
-          }
-        })
-        .catch((e) => console.log(e.code, e.message));
+    let arrayVideos = [];
+    try {
+      for (let i = lastVideo - 1; i > 0; i--) {
+        let resolve = await storageRef
+          .child("images/videoImages/" + i + ".png")
+          .getDownloadURL();
+        arrayVideos[lastVideo - i] = {
+          url: resolve,
+          id: i,
+        };
+      }
+      setVideoImages(arrayVideos);
+    } catch (error) {
+      console.log(error);
     }
-    setVideoImages(arrayVideos);
   };
 
   return (

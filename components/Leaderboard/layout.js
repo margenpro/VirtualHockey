@@ -1,18 +1,24 @@
 import React from 'react';
-import { Text, View, Image, TouchableOpacity, ScrollView, FlatList } from 'react-native';
-// import { LinearGradient } from "expo-linear-gradient";
-import styles from "./styles";
-import imagenTitulo from '../../assets/imagenTitulo.png'
-import imagenVideo from '../../assets/imagenVideo.png'
+// import { Text, View, Image, TouchableOpacity, ScrollView, FlatList } from 'react-native';
+// import styles from "./styles";
+// import imagenTitulo from '../../assets/imagenTitulo.png'
 import { Frame } from '../Frame'
+import Leaderboard from 'react-native-leaderboard'
 
 
 export function Layout({
-    // size
-    //screenHandler 
+    users,
+    rowPressHandler
 }) {
     return (
         <Frame>
+            <Leaderboard
+                data={users}
+                sortBy='points'
+                labelBy='username'
+                onRowPress={(item,index)=>rowPressHandler(item,index)}
+            />
+            {/*
             <View style={styles.container}>
                 <View style={styles.containerImagenTitulo}>
                     <Image
@@ -26,6 +32,7 @@ export function Layout({
                     </View>
                 </View>
             </View>
+            */}
         </Frame>
     );
 }

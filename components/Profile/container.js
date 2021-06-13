@@ -196,10 +196,10 @@ const Profile = ({ navigation, user, signOutUser }) => {
       repeatPassInputHandler={repeatPassInputHandler}
       submitHandler={submitHandler}
       showPasswordHandler={showPasswordHandler}
-      username={username}
+      username={user.username}
       changeAvatar={changeAvatar}
       email={email}
-      points={points ? points : 0}
+      points={user.points ? user.points : 0}
       image={image}
       signOut={signOut}
       newPassword={newPassword}

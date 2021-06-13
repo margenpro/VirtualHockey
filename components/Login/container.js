@@ -42,6 +42,22 @@ const Login = ({ navigation, user, setUser, setVideos, videos }) => {
     }
   };
 
+  const getPosition = async (points) => {
+    let rank = 1;
+    try {
+      const snap = await db
+        .collection("users")
+        .where("points", ">", points)
+        .get();
+      snap.forEach(() => {
+        rank++;
+      });
+      return rank;
+    } catch (e) {
+      console.log(e.message);
+    }
+  };
+
   const screenHandlerLanding = async () => {
     try {
       let usr = await getCurrentUserData();
@@ -99,30 +115,13 @@ const Login = ({ navigation, user, setUser, setVideos, videos }) => {
     }
   };
 
-  const getPosition = async (points) => {
-    let rank = 1;
-    try {
-      const snap = await db
-        .collection("users")
-        .where("points", ">", points)
-        .get();
-      snap.forEach(() => {
-        rank++;
-      });
-      return rank;
-    } catch (e) {
-      console.log(e.message);
-    }
-  };
-
   const submitHandler = async () => {
     setLoading(true);
     try {
       await firebase.auth().signInWithEmailAndPassword(email, password);
       const data = await getCurrentUserData();
-      data.position = await getPosition(data.points);
+      const position = await getPosition(data.points);
       const signInDate = firebase.auth().currentUser.metadata.lastSignInTime;
-      console.log("la position es", data.position);
       setUser({
         id: data.id,
         email,
@@ -132,7 +131,7 @@ const Login = ({ navigation, user, setUser, setVideos, videos }) => {
         lastVideo: data.lastVideoWatched,
         points: data.points,
         lastSignIn: signInDate,
-        position: data.position,
+        position,
       });
       let videosList = await getAllVideos();
 
