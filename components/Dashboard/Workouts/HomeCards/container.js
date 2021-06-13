@@ -31,24 +31,7 @@ function HomeCards({ navigation, user, setVideoShow, setNroVideo }) {
       console.log(error);
     }
   };
-  /*
-  const videosList = async () => {
-    let arrayVideos = []
-    for (let i = (lastVideo - 1); i > 0 ; i--) {
-      await storageRef
-        .child("images/videoImages/" + i + ".png")
-        .getDownloadURL()
-        .then((resolve) => {
-          arrayVideos[(lastVideo - i)] = {
-            url: resolve,
-            id: i
-          }
-        })
-        .catch((e) => console.log(e.code, e.message));
-    }
-    setVideoImages(arrayVideos);
-  };
-*/
+
   return (
     <>
       <Layout

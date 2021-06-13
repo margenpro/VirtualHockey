@@ -30,23 +30,12 @@ const HomeWork = ({
   };
 
   useEffect(() => {
-    let mounted = true
-    if(mounted){
       setUserName(user.username);
       setUserPoints(user.points);
       calculationRanking(user.points);
-    }
-    return () => {
-      mounted = false
-    }
-   // getCurrentUserData();
   }, []);
 
-  const getCurrentUserData = () => {
-    setUserName(user.username);
-    setUserPoints(user.points);
-    calculationRanking(user.points);
-  };
+
 
   const calculationRanking = async (points) => {
     try {
@@ -54,7 +43,6 @@ const HomeWork = ({
         .where("points", ">", points)
         .onSnapshot((snap) => {
           const size = snap.size + 1;
-          //setUserPosition(size);
           setUserRanking({ position: size });
         });
     } catch (e) {

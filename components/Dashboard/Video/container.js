@@ -15,7 +15,7 @@ const Video = ({ setvideoShow, videos, user, nroVideo, setUser }) => {
   const db = getFirestore()
 
   useEffect(() => {
-
+    
     setUrlVideo(videos.find((v) => v.nro === nroVideo).url);
 
   }, []);
@@ -75,7 +75,7 @@ const Video = ({ setvideoShow, videos, user, nroVideo, setUser }) => {
     switch (fullscreenUpdate) {
       case 0:
         if (Platform.OS === "ios" || Platform.OS === "android") {
-          ScreenOrientation.lockAsync(
+          await ScreenOrientation.lockAsync(
             ScreenOrientation.OrientationLock.LANDSCAPE
           );
         }
