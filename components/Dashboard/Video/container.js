@@ -15,7 +15,9 @@ const Video = ({ setvideoShow, videos, user, nroVideo, setUser }) => {
   const db = getFirestore()
 
   useEffect(() => {
+
     setUrlVideo(videos.find((v) => v.nro === nroVideo).url);
+
   }, []);
 
   const loadErrorHandler = () => {
@@ -40,7 +42,7 @@ const Video = ({ setvideoShow, videos, user, nroVideo, setUser }) => {
             lastVideoWatched: nroVideo,
           });
           setUser({ lastVideo: nroVideo });
-        } catch (error) {}
+        } catch (error) { }
       }
       const points = await assignPoints("Video", user, setUser)
       if (points > 0) {

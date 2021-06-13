@@ -30,8 +30,16 @@ const HomeWork = ({
   };
 
   useEffect(() => {
-    getCurrentUserData();
-    console.log(user.points)
+    let mounted = true
+    if(mounted){
+      setUserName(user.username);
+      setUserPoints(user.points);
+      calculationRanking(user.points);
+    }
+    return () => {
+      mounted = false
+    }
+   // getCurrentUserData();
   }, []);
 
   const getCurrentUserData = () => {
@@ -40,13 +48,13 @@ const HomeWork = ({
     calculationRanking(user.points);
   };
 
-  const calculationRanking = (points) => {
+  const calculationRanking = async (points) => {
     try {
-      db.collection("users")
+      await db.collection("users")
         .where("points", ">", points)
         .onSnapshot((snap) => {
           const size = snap.size + 1;
-          setUserPosition(size);
+          //setUserPosition(size);
           setUserRanking({ position: size });
         });
     } catch (e) {
@@ -61,7 +69,7 @@ const HomeWork = ({
         navigateToWorkouts={navigateToWorkouts}
         userName={user.username}
         userPoints={user.points}
-        userPosition={userPosition}
+        userPosition={user.position}
         setvideoShow={setvideoShow}
       ></Layout>
     </>

@@ -12,7 +12,7 @@ const WorkoutCard = ({
   videos,
 }) => {
   const lastVideo = user.lastVideo && user.lastVideo;
-  
+
   const findVideos = () => {
     if (videos && lastVideo) {
       return videos.find((v) => v.nro === lastVideo);
@@ -20,7 +20,7 @@ const WorkoutCard = ({
     return [];
   };
   const video = findVideos();
-  
+
   const videoDescription = video.description && video.description;
   const videoTitle = video.title && video.title;
 
@@ -30,19 +30,35 @@ const WorkoutCard = ({
   const [videoImage, setVideoImage] = useState();
 
   useEffect(() => {
-    getUrlVideoImage();
+    let isMounted = true
+    if (isMounted) {
+      getUrlVideoImage();
+    }
+    return () => {
+      isMounted = false
+    }
   }, []);
-
-  const getUrlVideoImage = () => {
-    storageRef
-      .child("images/videoImages/" + lastVideo + ".png")
-      .getDownloadURL()
-      .then((resolve) => {
-        setVideoImage(resolve);
-      })
-      .catch((e) => console.log(e.code, e.message));
+  const getUrlVideoImage = async () => {
+    try {
+      let resolve = await storageRef
+        .child("images/videoImages/" + lastVideo + ".png")
+        .getDownloadURL()
+      setVideoImage(resolve)
+    } catch (error) {
+      console.log(error)
+    }
   }
-
+  /*
+    const getUrlVideoImage = async () => {
+      await storageRef
+        .child("images/videoImages/" + lastVideo + ".png")
+        .getDownloadURL()
+        .then((resolve) => {
+          setVideoImage(resolve);
+        })
+        .catch((e) => console.log(e.code, e.message));
+    }
+  */
   const handleOnPress = () => {
     setNroVideo(lastVideo);
     setVideoShow(true);

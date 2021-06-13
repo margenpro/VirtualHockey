@@ -10,7 +10,7 @@ function HomeCards({ navigation, user, setVideoShow, setNroVideo }) {
   const [videoImages, setVideoImages] = useState([]);
   const lastVideo = user.lastVideo
   useEffect(() => {
-    videosList();
+      videosList()
   }, []);
 
 
