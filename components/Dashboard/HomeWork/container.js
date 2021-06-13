@@ -1,4 +1,5 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useEffect } from "react";
+import { useFocusEffect } from "@react-navigation/native";
 import { Layout } from "./layout";
 import profileImage from "../../../assets/images/user.jpg";
 import "firebase/auth";
@@ -7,19 +8,31 @@ import { connect } from "react-redux";
 import { setterUserAction } from "../../../redux/actions/userActions";
 import { useIsFocused } from "@react-navigation/native";
 
-const HomeWork = ({
-  navigation,
-  setvideoShow,
-  user,
-  videos,
-  setUserRanking,
-}) => {
+const HomeWork = ({ navigation, setvideoShow, user, setUser }) => {
   const firebase = useFirebaseApp();
   const db = firebase.firestore();
 
-  const [userName, setUserName] = useState("");
-  const [userPoints, setUserPoints] = useState("");
-  const [userPosition, setUserPosition] = useState("");
+  useFocusEffect(
+    React.useCallback(() => {
+      getPosition(user.points);
+    }, [])
+  );
+
+  const getPosition = async (points) => {
+    let rank = 1;
+    try {
+      const snap = await db
+        .collection("users")
+        .where("points", ">", points)
+        .get();
+      snap.forEach(() => {
+        rank++;
+      });
+      setUser({ position: rank });
+    } catch (e) {
+      console.log(e.message);
+    }
+  };
 
   const navigateToWorkouts = () => {
     navigation.navigate("Workouts");
@@ -29,38 +42,15 @@ const HomeWork = ({
     return profileImage;
   };
 
-  useEffect(() => {
-      setUserName(user.username);
-      setUserPoints(user.points);
-      calculationRanking(user.points);
-  }, []);
-
-
-
-  const calculationRanking = async (points) => {
-    try {
-      await db.collection("users")
-        .where("points", ">", points)
-        .onSnapshot((snap) => {
-          const size = snap.size + 1;
-          setUserRanking({ position: size });
-        });
-    } catch (e) {
-      console.log(e.message);
-    }
-  };
-
   return (
-    <>
-      <Layout
-        getProfileImage={getProfileImage}
-        navigateToWorkouts={navigateToWorkouts}
-        userName={user.username}
-        userPoints={user.points}
-        userPosition={user.position}
-        setvideoShow={setvideoShow}
-      ></Layout>
-    </>
+    <Layout
+      getProfileImage={getProfileImage}
+      navigateToWorkouts={navigateToWorkouts}
+      userName={user.username}
+      userPoints={user.points}
+      userPosition={user.position}
+      setvideoShow={setvideoShow}
+    ></Layout>
   );
 };
 
@@ -70,7 +60,7 @@ const mapStateToProps = (state) => ({
 });
 
 const actionCreators = {
-  setUserRanking: setterUserAction,
+  setUser: setterUserAction,
 };
 
 export default connect(mapStateToProps, actionCreators)(HomeWork);

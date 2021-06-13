@@ -1,56 +1,51 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
+import { useFocusEffect } from "@react-navigation/native";
 import { Layout } from "./layout";
-import { getFirestore } from '../../firebase'
+import { getFirestore } from "../../firebase";
 import { Alert } from "react-native";
 //import { connect } from "react-redux";
 //import { setterUserAction } from "../../redux/actions/userActions"
 
 export function Leaderboard({ navigation }) {
+  const db = getFirestore();
+  const [users, setUsers] = useState(undefined);
 
-    const db = getFirestore()
-    const [users, setUsers] = useState(undefined)
+  useFocusEffect(
+    React.useCallback(() => {
+      console.log("loop");
+      getAllUsers();
+    }, [])
+  );
 
-    useEffect(() => {
-        const getAllUsers = async () => {
-            try {
-                let userList = [];
-                let users = await db.collection("users").get();
+  const getAllUsers = async () => {
+    try {
+      let userList = [];
+      let users = await db
+        .collection("users")
+        .orderBy("points", "desc")
+        .limit(9)
+        .get();
 
-                users.forEach((usr) => {
-                    userList.push(usr.data());
-                });
-                setUsers(userList)
-            } catch (error) {
-                alert(error);
-            }
-        }
-        getAllUsers()
-    }, [users])
-
-    const rowPressHandler = (item, index) => {
-        Alert.alert(
-            item.username,
-            "Puntos acumulados: " + item.points,
-            [
-                {
-                    text: "OK",
-                }
-            ],
-        )
+      users.forEach((usr) => {
+        userList.push(usr.data());
+      });
+      setUsers(userList);
+    } catch (error) {
+      alert(error);
     }
+  };
 
+  const rowPressHandler = (item, index) => {
+    Alert.alert(item.username, "Puntos acumulados: " + item.points, [
+      {
+        text: "OK",
+      },
+    ]);
+  };
 
-    return (
-        <>
-            {users && (
-                <Layout
-                    users={users}
-                    rowPressHandler={rowPressHandler}
-                />
-            )}
-
-        </>
-    );
+  return (
+    <>{users && <Layout users={users} rowPressHandler={rowPressHandler} />}</>
+  );
 }
 /*
 const mapStateToProps = (state) => {

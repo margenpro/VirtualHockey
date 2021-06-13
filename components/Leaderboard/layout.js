@@ -1,7 +1,7 @@
 import React from 'react';
-import { Text, View, Image, TouchableOpacity, ScrollView, FlatList } from 'react-native';
-import styles from "./styles";
-import imagenTitulo from '../../assets/imagenTitulo.png'
+// import { Text, View, Image, TouchableOpacity, ScrollView, FlatList } from 'react-native';
+// import styles from "./styles";
+// import imagenTitulo from '../../assets/imagenTitulo.png'
 import { Frame } from '../Frame'
 import Leaderboard from 'react-native-leaderboard'
 
