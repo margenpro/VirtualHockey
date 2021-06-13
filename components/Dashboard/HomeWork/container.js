@@ -11,7 +11,7 @@ import { getPlatformOrientationLockAsync } from "expo-screen-orientation";
 
 const HomeWork = ({ navigation, setvideoShow, user, setUser }) => {
   const firebase = useFirebaseApp();
-  // const db = firebase.firestore();
+   const db = firebase.firestore();
 
   useFocusEffect(
     React.useCallback(() => {
@@ -38,7 +38,9 @@ const HomeWork = ({ navigation, setvideoShow, user, setUser }) => {
   const navigateToWorkouts = () => {
     navigation.navigate("Workouts");
   };
-
+  const getProfileImage = () => {
+    return profileImage;
+  };
   // useEffect(() => {
   //   console.log("entre al use effect");
   //   updateRanking();
