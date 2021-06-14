@@ -98,4 +98,29 @@ export default StyleSheet.create({
     color: colorsPalette.colorThree,
     // marginRight: 'auto',
   },
+  leaderboardTitle: {
+    ...fontType,
+    fontSize: 30,
+    color: colorsPalette.colorThree,
+    textAlign: "center",
+  },
+  positionNumber: {
+    ...fontType,
+    fontSize: 22,
+    color: colorsPalette.colorThree,
+    textAlign: "center",
+    fontWeight: '700',
+  },
+  usernameRanking: {
+    ...fontType,
+    fontSize: 16,
+    color: colorsPalette.colorThree,
+    textAlign: "center",
+  },
+  pointsRanking: {
+    ...fontType,
+    fontSize: 16,
+    color: colorsPalette.colorOne,
+    textAlign: "center",
+  }
 });

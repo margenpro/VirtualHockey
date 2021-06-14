@@ -12,7 +12,6 @@ export function Leaderboard({ navigation }) {
 
   useFocusEffect(
     React.useCallback(() => {
-      console.log("loop");
       getAllUsers();
     }, [])
   );
@@ -43,9 +42,7 @@ export function Leaderboard({ navigation }) {
     ]);
   };
 
-  return (
-    <>{users && <Layout users={users} rowPressHandler={rowPressHandler} />}</>
-  );
+  return <Layout users={users} rowPressHandler={rowPressHandler} />;
 }
 /*
 const mapStateToProps = (state) => {

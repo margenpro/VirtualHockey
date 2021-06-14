@@ -1,81 +1,50 @@
 import { Dimensions, StyleSheet } from "react-native";
+import { colorsPalette } from "../../assets/styles/colorsPalette";
 
-const width = Dimensions.get('window').width
-const height = Dimensions.get('window').height
+const width = Dimensions.get("window").width;
+const height = Dimensions.get("window").height;
 
 export default StyleSheet.create({
-
-  container: {
+  titleContainer: {
     flex: 1,
-    margin: 0,
-    alignItems: 'center',
-    justifyContent: 'center',
+    justifyContent: "center",
+    paddingTop: 20,
   },
-  containerImagenTitulo: {
-    marginTop: 10,
-    marginLeft: 10,
-    marginRight: 10,
-    justifyContent: 'flex-start',
-    height: 80,
+  podiumContainer: {
+    flex: 2,
+    justifyContent: "center",
+    alignItems: "center",
+    flexDirection: "row",
+    paddingBottom: 50,
+    paddingTop: 20,
   },
-  imagenTitulo: {
+  bottomContainer: {
     flex: 1,
-    width: width*.8,
-    height: 80,
-    resizeMode: 'contain'
-  },  
-  containerTextoInicial: {
-    alignItems: 'center',
-    marginBottom: 20,
   },
-  celeste: {
-    fontFamily:"Comfortaa_400Regular",
-    fontSize: 25,
-    color: '#00AEEF',
+  circle: {
+    width: 125,
+    height: 125,
+    borderRadius: 65,
+    borderColor: colorsPalette.colorOne,
+    borderWidth: 2,
+    zIndex: 9,
+    marginTop: 6,
+    marginBottom: 5,
   },
-  blanco: {
-    fontFamily:"Comfortaa_400Regular",
-    fontSize: 25,
-    color: '#fff',
+  circleSmall: {
+    width: 100,
+    height: 100,
+    borderRadius: 65,
+    borderColor: colorsPalette.colorOne,
+    borderWidth: 2,
+    marginTop: 6,
   },
-  containerImagenVideo: {
-    margin: 10,
+  leftCircleContainer: {
+    top: 50,
+    marginRight: -30,
   },
-  imagenVideo: {
-    width: width*.8,
-    height: 200,
-    borderRadius: 15
+  rightCircleContainer: {
+    top: 50,
+    marginLeft: -30,
   },
-  boton: {
-    width: width*.8,
-    backgroundColor: '#00AEEF',
-    padding: 10,
-    borderRadius: 10,
-    marginTop: 20,
-    marginBottom: 40,
-  },
-  textoBoton: {
-    fontFamily:"Comfortaa_400Regular",
-    color: '#fff',
-    textAlign: 'center',
-    fontSize: 20,
-    fontWeight: "600"
-  },
-  textoChico: {
-    fontFamily:"Comfortaa_400Regular",
-    color: '#00AEEF',
-    fontSize: 20,
-    marginBottom: 25
-  },
-  textoInfo: {
-    fontFamily:"Comfortaa_400Regular",
-    fontSize: 18,
-    color: '#fff',
-    textAlign: 'center',
-    marginBottom: 25,
-    paddingHorizontal: 20
-  },
-  scroll: {
-    flex: 1,
-  }
 });
