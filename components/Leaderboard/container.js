@@ -1,10 +1,8 @@
-import React, { useState, useEffect, useCallback } from "react";
+import React, { useState, useEffect } from "react";
 import { useFocusEffect } from "@react-navigation/native";
 import { Layout } from "./layout";
 import { getFirestore } from "../../firebase";
-import { Alert } from "react-native";
-//import { connect } from "react-redux";
-//import { setterUserAction } from "../../redux/actions/userActions"
+import { Alert, ActivityIndicator } from "react-native";
 
 export function Leaderboard({ navigation }) {
   const db = getFirestore();
@@ -42,18 +40,13 @@ export function Leaderboard({ navigation }) {
     ]);
   };
 
-  return <Layout users={users} rowPressHandler={rowPressHandler} />;
+  return (
+    <React.Fragment>
+      {users ? 
+        <Layout users={users} rowPressHandler={rowPressHandler} />
+      :
+        <ActivityIndicator size="large"/>     
+    }
+    </React.Fragment>
+  )
 }
-/*
-const mapStateToProps = (state) => {
-    return {
-        user: state.userReducer.user,
-    };
-};
-
-const actionCreators = {
-    setUser: setterUserAction,
-};
-
-export default connect(mapStateToProps, actionCreators)(Leaderboard);
-*/
