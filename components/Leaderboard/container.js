@@ -20,7 +20,7 @@ export function Leaderboard({ navigation }) {
       let users = await db
         .collection("users")
         .orderBy("points", "desc")
-        .limit(9)
+        .limit(10)
         .get();
 
       users.forEach((usr) => {

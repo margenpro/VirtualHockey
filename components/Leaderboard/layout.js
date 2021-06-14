@@ -6,12 +6,14 @@ import {
   TouchableOpacity,
   ScrollView,
   FlatList,
+  ActivityIndicator,
 } from "react-native";
 import styles from "./styles";
 // import imagenTitulo from '../../assets/imagenTitulo.png'
 import { Frame } from "../Frame";
 import Leaderboard from "react-native-leaderboard";
 import fontStyles from "../../assets/styles/fontStyles";
+import { Item } from "./Item/container"
 
 export function Layout({ users, rowPressHandler }) {
   return (
@@ -56,12 +58,11 @@ export function Layout({ users, rowPressHandler }) {
           </View>
         </View>
         <View style={styles.bottomContainer}>
-          {/* <Leaderboard
-            data={users}
-            sortBy="points"
-            labelBy="username"
-            onRowPress={(item, index) => rowPressHandler(item, index)}
-          /> */}
+          {
+            (users.filter(e=> e.points < users[2].points)).map((user, index) => (
+              <Item key={user.username} user={user} position={index}/>
+            ))
+          }
         </View>
       </ScrollView>
     </Frame>
