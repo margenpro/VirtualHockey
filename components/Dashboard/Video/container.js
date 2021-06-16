@@ -2,22 +2,19 @@ import React, { useEffect, useRef, useState } from "react";
 import { Layout } from "./layout";
 import * as ScreenOrientation from "expo-screen-orientation";
 import { Platform, Alert } from "react-native";
-import { connect } from 'react-redux'
-import { setterUserAction } from '../../../redux/actions/userActions'
-import { getFirestore } from '../../../firebase'
-import { assignPoints } from '../../../utils/functions/pointsHandler'
+import { connect } from "react-redux";
+import { setterUserAction } from "../../../redux/actions/userActions";
+import { getFirestore } from "../../../firebase";
+import { assignPoints } from "../../../utils/functions/pointsHandler";
 
 const Video = ({ setvideoShow, videos, user, nroVideo, setUser }) => {
-
   const video = useRef(null);
-  const [urlVideo, setUrlVideo] = useState(undefined)
-  const [earnedPoints, setEarnedPoints] = useState(0)
-  const db = getFirestore()
+  const [urlVideo, setUrlVideo] = useState(undefined);
+  const [earnedPoints, setEarnedPoints] = useState(0);
+  const db = getFirestore();
 
   useEffect(() => {
-    
     setUrlVideo(videos.find((v) => v.nro === nroVideo).url);
-
   }, []);
 
   const loadErrorHandler = () => {
@@ -34,22 +31,26 @@ const Video = ({ setvideoShow, videos, user, nroVideo, setUser }) => {
 
   const onVideoFinish = async (playbackStatus) => {
     if (playbackStatus.didJustFinish) {
-
       if (user.lastVideo < videos.length) {
-        nroVideo++
+        nroVideo++;
         try {
           await db.collection("users").doc(user.id).update({
             lastVideoWatched: nroVideo,
           });
           setUser({ lastVideo: nroVideo });
-        } catch (error) { }
+        } catch (error) {}
       }
-      const points = await assignPoints("Video", user, setUser)
+      let points;
+      try {
+        points = await assignPoints("Video", user, setUser);
+      } catch (e) {
+        console.log(e);
+      }
       if (points > 0) {
-        setEarnedPoints(points)
+        setEarnedPoints(points);
       }
     }
-  }
+  };
 
   const showEarnedPoints = () => {
     if (earnedPoints > 0) {
@@ -59,9 +60,9 @@ const Video = ({ setvideoShow, videos, user, nroVideo, setUser }) => {
         [
           {
             text: "OK",
-          }
-        ],
-      )
+          },
+        ]
+      );
     }
   };
 
@@ -87,16 +88,15 @@ const Video = ({ setvideoShow, videos, user, nroVideo, setUser }) => {
             await ScreenOrientation.lockAsync(
               ScreenOrientation.OrientationLock.PORTRAIT_UP
             );
-            showEarnedPoints()
           } else if (Platform.OS === "android") {
             await ScreenOrientation.lockAsync(
               ScreenOrientation.OrientationLock.PORTRAIT
             );
-            showEarnedPoints()
           }
         } catch (e) {
           console.log(e);
         }
+        showEarnedPoints();
         setvideoShow(false);
         break;
     }
@@ -128,4 +128,4 @@ const actionCreators = {
   setUser: setterUserAction,
 };
 
-export default connect(mapStateToProps, actionCreators)(Video)
+export default connect(mapStateToProps, actionCreators)(Video);

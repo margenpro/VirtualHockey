@@ -6,6 +6,10 @@ export const fontType = {
   fontFamily: "Comfortaa_400Regular",
 };
 
+export const fontTypeBold = {
+  fontFamily: "Comfortaa_700Bold",
+};
+
 export default StyleSheet.create({
   title: {
     ...fontType,
@@ -105,22 +109,21 @@ export default StyleSheet.create({
     textAlign: "center",
   },
   positionNumber: {
-    ...fontType,
+    ...fontTypeBold,
     fontSize: 22,
     color: colorsPalette.colorThree,
     textAlign: "center",
-    fontWeight: '700',
   },
   usernameRanking: {
-    ...fontType,
+    ...fontTypeBold,
     fontSize: 16,
     color: colorsPalette.colorThree,
     textAlign: "center",
   },
   pointsRanking: {
-    ...fontType,
+    ...fontTypeBold,
     fontSize: 16,
     color: colorsPalette.colorOne,
     textAlign: "center",
-  }
+  },
 });

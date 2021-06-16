@@ -6,7 +6,11 @@ import { firebaseConfig } from "./firebase";
 import { LoginStack } from "./routes/loginStack";
 // import { getFont } from "./fonts";
 // import { Context } from './context/userContext'
-import { useFonts, Comfortaa_400Regular } from "@expo-google-fonts/comfortaa";
+import {
+  useFonts,
+  Comfortaa_400Regular,
+  Comfortaa_700Bold,
+} from "@expo-google-fonts/comfortaa";
 import storeFn from "./redux/store";
 import { Provider } from "react-redux";
 
@@ -17,12 +21,12 @@ export default function App() {
   LogBox.ignoreLogs([
     "Can't perform a React state update on an unmounted component",
     "Setting a timer",
-    "Remote debugger"
+    "Remote debugger",
   ]);
-  
 
   let [fontsLoaded] = useFonts({
     Comfortaa_400Regular,
+    Comfortaa_700Bold,
   });
 
   if (!fontsLoaded) {

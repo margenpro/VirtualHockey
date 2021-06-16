@@ -16,7 +16,7 @@ export default StyleSheet.create({
     alignItems: "center",
     flexDirection: "row",
     paddingBottom: 50,
-    paddingTop: 20,
+    paddingTop: 10,
   },
   bottomContainer: {
     flex: 1,
@@ -26,7 +26,7 @@ export default StyleSheet.create({
     height: 125,
     borderRadius: 65,
     borderColor: colorsPalette.colorOne,
-    borderWidth: 2,
+    borderWidth: 1,
     zIndex: 9,
     marginTop: 6,
     marginBottom: 5,
@@ -36,15 +36,18 @@ export default StyleSheet.create({
     height: 100,
     borderRadius: 65,
     borderColor: colorsPalette.colorOne,
-    borderWidth: 2,
+    borderWidth: 1,
     marginTop: 6,
   },
   leftCircleContainer: {
-    top: 50,
-    marginRight: -30,
+    top: 55,
+    marginRight: -25,
   },
   rightCircleContainer: {
-    top: 50,
-    marginLeft: -30,
+    top: 55,
+    marginLeft: -25,
   },
+  scrollContainer: {
+    marginBottom: 81
+  }
 });
