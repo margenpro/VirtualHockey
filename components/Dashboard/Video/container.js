@@ -9,6 +9,8 @@ import { assignPoints } from "../../../utils/functions/pointsHandler";
 
 const Video = ({ setvideoShow, videos, user, nroVideo, setUser }) => {
   const video = useRef(null);
+  const [loading, setLoading] = useState(true);
+
   const [urlVideo, setUrlVideo] = useState(undefined);
   const [earnedPoints, setEarnedPoints] = useState(0);
   const db = getFirestore();
@@ -70,6 +72,7 @@ const Video = ({ setvideoShow, videos, user, nroVideo, setUser }) => {
     video.current.presentFullscreenPlayer();
   };
   const playVideo = () => {
+    setLoading(false);
     video.current.playAsync();
   };
   const fullScreenHandler = async ({ fullscreenUpdate }) => {
@@ -113,6 +116,7 @@ const Video = ({ setvideoShow, videos, user, nroVideo, setUser }) => {
           playVideo={playVideo}
           fullScreenHandler={fullScreenHandler}
           onVideoFinish={onVideoFinish}
+          loading={loading}
         />
       )}
     </>
