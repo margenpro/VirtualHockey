@@ -1,13 +1,12 @@
 import { Dimensions, StyleSheet } from "react-native";
 
-const width = Dimensions.get('window').width
-const height = Dimensions.get('window').height
+const width = Dimensions.get("window").width;
+const height = Dimensions.get("window").height;
 
 export default StyleSheet.create({
-
   video: {
-    alignSelf: 'center',
-    display: 'none'
+    alignSelf: "center",
+    display: "none",
   },
   spinner: {
     flex: 1,
@@ -15,5 +14,10 @@ export default StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-around",
     padding: 10,
-  }
+  },
+  loader: {
+    display: "flex",
+    alignSelf: "center",
+    top: height / 2,
+  },
 });

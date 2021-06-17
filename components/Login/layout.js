@@ -31,6 +31,8 @@ export function Layout({
   forTesting,
   toPayments,
   loading,
+  emailInput,
+  passInput,
 }) {
   return (
     <Frame>
@@ -62,6 +64,7 @@ export function Layout({
             >
               <Text style={fontStyles.inputHeader}>EMAIL</Text>
               <Input
+                ref={emailInput}
                 onChangeText={emailInputHandler}
                 placeholder="john.doe@example.com"
                 style={commonStyles.inputUser}

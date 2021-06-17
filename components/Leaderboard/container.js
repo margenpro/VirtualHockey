@@ -6,7 +6,8 @@ import { Alert, ActivityIndicator } from "react-native";
 
 export function Leaderboard({ navigation }) {
   const db = getFirestore();
-  const [users, setUsers] = useState(undefined);
+  const [users, setUsers] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   useFocusEffect(
     React.useCallback(() => {
@@ -16,6 +17,7 @@ export function Leaderboard({ navigation }) {
 
   const getAllUsers = async () => {
     try {
+      console.log("something");
       let userList = [];
       let users = await db
         .collection("users")
@@ -26,27 +28,22 @@ export function Leaderboard({ navigation }) {
       users.forEach((usr) => {
         userList.push(usr.data());
       });
-      setUsers(userList);
+      console.log("something 2");
+      console.log(userList.slice(0, 2));
+      console.log(userList.slice(2));
+      setUsers({
+        podium: userList.slice(0, 3),
+        others: userList.slice(3),
+      });
+      setLoading(false);
     } catch (error) {
       alert(error);
     }
   };
 
-  const rowPressHandler = (item, index) => {
-    Alert.alert(item.username, "Puntos acumulados: " + item.points, [
-      {
-        text: "OK",
-      },
-    ]);
-  };
-
   return (
     <React.Fragment>
-      {users ? 
-        <Layout users={users} rowPressHandler={rowPressHandler} />
-      :
-        <ActivityIndicator size="large"/>     
-    }
+      {!loading ? <Layout users={users} /> : <ActivityIndicator size="large" />}
     </React.Fragment>
-  )
+  );
 }

@@ -1,14 +1,15 @@
 import React, { useState, useEffect } from "react";
 import { Layout } from "./layout";
-import { connect } from 'react-redux'
+import { connect } from "react-redux";
 
 const Workouts = ({ navigation, user, videos, setEarnedPoints, earnedPoints }) => {
   const [videoShow, setVideoShow] = useState(false);
-  const [nroVideo, setNroVideo] = useState("")
+  const [nroVideo, setNroVideo] = useState("");
   /*
-    useEffect(() => { 
-    }, [videoShow]);
-   */
+  useEffect(() => { 
+  }, [videoShow]);
+ */
+
   return (
     <>
       <Layout
@@ -23,10 +24,10 @@ const Workouts = ({ navigation, user, videos, setEarnedPoints, earnedPoints }) =
     </>
   );
 };
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return {
     user: state.userReducer.user,
-    videos: state.videosReducer.videos
-  }
-}
-export default connect(mapStateToProps, {})(Workouts)
+    videos: state.videosReducer.videos,
+  };
+};
+export default connect(mapStateToProps, {})(Workouts);

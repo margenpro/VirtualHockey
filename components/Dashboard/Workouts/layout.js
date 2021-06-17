@@ -1,8 +1,17 @@
 import React from "react";
-import Video from "../Video/container"
-import HomeCards from "./HomeCards/container"
+import { ActivityIndicator } from "react-native";
+import Video from "../Video/container";
+import HomeCards from "./HomeCards/container";
 
-export function Layout({ videoShow, setVideoShow, navigation, nroVideo, setNroVideo, earnedPoints, setEarnedPoints }) {
+export function Layout({ 
+  videoShow, 
+  setVideoShow, 
+  navigation, nroVideo, 
+  setNroVideo, 
+  earnedPoints, 
+  setEarnedPoints, 
+  loading,
+  setLoading, }) {
   return (
     <React.Fragment>
       {videoShow ? (
