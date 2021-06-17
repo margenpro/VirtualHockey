@@ -2,13 +2,13 @@ import React, { useState, useEffect } from "react";
 import { Layout } from "./layout";
 import { connect } from 'react-redux'
 
-const Workouts = ({ navigation, user, videos }) => {
+const Workouts = ({ navigation, user, videos, setEarnedPoints, earnedPoints }) => {
   const [videoShow, setVideoShow] = useState(false);
   const [nroVideo, setNroVideo] = useState("")
-/*
-  useEffect(() => { 
-  }, [videoShow]);
- */
+  /*
+    useEffect(() => { 
+    }, [videoShow]);
+   */
   return (
     <>
       <Layout
@@ -17,6 +17,8 @@ const Workouts = ({ navigation, user, videos }) => {
         navigation={navigation}
         nroVideo={nroVideo}
         setNroVideo={setNroVideo}
+        setEarnedPoints={setEarnedPoints}
+        earnedPoints={earnedPoints}
       />
     </>
   );

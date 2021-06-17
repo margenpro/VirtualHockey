@@ -8,8 +8,9 @@ import { connect } from "react-redux";
 import { setterUserAction } from "../../../redux/actions/userActions";
 import { useIsFocused } from "@react-navigation/native";
 import { getPlatformOrientationLockAsync } from "expo-screen-orientation";
+import { Alert } from "react-native";
 
-const HomeWork = ({ navigation, setvideoShow, user, setUser }) => {
+const HomeWork = ({ navigation, setvideoShow, user, setUser, earnedPoints }) => {
   const firebase = useFirebaseApp();
    const db = firebase.firestore();
 
@@ -41,16 +42,24 @@ const HomeWork = ({ navigation, setvideoShow, user, setUser }) => {
   const getProfileImage = () => {
     return profileImage;
   };
-  // useEffect(() => {
-  //   console.log("entre al use effect");
-  //   updateRanking();
-  //   // updatePoints();
-  // });
+  
+  useEffect(() => {
+    showEarnedPoints()
+  },[earnedPoints]);
 
-  // updatePoints(async () => {
-  //   const points = await getPoints();
-  //   setUser({ points });
-  // });
+  const showEarnedPoints = () => {
+    if (earnedPoints > 0) {
+      Alert.alert(
+        "Congrats!!",
+        "You have earned " + earnedPoints + " points!",
+        [
+          {
+            text: "OK",
+          }
+        ],
+      )
+    }
+  };
 
   return (
     <Layout

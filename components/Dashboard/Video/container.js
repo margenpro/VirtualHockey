@@ -7,11 +7,10 @@ import { setterUserAction } from '../../../redux/actions/userActions'
 import { getFirestore } from '../../../firebase'
 import { assignPoints } from '../../../utils/functions/pointsHandler'
 
-const Video = ({ setvideoShow, videos, user, nroVideo, setUser }) => {
+const Video = ({ setvideoShow, videos, user, nroVideo, setUser, setEarnedPoints, earnedPoints }) => {
 
   const video = useRef(null);
   const [urlVideo, setUrlVideo] = useState(undefined)
-  const [earnedPoints, setEarnedPoints] = useState(0)
   const db = getFirestore()
 
   useEffect(() => {
@@ -87,12 +86,10 @@ const Video = ({ setvideoShow, videos, user, nroVideo, setUser }) => {
             await ScreenOrientation.lockAsync(
               ScreenOrientation.OrientationLock.PORTRAIT_UP
             );
-            showEarnedPoints()
           } else if (Platform.OS === "android") {
             await ScreenOrientation.lockAsync(
               ScreenOrientation.OrientationLock.PORTRAIT
             );
-            showEarnedPoints()
           }
         } catch (e) {
           console.log(e);

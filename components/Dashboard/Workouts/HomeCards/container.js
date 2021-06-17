@@ -2,8 +2,10 @@ import React, { useState, useEffect } from "react";
 import { Layout } from "./layout";
 import { connect } from "react-redux";
 import { getStorage } from "../../../../firebase";
+import { Alert } from "react-native";
 
-function HomeCards({ navigation, user, setVideoShow, setNroVideo }) {
+
+function HomeCards({ navigation, user, setVideoShow, setNroVideo, earnedPoints }) {
   const storage = getStorage();
   const storageRef = storage.ref();
 
@@ -29,6 +31,24 @@ function HomeCards({ navigation, user, setVideoShow, setNroVideo }) {
       setVideoImages(arrayVideos);
     } catch (error) {
       console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    showEarnedPoints()
+  },[earnedPoints]);
+
+  const showEarnedPoints = () => {
+    if (earnedPoints > 0) {
+      Alert.alert(
+        "Congrats!!",
+        "You have earned " + earnedPoints + " points!",
+        [
+          {
+            text: "OK",
+          }
+        ],
+      )
     }
   };
 

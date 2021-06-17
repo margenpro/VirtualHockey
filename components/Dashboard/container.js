@@ -7,6 +7,7 @@ import { BackHandler, Alert } from "react-native";
 const Dashboard = ({ navigation, user, videos }) => {
   const [videoShow, setvideoShow] = useState(false);
   const [nroVideo, setNroVideo] = useState("");
+  const [earnedPoints, setEarnedPoints] = useState(0)
 
   useFocusEffect(
     useCallback(() => {
@@ -41,6 +42,8 @@ const Dashboard = ({ navigation, user, videos }) => {
         setvideoShow={setvideoShow}
         navigation={navigation}
         nroVideo={nroVideo}
+        earnedPoints={earnedPoints}
+        setEarnedPoints={setEarnedPoints}
       />
     </>
   );
