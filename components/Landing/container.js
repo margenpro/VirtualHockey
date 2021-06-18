@@ -3,24 +3,24 @@ import { Image } from "react-native";
 import { Layout } from "./layout";
 
 export function Landing({ navigation }) {
-    // const [size, setSize] = useState({ width: 0, height: 0 });
-    // useEffect(() => {
-    //     const width = Dimensions.get('window').width
-    //     const height = Dimensions.get('window').height
-    //     setSize(width, height)
-    // }, [])
-    /* const screenHandler = () => {
+  // const [size, setSize] = useState({ width: 0, height: 0 });
+  // useEffect(() => {
+  //     const width = Dimensions.get('window').width
+  //     const height = Dimensions.get('window').height
+  //     setSize(width, height)
+  // }, [])
+  /* const screenHandler = () => {
         navigation.navigate("Pagos");
     }; */
 
-    const navigateToPaymentForm = () => {
-        navigation.navigate("Payment")
-    }
+  const navigateToPaymentForm = () => {
+    navigation.navigate("Payment");
+  };
 
-    return (
-        <Layout
-        // size={size}
-        navigateToPaymentForm={navigateToPaymentForm}
-        />
-    );
+  return (
+    <Layout
+      // size={size}
+      navigateToPaymentForm={navigateToPaymentForm}
+    />
+  );
 }

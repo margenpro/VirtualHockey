@@ -44,6 +44,10 @@ const Login = ({ navigation, user, setUser, setVideos, videos }) => {
     navigation.navigate("Register");
   };
 
+  const toPassRecovery = () => {
+    navigation.navigate("PasswordRecovery");
+  };
+
   const getCurrentUserData = async () => {
     try {
       let usr = firebase.auth().currentUser;
@@ -176,6 +180,7 @@ const Login = ({ navigation, user, setUser, setVideos, videos }) => {
       loading={loading}
       emailInput={emailInput}
       passInput={passInput}
+      toPassRecovery={toPassRecovery}
     />
   );
 };

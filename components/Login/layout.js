@@ -33,6 +33,7 @@ export function Layout({
   loading,
   emailInput,
   passInput,
+  toPassRecovery,
 }) {
   return (
     <Frame>
@@ -87,6 +88,13 @@ export function Layout({
                   "LOG IN"
                 )}
               </Text>
+            </TouchableOpacity>
+            <TouchableOpacity
+              onPress={toPassRecovery}
+              style={commonStyles.textTouch}
+              accessibilityRole="text"
+            >
+              <Text style={fontStyles.footerText}>Forgot your password?</Text>
             </TouchableOpacity>
             <TouchableOpacity
               onPress={screenHandlerRegister}
