@@ -98,7 +98,7 @@ const Video = ({ setvideoShow, videos, user, nroVideo, setUser, setEarnedPoints,
         } catch (e) {
           console.log(e);
         }
-        showEarnedPoints();
+        //showEarnedPoints();
         setvideoShow(false);
         break;
     }

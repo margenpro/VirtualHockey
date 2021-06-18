@@ -25,7 +25,8 @@ export function Layout({
           setVideoShow={setVideoShow}
           navigation={navigation}
           setNroVideo={setNroVideo}
-          earnedPoints={earnedPoints} />
+          earnedPoints={earnedPoints} 
+          />
       )}
     </React.Fragment>
   );
