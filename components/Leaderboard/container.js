@@ -45,9 +45,7 @@ export function Leaderboard({ navigation }) {
       getDefaultAvatar()
       if(users.podium){
         getPodiumAvatars()
-      //  console.log("loop test")
       }
-      //console.log("loop test")
     }, [users.podium])
 
     const getDefaultAvatar = async () => {
@@ -95,7 +93,6 @@ export function Leaderboard({ navigation }) {
             justifyContent: "center",
           }}
         />}
-      )
     </React.Fragment>
   );
 }

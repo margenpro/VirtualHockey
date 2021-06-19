@@ -17,8 +17,7 @@ export function Layout({ user, position, avatarUrl }) {
       <View style={styles.positionContainer}>
         <Text
           style={[
-            fontStyles.positionNumber,
-            // { marginLeft: 25 }
+            fontStyles.positionNumber
           ]}
         >
           {position}
