@@ -1,13 +1,11 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import { useFocusEffect } from "@react-navigation/native";
 import { Layout } from "./layout";
 import profileImage from "../../../assets/images/user.jpg";
 import "firebase/auth";
-import { firestore, useFirebaseApp } from "reactfire";
+import { useFirebaseApp } from "reactfire";
 import { connect } from "react-redux";
 import { setterUserAction } from "../../../redux/actions/userActions";
-import { useIsFocused } from "@react-navigation/native";
-import { getPlatformOrientationLockAsync } from "expo-screen-orientation";
 import { Alert } from "react-native";
 
 const HomeWork = ({ navigation, setvideoShow, user, setUser, earnedPoints }) => {

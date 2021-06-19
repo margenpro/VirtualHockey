@@ -5,21 +5,14 @@ import {
   TouchableOpacity,
   Image,
   KeyboardAvoidingView,
-  TouchableWithoutFeedback,
   Platform,
   Keyboard,
-  Alert,
-  ScrollView,
-  ActivityIndicator,
 } from "react-native";
-import Icon from "react-native-vector-icons/FontAwesome";
 import { Input } from "react-native-elements";
 import { Frame } from "../Frame";
 import mainLogo from "../../assets/images/mainLogo.png";
 import fontStyles from "../../assets/styles/fontStyles";
 import commonStyles from "../../assets/styles/commonStyles";
-import { Header } from "react-navigation-stack";
-import { Password } from "../../utils/Password/container";
 
 export function Layout({ sendPasswordResetEmail, emailInputHandler, toLogin }) {
   return (

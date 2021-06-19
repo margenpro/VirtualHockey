@@ -7,7 +7,6 @@ import { Alert } from "react-native";
 export function PasswordRecovery({ navigation }) {
   const firebase = useFirebaseApp();
   const [email, setEmail] = useState("");
-  const db = firebase.firestore();
 
   const emailInputHandler = (newValue) => {
     setEmail(newValue);

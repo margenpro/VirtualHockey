@@ -10,7 +10,6 @@ import {
 // import { LinearGradient } from "expo-linear-gradient";
 import styles from "./styles";
 import imagenTitulo from "../../assets/imagenTitulo.png";
-import imagenVideo from "../../assets/imagenVideo.png";
 import { Frame } from "../Frame";
 import fontStyles from "../../assets/styles/fontStyles";
 
