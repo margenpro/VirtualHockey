@@ -7,11 +7,12 @@ import { setterUserAction } from "../../../redux/actions/userActions";
 import { getFirestore } from "../../../firebase";
 import { assignPoints } from "../../../utils/functions/pointsHandler";
 
-const Video = ({ setvideoShow, videos, user, nroVideo, setUser }) => {
+const Video = ({ setvideoShow, videos, user, nroVideo, setUser, setEarnedPoints, earnedPoints }) => {
+
   const video = useRef(null);
-  const [urlVideo, setUrlVideo] = useState(undefined);
-  const [earnedPoints, setEarnedPoints] = useState(0);
-  const db = getFirestore();
+  const [urlVideo, setUrlVideo] = useState(undefined)
+  const db = getFirestore()
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     setUrlVideo(videos.find((v) => v.nro === nroVideo).url);
@@ -70,6 +71,7 @@ const Video = ({ setvideoShow, videos, user, nroVideo, setUser }) => {
     video.current.presentFullscreenPlayer();
   };
   const playVideo = () => {
+    setLoading(false);
     video.current.playAsync();
   };
   const fullScreenHandler = async ({ fullscreenUpdate }) => {
@@ -96,7 +98,7 @@ const Video = ({ setvideoShow, videos, user, nroVideo, setUser }) => {
         } catch (e) {
           console.log(e);
         }
-        showEarnedPoints();
+        //showEarnedPoints();
         setvideoShow(false);
         break;
     }
@@ -113,6 +115,7 @@ const Video = ({ setvideoShow, videos, user, nroVideo, setUser }) => {
           playVideo={playVideo}
           fullScreenHandler={fullScreenHandler}
           onVideoFinish={onVideoFinish}
+          loading={loading}
         />
       )}
     </>

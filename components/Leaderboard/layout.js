@@ -3,15 +3,10 @@ import {
   Text,
   View,
   Image,
-  TouchableOpacity,
   ScrollView,
-  FlatList,
-  ActivityIndicator,
 } from "react-native";
 import styles from "./styles";
-// import imagenTitulo from '../../assets/imagenTitulo.png'
 import { Frame } from "../Frame";
-import Leaderboard from "react-native-leaderboard";
 import fontStyles from "../../assets/styles/fontStyles";
 import { Item } from "./Item/container";
 

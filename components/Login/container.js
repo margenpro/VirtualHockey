@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useState, useCallback, useEffect, useRef } from "react";
+import { useFocusEffect } from "@react-navigation/native";
 import "firebase/auth";
 import { getStorage } from "../../firebase";
 import { useFirebaseApp } from "reactfire";
@@ -17,7 +18,9 @@ const Login = ({ navigation, user, setUser, setVideos, videos }) => {
   const db = firebase.firestore();
 
   const [email, setEmail] = useState("");
+  const emailInput = useRef(null);
   const [password, setPassword] = useState("");
+  const passInput = useRef(null);
   const [wrongEmail, setWrongEmail] = useState(false);
   const [wrongPassword, setWrongPassword] = useState({
     code: "",
@@ -26,8 +29,23 @@ const Login = ({ navigation, user, setUser, setVideos, videos }) => {
   const [logoUrl, setLogoUrl] = useState();
   const [loading, setLoading] = useState(false);
 
+  useFocusEffect(
+    useCallback(() => {
+      emailInput.current.clear();
+    }, [])
+  );
+
+  const clearForm = () => {
+    console.log("Limpiando form en Login");
+    emailInputHandler("");
+  };
+
   const screenHandlerRegister = () => {
     navigation.navigate("Register");
+  };
+
+  const toPassRecovery = () => {
+    navigation.navigate("PasswordRecovery");
   };
 
   const getCurrentUserData = async () => {
@@ -84,7 +102,7 @@ const Login = ({ navigation, user, setUser, setVideos, videos }) => {
 
   const passInputHandler = (newValue) => {
     setPassword(newValue);
-    setWrongEmail(false);
+    setWrongPassword({ code: "", msg: "" });
   };
 
   const getAllVideos = async () => {
@@ -160,6 +178,9 @@ const Login = ({ navigation, user, setUser, setVideos, videos }) => {
       forTesting={forTesting}
       toPayments={toPayments}
       loading={loading}
+      emailInput={emailInput}
+      passInput={passInput}
+      toPassRecovery={toPassRecovery}
     />
   );
 };

@@ -12,14 +12,13 @@ export function Layout({
   showPassword,
   showPasswordHandler,
   textInput,
+  passInput,
 }) {
   return (
     <React.Fragment>
       <Text style={fontStyles.inputHeader}>{tag}</Text>
       <Input
-        ref={(input) => {
-          textInput = input;
-        }}
+        ref={passInput}
         onChangeText={passInputHandler}
         // onChangeText={() => {
         //   console.log(textInput.clear);
