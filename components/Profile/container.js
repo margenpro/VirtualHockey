@@ -72,7 +72,7 @@ const Profile = ({ navigation, user, signOutUser }) => {
   };
 
   const signOut = () => {
-    console.log("signing out");
+    // console.log("signing out");
     try {
       firebase.auth().signOut();
     } catch (error) {

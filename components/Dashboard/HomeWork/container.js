@@ -33,7 +33,7 @@ const HomeWork = ({ navigation, setvideoShow, user, setUser, earnedPoints }) => 
         rank = parseInt(rank) + 1;
       });
       setUser({ position: rank });
-      console.log(rank);
+      // console.log(rank);
     } catch (e) {
       console.log(e.message);
     }

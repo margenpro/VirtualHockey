@@ -94,7 +94,7 @@ export function Register({ navigation }) {
   };
 
   const validatePasswordConfirmation = () => {
-    console.log(confirmedPassword);
+    // console.log(confirmedPassword);
     if (password !== confirmedPassword) {
       throw { code: "pass/no-match", message: "Passwords must match" };
     }
