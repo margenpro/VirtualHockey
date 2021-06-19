@@ -50,9 +50,4 @@ export default StyleSheet.create({
   scrollContainer: {
     marginBottom: 81
   },
-  loader: {
-    display: "flex",
-    alignSelf: "center",
-    top: height / 2,
-  },
 });
