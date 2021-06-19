@@ -25,7 +25,7 @@ const UserAvatar = ({ user }) => {
       resolve = await storageRef.child(URL).getDownloadURL();
       temp = resolve;
     } catch (e) {
-      console.log(e.code, e.message);
+      // console.log(e.code, e.message);
       temp = await getDefaultImage();
     }
     temp && setProfileImage(temp);

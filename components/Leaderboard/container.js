@@ -17,7 +17,6 @@ export function Leaderboard({ navigation }) {
 
   const getAllUsers = async () => {
     try {
-
       let userList = [];
       let users = await db
         .collection("users")
@@ -39,18 +38,19 @@ export function Leaderboard({ navigation }) {
 
   return (
     <React.Fragment>
-      {!loading ?
-        <Layout
-          users={users} />
-        :
+      {!loading ? (
+        <Layout users={users} />
+      ) : (
         <ActivityIndicator
           size="large"
           animating={true}
           color="#0000ff"
           style={{
             flex: 1,
-            justifyContent: "center"
-          }} />}
+            justifyContent: "center",
+          }}
+        />
+      )}
     </React.Fragment>
   );
 }
