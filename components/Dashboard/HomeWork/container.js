@@ -11,7 +11,11 @@ import { getPlatformOrientationLockAsync } from "expo-screen-orientation";
 
 const HomeWork = ({ navigation, setvideoShow, user, setUser }) => {
   const firebase = useFirebaseApp();
-   const db = firebase.firestore();
+  const db = firebase.firestore();
+
+  useEffect(() => {
+    getPosition(user.points);
+  }, []);
 
   useFocusEffect(
     React.useCallback(() => {
@@ -27,9 +31,10 @@ const HomeWork = ({ navigation, setvideoShow, user, setUser }) => {
         .where("points", ">", points)
         .get();
       snap.forEach(() => {
-        rank++;
+        rank = parseInt(rank) + 1;
       });
       setUser({ position: rank });
+      console.log(rank);
     } catch (e) {
       console.log(e.message);
     }

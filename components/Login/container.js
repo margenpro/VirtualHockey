@@ -74,7 +74,7 @@ const Login = ({ navigation, user, setUser, setVideos, videos }) => {
   };
 
   const toPayments = () => {
-    navigation.navigate("Payment");
+    navigation.navigate("Landing");
   };
 
   const emailInputHandler = (newValue) => {

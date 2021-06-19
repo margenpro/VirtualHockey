@@ -27,7 +27,7 @@ const UserAvatar = ({
   const isFocused = useIsFocused();
 
   useEffect(() => {
-     getProfileImage()
+    getProfileImage();
   });
 
   const getProfileImage = async () => {
@@ -39,7 +39,7 @@ const UserAvatar = ({
         temp = resolve;
       })
       .catch((e) => console.log(e.code, e.message));
-      setProfileImage(temp)
+    setProfileImage(temp);
   };
 
   return isFocused ? (

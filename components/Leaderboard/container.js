@@ -24,13 +24,9 @@ export function Leaderboard({ navigation }) {
         .orderBy("points", "desc")
         .limit(10)
         .get();
-
       users.forEach((usr) => {
         userList.push(usr.data());
       });
-      console.log("something 2");
-      console.log(userList.slice(0, 2));
-      console.log(userList.slice(2));
       setUsers({
         podium: userList.slice(0, 3),
         others: userList.slice(3),
