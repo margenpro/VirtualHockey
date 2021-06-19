@@ -1,18 +1,20 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import { useFocusEffect } from "@react-navigation/native";
 import { Layout } from "./layout";
 import profileImage from "../../../assets/images/user.jpg";
 import "firebase/auth";
-import { firestore, useFirebaseApp } from "reactfire";
+import { useFirebaseApp } from "reactfire";
 import { connect } from "react-redux";
 import { setterUserAction } from "../../../redux/actions/userActions";
-import { useIsFocused } from "@react-navigation/native";
-import { getPlatformOrientationLockAsync } from "expo-screen-orientation";
 import { Alert } from "react-native";
 
 const HomeWork = ({ navigation, setvideoShow, user, setUser, earnedPoints }) => {
   const firebase = useFirebaseApp();
-   const db = firebase.firestore();
+  const db = firebase.firestore();
+
+  useEffect(() => {
+    getPosition(user.points);
+  }, []);
 
   useFocusEffect(
     React.useCallback(() => {
@@ -28,9 +30,10 @@ const HomeWork = ({ navigation, setvideoShow, user, setUser, earnedPoints }) => 
         .where("points", ">", points)
         .get();
       snap.forEach(() => {
-        rank++;
+        rank = parseInt(rank) + 1;
       });
       setUser({ position: rank });
+      // console.log(rank);
     } catch (e) {
       console.log(e.message);
     }

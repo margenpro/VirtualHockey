@@ -22,14 +22,12 @@ export function Leaderboard({ navigation }) {
 
   const getAllUsers = async () => {
     try {
-
       let userList = [];
       let users = await db
         .collection("users")
         .orderBy("points", "desc")
         .limit(10)
         .get();
-
       users.forEach((usr) => {
         userList.push(usr.data());
       });
@@ -94,8 +92,10 @@ export function Leaderboard({ navigation }) {
           color="#0000ff"
           style={{
             flex: 1,
-            justifyContent: "center"
-          }} />}
+            justifyContent: "center",
+          }}
+        />}
+      )
     </React.Fragment>
   );
 }

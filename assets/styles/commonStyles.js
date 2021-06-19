@@ -53,7 +53,7 @@ export default StyleSheet.create({
   textTouch: {
     ...fontStyle.fontType,
     alignSelf: "center",
-    marginTop: 3,
+    marginTop: 10,
     alignItems: "center",
   },
   mainLogo: {

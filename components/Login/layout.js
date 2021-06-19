@@ -94,7 +94,7 @@ export function Layout({
               style={commonStyles.textTouch}
               accessibilityRole="text"
             >
-              <Text style={fontStyles.footerText}>Forgot your password?</Text>
+              <Text style={[fontStyles.smallSize, fontStyles.footerText]}>Forgot your password?</Text>
             </TouchableOpacity>
             <TouchableOpacity
               onPress={screenHandlerRegister}

@@ -36,7 +36,7 @@ const Login = ({ navigation, user, setUser, setVideos, videos }) => {
   );
 
   const clearForm = () => {
-    console.log("Limpiando form en Login");
+    // console.log("Limpiando form en Login");
     emailInputHandler("");
   };
 
@@ -92,7 +92,7 @@ const Login = ({ navigation, user, setUser, setVideos, videos }) => {
   };
 
   const toPayments = () => {
-    navigation.navigate("Payment");
+    navigation.navigate("Landing");
   };
 
   const emailInputHandler = (newValue) => {

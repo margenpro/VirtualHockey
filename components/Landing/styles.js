@@ -1,11 +1,12 @@
 import { Dimensions, StyleSheet } from "react-native";
+import { colorsPalette } from "../../assets/styles/colorsPalette";
 
 const width = Dimensions.get('window').width
 const height = Dimensions.get('window').height
 
 export default StyleSheet.create({
 
-  container: {
+  topContainer: {
     flex: 1,
     margin: 0,
     alignItems: 'center',
@@ -32,11 +33,14 @@ export default StyleSheet.create({
     fontFamily:"Comfortaa_400Regular",
     fontSize: 25,
     color: '#00AEEF',
+    lineHeight: 27,
   },
   blanco: {
     fontFamily:"Comfortaa_400Regular",
     fontSize: 25,
     color: '#fff',
+    lineHeight: 27,
+
   },
   containerImagenVideo: {
     margin: 10,
@@ -51,8 +55,6 @@ export default StyleSheet.create({
     backgroundColor: '#00AEEF',
     padding: 10,
     borderRadius: 10,
-    marginTop: 20,
-    marginBottom: 40,
   },
   textoBoton: {
     fontFamily:"Comfortaa_400Regular",
@@ -77,5 +79,23 @@ export default StyleSheet.create({
   },
   scroll: {
     flex: 1,
-  }
+  },
+  priceContainer: {
+    width: width*0.75,
+    height: 127,
+    backgroundColor: colorsPalette.colorThree,
+    marginVertical: 20,
+    borderRadius: 8,
+    borderColor: colorsPalette.colorTwo,
+    borderWidth: 1,
+  },
+  description: {
+    flex: 3,
+    justifyContent: 'flex-start',
+    alignItems: 'flex-start',
+    marginHorizontal: 70,
+    marginTop: 10,
+    marginBottom: 25,
+  },
+
 });

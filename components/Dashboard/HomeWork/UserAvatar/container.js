@@ -1,45 +1,44 @@
 import React, { useEffect, useState } from "react";
 import { Layout } from "./layout";
 import "firebase/auth";
-import { useFirebaseApp } from "reactfire";
 import { connect } from "react-redux";
 import { setterUserAction } from "../../../../redux/actions/userActions";
 import { getStorage } from "../../../../firebase";
 import { useIsFocused } from "@react-navigation/native";
 
-const UserAvatar = ({
-  navigation,
-  setvideoShow,
-  user,
-  setUserRanking,
-  name = "sample_image",
-  changeEvent,
-}) => {
-  const DEFAULT_URL =
-    "https://thumbs.dreamstime.com/z/default-avatar-profile-vector-user-profile-default-avatar-profile-vector-user-profile-profile-179376714.jpg";
-  const firebase = useFirebaseApp();
-  const db = firebase.firestore();
-  const [profileImage, setProfileImage] = useState(DEFAULT_URL);
+const UserAvatar = ({ user }) => {
+  const [profileImage, setProfileImage] = useState(undefined);
   const storage = getStorage();
   const storageRef = storage.ref();
   const URL = "images/avatars/" + user.username + ".png";
+  const defaultURL = "default/avatar.png";
 
   const isFocused = useIsFocused();
 
   useEffect(() => {
-     getProfileImage()
+    getProfileImage();
   });
 
   const getProfileImage = async () => {
-    let temp;
-    await storageRef
-      .child(URL)
-      .getDownloadURL()
-      .then((resolve) => {
-        temp = resolve;
-      })
-      .catch((e) => console.log(e.code, e.message));
-      setProfileImage(temp)
+    let temp, resolve;
+    try {
+      resolve = await storageRef.child(URL).getDownloadURL();
+      temp = resolve;
+    } catch (e) {
+      // console.log(e.code, e.message);
+      temp = await getDefaultImage();
+    }
+    temp && setProfileImage(temp);
+  };
+
+  const getDefaultImage = async () => {
+    let resolve;
+    try {
+      resolve = await storageRef.child(defaultURL).getDownloadURL();
+      return resolve;
+    } catch (e) {
+      console.log(e.code, e.message);
+    }
   };
 
   return isFocused ? (

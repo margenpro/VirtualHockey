@@ -21,17 +21,17 @@ export function Register({ navigation }) {
 
   const [usernameExists, setUsernameExists] = useState({
     exists: false,
-    msg: "",
+    msg: ""
   });
   const [invalidPassword, setInvalidPassword] = useState({
     invalid: false,
-    msg: "",
+    msg: ""
   });
 
   const [confirmedPassword, setConfirmedPassword] = useState("");
   const [invalidConfirmedPassword, setInvalidConfirmedPassword] = useState({
     invalid: false,
-    msg: "",
+    msg: ""
   });
 
   const [logoUrl, setLogoUrl] = useState();
@@ -39,7 +39,7 @@ export function Register({ navigation }) {
   const sendMail = async () => {
     let user = {
       email,
-      username,
+      username
     };
 
     try {
@@ -49,10 +49,10 @@ export function Register({ navigation }) {
         {
           headers: {
             Accept: "application/json",
-            "Content-Type": "application/json",
+            "Content-Type": "application/json"
           },
           method: "POST",
-          body: JSON.stringify({ user }),
+          body: JSON.stringify({ user })
         }
       );
     } catch (error) {
@@ -67,47 +67,47 @@ export function Register({ navigation }) {
     navigation.navigate("Login");
   };
 
-  const handleKeyDown = (e) => {
+  const handleKeyDown = e => {
     if (e.nativeEvent.key == "Enter") {
       // CURRENTLY NOT WORKING
     }
   };
 
-  const emailInputHandler = (newValue) => {
+  const emailInputHandler = newValue => {
     setEmail(newValue);
     setEmailExists({ exists: false });
   };
 
-  const userInputHandler = (newValue) => {
+  const userInputHandler = newValue => {
     setUsername(newValue);
     setUsernameExists({ exists: false });
   };
 
-  const passInputHandler = (newValue) => {
+  const passInputHandler = newValue => {
     setPassword(newValue);
     setInvalidPassword(false);
   };
 
-  const confirmPassInputHandler = (newValue) => {
+  const confirmPassInputHandler = newValue => {
     setConfirmedPassword(newValue);
     setInvalidConfirmedPassword(false);
   };
 
   const validatePasswordConfirmation = () => {
-    console.log(confirmedPassword);
+    // console.log(confirmedPassword);
     if (password !== confirmedPassword) {
       throw { code: "pass/no-match", message: "Passwords must match" };
     }
   };
 
   const validatePassword = () => {
-    var strongRegex = new RegExp("^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.{8,})");
+    var strongRegex = new RegExp("^(?=.*[a-z])(?=.{6,})");
 
     if (!strongRegex.test(password)) {
       throw {
         code: "pass/invalid-pass",
         message:
-          "Password must have 8 characters, 1 upper, 1 lower and 1 number",
+          "Strong passwords have at least 6 characters and a mix of letters and numbers"
       };
     }
   };
@@ -150,12 +150,12 @@ export function Register({ navigation }) {
     if (username.match(/[ `!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~]/))
       throw {
         code: "empty-username",
-        message: "Username cannot contain white spaces or special characters",
+        message: "Username cannot contain white spaces or special characters"
       };
     if (username.trim() === "")
       throw {
         code: "empty-username",
-        message: "You must enter a valid username",
+        message: "You must enter a valid username"
       };
 
     try {
@@ -167,7 +167,7 @@ export function Register({ navigation }) {
       if (querySnapshot.docs[0] != undefined) {
         throw {
           code: "username-exists",
-          message: `The username ${username} is already in use`,
+          message: `The username ${username} is already in use`
         };
       }
     } catch (error) {
@@ -181,14 +181,16 @@ export function Register({ navigation }) {
         .auth()
         .createUserWithEmailAndPassword(email, password);
 
-      db.collection("users").doc(userCreds.user.uid).set({
-        username,
-        role: 1,
-        paymentDate: null,
-        lastVideoWatched: 1,
-        points: 250,
-        lastSignIn: "",
-      });
+      db.collection("users")
+        .doc(userCreds.user.uid)
+        .set({
+          username,
+          role: 1,
+          paymentDate: null,
+          lastVideoWatched: 1,
+          points: 250,
+          lastSignIn: ""
+        });
 
       return { code: null };
     } catch (error) {

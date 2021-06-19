@@ -56,7 +56,7 @@ export const userReducer = (state = initialState, action) => {
     };
   }
   if (action.type === SIGN_OUT_USER) {
-    console.log("entree a redux");
+    // console.log("entree a redux");
     return initialState;
   }
   return state;
