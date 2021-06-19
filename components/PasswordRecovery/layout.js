@@ -6,7 +6,7 @@ import {
   Image,
   KeyboardAvoidingView,
   Platform,
-  Keyboard,
+  Keyboard
 } from "react-native";
 import { Input } from "react-native-elements";
 import { Frame } from "../Frame";
@@ -14,7 +14,12 @@ import mainLogo from "../../assets/images/mainLogo.png";
 import fontStyles from "../../assets/styles/fontStyles";
 import commonStyles from "../../assets/styles/commonStyles";
 
-export function Layout({ sendPasswordResetEmail, emailInputHandler, toLogin }) {
+export function Layout({
+  wrongEmail,
+  sendPasswordResetEmail,
+  emailInputHandler,
+  toLogin
+}) {
   return (
     <Frame>
       <KeyboardAvoidingView
@@ -49,6 +54,7 @@ export function Layout({ sendPasswordResetEmail, emailInputHandler, toLogin }) {
                 placeholder="john.doe@example.com"
                 style={commonStyles.inputUser}
                 autoCompleteType="email"
+                errorMessage={wrongEmail.msg}
               />
             </TouchableOpacity>
             <TouchableOpacity

@@ -31,7 +31,7 @@ const Profile = ({ navigation, user, signOutUser }) => {
   // let textInput;
 
   // const [usernameExists, setUsernameExists] = useState(0);
-  const uploadImage = async (image) => {
+  const uploadImage = async image => {
     const response = await fetch(image);
     const blob = await response.blob();
     var ref =
@@ -45,8 +45,9 @@ const Profile = ({ navigation, user, signOutUser }) => {
 
   const askPermissions = async () => {
     try {
-      const { status } =
-        await ImagePicker.requestMediaLibraryPermissionsAsync();
+      const {
+        status
+      } = await ImagePicker.requestMediaLibraryPermissionsAsync();
       if (status !== "granted") {
         alert("Sorry, we need media library permissions to make this work!");
       } else {
@@ -62,7 +63,7 @@ const Profile = ({ navigation, user, signOutUser }) => {
     if (await askPermissions()) {
       let result = await ImagePicker.launchImageLibraryAsync({
         mediaTypes: ImagePicker.MediaTypeOptions.Images,
-        quality: 1,
+        quality: 1
       });
       if (!result.cancelled) {
         await uploadImage(result.uri);
@@ -82,20 +83,20 @@ const Profile = ({ navigation, user, signOutUser }) => {
     navigation.navigate("Login");
   };
 
-  const oldPassInputHandler = (newValue) => {
+  const oldPassInputHandler = newValue => {
     setOldPassword(newValue);
     // setInvalidPassword(false);
   };
-  const newPassInputHandler = (newValue) => {
+  const newPassInputHandler = newValue => {
     setNewPassword(newValue);
     // setInvalidPassword(false);
   };
-  const repeatPassInputHandler = (newValue) => {
+  const repeatPassInputHandler = newValue => {
     setRepeatPassword(newValue);
     // setInvalidPassword(false);
   };
 
-  const showPasswordHandler = (newValue) => {
+  const showPasswordHandler = newValue => {
     setShowPassword(newValue);
   };
 
@@ -154,11 +155,11 @@ const Profile = ({ navigation, user, signOutUser }) => {
     } catch (e) {
       if (e.code === "pass/invalid-pass" || e.code === "pass/same-pass")
         setNewWrongPassword({
-          msg: e.message,
+          msg: e.message
         });
       else if (e.code === "pass/no-match")
         setRepeatWrongPassword({
-          msg: e.message,
+          msg: e.message
         });
     }
   };
@@ -173,19 +174,19 @@ const Profile = ({ navigation, user, signOutUser }) => {
     if (oldPassword === newPassword) {
       throw {
         code: "pass/same-pass",
-        message: "Password can't be the same as before",
+        message: "Password can't be the same as before"
       };
     }
   };
 
   const validatePassword = () => {
-    var strongRegex = new RegExp("^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.{8,})");
+    var strongRegex = new RegExp("^(?=.*[a-z])(?=.{6,})");
 
     if (!strongRegex.test(newPassword)) {
       throw {
         code: "pass/invalid-pass",
         message:
-          "Password must have 8 characters, 1 upper, 1 lower and 1 number",
+          "Strong passwords have at least 6 characters and a mix of letters and numbers"
       };
     }
   };
@@ -213,15 +214,15 @@ const Profile = ({ navigation, user, signOutUser }) => {
   );
 };
 
-const mapStateToProps = (state) => {
+const mapStateToProps = state => {
   return {
     user: state.userReducer.user,
-    videos: state.videosReducer.videos,
+    videos: state.videosReducer.videos
   };
 };
 
 const actionCreators = {
-  signOutUser: signOutAction,
+  signOutUser: signOutAction
 };
 
 export default connect(mapStateToProps, actionCreators)(Profile);

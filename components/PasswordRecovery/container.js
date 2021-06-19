@@ -7,8 +7,11 @@ import { Alert } from "react-native";
 export function PasswordRecovery({ navigation }) {
   const firebase = useFirebaseApp();
   const [email, setEmail] = useState("");
+  const [wrongEmail, setWrongEmail] = useState({
+    msg: ""
+  });
 
-  const emailInputHandler = (newValue) => {
+  const emailInputHandler = newValue => {
     setEmail(newValue);
   };
   const sendPasswordResetEmail = async () => {
@@ -19,13 +22,13 @@ export function PasswordRecovery({ navigation }) {
         "Please check your email to find a recovery link.",
         [
           {
-            text: "OK",
+            text: "OK"
           }
-        ],
-      )
-      toLogin()
+        ]
+      );
+      toLogin();
     } catch (error) {
-      console.log(error);
+      setWrongEmail({ msg: error.message });
     }
   };
   const toLogin = () => {
@@ -36,6 +39,7 @@ export function PasswordRecovery({ navigation }) {
       sendPasswordResetEmail={sendPasswordResetEmail}
       emailInputHandler={emailInputHandler}
       toLogin={toLogin}
+      wrongEmail={wrongEmail}
     />
   );
 }
