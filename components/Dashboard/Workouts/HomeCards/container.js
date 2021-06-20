@@ -5,7 +5,7 @@ import { getStorage } from "../../../../firebase";
 import { Alert } from "react-native";
 
 
-function HomeCards({ navigation, user, setVideoShow, setNroVideo, earnedPoints }) {
+function HomeCards({ user, setVideoShow, setNroVideo, earnedPoints }) {
   const storage = getStorage();
   const storageRef = storage.ref();
 

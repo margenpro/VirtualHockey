@@ -1,11 +1,11 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { Layout } from "./layout";
 import { connect } from "react-redux";
 
-const Workouts = ({ navigation, user, videos }) => {
+const Workouts = ({ navigation }) => {
   const [videoShow, setVideoShow] = useState(false);
   const [nroVideo, setNroVideo] = useState("");
-  const [earnedPoints, setEarnedPoints] = useState(0)
+  const [earnedPoints, setEarnedPoints] = useState(0);
   /*
   useEffect(() => { 
   }, [videoShow]);

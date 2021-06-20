@@ -20,7 +20,7 @@ export function Item({ user, position, defaultAvatar }) {
         .getDownloadURL()
         setAvatarUrl(res)
     } catch (error) {
-      console.log(error)
+      // console.log(error)
     }
   }
 

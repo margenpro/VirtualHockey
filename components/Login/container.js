@@ -1,7 +1,6 @@
-import React, { useState, useCallback, useEffect, useRef } from "react";
+import React, { useState, useCallback, useRef } from "react";
 import { useFocusEffect } from "@react-navigation/native";
 import "firebase/auth";
-import { getStorage } from "../../firebase";
 import { useFirebaseApp } from "reactfire";
 import { Layout } from "./layout";
 import { connect } from "react-redux";
@@ -10,10 +9,8 @@ import { setVideosAction } from "../../redux/actions/videosActions";
 import { assignPoints } from "../../utils/functions/pointsHandler";
 import { Alert } from "react-native";
 
-const Login = ({ navigation, user, setUser, setVideos, videos }) => {
-  const storage = getStorage();
+const Login = ({ navigation, user, setUser, setVideos }) => {
   const firebase = useFirebaseApp();
-  const storageRef = storage.ref();
 
   const db = firebase.firestore();
 
@@ -26,7 +23,6 @@ const Login = ({ navigation, user, setUser, setVideos, videos }) => {
     code: "",
     msg: "",
   });
-  const [logoUrl, setLogoUrl] = useState();
   const [loading, setLoading] = useState(false);
 
   useFocusEffect(
@@ -34,11 +30,6 @@ const Login = ({ navigation, user, setUser, setVideos, videos }) => {
       emailInput.current.clear();
     }, [])
   );
-
-  const clearForm = () => {
-    // console.log("Limpiando form en Login");
-    emailInputHandler("");
-  };
 
   const screenHandlerRegister = () => {
     navigation.navigate("Register");
@@ -120,7 +111,10 @@ const Login = ({ navigation, user, setUser, setVideos, videos }) => {
   };
 
   const showEarnedPoints = (earnedPoints) => {
+    // console.log("muestro earned points?");
+    // console.log("los earned points son ", earnedPoints);
     if (earnedPoints > 0) {
+      // console.log("si, muestro earned points");
       Alert.alert(
         "Welcome Back!!",
         "You have earned " + earnedPoints + " points!",
@@ -139,7 +133,9 @@ const Login = ({ navigation, user, setUser, setVideos, videos }) => {
       await firebase.auth().signInWithEmailAndPassword(email, password);
       const data = await getCurrentUserData();
       const position = await getPosition(data.points);
-      const signInDate = firebase.auth().currentUser.metadata.lastSignInTime;
+      // const signInDate = firebase.auth().currentUser.metadata.lastSignInTime;
+      const previousSignIn = data.lastSignIn;
+      const newSignIn = new Date();
       setUser({
         id: data.id,
         email,
@@ -148,14 +144,22 @@ const Login = ({ navigation, user, setUser, setVideos, videos }) => {
         paymentDate: data.paymentDate,
         lastVideo: data.lastVideoWatched,
         points: data.points,
-        lastSignIn: signInDate,
+        lastSignIn: newSignIn,
         position,
       });
       let videosList = await getAllVideos();
-
-      const points = await assignPoints("Login", data, setUser);
-      showEarnedPoints(points);
-
+      let result;
+      // console.log(data.lastSignIn.toDate());
+      result = await assignPoints("Login", data);
+      // console.log({ lastSignIn: result.lastSignIn });
+      // setUser({ lastSignIn: result.lastSignIn });
+      // console.log(result);
+      showEarnedPoints(result.earnedPoints);
+      try {
+        await setNewSignInDate(data.id, newSignIn);
+      } catch (e) {
+        console.log(e);
+      }
       setVideos(videosList);
       screenHandlerLanding();
     } catch (error) {
@@ -165,6 +169,17 @@ const Login = ({ navigation, user, setUser, setVideos, videos }) => {
       });
     }
     setLoading(false);
+  };
+
+  const setNewSignInDate = async (id, lastSignIn) => {
+    try {
+      // console.log("el user id es", id);
+      await db.collection("users").doc(id).update({
+        lastSignIn,
+      });
+    } catch (error) {
+      console.log(e);
+    }
   };
 
   return (

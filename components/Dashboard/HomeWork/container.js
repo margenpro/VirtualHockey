@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useFocusEffect } from "@react-navigation/native";
 import { Layout } from "./layout";
 import profileImage from "../../../assets/images/user.jpg";
@@ -8,31 +8,56 @@ import { connect } from "react-redux";
 import { setterUserAction } from "../../../redux/actions/userActions";
 import { Alert } from "react-native";
 
-const HomeWork = ({ navigation, setvideoShow, user, setUser, earnedPoints }) => {
+const HomeWork = ({
+  navigation,
+  setvideoShow,
+  user,
+  setUser,
+  earnedPoints,
+}) => {
   const firebase = useFirebaseApp();
   const db = firebase.firestore();
+  const [position, setPosition] = useState(user.position);
+  const [points, setPoints] = useState(user.points);
 
   useEffect(() => {
-    getPosition(user.points);
+    fixPosition();
   }, []);
 
   useFocusEffect(
     React.useCallback(() => {
-      getPosition(user.points);
+      fixPosition();
     }, [])
   );
-
-  const getPosition = async (points) => {
+  const fixPosition = async () => {
+    let temp = await getPosition();
+    // console.log(temp);
+    setPosition(temp);
+  };
+  const getPosition = async () => {
+    let _points;
     let rank = 1;
+    try {
+      let usr = firebase.auth().currentUser;
+      let doc = await db.collection("users").doc(usr.uid).get();
+      let data = doc.data();
+      _points = data.points ? data.points : user.points;
+      setPoints(_points);
+    } catch (e) {
+      console.log(e);
+    }
+    // console.log("voy a buscar a la base con puntos", _points);
     try {
       const snap = await db
         .collection("users")
-        .where("points", ">", points)
+        .where("points", ">", _points)
         .get();
       snap.forEach(() => {
+        // console.log("rank es", rank);
         rank = parseInt(rank) + 1;
       });
       setUser({ position: rank });
+      return rank;
       // console.log(rank);
     } catch (e) {
       console.log(e.message);
@@ -45,23 +70,18 @@ const HomeWork = ({ navigation, setvideoShow, user, setUser, earnedPoints }) => 
   const getProfileImage = () => {
     return profileImage;
   };
-  
-  useEffect(() => {
-    showEarnedPoints()
-  },[earnedPoints]);
 
-  const showEarnedPoints = () => {
-    if (earnedPoints > 0) {
-      Alert.alert(
-        "Congrats!!",
-        "You have earned " + earnedPoints + " points!",
-        [
-          {
-            text: "OK",
-          }
-        ],
-      )
-    }
+  useEffect(() => {
+    // console.log("los earnedpoints son ", earnedPoints);
+    if (earnedPoints > 0) displayAlert(earnedPoints);
+  }, [earnedPoints]);
+
+  const displayAlert = (_points) => {
+    Alert.alert("Congrats!!", "You have earned " + _points + " points!", [
+      {
+        text: "OK",
+      },
+    ]);
   };
 
   return (
@@ -69,8 +89,8 @@ const HomeWork = ({ navigation, setvideoShow, user, setUser, earnedPoints }) => 
       getProfileImage={getProfileImage}
       navigateToWorkouts={navigateToWorkouts}
       userName={user.username}
-      userPoints={user.points}
-      userPosition={user.position}
+      userPoints={points}
+      userPosition={position}
       setvideoShow={setvideoShow}
     ></Layout>
   );

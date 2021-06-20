@@ -10,7 +10,8 @@ export function Layout({ videoShow, setvideoShow, navigation, nroVideo, setEarne
           setvideoShow={setvideoShow}
           nroVideo={nroVideo}
           setEarnedPoints={setEarnedPoints}
-          earnedPoints={earnedPoints} />
+          earnedPoints={earnedPoints} 
+          />
       ) : (
         <HomeWork
           setvideoShow={setvideoShow}

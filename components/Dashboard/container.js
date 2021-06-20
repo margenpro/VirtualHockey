@@ -4,10 +4,10 @@ import { connect } from "react-redux";
 import { useFocusEffect } from "@react-navigation/native";
 import { BackHandler, Alert } from "react-native";
 
-const Dashboard = ({ navigation, user, videos }) => {
+const Dashboard = ({ navigation, user }) => {
   const [videoShow, setvideoShow] = useState(false);
   const [nroVideo, setNroVideo] = useState("");
-  const [earnedPoints, setEarnedPoints] = useState(0)
+  const [earnedPoints, setEarnedPoints] = useState(0);
 
   useFocusEffect(
     useCallback(() => {
@@ -36,22 +36,19 @@ const Dashboard = ({ navigation, user, videos }) => {
   }, [videoShow]);
 
   return (
-    <>
-      <Layout
-        videoShow={videoShow}
-        setvideoShow={setvideoShow}
-        navigation={navigation}
-        nroVideo={nroVideo}
-        earnedPoints={earnedPoints}
-        setEarnedPoints={setEarnedPoints}
-      />
-    </>
+    <Layout
+      videoShow={videoShow}
+      setvideoShow={setvideoShow}
+      navigation={navigation}
+      nroVideo={nroVideo}
+      earnedPoints={earnedPoints}
+      setEarnedPoints={setEarnedPoints}
+    />
   );
 };
 const mapStateToProps = (state) => {
   return {
     user: state.userReducer.user,
-    videos: state.videosReducer.videos,
   };
 };
 export default connect(mapStateToProps, {})(Dashboard);

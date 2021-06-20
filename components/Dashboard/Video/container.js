@@ -7,11 +7,18 @@ import { setterUserAction } from "../../../redux/actions/userActions";
 import { getFirestore } from "../../../firebase";
 import { assignPoints } from "../../../utils/functions/pointsHandler";
 
-const Video = ({ setvideoShow, videos, user, nroVideo, setUser, setEarnedPoints, earnedPoints }) => {
-
+const Video = ({
+  setvideoShow,
+  videos,
+  user,
+  nroVideo,
+  setUser,
+  setEarnedPoints,
+  earnedPoints,
+}) => {
   const video = useRef(null);
-  const [urlVideo, setUrlVideo] = useState(undefined)
-  const db = getFirestore()
+  const [urlVideo, setUrlVideo] = useState(undefined);
+  const db = getFirestore();
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -41,29 +48,19 @@ const Video = ({ setvideoShow, videos, user, nroVideo, setUser, setEarnedPoints,
           setUser({ lastVideo: nroVideo });
         } catch (error) {}
       }
-      let points;
+      let result;
       try {
-        points = await assignPoints("Video", user, setUser);
+        result = await assignPoints("Video", user);
+        setUser({
+          points: result.updatedPoints,
+        });
       } catch (e) {
         console.log(e);
       }
-      if (points > 0) {
-        setEarnedPoints(points);
+      // console.log("result poins es ", result.earnedPoints);
+      if (result.earnedPoints > 0) {
+        setEarnedPoints(result.earnedPoints);
       }
-    }
-  };
-
-  const showEarnedPoints = () => {
-    if (earnedPoints > 0) {
-      Alert.alert(
-        "Congrats!!",
-        "You have earned " + earnedPoints + " points!",
-        [
-          {
-            text: "OK",
-          },
-        ]
-      );
     }
   };
 
@@ -98,7 +95,6 @@ const Video = ({ setvideoShow, videos, user, nroVideo, setUser, setEarnedPoints,
         } catch (e) {
           console.log(e);
         }
-        //showEarnedPoints();
         setvideoShow(false);
         break;
     }
