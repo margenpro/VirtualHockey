@@ -70,7 +70,8 @@ const Login = ({ navigation, user, setUser, setVideos }) => {
   const screenHandlerLanding = async () => {
     try {
       let usr = await getCurrentUserData();
-      usr.role === 2 || usr.role === 3
+      let role = parseInt(usr.role);
+      role === 2 || role === 3
         ? navigation.navigate("BottomTab")
         : navigation.navigate("Landing");
     } catch (error) {
@@ -151,7 +152,7 @@ const Login = ({ navigation, user, setUser, setVideos }) => {
       let result;
       result = await assignPoints("Login", data);
       showEarnedPoints(result.earnedPoints);
-      setUser({points: result.updatedPoints})
+      setUser({ points: result.updatedPoints });
       try {
         await setNewSignInDate(data.id, newSignIn);
       } catch (e) {
