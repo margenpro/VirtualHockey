@@ -38,7 +38,11 @@ const Video = ({
   };
 
   const onVideoFinish = async (playbackStatus) => {
-    if (playbackStatus.didJustFinish) {
+    let almostFinish = playbackStatus.durationMillis - 8000
+    let actualPosition = playbackStatus.positionMillis
+    let videoFinished = actualPosition >= almostFinish ? true : false
+
+    if (videoFinished) {
       if (user.lastVideo < videos.length) {
         nroVideo++;
         try {
@@ -46,7 +50,7 @@ const Video = ({
             lastVideoWatched: nroVideo,
           });
           setUser({ lastVideo: nroVideo });
-        } catch (error) {}
+        } catch (error) { }
       }
       let result;
       try {
