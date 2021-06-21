@@ -12,11 +12,14 @@ import styles from "./styles";
 import imagenTitulo from "../../assets/imagenTitulo.png";
 import { Frame } from "../Frame";
 import fontStyles from "../../assets/styles/fontStyles";
+import commonStyles from "../../assets/styles/commonStyles";
+
 
 export function Layout({
   // size
   //screenHandler
   navigateToPaymentForm,
+  signOut,
 }) {
   return (
     <Frame>
@@ -74,6 +77,15 @@ export function Layout({
             onPress={navigateToPaymentForm}
           >
             <Text style={styles.textoBoton}> START YOUR FREE TRAIL </Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            onPress={signOut}
+            style={[commonStyles.textTouch, {marginBottom: 10}]}
+            accessibilityRole="text"
+          >
+            <Text style={[fontStyles.smallSize, fontStyles.footerText]}>
+              Log Out
+            </Text>
           </TouchableOpacity>
           {/* <View style={styles.containerimagenVideo}>
                     <Image

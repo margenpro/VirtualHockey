@@ -63,22 +63,31 @@ export function Leaderboard({ navigation }) {
   };
 
   const getPodiumAvatars = async () => {
-    try {
-      let urls = [];
-      let usrs = [];
-      await users.podium.map((u) => usrs.push(u));
-      for (let i = 0; i < usrs.length; i++) {
+    let urls = [];
+    let usrs = [];
+    let url;
+    users.podium.map((u) => usrs.push(u));
+    for (let i = 0; i < usrs.length; i++) {
+      try {
         let res = await storageRef
           .child("images/avatars/" + usrs[i].username + ".png")
           .getDownloadURL();
-        let url = res ? res : defaultAvatar;
+        url = res;
+      } catch (error) {
+        try {
+          let res = await storageRef
+            .child("default/avatar.png")
+            .getDownloadURL();
+          url = res;
+        } catch (e) {
+          console.log(e);
+        }
+      } finally {
         urls.push(url);
       }
-      setPodiumAvatars(urls);
-      setLoading(false);
-    } catch (error) {
-      console.log(error);
     }
+    setPodiumAvatars(urls);
+    setLoading(false);
   };
 
   return (

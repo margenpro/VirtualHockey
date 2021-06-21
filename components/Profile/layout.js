@@ -3,20 +3,14 @@ import {
   View,
   Text,
   TouchableOpacity,
-  Image,
   KeyboardAvoidingView,
   Keyboard,
 } from "react-native";
-import Icon from "react-native-vector-icons/FontAwesome";
-import { Input } from "react-native-elements";
 import { Frame } from "../Frame";
-import mainLogo from "../../assets/images/mainLogo.png";
 import fontStyles from "../../assets/styles/fontStyles";
 import commonStyles from "../../assets/styles/commonStyles";
 import UserAvatar from "../Dashboard/HomeWork/UserAvatar/container";
-import styles from "./styles";
 import { ScrollView } from "react-native-gesture-handler";
-import { colorsPalette } from "../../assets/styles/colorsPalette";
 import { Password } from "../../utils/Password/container.js";
 
 // import { LinearGradient } from "expo-linear-gradient";
@@ -28,7 +22,6 @@ export function Layout({
   newPassInputHandler,
   repeatPassInputHandler,
   submitHandler,
-  showPassword,
   changeAvatar,
   points,
   image,
@@ -109,7 +102,7 @@ export function Layout({
                 accessibilityRole="text"
               >
                 <Text style={[fontStyles.smallSize, fontStyles.footerText]}>
-                  Sign Out
+                  Log Out
                 </Text>
               </TouchableOpacity>
             </View>

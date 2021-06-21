@@ -2,7 +2,7 @@ import React from "react";
 import { createStackNavigator } from "@react-navigation/stack";
 import Login from "../components/Login/container";
 import { Register } from "../components/Register/container";
-import { Landing } from "../components/Landing/container";
+import Landing from "../components/Landing/container";
 import { BottomTab } from "./bottomTabNavigation";
 import Payment from "../components/Payment/container";
 import { PasswordRecovery } from "../components/PasswordRecovery/container";

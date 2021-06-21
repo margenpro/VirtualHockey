@@ -1,26 +1,66 @@
-import React, { useState, useEffect } from "react";
-import { Image } from "react-native";
+import React, { useCallback } from "react";
 import { Layout } from "./layout";
+import { connect } from "react-redux";
+import { useFirebaseApp } from "reactfire";
+import { signOutAction } from "../../redux/actions/userActions";
+import { BackHandler, Alert } from "react-native";
+import { useFocusEffect } from "@react-navigation/native";
 
-export function Landing({ navigation }) {
-  // const [size, setSize] = useState({ width: 0, height: 0 });
-  // useEffect(() => {
-  //     const width = Dimensions.get('window').width
-  //     const height = Dimensions.get('window').height
-  //     setSize(width, height)
-  // }, [])
-  /* const screenHandler = () => {
-        navigation.navigate("Pagos");
-    }; */
+function Landing({ navigation, signOutUser }) {
+  const firebase = useFirebaseApp();
+
+  useFocusEffect(
+    useCallback(() => {
+      const onBackPress = () => {
+        Alert.alert("Hold on!", "Are you sure you want to Exit?", [
+          {
+            text: "Cancel",
+            onPress: () => null,
+            style: "cancel",
+          },
+          { text: "YES", onPress: () => BackHandler.exitApp() },
+        ]);
+        return true;
+      };
+      BackHandler.addEventListener("hardwareBackPress", onBackPress);
+      return () =>
+        BackHandler.removeEventListener("hardwareBackPress", onBackPress);
+    }, [])
+  );
 
   const navigateToPaymentForm = () => {
     navigation.navigate("Payment");
+  };
+
+  const signOut = () => {
+    // console.log("signing out");
+    try {
+      firebase.auth().signOut();
+    } catch (error) {
+      console.log(error);
+    }
+    signOutUser();
+    navigation.navigate("Login");
   };
 
   return (
     <Layout
       // size={size}
       navigateToPaymentForm={navigateToPaymentForm}
+      signOut={signOut}
     />
   );
 }
+
+const mapStateToProps = (state) => {
+  return {
+    user: state.userReducer.user,
+    videos: state.videosReducer.videos,
+  };
+};
+
+const actionCreators = {
+  signOutUser: signOutAction,
+};
+
+export default connect(mapStateToProps, actionCreators)(Landing);

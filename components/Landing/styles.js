@@ -84,7 +84,7 @@ export default StyleSheet.create({
     width: width*0.75,
     height: 127,
     backgroundColor: colorsPalette.colorThree,
-    marginVertical: 20,
+    marginVertical: 15,
     borderRadius: 8,
     borderColor: colorsPalette.colorTwo,
     borderWidth: 1,
@@ -95,7 +95,7 @@ export default StyleSheet.create({
     alignItems: 'flex-start',
     marginHorizontal: 70,
     marginTop: 10,
-    marginBottom: 25,
+    marginBottom: 15,
   },
 
 });

@@ -58,7 +58,7 @@ export default StyleSheet.create({
     display: "flex",
     alignItems: "center",
     alignSelf: "center",
-    top: 6,
+    // top: 6,
   },
   smallSize: {
     fontSize: 18,
