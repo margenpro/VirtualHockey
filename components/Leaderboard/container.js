@@ -13,12 +13,18 @@ export function Leaderboard({ navigation }) {
   const [loading, setLoading] = useState(true);
   const [podiumAvatars, setPodiumAvatars] = useState([]);
   const [defaultAvatar, setDefaultAvatar] = useState();
-
+  const timeout = 3;
   useFocusEffect(
     React.useCallback(() => {
       getAllUsers();
+      willShow();
     }, [])
   );
+  const willShow = () => {
+    setTimeout(() => {
+      setLoading(false);
+    }, timeout * 1000);
+  };
 
   const getAllUsers = async () => {
     try {

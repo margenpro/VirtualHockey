@@ -1,4 +1,4 @@
-import React, { useRef, useState, useCallback } from "react";
+import React, { useRef, useState, useCallback, useEffect } from "react";
 import { Layout } from "./layout";
 import { useFocusEffect } from "@react-navigation/native";
 
@@ -7,6 +7,7 @@ export const Password = ({
   passInputHandler,
   wrongPassword,
   textInput,
+  setWrongPassword = false,
 }) => {
   const [showPassword, setShowPassword] = useState(false);
   const passInput = useRef();
@@ -14,9 +15,16 @@ export const Password = ({
     setShowPassword(newValue);
   };
 
+  // useEffect(() => {
+  //   console.log("entre al coso");
+  //   passInput.current.clear();
+  //   setWrongPassword && setWrongPassword(false)
+  // }, []);
+
   useFocusEffect(
     useCallback(() => {
       passInput.current.clear();
+      setWrongPassword && setWrongPassword(false);
     }, [])
   );
 

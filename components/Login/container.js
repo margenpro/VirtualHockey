@@ -196,6 +196,7 @@ const Login = ({ navigation, user, setUser, setVideos }) => {
       emailInput={emailInput}
       passInput={passInput}
       toPassRecovery={toPassRecovery}
+      setWrongPassword={setWrongPassword}
     />
   );
 };
