@@ -149,12 +149,9 @@ const Login = ({ navigation, user, setUser, setVideos }) => {
       });
       let videosList = await getAllVideos();
       let result;
-      // console.log(data.lastSignIn.toDate());
       result = await assignPoints("Login", data);
-      // console.log({ lastSignIn: result.lastSignIn });
-      // setUser({ lastSignIn: result.lastSignIn });
-      // console.log(result);
       showEarnedPoints(result.earnedPoints);
+      setUser({points: result.updatedPoints})
       try {
         await setNewSignInDate(data.id, newSignIn);
       } catch (e) {

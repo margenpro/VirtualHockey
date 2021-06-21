@@ -180,13 +180,13 @@ const Profile = ({ navigation, user, signOutUser }) => {
   };
 
   const validatePassword = () => {
-    var strongRegex = new RegExp("^(?=.*[a-z])(?=.{6,})");
+    var strongRegex = new RegExp("^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.{8,})");
 
     if (!strongRegex.test(newPassword)) {
       throw {
         code: "pass/invalid-pass",
         message:
-          "Strong passwords have at least 6 characters and a mix of letters and numbers"
+          "Password must have at least 8 characters, 1 upper, 1 lower and 1 number"
       };
     }
   };
