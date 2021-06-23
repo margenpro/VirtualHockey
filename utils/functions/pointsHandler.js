@@ -10,6 +10,9 @@ export async function assignPoints(event, user) {
   let earnedPoints = 0;
   if (event === "Login") {
     let today = new Date();
+    console.log(today);
+    console.log(user.lastSignIn.toDate());
+
     let lastSignIn = user.lastSignIn ? user.lastSignIn.toDate() : today;
     if (
       today > lastSignIn &&
@@ -26,9 +29,12 @@ export async function assignPoints(event, user) {
   updatedPoints = previousPoints + earnedPoints;
   if (updatedPoints > previousPoints) {
     try {
-      await db.collection("users").doc(user.id).update({
-        points: updatedPoints,
-      });
+      await db
+        .collection("users")
+        .doc(user.id)
+        .update({
+          points: updatedPoints
+        });
     } catch (error) {
       console.log(error);
     }

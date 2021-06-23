@@ -72,6 +72,39 @@ const Profile = ({ navigation, user, signOutUser }) => {
     }
   };
 
+  const deleteAccount = () => {
+    Alert.alert(
+      "Delete Account",
+      "Are you sure you want to delete your account? This action can not be undone.",
+      [
+        {
+          text: "Yes",
+          onPress: async () => {
+            await deleteCurrentAccount();
+          }
+        },
+
+        {
+          text: "No"
+        }
+      ]
+    );
+  };
+
+  const deleteCurrentAccount = async () => {
+    try {
+      await db
+        .collection("users")
+        .doc(user.id)
+        .delete();
+
+      await firebase.auth().currentUser.delete();
+      await signOut();
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
+
   const signOut = () => {
     // console.log("signing out");
     try {
@@ -209,6 +242,7 @@ const Profile = ({ navigation, user, signOutUser }) => {
       repeatWrongPassword={repeatWrongPassword}
       oldWrongPassword={oldWrongPassword}
       changed={changed}
+      deleteAccount={deleteAccount}
       // textInput={textInput}
     />
   );

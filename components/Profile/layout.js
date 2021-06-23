@@ -4,11 +4,12 @@ import {
   Text,
   TouchableOpacity,
   KeyboardAvoidingView,
-  Keyboard,
+  Keyboard
 } from "react-native";
 import { Frame } from "../Frame";
 import fontStyles from "../../assets/styles/fontStyles";
 import commonStyles from "../../assets/styles/commonStyles";
+import { colorsPalette } from "../../assets/styles/colorsPalette";
 import UserAvatar from "../Dashboard/HomeWork/UserAvatar/container";
 import { ScrollView } from "react-native-gesture-handler";
 import { Password } from "../../utils/Password/container.js";
@@ -30,6 +31,7 @@ export function Layout({
   repeatWrongPassword,
   oldWrongPassword,
   changed,
+  deleteAccount
   // textInput,
 }) {
   return (
@@ -98,11 +100,26 @@ export function Layout({
               </TouchableOpacity>
               <TouchableOpacity
                 onPress={signOut}
-                style={[commonStyles.textTouch, { marginBottom: 80 }]}
+                style={[commonStyles.textTouch, { marginBottom: 2 }]}
                 accessibilityRole="text"
               >
                 <Text style={[fontStyles.smallSize, fontStyles.footerText]}>
                   Log Out
+                </Text>
+              </TouchableOpacity>
+              <TouchableOpacity
+                onPress={deleteAccount}
+                style={[commonStyles.textTouch, { marginBottom: 80 }]}
+                accessibilityRole="text"
+              >
+                <Text
+                  style={[
+                    fontStyles.smallSize,
+                    fontStyles.footerText,
+                    { color: colorsPalette.specialRed }
+                  ]}
+                >
+                  Delete my account
                 </Text>
               </TouchableOpacity>
             </View>

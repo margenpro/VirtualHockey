@@ -21,7 +21,7 @@ const Login = ({ navigation, user, setUser, setVideos }) => {
   const [wrongEmail, setWrongEmail] = useState(false);
   const [wrongPassword, setWrongPassword] = useState({
     code: "",
-    msg: "",
+    msg: ""
   });
   const [loading, setLoading] = useState(false);
 
@@ -42,7 +42,10 @@ const Login = ({ navigation, user, setUser, setVideos }) => {
   const getCurrentUserData = async () => {
     try {
       let usr = firebase.auth().currentUser;
-      let doc = await db.collection("users").doc(usr.uid).get();
+      let doc = await db
+        .collection("users")
+        .doc(usr.uid)
+        .get();
       let data = doc.data();
       data.id = usr.uid;
       return data;
@@ -51,7 +54,7 @@ const Login = ({ navigation, user, setUser, setVideos }) => {
     }
   };
 
-  const getPosition = async (points) => {
+  const getPosition = async points => {
     let rank = 1;
     try {
       const snap = await db
@@ -87,12 +90,12 @@ const Login = ({ navigation, user, setUser, setVideos }) => {
     navigation.navigate("Landing");
   };
 
-  const emailInputHandler = (newValue) => {
+  const emailInputHandler = newValue => {
     setEmail(newValue);
     setWrongEmail(false);
   };
 
-  const passInputHandler = (newValue) => {
+  const passInputHandler = newValue => {
     setPassword(newValue);
     setWrongPassword({ code: "", msg: "" });
   };
@@ -102,7 +105,7 @@ const Login = ({ navigation, user, setUser, setVideos }) => {
       let videosList = [];
       let videos = await db.collection("videos").get();
 
-      videos.forEach((video) => {
+      videos.forEach(video => {
         videosList.push(video.data());
       });
       return videosList;
@@ -111,7 +114,7 @@ const Login = ({ navigation, user, setUser, setVideos }) => {
     }
   };
 
-  const showEarnedPoints = (earnedPoints) => {
+  const showEarnedPoints = earnedPoints => {
     // console.log("muestro earned points?");
     // console.log("los earned points son ", earnedPoints);
     if (earnedPoints > 0) {
@@ -121,8 +124,8 @@ const Login = ({ navigation, user, setUser, setVideos }) => {
         "You have earned " + earnedPoints + " points!",
         [
           {
-            text: "OK",
-          },
+            text: "OK"
+          }
         ]
       );
     }
@@ -146,7 +149,7 @@ const Login = ({ navigation, user, setUser, setVideos }) => {
         lastVideo: data.lastVideoWatched,
         points: data.points,
         lastSignIn: newSignIn,
-        position,
+        position
       });
       let videosList = await getAllVideos();
       let result;
@@ -161,10 +164,14 @@ const Login = ({ navigation, user, setUser, setVideos }) => {
       setVideos(videosList);
       screenHandlerLanding();
     } catch (error) {
-      setWrongPassword({
-        code: "incorrect-data",
-        msg: "Invalid email or password",
-      });
+      if (error.code === "auth/wrong-password") {
+        setWrongPassword({
+          code: "incorrect-data",
+          msg: "Invalid email or password"
+        });
+      } else {
+        console.log(error);
+      }
     }
     setLoading(false);
   };
@@ -172,9 +179,12 @@ const Login = ({ navigation, user, setUser, setVideos }) => {
   const setNewSignInDate = async (id, lastSignIn) => {
     try {
       // console.log("el user id es", id);
-      await db.collection("users").doc(id).update({
-        lastSignIn,
-      });
+      await db
+        .collection("users")
+        .doc(id)
+        .update({
+          lastSignIn
+        });
     } catch (error) {
       console.log(e);
     }
@@ -198,16 +208,16 @@ const Login = ({ navigation, user, setUser, setVideos }) => {
     />
   );
 };
-const mapStateToProps = (state) => {
+const mapStateToProps = state => {
   return {
     user: state.userReducer.user,
-    videos: state.videosReducer.videos,
+    videos: state.videosReducer.videos
   };
 };
 
 const actionCreators = {
   setUser: setterUserAction,
-  setVideos: setVideosAction,
+  setVideos: setVideosAction
 };
 
 export default connect(mapStateToProps, actionCreators)(Login);
