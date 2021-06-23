@@ -13,7 +13,7 @@ import { colorsPalette } from "../../assets/styles/colorsPalette";
 import UserAvatar from "../Dashboard/HomeWork/UserAvatar/container";
 import { ScrollView } from "react-native-gesture-handler";
 import { Password } from "../../utils/Password/container.js";
-
+import Prompt from "../Prompt/index";
 // import { LinearGradient } from "expo-linear-gradient";
 
 export function Layout({
@@ -31,7 +31,10 @@ export function Layout({
   repeatWrongPassword,
   oldWrongPassword,
   changed,
-  deleteAccount
+  deleteAccount,
+  deleteCurrentAccount,
+  cancelPrompt,
+  promptVisibility
   // textInput,
 }) {
   return (
@@ -122,6 +125,13 @@ export function Layout({
                   Delete my account
                 </Text>
               </TouchableOpacity>
+              <Prompt
+                title={"Confirm Password"}
+                visible={promptVisibility}
+                placeholder={"Password..."}
+                onCancel={cancelPrompt}
+                onSubmit={deleteCurrentAccount}
+              />
             </View>
           </TouchableOpacity>
         </ScrollView>

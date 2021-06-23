@@ -24,6 +24,8 @@ const Profile = ({ navigation, user, signOutUser }) => {
   const [changed, setChanged] = useState(true);
   changed;
 
+  const [promptVisibility, setPromptVisibility] = useState(false);
+
   const [newWrongPassword, setNewWrongPassword] = useState("");
   const [repeatWrongPassword, setRepeatWrongPassword] = useState("");
   const [oldWrongPassword, setOldWrongPassword] = useState("");
@@ -72,6 +74,10 @@ const Profile = ({ navigation, user, signOutUser }) => {
     }
   };
 
+  const cancelPrompt = () => {
+    setPromptVisibility(false);
+  };
+
   const deleteAccount = () => {
     Alert.alert(
       "Delete Account",
@@ -80,7 +86,7 @@ const Profile = ({ navigation, user, signOutUser }) => {
         {
           text: "Yes",
           onPress: async () => {
-            await deleteCurrentAccount();
+            setPromptVisibility(true);
           }
         },
 
@@ -91,18 +97,25 @@ const Profile = ({ navigation, user, signOutUser }) => {
     );
   };
 
-  const deleteCurrentAccount = async () => {
-    try {
-      await db
-        .collection("users")
-        .doc(user.id)
-        .delete();
-
-      await firebase.auth().currentUser.delete();
-      await signOut();
-    } catch (error) {
-      console.log(error.message);
-    }
+  const deleteCurrentAccount = async pass => {
+    firebase
+      .auth()
+      .signInWithEmailAndPassword(
+        user.email ? user.email : "",
+        pass ? pass : ""
+      )
+      .then(creds => {
+        db.collection("users")
+          .doc(user.id)
+          .delete()
+          .then(data => {
+            firebase.auth().currentUser.delete();
+          })
+          .then(data => navigation.navigate("Login"));
+      })
+      .catch(error => {
+        Alert.alert("Error!", "Invalid password");
+      });
   };
 
   const signOut = () => {
@@ -155,7 +168,7 @@ const Profile = ({ navigation, user, signOutUser }) => {
         );
       result = true;
     } catch (e) {
-      console.log(e);
+      throw e;
     }
     return result;
   };
@@ -243,6 +256,9 @@ const Profile = ({ navigation, user, signOutUser }) => {
       oldWrongPassword={oldWrongPassword}
       changed={changed}
       deleteAccount={deleteAccount}
+      deleteCurrentAccount={deleteCurrentAccount}
+      cancelPrompt={cancelPrompt}
+      promptVisibility={promptVisibility}
       // textInput={textInput}
     />
   );

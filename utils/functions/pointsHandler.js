@@ -10,8 +10,6 @@ export async function assignPoints(event, user) {
   let earnedPoints = 0;
   if (event === "Login") {
     let today = new Date();
-    console.log(today);
-    console.log(user.lastSignIn.toDate());
 
     let lastSignIn = user.lastSignIn ? user.lastSignIn.toDate() : today;
     if (
