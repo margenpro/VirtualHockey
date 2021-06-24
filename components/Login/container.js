@@ -161,16 +161,10 @@ const Login = ({ navigation, user, setUser, setVideos }) => {
       setVideos(videosList);
       screenHandlerLanding();
     } catch (error) {
-      if (error.code === "auth/user-not-found") {
+      if (error.code !== "") {
         setWrongPassword({
           code: "incorrect-data",
-          msg: "The user does not exist",
-        });
-      }
-      if (error.code === "auth/wrong-password") {
-        setWrongPassword({
-          code: "incorrect-data",
-          msg: "Invalid email or password",
+          msg: "Invalid email or password. Check your credentials.",
         });
       } else {
         console.log(error);
