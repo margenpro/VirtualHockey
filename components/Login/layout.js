@@ -109,20 +109,6 @@ export function Layout({
                 New User? Sign Up!
               </Text>
             </TouchableOpacity>
-            <TouchableOpacity
-              onPress={forTesting}
-              style={commonStyles.textTouch}
-              accessibilityRole="text"
-            >
-              <Text style={fontStyles.footerText}>For Testing</Text>
-            </TouchableOpacity>
-            <TouchableOpacity
-              onPress={toPayments}
-              style={commonStyles.textTouch}
-              accessibilityRole="text"
-            >
-              <Text style={fontStyles.footerText}>To Payments</Text>
-            </TouchableOpacity>
           </View>
         </TouchableOpacity>
       </KeyboardAvoidingView>

@@ -8,27 +8,27 @@ export function PasswordRecovery({ navigation }) {
   const firebase = useFirebaseApp();
   const [email, setEmail] = useState("");
   const [wrongEmail, setWrongEmail] = useState({
-    msg: ""
+    msg: "",
   });
 
-  const emailInputHandler = newValue => {
+  const emailInputHandler = (newValue) => {
     setEmail(newValue);
   };
   const sendPasswordResetEmail = async () => {
     try {
       await firebase.auth().sendPasswordResetEmail(email);
+    } catch (error) {
+    } finally {
       Alert.alert(
         "Password Recovery Sent",
-        "Please check your email to find a recovery link.",
+        "If you are a registered user, you'll get a new email to find a recovery link. Check spam.",
         [
           {
-            text: "OK"
-          }
+            text: "OK",
+          },
         ]
       );
       toLogin();
-    } catch (error) {
-      setWrongEmail({ msg: error.message });
     }
   };
   const toLogin = () => {
