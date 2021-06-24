@@ -14,6 +14,7 @@ const HomeWork = ({
   user,
   setUser,
   earnedPoints,
+  setEarnedPoints,
 }) => {
   const firebase = useFirebaseApp();
   const db = firebase.firestore();
@@ -74,6 +75,7 @@ const HomeWork = ({
   useEffect(() => {
     // console.log("los earnedpoints son ", earnedPoints);
     if (earnedPoints > 0) displayAlert(earnedPoints);
+    setEarnedPoints(0)
   }, [earnedPoints]);
 
   const displayAlert = (_points) => {

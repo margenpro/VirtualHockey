@@ -16,7 +16,8 @@ export function Layout({ videoShow, setvideoShow, navigation, nroVideo, setEarne
         <HomeWork
           setvideoShow={setvideoShow}
           navigation={navigation}
-          earnedPoints={earnedPoints} />
+          earnedPoints={earnedPoints} 
+          setEarnedPoints={setEarnedPoints}/>
       )}
     </React.Fragment>
   );
